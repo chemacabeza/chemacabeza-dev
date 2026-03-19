@@ -54,22 +54,23 @@ export default function NowPage() {
                             <li className="flex gap-2">
                                 <span className="text-indigo-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    Leading a platform re-architecture initiative to move from a distributed monolith to a
-                                    proper service mesh, with full observability from day one.
+                                    Leading Merchant Partner Account Infrastructure in Berlin — overseeing 7 critical
+                                    services handling API integrations with 40+ payment partners (Adyen, Mollie, Stripe).
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-indigo-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    Scaling my engineering team from 8 to 14 people — hiring for two senior backend roles
-                                    and one Staff Engineer.
+                                    Scaling and evolving a custom framework that enables automatic retriggering,
+                                    prioritisation, and chaining of service calls — reducing maintenance overhead
+                                    significantly.
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-indigo-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    Establishing a quarterly engineering strategy process — tying technical bets
-                                    to business outcomes with clear metrics.
+                                    Running quarterly engineering strategy and OKR processes, tying team technical bets
+                                    to measurable business outcomes.
                                 </span>
                             </li>
                         </ul>
@@ -88,21 +89,22 @@ export default function NowPage() {
                                 <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
                                 <span>
                                     <strong className="text-slate-300">This website</strong> — built from scratch with
-                                    Next.js, Tailwind, and MDX. A permanent home for my writing and projects.
+                                    Next.js, Tailwind, and MDX. A permanent home for my writing, projects, and thinking.
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    <strong className="text-slate-300">Consistency Tracker v2</strong> — adding team
-                                    features, webhooks, and a data export API. Planning to launch a free tier publicly.
+                                    Experimenting with <strong className="text-slate-300">AI image generation</strong>{" "}
+                                    tooling using Stable Diffusion and Fooocus — exploring practical applications in
+                                    creative and product workflows.
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    A short-form writing habit — committing to one technical post every two weeks. Systems
-                                    thinking, performance, leadership.
+                                    A short-form technical writing habit — committing to one post every two weeks on
+                                    systems design, performance, and engineering leadership.
                                 </span>
                             </li>
                         </ul>
@@ -120,22 +122,22 @@ export default function NowPage() {
                             <li className="flex gap-2">
                                 <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    <strong className="text-slate-300">eBPF</strong> — understanding kernel-level
-                                    observability primitives and their applications in production tracing.
+                                    <strong className="text-slate-300">OKR methodology</strong> — applying structured
+                                    goal-setting frameworks to engineering teams and measuring what actually matters.
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    <strong className="text-slate-300">Rust</strong> — working through the language to
-                                    better understand memory management and write faster CLI tooling.
+                                    Deepening <strong className="text-slate-300">Spring Boot 3 + Spring 6</strong> —
+                                    keeping my hands in the codebase alongside leading teams that run Java at scale.
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    Reading: <em className="text-slate-300">An Elegant Puzzle</em> by Will Larson and{" "}
-                                    <em className="text-slate-300">Designing Data-Intensive Applications</em> (re-read).
+                                    <strong className="text-slate-300">German</strong> — A2 level and pushing forward.
+                                    Living in Berlin makes this both necessary and rewarding.
                                 </span>
                             </li>
                         </ul>

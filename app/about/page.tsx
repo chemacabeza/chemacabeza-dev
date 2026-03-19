@@ -10,32 +10,60 @@ export const metadata: Metadata = createMetadata({
 
 const experience = [
     {
-        period: "2021 — Present",
-        role: "Engineering Manager",
-        company: "Scale-up (FinTech)",
+        period: "Sept 2020 — Present",
+        role: "Engineering Manager — Merchant Partner Account Infrastructure",
+        company: "Berlin, Germany",
         description:
-            "Leading a team of 12 engineers across 3 squads. Drove a platform re-architecture that reduced infrastructure costs by 40% while doubling throughput. Established engineering excellence practices: on-call rotation, blameless post-mortems, RFC culture.",
+            "Lead a team of 8 (4 mid-level engineers, 2 senior engineers, 1 PM). Oversee security and quality of 7 critical services handling API integrations with 40+ distribution partners (Adyen, Mollie, Stripe, etc.). Spearheaded a major Stripe integration onboarding 1,700+ merchants weekly. Designed and implemented a global merchant tracking service handling 1.4M+ requests per week. Proposed and co-built a custom framework to decouple our main system from services and queues — enabling automatic retriggering, call prioritisation, and chaining, significantly reducing maintenance overhead. Conducted 40+ Java technical interviews and coached a Senior Engineer to Lead Engineer.",
     },
     {
-        period: "2018 — 2021",
-        role: "Senior Backend Engineer → Staff Engineer",
-        company: "E-commerce Platform",
+        period: "Sept 2018 — Sept 2020",
+        role: "Senior Software Engineer — Merchant Account Infrastructure",
+        company: "Berlin, Germany",
         description:
-            "Designed and implemented the event-driven inventory system processing 2M+ events/day. Mentored 6 engineers from mid to senior level. Led the migration from a monolith to service-oriented architecture across 18 months.",
+            "Automated partner pricing setup, reducing manual work from 4 days to 15 minutes. Led migration from Salesforce to a custom in-house system across 3 services. Developed a KPI monitoring dashboard in Grafana to improve system performance tracking. Coached and mentored junior engineers, resulting in multiple promotions to Senior Engineer.",
     },
     {
-        period: "2015 — 2018",
-        role: "Backend Engineer",
-        company: "Digital Agency",
+        period: "Dec 2017 — Aug 2018",
+        role: "Senior Software Engineer — Data Platform Team",
+        company: "Edinburgh, Scotland",
         description:
-            "Built APIs and backend systems for clients across finance, media, and retail. Introduced automated testing culture — test coverage went from 12% to 78% in 12 months.",
+            "Maintained and enhanced legacy banking transaction analysis pipelines using Java, Dropwizard, Cassandra, HBase, and Hadoop.",
     },
     {
-        period: "2010 — 2015",
-        role: "Full-Stack Developer",
-        company: "Various (freelance + startups)",
+        period: "May 2015 — Nov 2017",
+        role: "Senior Software Engineer — Aftersales Pricing Orchestration",
+        company: "Amadeus IT, Sophia Antipolis, France",
         description:
-            "Shipped 20+ projects from 0→1. Learned the value of constraints, simplicity, and shipping fast. Built the foundation of full-stack intuition that I still use every day.",
+            "Refactored Amadeus Ticket Changer, simplifying debugging and enhancement via XML-based configurations. Designed and implemented a proprietary discount coupon algorithm for Japan Airlines, reducing computational complexity from O(n!) to O(n³) — generating results in under 100ms (vs. minutes), avoiding the need for a new dedicated backend.",
+    },
+    {
+        period: "Jan 2014 — Jun 2015",
+        role: "Software Engineer — Issuance, Documents & Reporting",
+        company: "Amadeus IT, Sophia Antipolis, France",
+        description:
+            "Designed, architected and built the module responsible for gathering and managing reporting features across Amadeus products (Selling Platform, Sell Connect, Amadeus e-Travel Management), including integration with American Express and Airplus International.",
+    },
+    {
+        period: "Jun 2011 — Dec 2013",
+        role: "Software Engineer — Leisure Shopping",
+        company: "Amadeus IT, Sophia Antipolis, France",
+        description:
+            "Integrated Amadeus with American Express BTA, ensuring PCI-DSS compliance. Responsible as functional analyst and front-end developer for new rail market features for Trenitalia, SNCF, Swedish Rail, and DBahn in Selling Platform and Amadeus e-Travel Management.",
+    },
+    {
+        period: "Nov 2009 — May 2011",
+        role: "Software Engineer",
+        company: "Madrid, Spain",
+        description:
+            "Led development of Veedia Seminar Portal for Polycom Inc. to facilitate remote video conferencing. Built an ICEfaces 2 web app for Helvetia Seguros to monitor trader activity in real time. Design and development manager for a Flash-based web application creating an Interactive Voice Response system via flowcharts for Vodafone Spain.",
+    },
+    {
+        period: "Jun 2007 — May 2009",
+        role: "UPM Scholarship — Programmer",
+        company: "Teldat SA, Madrid, Spain",
+        description:
+            "Selected on the basis of outstanding academic performance by the Telematics Laboratory of Universidad Politécnica de Madrid. Led modification of a Debian-based OS to automate marketing study installations. Designed, developed and maintained a communication system between two modules of marketing studies software using facial recognition via webcams.",
     },
 ];
 
@@ -92,8 +120,9 @@ export default function AboutPage() {
                         <span className="gradient-text">and the teams</span> behind them.
                     </h1>
                     <p className="text-xl text-slate-400 leading-relaxed max-w-2xl">
-                        I&apos;m Chema Cabeza — an Engineering Manager based in Spain with 15+ years of experience
-                        designing backend systems, distributed architectures, and high-performing engineering teams.
+                        I&apos;m José María (Chema) Cabeza Rodríguez — an Engineering Manager based in Berlin with
+                        15+ years of experience delivering backend systems, distributed architectures, and
+                        high-performing engineering teams across France, Scotland, and Germany.
                     </p>
                 </div>
 
@@ -102,27 +131,29 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-slate-100 mb-6">My story</h2>
                     <div className="space-y-5 text-slate-400 leading-relaxed text-[17px]">
                         <p>
-                            I started writing code in my teens — mostly because I was curious and slightly obsessed
-                            with how things worked. That curiosity turned into a career. I spent my early years as a
-                            freelance full-stack developer, building products from scratch and learning what it
-                            actually takes to ship software that works.
+                            My journey started in Madrid, where I studied Computer Science at Universidad Politécnica
+                            de Madrid and was selected — on academic merit — to do R&D at Teldat SA. That early taste
+                            of real-world engineering, writing communication systems and patching Debian kernels, set
+                            the tone for everything that followed.
                         </p>
                         <p>
-                            Over time I gravitated toward backend systems. The combination of constraints, scale, and
-                            the need for rigorous thinking resonated with how my brain works. I became obsessed with
-                            distributed systems, event-driven architecture, and the craft of building things that
-                            don&apos;t break at 3am.
+                            From Madrid I moved to the south of France to join Amadeus IT, where I spent six years
+                            across three teams. I designed reporting infrastructure used by American Express and
+                            Airplus, built PCI-DSS-compliant integrations, and delivered a proprietary algorithm for
+                            Japan Airlines that reduced ticket coupon computation from O(n!) to O(n³) — cutting
+                            response times from minutes to under 100ms.
                         </p>
                         <p>
-                            My shift to engineering management wasn&apos;t a career pivot — it was a natural extension.
-                            I realised that the highest-leverage thing I could do was to make other engineers more
-                            effective. Coaching, system design, technical strategy, culture-building — these became
-                            the craft. I never stopped being an engineer; I just became a different kind.
+                            After a stint in Edinburgh working on banking transaction pipelines, I joined the
+                            Merchant Partner Account Infrastructure team in Berlin. I grew from Senior Software
+                            Engineer to Engineering Manager, and today I lead a team of 8 building the critical
+                            systems that power payment integrations for 1,700+ merchants weekly — handling 1.4M+
+                            requests per week through services I designed and still evolve.
                         </p>
                         <p>
-                            Today I lead engineering teams building at the intersection of reliability, scale, and
-                            product velocity. I care deeply about systems thinking, a11y, observability, and the kind
-                            of engineering culture where people do the best work of their careers.
+                            The shift into management wasn&apos;t a pivot — it was an extension. The highest-leverage
+                            thing I can do is make the engineers around me more effective. I never stopped being an
+                            engineer; I just became a different kind.
                         </p>
                     </div>
                 </section>
@@ -132,10 +163,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-slate-100 mb-8">Experience</h2>
                     <div className="space-y-0">
                         {experience.map((item, idx) => (
-                            <div
-                                key={idx}
-                                className="relative flex gap-6 pb-10 last:pb-0"
-                            >
+                            <div key={idx} className="relative flex gap-6 pb-10 last:pb-0">
                                 {/* Timeline line */}
                                 {idx < experience.length - 1 && (
                                     <div className="absolute left-[5.5px] top-5 bottom-0 w-px bg-gradient-to-b from-indigo-500/30 to-transparent" />
@@ -150,6 +178,37 @@ export default function AboutPage() {
                                     <p className="text-sm text-slate-500 mb-2">{item.company}</p>
                                     <p className="text-slate-400 leading-relaxed">{item.description}</p>
                                 </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Education */}
+                <section className="mb-20">
+                    <h2 className="text-2xl font-bold text-slate-100 mb-6">Education</h2>
+                    <div className="space-y-4">
+                        {[
+                            {
+                                period: "Sep 2003 — Sep 2009",
+                                degree: "M.Sc. in Computer Science",
+                                school: "Universidad Politécnica de Madrid, Spain",
+                                note: "Final Project: Web app to manage research group information — Honors",
+                            },
+                            {
+                                period: "Jan 2008 — Sep 2009",
+                                degree: "Specialization in Web Computer Software",
+                                school: "Universidad Politécnica de Madrid, Spain",
+                                note: "",
+                            },
+                        ].map(({ period, degree, school, note }) => (
+                            <div
+                                key={degree}
+                                className="rounded-xl border border-slate-800/60 bg-slate-900/40 p-6"
+                            >
+                                <span className="text-xs font-semibold text-indigo-400">{period}</span>
+                                <h3 className="font-bold text-slate-100 mt-0.5">{degree}</h3>
+                                <p className="text-sm text-slate-500">{school}</p>
+                                {note && <p className="text-sm text-slate-400 mt-1">{note}</p>}
                             </div>
                         ))}
                     </div>

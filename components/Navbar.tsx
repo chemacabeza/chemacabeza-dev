@@ -46,7 +46,7 @@ export default function Navbar() {
                             <Code2 className="w-4 h-4 text-indigo-400" />
                         </div>
                         <span className="font-bold text-slate-100 tracking-tight">
-                            José María <span className="text-indigo-400">Cabeza Rodríguez</span>
+                            chema<span className="text-indigo-400">cabeza</span>
                             <span className="text-slate-500">.dev</span>
                         </span>
                     </Link>

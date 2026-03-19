@@ -34,7 +34,7 @@ export default function Footer() {
                                 <Code2 className="w-3.5 h-3.5 text-indigo-400" />
                             </div>
                             <span className="font-bold text-slate-300 text-sm tracking-tight">
-                                José María <span className="text-indigo-400">Cabeza Rodríguez</span>
+                                chema<span className="text-indigo-400">cabeza</span>
                                 <span className="text-slate-500">.dev</span>
                             </span>
                         </Link>

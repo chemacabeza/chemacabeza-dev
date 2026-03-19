@@ -226,6 +226,64 @@ export default function AboutPage() {
                     </div>
                 </section>
 
+                {/* Certifications & Courses */}
+                <section className="mb-20">
+                    <h2 className="text-2xl font-bold text-slate-100 mb-6">Certifications &amp; Courses</h2>
+
+                    {/* Oracle certifications */}
+                    <h3 className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-4">Certifications</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                        {[
+                            { year: "2013", title: "Oracle Certified Java Programmer", issuer: "Oracle" },
+                            { year: "2011", title: "Oracle Certified Java Associate", issuer: "Oracle" },
+                        ].map(({ year, title, issuer }) => (
+                            <div
+                                key={title}
+                                className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-5 flex items-start gap-4"
+                            >
+                                <div className="w-9 h-9 rounded-lg bg-indigo-500/15 border border-indigo-500/25 flex items-center justify-center flex-shrink-0 text-sm font-bold text-indigo-400">
+                                    {year.slice(2)}
+                                </div>
+                                <div>
+                                    <p className="font-semibold text-slate-100 leading-snug">{title}</p>
+                                    <p className="text-xs text-slate-500 mt-0.5">{issuer} · {year}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Online courses */}
+                    <h3 className="text-xs font-semibold uppercase tracking-widest text-indigo-400 mb-4">Online Courses</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                            { year: "2025", title: "Flux Step by Step — AI Influencers & Fanvue Models FAST", platform: "Udemy", instructor: "Dominik Felber" },
+                            { year: "2025", title: "Realistic AI Images with Stable Diffusion & Fooocus", platform: "Udemy", instructor: "Dominik Felber" },
+                            { year: "2025", title: "OKR Goal Setting 101", platform: "Udemy", instructor: "Axel Ritterhaus" },
+                            { year: "2025", title: "Spring Boot 3, Spring 6 & Hibernate for Beginners", platform: "Udemy", instructor: "Chad Darby" },
+                            { year: "2020", title: "React — The Complete Guide", platform: "Udemy", instructor: "Academind" },
+                            { year: "2019", title: "CSS — The Complete Guide", platform: "Udemy", instructor: "Academind" },
+                            { year: "2017", title: "Machine Learning Specialization", platform: "Coursera", instructor: "University of Washington" },
+                            { year: "2017", title: "Machine Learning: Clustering & Retrieval", platform: "Coursera", instructor: "University of Washington" },
+                            { year: "2017", title: "Machine Learning: Classification", platform: "Coursera", instructor: "University of Washington" },
+                            { year: "2017", title: "Machine Learning: Regression", platform: "Coursera", instructor: "University of Washington" },
+                            { year: "2017", title: "Machine Learning Foundations", platform: "Coursera", instructor: "University of Washington" },
+                            { year: "2016", title: "Machine Learning", platform: "Coursera", instructor: "Stanford University" },
+                            { year: "2015", title: "Data Analysis and Statistical Inference", platform: "Coursera", instructor: "Duke University" },
+                        ].map(({ year, title, platform, instructor }) => (
+                            <div
+                                key={title}
+                                className="rounded-xl border border-slate-800/60 bg-slate-900/40 p-4 flex items-start gap-3"
+                            >
+                                <span className="text-xs font-mono font-bold text-slate-600 mt-0.5 w-8 flex-shrink-0">{year}</span>
+                                <div>
+                                    <p className="text-sm font-medium text-slate-200 leading-snug">{title}</p>
+                                    <p className="text-xs text-slate-500 mt-0.5">{platform} · {instructor}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
                 {/* Engineering principles */}
                 <section>
                     <h2 className="text-2xl font-bold text-slate-100 mb-3">Engineering principles</h2>

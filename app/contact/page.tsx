@@ -28,7 +28,7 @@ const links = [
     {
         icon: Linkedin,
         label: "LinkedIn",
-        value: "linkedin.com/in/chemacabeza",
+        value: "linkedin.com/in/jcabeza",
         href: siteConfig.author.linkedin,
         description: "Professional background, endorsements, and career history.",
         color: "blue",

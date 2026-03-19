@@ -1,0 +1,76 @@
+---
+title: "Why most microservices architectures fail"
+description: "Microservices promise scalability and autonomy. Most implementations deliver the opposite. Here's why — and how to fix it."
+date: "2025-01-15"
+tags: ["Microservices", "Architecture", "Distributed Systems"]
+featured: true
+---
+
+# Why most microservices architectures fail
+
+There is a certain irony to microservices. An architectural style explicitly designed to create autonomous, independently deployable services — and yet, in practice, most teams that adopt it end up with something that is harder to deploy, harder to debug, and harder to change than the monolith they were trying to escape.
+
+I have seen this pattern dozens of times. Smart engineers, good intentions, and an implementation that creates a distributed monolith held together with HTTP calls and a shared database.
+
+Let me tell you why it keeps happening — and what the good implementations have in common.
+
+## The promise vs. the reality
+
+The microservices pitch is compelling: decompose your system into small, focused services. Each service owns its domain. Teams can work independently. You can scale individual components. Technology choices are decentralised.
+
+On paper, it is everything. In practice, you need serious organisational and technical maturity to reap those benefits. Most teams attempt microservices before they have that maturity.
+
+The result is a distributed monolith: services that are physically separate but logically coupled. You still have to deploy them together. One service failing takes down half the system. You need a synchronised release train to ship any feature.
+
+It is the worst of both worlds.
+
+## The five failure patterns I see most often
+
+### 1. Premature decomposition
+
+Services are drawn around technical layers, not business capabilities. You end up with `UserService`, `EmailService`, `NotificationService` — all tightly coupled, all needing to be changed together for any business feature.
+
+**The fix:** Use DDD-style bounded contexts. Decompose around business domains, not technical concerns. A service should map to a team's area of ownership.
+
+### 2. Synchronous everything
+
+Services communicate via synchronous REST calls, forming a chain of blocking requests. One slow service stalls everything upstream. Retry storms compound the problem. Blast radius is enormous.
+
+**The fix:** Default to asynchronous, event-driven communication for operations that can tolerate eventual consistency. Synchronous calls should be the exception, not the rule.
+
+### 3. Shared databases
+
+Multiple services pointing at the same database. This is a distributed monolith by definition. Schema changes require coordination across teams. You cannot evolve services independently.
+
+**The fix:** Each service owns its data store entirely. Period. Cross-service data access goes through APIs or events, never direct database access.
+
+### 4. No observability
+
+Individual services are easy enough to debug in isolation. At scale, with dozens of services, finding the cause of a slow request or an intermittent failure is nearly impossible without distributed tracing, structured logs, and correlated metrics.
+
+**The fix:** Observability is not optional. Every service ships with structured logging (trace ID on every log line), distributed traces (OpenTelemetry), and meaningful SLIs/SLOs.
+
+### 5. Organisational mismatch
+
+The architecture does not match the team structure. Two teams own three services each. Or one team owns a service that another team deploys. Conway's Law is inviolable — if your teams are not independent, your services will not be either.
+
+**The fix:** Before you draw a service boundary, draw the team boundary. The architecture should reflect the org chart, not fight it.
+
+## What good looks like
+
+The organisations I have seen run microservices well share a few traits:
+
+- **They started with a monolith**, extracted services when they had a compelling reason (scale, team autonomy, independent deployment velocity)
+- **They invest heavily in shared platform infrastructure** — service mesh, observability, CI/CD, secret management — before proliferating services
+- **Each service has a single, clear owner** — a team that is responsible for its SLO
+- **They treat distributed systems seriously** — building with the assumption that the network will fail, services will be slow, and partial failures will happen
+
+## The uncomfortable truth
+
+Microservices are not a technology decision. They are an organisational design decision.
+
+If your organisation cannot run independent teams, cannot own its own data, and cannot instrument its systems properly — microservices will compound your problems, not solve them.
+
+The best architecture is the simplest one that meets your actual requirements. For most teams at most stages of growth, that is a well-structured modular monolith.
+
+Add services surgically, with intent. Not because the tech blog told you to.

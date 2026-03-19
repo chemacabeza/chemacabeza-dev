@@ -1,0 +1,87 @@
+---
+title: "Performance is a product feature"
+description: "We treat performance as a non-functional requirement — something to address after the product is built. That is a mistake. Performance is product."
+date: "2025-03-01"
+tags: ["Performance", "Product", "Backend Systems"]
+featured: true
+---
+
+# Performance is a product feature
+
+There is a mental model that corrupts how most engineering teams think about performance:
+
+> "Functional requirements first. Non-functional requirements later."
+
+Performance gets put in the "nice to have" box. It is addressed retroactively, after the feature is shipped, after users are complaining, after the performance regression has baked into the architecture.
+
+This is exactly backwards.
+
+Performance is not a technical constraint. It is a product experience. And like any product experience, the later you address it, the more expensive it becomes to fix.
+
+## The data is not ambiguous
+
+- A 100ms improvement in page load time correlates with +1% revenue for e-commerce (Amazon, 2012)
+- 53% of mobile users abandon sites that take more than 3 seconds to load (Google)
+- Pinterest reduced page load time by 40% and saw a 15% increase in SEO traffic
+- A 1-second delay in response time results in 7% reduction in conversions
+
+These figures are old. The bar has gotten higher, not lower. Users have been conditioned by the best-performing apps in the world. Slack, Linear, Figma — perception of speed is now a key differentiator.
+
+The slow app is the bad app. Even if it has more features.
+
+## Performance as user experience
+
+Think about what it feels like to use a slow product.
+
+You click something. There's a delay. You wonder if it registered. You hover. You click again. Now you've done it twice. The UI catches up with a double-action. You feel friction. You feel mild anxiety. Over 100 sessions, that anxiety accumulates into a general negative perception of the product.
+
+Fast software feels _respected_. It says: we value your time. Every interaction affirms that the product was built with care.
+
+Slow software communicates the opposite: we didn't think about you.
+
+Performance is not about benchmarks. It is about the emotional texture of using a product.
+
+## It compounds in both directions
+
+The dangerous thing about performance regressions is that they compound.
+
+Each feature ships with a marginal performance cost. Database query that doesn't have an index. Synchronous call that could be async. One extra round trip to validate something that could be cached.
+
+Individually, invisible. Cumulatively, devastating.
+
+After 18 months, the fast startup app that could load in 400ms now takes 2.3 seconds. The team does not know when it happened. Bisecting the git history reveals dozens of commits each contributed 20ms. No single villain. Death by a thousand cuts.
+
+The inverse is also true. Systematic performance hygiene compounds into product excellence. Every engineer who thinks about the cost of what they ship creates a culture where performance is maintained, not recovered.
+
+## What systematic performance culture looks like
+
+**Measure what matters.** Set SLOs on user-facing latency (P50, P95, P99 — not just average). Track bundle size. Track Core Web Vitals. Make regressions visible on every PR.
+
+**Treat performance budgets like test coverage.** Would you merge a PR that drops test coverage by 20%? Then why merge one that increases bundle size by 40KB with no justification?
+
+**Design for performance.** The most impactful performance work happens in the design phase, not the optimization phase. The right data model, the right caching strategy, the right API contract — these decisions are made before a line of code is written.
+
+**Celebrate performance wins publicly.** When an engineer reduces P95 by 40%, that is a product improvement. Treat it like one. Put it in the changelog. Mention it in the all-hands. Signal that this work is valued.
+
+**Make it easy to understand performance.** Every engineer should have access to production latency dashboards, flame graphs, and query plans. Observability is the prerequisite for performance culture.
+
+## The engineering manager's responsibility
+
+If you are an engineering manager, you are ultimately responsible for the performance culture of your team.
+
+That means:
+
+- Including performance criteria in your definition of done for every feature
+- Refusing to accept "we'll fix it later" as an answer for known performance issues
+- Prioritising performance work in your roadmap before it becomes critical
+- Praising and rewarding the engineers who do the unsexy work of making things faster
+
+You get the culture you tolerate. If you tolerate slow, you get slow.
+
+## Close
+
+The next time you hear "we'll optimize after the feature is shipped" — that is a red flag.
+
+Performance is not something you bolt on. It is something you design in. It is the difference between a product that feels like a pleasure to use and one that feels like a chore.
+
+Ship fast code. Your users will know the difference, even if they can't articulate why.

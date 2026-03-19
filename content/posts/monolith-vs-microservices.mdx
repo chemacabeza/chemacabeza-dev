@@ -1,0 +1,105 @@
+---
+title: "Modular monolith vs microservices: a practical guide"
+description: "Stop treating modular monolith and microservices as a binary choice. Here is a framework for thinking about the right architecture at the right stage."
+date: "2025-02-10"
+tags: ["Architecture", "Microservices", "Engineering"]
+featured: true
+---
+
+# Modular monolith vs microservices: a practical guide
+
+The debate usually goes like this:
+
+> "We should move to microservices. Monoliths don't scale."
+
+Or the backlash:
+
+> "We should go back to a monolith. Microservices are overengineered."
+
+Both positions are wrong because they are categorical. They treat architecture as theology rather than engineering.
+
+The right question is not *which is better*. The right question is *which is appropriate for our current constraints, team size, and growth trajectory*.
+
+Let me give you a practical framework.
+
+## What a modular monolith actually is
+
+A modular monolith is not a big ball of mud. It is a single deployable unit where the code is organised into well-defined modules with explicit boundaries, enforced through code rather than network.
+
+Think of it as microservices at the code level instead of the infrastructure level. Each module owns its domain logic. No cross-module access to internals. Communication happens through defined interfaces.
+
+The boundary is a Java package, a Python module, a TypeScript namespace — not an HTTP endpoint.
+
+### The advantages
+
+- **Simpler operations**: one thing to deploy, one thing to monitor, one database to care about
+- **Lower latency**: in-process calls instead of network calls
+- **Easier refactoring**: moving code across module boundaries is cheaper than re-designing service contracts
+- **Atomic transactions**: you can use ACID transactions across domain boundaries trivially
+- **Faster onboarding**: new engineers can understand the system by reading the code
+
+### The trade-offs
+
+- **Scaling is all-or-nothing**: you can't scale your hot module independently
+- **Technology lock-in**: the whole app runs on one tech stack
+- **Deployment coupling**: a bug in one module can take down everything
+- **Team coordination**: merge conflicts and PR reviews cross module boundaries
+
+## What microservices actually buy you
+
+Microservices are not about scalability. Or rather, they are, but not in the way most people think.
+
+The real value of microservices is **independent deployability**. The ability for one team to change, test, and ship their service without coordinating with any other team. That is the primary reason to reach for them.
+
+As a consequence of independent deployability, you get:
+- Independent scaling — you can allocate resources where the load is
+- Technology flexibility — each service can use the right tool for the job
+- Blast radius reduction — a failing service can be isolated
+
+But you also inherit:
+- **Distributed systems complexity**: network partitions, partial failures, eventual consistency
+- **Operational overhead**: service discovery, load balancing, distributed tracing, per-service CI/CD
+- **Data management complexity**: cross-service joins, sagas, event sourcing
+- **Organisational prerequisites**: you need Conway-aligned teams to make this work
+
+## A decision framework
+
+Here is how I think about the choice:
+
+### Start with a modular monolith if:
+
+- You are building something new (0→1)
+- Your team is smaller than ~20 engineers
+- You have not yet found product-market fit
+- You cannot invest in serious platform infrastructure
+- Your main scaling concern is code complexity, not infrastructure throughput
+
+The modular monolith keeps you fast. You can iterate quickly, refactor aggressively, and you do not need a DevOps team to manage your deployment topology.
+
+### Extract services when:
+
+- A specific module has demonstrably different scaling requirements
+- A specific team needs completely autonomous deployment velocity
+- A module has such a different availability requirement that it needs independent SLOs
+- You are adding a fundamentally different technology that cannot co-exist in the current stack
+
+Notice the emphasis on *specific*. Not "let's carve out services in advance" but "this module, right now, has a concrete need that only a service boundary solves."
+
+## The migration path
+
+If you're starting a modular monolith today, design it with a service extraction path in mind:
+
+1. **Enforce module boundaries from day one** — use linting or architecture tests to prevent cross-module coupling
+2. **Design module APIs as if they were service APIs** — explicit inputs, explicit outputs, no shared state
+3. **Use domain events internally** — even within the monolith, emit business events that other modules consume asynchronously
+4. **Own your data per module** — even if it's the same database, keep tables namespaced to their owning module
+
+When the time comes to extract a service, you lift the module out. The API is already defined. The data ownership is already clear. You change the transport layer from function calls to HTTP/events.
+
+That is the strangler fig pattern applied intentionally from day one.
+
+## The bottom line
+
+The best codebase I have ever worked on was a well-structured modular monolith serving 10M users. The worst distributed system I have ever inherited was an over-engineered microservices mesh with 60 services and a team of 8 engineers who could not deploy anything without breaking three other things.
+
+Architecture is a trade-off, not a verdict. Use the right tool for your current moment — and build with the next moment in mind.

@@ -11,7 +11,7 @@ export const siteConfig = {
         name: "José María Cabeza Rodríguez",
         email: "chemacabeza@gmail.com",
         github: "https://github.com/chemacabeza",
-        linkedin: "https://www.linkedin.com/in/chemacabeza",
+        linkedin: "https://www.linkedin.com/in/jcabeza/",
         twitter: "https://twitter.com/chemacabeza",
     },
 };

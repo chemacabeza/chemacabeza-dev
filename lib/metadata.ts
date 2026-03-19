@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-    name: "Chema Cabeza",
-    title: "Chema Cabeza — Engineering Manager & System Architect",
+    name: "José María Cabeza Rodríguez",
+    title: "José María Cabeza Rodríguez — Engineering Manager & System Architect",
     description:
         "Engineering Manager with 15+ years building high-performance backend systems, distributed architectures, and the teams that deliver them. Based in Berlin.",
     url: "https://chemacabeza.dev",
     ogImage: "https://chemacabeza.dev/og-image.png",
     author: {
-        name: "José María (Chema) Cabeza Rodríguez",
+        name: "José María Cabeza Rodríguez",
         email: "chemacabeza@gmail.com",
         github: "https://github.com/chemacabeza",
         linkedin: "https://www.linkedin.com/in/chemacabeza",

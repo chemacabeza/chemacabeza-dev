@@ -31,8 +31,8 @@ export default function Navbar() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                    ? "bg-[#020817]/90 backdrop-blur-md border-b border-slate-800/60 shadow-lg shadow-black/20"
-                    : "bg-transparent"
+                ? "bg-[#020817]/90 backdrop-blur-md border-b border-slate-800/60 shadow-lg shadow-black/20"
+                : "bg-transparent"
                 }`}
         >
             <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +46,7 @@ export default function Navbar() {
                             <Code2 className="w-4 h-4 text-indigo-400" />
                         </div>
                         <span className="font-bold text-slate-100 tracking-tight">
-                            chema<span className="text-indigo-400">cabeza</span>
+                            José María <span className="text-indigo-400">Cabeza Rodríguez</span>
                             <span className="text-slate-500">.dev</span>
                         </span>
                     </Link>
@@ -63,8 +63,8 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${isActive
-                                            ? "text-indigo-400 bg-indigo-500/10"
-                                            : "text-slate-400 hover:text-slate-100 hover:bg-slate-800/60"
+                                        ? "text-indigo-400 bg-indigo-500/10"
+                                        : "text-slate-400 hover:text-slate-100 hover:bg-slate-800/60"
                                         }`}
                                 >
                                     {link.label}
@@ -96,8 +96,8 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     className={`block px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${isActive
-                                            ? "text-indigo-400 bg-indigo-500/10"
-                                            : "text-slate-400 hover:text-slate-100 hover:bg-slate-800"
+                                        ? "text-indigo-400 bg-indigo-500/10"
+                                        : "text-slate-400 hover:text-slate-100 hover:bg-slate-800"
                                         }`}
                                 >
                                     {link.label}

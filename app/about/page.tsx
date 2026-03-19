@@ -11,7 +11,7 @@ export const metadata: Metadata = createMetadata({
 const experience = [
     {
         period: "Sept 2020 — Present",
-        role: "Engineering Manager — Merchant Partner Account Infrastructure",
+        role: "Engineering Manager — Partner Account Infrastructure",
         company: "Klarna",
         location: "Berlin, Germany",
         description:
@@ -128,7 +128,7 @@ export default function AboutPage() {
                         <span className="gradient-text">and the teams</span> behind them.
                     </h1>
                     <p className="text-xl text-slate-400 leading-relaxed max-w-2xl">
-                        I&apos;m José María (Chema) Cabeza Rodríguez — an Engineering Manager based in Berlin with
+                        I&apos;m José María Cabeza Rodríguez — an Engineering Manager based in Berlin with
                         15+ years of experience delivering backend systems, distributed architectures, and
                         high-performing engineering teams across France, Scotland, and Germany.
                     </p>

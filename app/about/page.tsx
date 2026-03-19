@@ -12,7 +12,7 @@ const experience = [
     {
         period: "Sept 2020 — Present",
         role: "Engineering Manager — Merchant Partner Account Infrastructure",
-        company: "Booking.com",
+        company: "Klarna",
         location: "Berlin, Germany",
         description:
             "Lead a team of 8 (4 mid-level engineers, 2 senior engineers, 1 PM). Oversee security and quality of 7 critical services handling API integrations with 40+ distribution partners (Adyen, Mollie, Stripe, etc.). Spearheaded a major Stripe integration onboarding 1,700+ merchants weekly. Designed and implemented a global merchant tracking service handling 1.4M+ requests per week. Proposed and co-built a custom framework to decouple our main system from services and queues — enabling automatic retriggering, call prioritisation, and chaining, significantly reducing maintenance overhead. Conducted 40+ Java technical interviews and coached a Senior Engineer to Lead Engineer.",
@@ -20,7 +20,7 @@ const experience = [
     {
         period: "Sept 2018 — Sept 2020",
         role: "Senior Software Engineer — Merchant Account Infrastructure",
-        company: "Booking.com",
+        company: "Klarna",
         location: "Berlin, Germany",
         description:
             "Automated partner pricing setup, reducing manual work from 4 days to 15 minutes. Led migration from Salesforce to a custom in-house system across 3 services. Developed a KPI monitoring dashboard in Grafana to improve system performance tracking. Coached and mentored junior engineers, resulting in multiple promotions to Senior Engineer.",
@@ -28,7 +28,7 @@ const experience = [
     {
         period: "Dec 2017 — Aug 2018",
         role: "Senior Software Engineer — Data Platform Team",
-        company: "Lloyds Banking Group",
+        company: "NCR",
         location: "Edinburgh, Scotland",
         description:
             "Maintained and enhanced legacy banking transaction analysis pipelines using Java, Dropwizard, Cassandra, HBase, and Hadoop.",
@@ -60,7 +60,7 @@ const experience = [
     {
         period: "Nov 2009 — May 2011",
         role: "Software Engineer",
-        company: "Freelance / Various clients",
+        company: "Cystelcom",
         location: "Madrid, Spain",
         description:
             "Led development of Veedia Seminar Portal for Polycom Inc. to facilitate remote video conferencing. Built an ICEfaces 2 web app for Helvetia Seguros to monitor trader activity in real time. Design and development manager for a Flash-based web application creating an Interactive Voice Response system via flowcharts for Vodafone Spain.",

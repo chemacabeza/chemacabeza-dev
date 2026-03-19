@@ -53,7 +53,7 @@ const experience = [
         period: "Jun 2011 — Dec 2013",
         role: "Software Engineer — Leisure Shopping",
         company: "Amadeus IT Group",
-        location: "Sophia Antipolis, France",
+        location: "Sophia Antipolis, France 🇫🇷",
         description:
             "Integrated Amadeus with American Express BTA, ensuring PCI-DSS compliance. Responsible as functional analyst and front-end developer for new rail market features for Trenitalia, SNCF, Swedish Rail, and DBahn in Selling Platform and Amadeus e-Travel Management.",
     },

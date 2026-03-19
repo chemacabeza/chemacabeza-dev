@@ -21,7 +21,7 @@ const githubProjects = [
         title: "ML Inference Pipeline",
         subtitle: "PyTorch → ONNX → Java",
         description:
-            "Multi-model machine learning serving on a single Spring Boot REST API. Models are trained in Python with PyTorch, exported to the ONNX format, then deployed in Java using ONNX Runtime — with golden parity tests guaranteeing identical outputs across both runtimes. Includes four models: Iris MLP classifier, MNIST CNN (99.13% accuracy), Glasses ResNet18 (98.12% accuracy), and a Document Reader.",
+            "What if you could train a model in Python and deploy it in Java — with mathematically identical results? That's exactly what this does. Four production-grade models (MNIST CNN at 99.13% accuracy, ResNet18 at 98.12%) trained in PyTorch, exported to ONNX, and served through a single Spring Boot API with live WebSocket updates. Golden parity tests prove every prediction matches across runtimes. Zero Python in production.",
         tags: ["PyTorch", "ONNX", "Spring Boot 3", "React", "WebSocket", "Docker"],
     },
     {
@@ -31,7 +31,7 @@ const githubProjects = [
         title: "AI Video Generation Studio",
         subtitle: "Full-stack AI video platform",
         description:
-            "A production-ready full-stack platform that converts a text prompt or image into a video using state-of-the-art generative AI models — delivered live in the browser. Built with an async job lifecycle (submit → scheduled polling → live UI update) and supports 5 models: Wan 2.6, Wan 2.2-A14B, Kling v2.5 Turbo Pro, LTX-2 19B, and PixVerse v5. Adding a new model is a single config entry.",
+            "Type a prompt. Watch AI turn it into a video. In your browser. This is a full SaaS-grade platform built from scratch — not a wrapper, not a notebook. Five cutting-edge models (Wan 2.6, Kling v2.5 Turbo Pro, PixVerse v5 and more), async job orchestration with live polling, zero-downtime DB migrations via Flyway, and an architecture so clean that adding a new model is literally one config entry. From zero to production in days — not weeks.",
         tags: ["Spring Boot 3", "React 18", "Vite", "PostgreSQL", "Flyway", "Docker", "fal.ai"],
     },
     {
@@ -41,7 +41,7 @@ const githubProjects = [
         title: "AI Voice Studio",
         subtitle: "Text-to-speech via OpenAI API",
         description:
-            "A full-stack Text-to-Speech application that converts any text into natural, expressive speech via the OpenAI TTS API and streams the MP3 back to the browser instantly. The API key lives exclusively on the backend — the React frontend never sees it, demonstrating secure full-stack API design. Supports 11 OpenAI voices and custom speaking instructions. Stateless backend scales horizontally with zero changes.",
+            "Type any text, pick from 11 expressive OpenAI voices, and hear it spoken back to you instantly — streamed as raw MP3 straight to your browser. The magic? Your API key never leaves the server. A clean, secure architecture where the React frontend knows nothing about credentials, the stateless Spring Boot backend scales horizontally with zero changes, and Docker spins everything up with a single command. Production-grade security meets effortless developer experience.",
         tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "Docker", "Nginx"],
     },
     {
@@ -51,7 +51,7 @@ const githubProjects = [
         title: "AI Image Generation Platform",
         subtitle: "Stable Diffusion · Fooocus · 46 GB model library",
         description:
-            "A production-ready Fooocus deployment that turns your machine into an AI art powerhouse. Ships with a curated 46 GB model library — 7 SDXL checkpoints and 41 LoRAs (including 35 custom character LoRAs spanning 34 nationalities). Runs locally or in Docker with one command. Full Apple Silicon MPS GPU acceleration for blazing-fast generation on M1/M2/M3/M4 chips. Extensible architecture — drop a new .safetensors file and it just works.",
+            "Turn your machine into an AI art powerhouse — one command and you're generating stunning images. Ships with a massive 46 GB curated model library: 7 SDXL checkpoints and 41 LoRAs including 35 custom character LoRAs spanning 34 nationalities. Blazing-fast on Apple Silicon via MPS GPU acceleration (M1 through M4). Run it locally or in Docker. Want a new model? Just drop a .safetensors file and it's ready. The creative possibilities are literally endless.",
         tags: ["Stable Diffusion", "Fooocus", "SDXL", "LoRA", "Docker", "Apple Silicon", "Python"],
     },
 ];

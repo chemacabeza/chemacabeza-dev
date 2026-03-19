@@ -4,7 +4,7 @@ import { BookOpen, Hammer, Cpu, Target } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
     title: "Now",
-    description: "What Chema Cabeza is currently focused on, building, and learning.",
+    description: "What José María Cabeza Rodríguez is currently focused on, building, and learning.",
     path: "/now",
 });
 

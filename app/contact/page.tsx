@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
     title: "Contact",
-    description: "Get in touch with Chema Cabeza — engineering leadership, collaboration, and speaking.",
+    description: "Get in touch with José María Cabeza Rodríguez — engineering leadership, collaboration, and speaking.",
     path: "/contact",
 });
 

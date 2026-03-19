@@ -45,6 +45,16 @@ const githubProjects = [
         tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "Docker", "Nginx"],
     },
     {
+        repo: "bash",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/bash",
+        emoji: "🐚",
+        title: "Bash In Depth",
+        subtitle: "A Developer's Guide · 7-part living book",
+        description:
+            "A living, structured deep-dive into Bash — from variables and control flow to process management and advanced topics. 7 parts, dozens of chapters, written for engineers who want to go beyond quick scripts and truly understand the shell that holds systems together.",
+        tags: ["Bash", "Shell Scripting", "Linux", "Systems", "Developer Tools"],
+    },
+    {
         repo: "AI-related",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related",
         emoji: "🎨",

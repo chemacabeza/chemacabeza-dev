@@ -55,6 +55,16 @@ const githubProjects = [
         tags: ["Bash", "Shell Scripting", "Linux", "Systems", "Developer Tools"],
     },
     {
+        repo: "JavaSpringBoot",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/JavaSpringBoot",
+        emoji: "☕",
+        title: "Java + Spring Boot In Depth",
+        subtitle: "Production-grade backend · 10-section living guide",
+        description:
+            "The backbone of serious backend engineering — documented from the ground up. Spring Core, Hibernate/JPA CRUD, REST APIs, Spring Security, Spring MVC, AOP, and advanced JPA mappings. Real code, real patterns, built to production standards. If you want to understand how a backend stacks up from entry point to service logic to endpoints, this is the playground.",
+        tags: ["Java", "Spring Boot", "Hibernate", "JPA", "REST API", "Spring Security", "AOP"],
+    },
+    {
         repo: "AI-related",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related",
         emoji: "🎨",

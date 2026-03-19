@@ -44,6 +44,16 @@ const githubProjects = [
             "A full-stack Text-to-Speech application that converts any text into natural, expressive speech via the OpenAI TTS API and streams the MP3 back to the browser instantly. The API key lives exclusively on the backend — the React frontend never sees it, demonstrating secure full-stack API design. Supports 11 OpenAI voices and custom speaking instructions. Stateless backend scales horizontally with zero changes.",
         tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "Docker", "Nginx"],
     },
+    {
+        repo: "AI-related",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related",
+        emoji: "🎨",
+        title: "AI Image Generation Platform",
+        subtitle: "Stable Diffusion · Fooocus · 46 GB model library",
+        description:
+            "A production-ready Fooocus deployment that turns your machine into an AI art powerhouse. Ships with a curated 46 GB model library — 7 SDXL checkpoints and 41 LoRAs (including 35 custom character LoRAs spanning 34 nationalities). Runs locally or in Docker with one command. Full Apple Silicon MPS GPU acceleration for blazing-fast generation on M1/M2/M3/M4 chips. Extensible architecture — drop a new .safetensors file and it just works.",
+        tags: ["Stable Diffusion", "Fooocus", "SDXL", "LoRA", "Docker", "Apple Silicon", "Python"],
+    },
 ];
 
 export default function ProjectsPage() {

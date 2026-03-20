@@ -54,7 +54,7 @@ export default function NowPage() {
                             <li className="flex gap-2">
                                 <span className="text-indigo-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    Leading Merchant Partner Account Infrastructure in Berlin — overseeing 7 critical
+                                    Leading Partner Account Infrastructure in Berlin — overseeing 7 critical
                                     services handling API integrations with 40+ payment partners (Adyen, Mollie, Stripe).
                                 </span>
                             </li>

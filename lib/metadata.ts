@@ -9,7 +9,7 @@ export const siteConfig = {
     ogImage: "https://chemacabeza.dev/og-image.png",
     author: {
         name: "José María Cabeza Rodríguez",
-        email: "chemacabeza@gmail.com",
+        email: "chema@chemacabeza.dev",
         github: "https://github.com/chemacabeza",
         linkedin: "https://www.linkedin.com/in/jcabeza/",
         twitter: "https://twitter.com/chemacabeza",

@@ -61,8 +61,8 @@ const githubProjects = [
         title: "Java + Spring Boot In Depth",
         subtitle: "Production-grade backend · 3 comprehensive tracks",
         description:
-            "The backbone of serious backend engineering — documented from the ground up. This living guide covers a complete Spring Boot 3 & Hibernate masterclass, a deep dive into modular monolithic architectures with Spring Modulith, and a foundational Java Masterclass. Real code and real patterns built to production standards.",
-        tags: ["Java", "Spring Boot 3", "Spring Modulith", "Hibernate", "REST API", "Spring Security"],
+            "The backbone of serious backend engineering — documented from the ground up for full local reproducibility. This living guide covers a complete Spring Boot 3 & Hibernate masterclass, a deep dive into modular monolithic architectures with Spring Modulith (now featuring event-driven Kafka integration), and a foundational Java Masterclass. Everything is built to production standards with copy-pasteable code examples and complete Docker environments (Dockerfile & docker-compose) tailored for both Apple Silicon and Linux.",
+        tags: ["Java", "Spring Boot 3", "Spring Modulith", "Hibernate", "Kafka", "Docker", "REST API", "Spring Security"],
     },
     {
         repo: "AI-related",

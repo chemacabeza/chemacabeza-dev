@@ -99,10 +99,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Linux",
         emoji: "🐧",
         title: "Linux Mastery Curriculum",
-        subtitle: "12-part guide · From CLI to eBPF",
+        subtitle: "13-part guide · From CLI to Kernel Modules & eBPF",
         description:
-            "A hardcore 12-part curriculum synthesizing foundational bibles of system engineering. Takes you from basic CLI survival and filesystem architecture to Process Management, tracing silent HTTP crashes via strace, Deep Packet Inspection with tcpdump, and injecting custom C-based eBPF probes for live kernel observability.",
-        tags: ["Linux", "Sysadmin", "Kernel", "Networking", "eBPF", "Performance", "Bash"],
+            "A hardcore 13-part curriculum synthesizing foundational bibles of system engineering. Takes you from basic CLI survival and filesystem architecture to Process Management, custom Character Device Driver development (Kernel Modules) in C, Deep Packet Inspection with tcpdump, and injecting eBPF probes for live kernel observability.",
+        tags: ["Linux", "Sysadmin", "Kernel", "Device Drivers", "Networking", "eBPF", "Performance", "C"],
     },
 ];
 

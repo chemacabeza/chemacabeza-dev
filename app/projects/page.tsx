@@ -59,10 +59,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/JavaSpringBoot",
         emoji: "☕",
         title: "Java + Spring Boot In Depth",
-        subtitle: "Production-grade backend · 3 comprehensive tracks",
+        subtitle: "Production-grade backend · LLM Integration",
         description:
-            "The backbone of serious backend engineering — documented from the ground up for full local reproducibility. This living guide covers a complete Spring Boot 3 & Hibernate masterclass, a deep dive into modular monolithic architectures with Spring Modulith (now featuring event-driven Kafka integration), and a foundational Java Masterclass. Everything is built to production standards with copy-pasteable code examples and complete Docker environments (Dockerfile & docker-compose) tailored for both Apple Silicon and Linux.",
-        tags: ["Java", "Spring Boot 3", "Spring Modulith", "Hibernate", "Kafka", "Docker", "REST API", "Spring Security"],
+            "The backbone of serious backend engineering, fully documented for local reproducibility. This living guide covers a standard Spring Boot 3 & Hibernate masterclass, Spring Modulith (featuring event-driven Kafka), and a new track on the Model Context Protocol (MCP) — showcasing how to expose enterprise Java tools natively to LLMs. Everything is built to production standards with complete Docker environments tailored for both Apple Silicon and Linux.",
+        tags: ["Java", "Spring Boot 3", "Spring Modulith", "Hibernate", "Kafka", "Docker", "MCP", "AI"],
     },
     {
         repo: "AI-related",

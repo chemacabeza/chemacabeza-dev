@@ -37,7 +37,7 @@ const links = [
         icon: Calendar,
         label: "Calendly",
         value: "Book a 30-minute meeting",
-        href: "https://calendly.com/chemacabeza/30min",
+        href: "https://calendly.com/chemacabeza",
         description: "Schedule a direct 1-on-1 meeting with me.",
         color: "emerald",
     },

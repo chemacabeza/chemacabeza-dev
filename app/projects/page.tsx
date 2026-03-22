@@ -94,6 +94,16 @@ const githubProjects = [
             "A complete 12-part path to taking Go from zero to production. Covers fundamentals, the CSP concurrency model (Goroutines & Channels), Test-Driven Development, and Domain-Driven Design. Culminates in building multi-container microservices communicating over gRPC with Protocol Buffers. 100% Dockerized for zero-overhead local execution.",
         tags: ["Go", "Microservices", "gRPC", "Protobufs", "Docker", "Concurrency", "DDD"],
     },
+    {
+        repo: "Linux",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/Linux",
+        emoji: "🐧",
+        title: "Linux Mastery Curriculum",
+        subtitle: "12-part guide · From CLI to eBPF",
+        description:
+            "A hardcore 12-part curriculum synthesizing foundational bibles of system engineering. Takes you from basic CLI survival and filesystem architecture to Process Management, tracing silent HTTP crashes via strace, Deep Packet Inspection with tcpdump, and injecting custom C-based eBPF probes for live kernel observability.",
+        tags: ["Linux", "Sysadmin", "Kernel", "Networking", "eBPF", "Performance", "Bash"],
+    },
 ];
 
 export default function ProjectsPage() {

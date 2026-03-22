@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { createMetadata, siteConfig } from "@/lib/metadata";
-import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowRight, Calendar } from "lucide-react";
 
 export const metadata: Metadata = createMetadata({
     title: "Contact",
@@ -33,6 +33,14 @@ const links = [
         description: "Professional background, endorsements, and career history.",
         color: "blue",
     },
+    {
+        icon: Calendar,
+        label: "Calendly",
+        value: "Book a 30-minute meeting",
+        href: "https://calendly.com/chemacabeza/30min",
+        description: "Schedule a direct 1-on-1 meeting with me.",
+        color: "emerald",
+    },
 ];
 
 const colorMap: Record<string, string> = {
@@ -41,12 +49,14 @@ const colorMap: Record<string, string> = {
     violet:
         "bg-violet-500/10 border-violet-500/20 text-violet-400 hover:border-violet-500/50 hover:bg-violet-500/15",
     blue: "bg-blue-500/10 border-blue-500/20 text-blue-400 hover:border-blue-500/50 hover:bg-blue-500/15",
+    emerald: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/15",
 };
 
 const iconBg: Record<string, string> = {
     indigo: "bg-indigo-500/10 border-indigo-500/20 text-indigo-400",
     violet: "bg-violet-500/10 border-violet-500/20 text-violet-400",
     blue: "bg-blue-500/10 border-blue-500/20 text-blue-400",
+    emerald: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
 };
 
 export default function ContactPage() {

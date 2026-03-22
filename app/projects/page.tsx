@@ -74,6 +74,16 @@ const githubProjects = [
             "Turn your machine into an AI art powerhouse — one command and you're generating stunning images. Ships with a massive 46 GB curated model library: 7 SDXL checkpoints and 41 LoRAs including 35 custom character LoRAs spanning 34 nationalities. Blazing-fast on Apple Silicon via MPS GPU acceleration (M1 through M4). Run it locally or in Docker. Want a new model? Just drop a .safetensors file and it's ready. The creative possibilities are literally endless.",
         tags: ["Stable Diffusion", "Fooocus", "SDXL", "LoRA", "Docker", "Apple Silicon", "Python"],
     },
+    {
+        repo: "Cplusplus",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/Cplusplus",
+        emoji: "⚙️",
+        title: "C++ In Depth",
+        subtitle: "Advanced systems programming · Mastery sequence",
+        description:
+            "A comprehensive deep-dive into the C++ Object Model and Language Specification. Covers memory architecture, virtual tables, template metaprogramming (SFINAE), and policy-based design. Culminates in a type-erased, thread-safe heterogeneous container built entirely from scratch.",
+        tags: ["C++", "Systems Programming", "Memory Architecture", "Template Metaprogramming", "STL"],
+    },
 ];
 
 export default function ProjectsPage() {

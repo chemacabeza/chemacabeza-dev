@@ -84,6 +84,16 @@ const githubProjects = [
             "A comprehensive deep-dive into the C++ Object Model and Language Specification. Covers memory architecture, virtual tables, template metaprogramming (SFINAE), and policy-based design. Culminates in a type-erased, thread-safe heterogeneous container built entirely from scratch.",
         tags: ["C++", "Systems Programming", "Memory Architecture", "Template Metaprogramming", "STL"],
     },
+    {
+        repo: "Golang",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/Golang",
+        emoji: "🐹",
+        title: "Golang Mastery Curriculum",
+        subtitle: "12-part guide · Microservices & gRPC",
+        description:
+            "A complete 12-part path to taking Go from zero to production. Covers fundamentals, the CSP concurrency model (Goroutines & Channels), Test-Driven Development, and Domain-Driven Design. Culminates in building multi-container microservices communicating over gRPC with Protocol Buffers. 100% Dockerized for zero-overhead local execution.",
+        tags: ["Go", "Microservices", "gRPC", "Protobufs", "Docker", "Concurrency", "DDD"],
+    },
 ];
 
 export default function ProjectsPage() {

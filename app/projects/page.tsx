@@ -87,7 +87,7 @@ const githubProjects = [
     {
         repo: "Golang",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Golang",
-        emoji: "🐹",
+        emoji: <span className="bg-[#00ADD8] text-white px-2 py-0.5 rounded-md text-xl font-bold italic tracking-tighter shadow-sm inline-flex items-center justify-center">Go</span>,
         title: "Golang Mastery Curriculum",
         subtitle: "12-part guide · Microservices & gRPC",
         description:

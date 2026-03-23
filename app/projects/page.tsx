@@ -45,8 +45,8 @@ const githubProjects = [
         tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "Docker", "Nginx"],
     },
     {
-        repo: "test-audio-listener",
-        url: "https://github.com/chemacabeza/my-github-projects/tree/master/test-audio-listener",
+        repo: "test-for-audio-listener",
+        url: "https://github.com/chemacabeza/test-for-audio-listener",
         emoji: "🎧",
         title: "AI Audio Listener",
         subtitle: "STT via OpenAI Whisper",

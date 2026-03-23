@@ -45,6 +45,16 @@ const githubProjects = [
         tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "Docker", "Nginx"],
     },
     {
+        repo: "test-audio-listener",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/test-audio-listener",
+        emoji: "🎙️",
+        title: "AI Audio Listener",
+        subtitle: "Speech-to-Text Transcription",
+        description:
+            "A full-stack transcription pipeline powered by OpenAI Whisper, completely containerized to run effortlessly on your local machine. Featuring a Next.js 15 App Router frontend and a Spring Boot 3 & Java 21 backend backed by PostgreSQL and Flyway. Simply execute `./start.sh` to spin up the entire isolated transcription stack locally via Docker Compose — allowing seamless browser-based audio recording and historical tracking without relying on cloud-hosted application infrastructure.",
+        tags: ["Spring Boot 3", "Next.js 15", "PostgreSQL", "Whisper", "Docker"],
+    },
+    {
         repo: "test-for-audio-listener",
         url: "https://github.com/chemacabeza/test-for-audio-listener",
         emoji: "🎧",

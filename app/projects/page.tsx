@@ -59,10 +59,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/JavaSpringBoot",
         emoji: "☕",
         title: "Java + Spring Boot In Depth",
-        subtitle: "Production-grade backend · Claude Desktop MCP",
+        subtitle: "23-part curriculum · 70+ projects · 133+ tests",
         description:
-            "The backbone of serious backend engineering, fully documented for local reproducibility. This living guide covers a Spring Boot 3 masterclass, Spring Modulith (featuring event-driven Kafka), and a cutting-edge track on the Model Context Protocol (MCP). The MCP module showcases how to natively expose enterprise Java tools to LLMs by integrating a fully Dockerized Spring Boot backend directly with Anthropic's Claude Desktop via JSON-RPC over HTTP SSE.",
-        tags: ["Java", "Spring Boot 3", "Spring Modulith", "Kafka", "Docker", "MCP", "Claude", "AI"],
+            "Two massive, fully documented courses built from industry reference books. The 12-part Java track goes from OOP essentials through Generics, Streams API, Concurrency, and culminates in JNI & Project Panama. The 11-part Spring Boot track covers Spring Core, REST CRUD, Security (BCrypt + JDBC), MVC, JPA Advanced Mappings, plus deep dives into Hibernate internals and AspectJ. Bonus modules include Apache Kafka integration, Spring Modulith with event-driven architecture, and a Model Context Protocol (MCP) module that natively exposes enterprise Java tools to Anthropic's Claude Desktop via JSON-RPC over HTTP SSE.",
+        tags: ["Java", "Spring Boot 3", "Hibernate", "JPA", "Spring Security", "AOP", "AspectJ", "Kafka", "Spring Modulith", "MCP", "Docker"],
     },
     {
         repo: "AI-related",

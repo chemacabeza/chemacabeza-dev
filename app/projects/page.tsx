@@ -45,6 +45,16 @@ const githubProjects = [
         tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "Docker", "Nginx"],
     },
     {
+        repo: "test-audio-listener",
+        url: "https://github.com/chemacabeza/test-audio-listener",
+        emoji: "🎧",
+        title: "AI Audio Listener",
+        subtitle: "STT via OpenAI Whisper",
+        description:
+            "Record. Transcribe. Search. This is a full-stack audio intelligence platform that turns speech into text with near-perfect accuracy using OpenAI Whisper. Whether it's a live recording from your mic or a file upload, the system handles it with a high-performance Java 21 backend and a lightning-fast Next.js 15 UI. Features include searchable transcription history, persistent storage with PostgreSQL, and a completely Dockerized environment for instant setup. A clean, modular architecture where performance meets simplicity.",
+        tags: ["Spring Boot 3", "Next.js 15", "OpenAI Whisper", "PostgreSQL", "Flyway", "Docker", "TypeScript"],
+    },
+    {
         repo: "bash",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/bash",
         emoji: "🐚",

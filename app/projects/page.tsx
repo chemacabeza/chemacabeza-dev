@@ -46,7 +46,7 @@ const githubProjects = [
     },
     {
         repo: "test-audio-listener",
-        url: "https://github.com/chemacabeza/test-audio-listener",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/test-audio-listener",
         emoji: "🎧",
         title: "AI Audio Listener",
         subtitle: "STT via OpenAI Whisper",

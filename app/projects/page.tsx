@@ -29,10 +29,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/test-for-ai-wan",
         emoji: "⚡",
         title: "AI Video Generation Studio",
-        subtitle: "Full-stack AI video platform",
+        subtitle: "100% Local · Offline Video Synthesis",
         description:
-            "Type a prompt. Watch AI turn it into a video. In your browser. This is a full SaaS-grade platform built from scratch — not a wrapper, not a notebook. Five cutting-edge models (Wan 2.6, Kling v2.5 Turbo Pro, PixVerse v5 and more), async job orchestration with live polling, zero-downtime DB migrations via Flyway, and an architecture so clean that adding a new model is literally one config entry. From zero to production in days — not weeks.",
-        tags: ["Spring Boot 3", "React 18", "Vite", "PostgreSQL", "Flyway", "Docker", "fal.ai"],
+            "Type a prompt and watch AI turn it into a video — entirely on your own machine. This full-stack video platform is built from scratch to run 100% locally without requiring any internet connection or cloud APIs. Engineered with Spring Boot 3, React, and local PostgreSQL, it features async job orchestration, isolated Docker environments, and a robust architecture designed for true air-gapped, private video synthesis workflows.",
+        tags: ["Spring Boot 3", "React 18", "Local Inference", "PostgreSQL", "Docker", "Offline"],
     },
     {
         repo: "test-for-audio-generation",

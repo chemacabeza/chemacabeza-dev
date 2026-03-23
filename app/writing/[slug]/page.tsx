@@ -65,7 +65,7 @@ export default async function PostPage({ params }: Props) {
                         </div>
                     )}
 
-                    <h1 className="text-3xl sm:text-4xl font-black text-slate-100 mb-4 leading-tight">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-100 mb-4 leading-tight">
                         {frontmatter.title}
                     </h1>
 
@@ -90,7 +90,7 @@ export default async function PostPage({ params }: Props) {
                 </header>
 
                 {/* MDX content */}
-                <article className="prose prose-invert prose-lg max-w-none">
+                <article className="prose prose-invert sm:prose-lg max-w-none overflow-hidden">
                     <MDXRemote source={content} />
                 </article>
 

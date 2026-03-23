@@ -13,12 +13,12 @@ export default function ArticleCard({ post, featured = false }: ArticleCardProps
     return (
         <Link href={`/writing/${slug}`} className="group block">
             <article
-                className={`relative h-full rounded-xl border border-slate-800/60 bg-slate-900/40 p-6 hover:border-indigo-500/40 hover:bg-slate-900/70 transition-all duration-300 ${featured ? "hover:shadow-lg hover:shadow-indigo-500/10" : ""
+                className={`relative h-full rounded-xl border border-slate-800/60 bg-slate-900/40 p-4 sm:p-6 hover:border-indigo-500/40 hover:bg-slate-900/70 transition-all duration-300 ${featured ? "hover:shadow-lg hover:shadow-indigo-500/10" : ""
                     }`}
             >
                 {/* Tags */}
                 {frontmatter.tags && frontmatter.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    <div className="flex flex-wrap gap-1.5 mb-3 sm:mb-4">
                         {frontmatter.tags.slice(0, 3).map((tag) => (
                             <span
                                 key={tag}
@@ -30,7 +30,7 @@ export default function ArticleCard({ post, featured = false }: ArticleCardProps
                     </div>
                 )}
 
-                <h3 className="text-lg font-bold text-slate-100 mb-2 group-hover:text-indigo-300 transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg font-bold text-slate-100 mb-2 group-hover:text-indigo-300 transition-colors leading-snug">
                     {frontmatter.title}
                 </h3>
 
@@ -40,8 +40,8 @@ export default function ArticleCard({ post, featured = false }: ArticleCardProps
                     </p>
                 )}
 
-                <div className="flex items-center justify-between mt-auto pt-2">
-                    <div className="flex items-center gap-3 text-xs text-slate-500">
+                <div className="flex items-center justify-between mt-auto pt-2 gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 sm:gap-3 text-xs text-slate-500">
                         <span className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             {new Date(frontmatter.date).toLocaleDateString("en-GB", {

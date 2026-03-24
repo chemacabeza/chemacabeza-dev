@@ -19,10 +19,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/neural-network-with-java",
         emoji: "🧠",
         title: "ML Inference Pipeline",
-        subtitle: "PyTorch → ONNX → Java",
+        subtitle: "Train in Python → Export to ONNX → Serve in Java",
         description:
-            "What if you could train a model in Python and deploy it in Java — with mathematically identical results? That's exactly what this does. Four production-grade models (MNIST CNN at 99.13% accuracy, ResNet18 at 98.12%) trained in PyTorch, exported to ONNX, and served through a single Spring Boot API with live WebSocket updates. Golden parity tests prove every prediction matches across runtimes. Zero Python in production.",
-        tags: ["PyTorch", "ONNX", "Spring Boot 3", "React", "WebSocket", "Docker"],
+            "A complete, production-ready machine learning pipeline that trains a neural network in Python (PyTorch), exports it to ONNX, and serves it via a Spring Boot API with 'Golden Parity' tests. This automated architecture ensures mathematically identical results between Python and Java runtimes, proving that models can be trained in Python but executed with zero-Python production footprints.",
+        tags: ["PyTorch", "ONNX", "Spring Boot 3", "React", "Golden Parity", "Docker"],
     },
     {
         repo: "test-for-ai-wan",
@@ -31,7 +31,7 @@ const githubProjects = [
         title: "AI Video Generation Studio",
         subtitle: "Hybrid Architecture · Online & Offline Video Synthesis",
         description:
-            "Type a prompt and watch AI turn it into a video. This full-stack, SaaS-grade video platform is built from scratch with a flexible hybrid architecture: a single configuration switch lets you instantly toggle between running it entirely offline on your local hardware for air-gapped privacy, or connecting it effortlessly to cloud APIs (like fal.ai) for massive scale. Engineered with Spring Boot 3, React, and PostgreSQL, it features async job orchestration, isolated Docker environments, and zero-downtime database migrations.",
+            "A full-stack video platform supporting 5 state-of-the-art models (Wan, Kling, LTX-2, PixVerse) via fal.ai. Engineered with a flexible hybrid architecture: a single configuration switch lets you toggle between running models entirely offline on local hardware or connecting to cloud APIs for scale. Features async job orchestration, isolated Docker environments, and zero-downtime database migrations.",
         tags: ["Spring Boot 3", "React 18", "Hybrid Cloud", "Local Inference", "fal.ai", "Docker"],
     },
     {
@@ -39,30 +39,30 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/test-for-audio-generation",
         emoji: "🔊",
         title: "AI Voice Studio",
-        subtitle: "Text-to-speech via OpenAI API",
+        subtitle: "Text-to-speech Generator · OpenAI TTS",
         description:
-            "Type any text, pick from 11 expressive OpenAI voices, and hear it spoken back to you instantly — streamed as raw MP3 straight to your browser. The magic? Your API key never leaves the server. A clean, secure architecture where the React frontend knows nothing about credentials, the stateless Spring Boot backend scales horizontally with zero changes, and Docker spins everything up with a single command. Production-grade security meets effortless developer experience.",
-        tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "Docker", "Nginx"],
+            "Convert text to natural-sounding speech instantly using the OpenAI TTS API. Choose from 11 expressive voices and stream raw MP3 audio straight to your browser. The secure architecture keeps API keys strictly server-side, while the Spring Boot backend and React frontend are fully Dockerized for effortless, horizontal scaling in any environment.",
+        tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "MP3 Streaming", "Docker"],
+    },
+    {
+        repo: "test-ai-asistant",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/test-ai-asistant",
+        emoji: "🎙️",
+        title: "AI Voice Assistant",
+        subtitle: "Whisper STT · GPT-4o Chat · OpenAI TTS",
+        description:
+            "A production-ready voice assistant featuring speech-to-text (Whisper), intelligent GPT-4o chat responses, and natural TTS output. Includes configurable wake-word detection ('Nova'), support for 9 languages, and custom AI personas. Built with a premium dark-themed React UI and a Spring Boot backend, completely containerized for instant local deployment via Docker.",
+        tags: ["Spring Boot 3", "React 18", "GPT-4o", "Whisper", "Voice Assistant", "Docker"],
     },
     {
         repo: "test-audio-listener",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/test-audio-listener",
-        emoji: "🎙️",
+        emoji: "🎧",
         title: "AI Audio Listener",
         subtitle: "Hybrid Architecture · Online & Offline Transcription",
         description:
-            "A full-stack transcription pipeline powered by Whisper, engineered with a flexible hybrid architecture: a single configuration toggle lets you instantly choose between running transcription models entirely offline on your local hardware for strict privacy, or connecting to OpenAI cloud APIs for maximum scale and speed. Featuring a Next.js 15 App Router frontend and a Spring Boot 3 & Java 21 backend backed by PostgreSQL, you can spin up the entire isolated stack locally via Docker Compose — allowing seamless browser-based audio recording and historical tracking.",
-        tags: ["Spring Boot 3", "Next.js 15", "Hybrid Cloud", "Local Inference", "Whisper", "Docker"],
-    },
-    {
-        repo: "test-for-audio-listener",
-        url: "https://github.com/chemacabeza/test-for-audio-listener",
-        emoji: "🎧",
-        title: "AI Audio Listener",
-        subtitle: "STT via OpenAI Whisper",
-        description:
-            "Record. Transcribe. Search. This is a full-stack audio intelligence platform that turns speech into text with near-perfect accuracy using OpenAI Whisper. Whether it's a live recording from your mic or a file upload, the system handles it with a high-performance Java 21 backend and a lightning-fast Next.js 15 UI. Features include searchable transcription history, persistent storage with PostgreSQL, and a completely Dockerized environment for instant setup. A clean, modular architecture where performance meets simplicity.",
-        tags: ["Spring Boot 3", "Next.js 15", "OpenAI Whisper", "PostgreSQL", "Flyway", "Docker", "TypeScript"],
+            "A high-performance transcription pipeline powered by OpenAI Whisper. This hybrid platform allows you to toggle instantly between local-only transcription for air-gapped privacy or cloud acceleration via OpenAI APIs. Featuring a Next.js 15 App Router frontend and a Spring Boot 3.3 backend with PostgreSQL, it includes searchable history, file uploads, and browser-based recording updates.",
+        tags: ["Spring Boot 3.3", "Next.js 15", "PostgreSQL", "Whisper", "Docker", "Flyway"],
     },
     {
         repo: "test-ai-asistant",
@@ -90,58 +90,58 @@ const githubProjects = [
         title: "Bash In Depth",
         subtitle: "A Developer's Guide · 7-part living book",
         description:
-            "A living, structured deep-dive into Bash — from variables and control flow to process management and advanced topics. 7 parts, dozens of chapters, written for engineers who want to go beyond quick scripts and truly understand the shell that holds systems together.",
-        tags: ["Bash", "Shell Scripting", "Linux", "Systems", "Developer Tools"],
+            "A structured deep-dive into Bash systems engineering — from variables and control flow to process management and signals. This 7-part living book is written for engineers who want to go beyond quick scripts and truly master the shell that holds systems together. Features chapters on subshells, Coprocesses, and Programmable Completion.",
+        tags: ["Bash", "Systems Engineering", "Linux", "DevOps", "Automation"],
     },
     {
         repo: "JavaSpringBoot",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/JavaSpringBoot",
         emoji: "☕",
         title: "Java + Spring Boot In Depth",
-        subtitle: "23-part curriculum · 70+ projects · 133+ tests",
+        subtitle: "Mastery Curriculum · 24-part deep dive",
         description:
-            "Two massive, fully documented courses built from industry reference books. The 12-part Java track goes from OOP essentials through Generics, Streams API, Concurrency, and culminates in JNI & Project Panama. The 11-part Spring Boot track covers Spring Core, REST CRUD, Security (BCrypt + JDBC), MVC, JPA Advanced Mappings, plus deep dives into Hibernate internals and AspectJ. Bonus modules include Apache Kafka integration, Spring Modulith with event-driven architecture, and a Model Context Protocol (MCP) module that natively exposes enterprise Java tools to Anthropic's Claude Desktop via JSON-RPC over HTTP SSE.",
-        tags: ["Java", "Spring Boot 3", "Hibernate", "JPA", "Spring Security", "AOP", "AspectJ", "Kafka", "Spring Modulith", "MCP", "Docker"],
+            "A massive mastery curriculum split into two deep tracks. The 13-part Java track spans OOP essentials, the Streams API, Concurrency, and JNI/Project Panama. The 11-part Spring Boot track covers REST, Security, JPA internal mappings, and advanced architectural patterns including Spring Modulith, event-driven design, and the Model Context Protocol (MCP) for LLM tool integration.",
+        tags: ["Java 21", "Spring Boot 3", "Project Panama", "Hibernate", "Modulith", "MCP", "Docker"],
     },
     {
         repo: "AI-related",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related",
         emoji: "🎨",
         title: "AI Image Generation Platform",
-        subtitle: "Stable Diffusion · Fooocus · 46 GB model library",
+        subtitle: "Stable Diffusion · Fooocus · Model Library",
         description:
-            "Turn your machine into an AI art powerhouse — one command and you're generating stunning images. Ships with a massive 46 GB curated model library: 7 SDXL checkpoints and 41 LoRAs including 35 custom character LoRAs spanning 34 nationalities. Blazing-fast on Apple Silicon via MPS GPU acceleration (M1 through M4). Run it locally or in Docker. Want a new model? Just drop a .safetensors file and it's ready. The creative possibilities are literally endless.",
-        tags: ["Stable Diffusion", "Fooocus", "SDXL", "LoRA", "Docker", "Apple Silicon", "Python"],
+            "A local high-performance art platform using Stable Diffusion and Fooocus. Features a 46GB model library with 7 SDXL checkpoints and 41 LoRAs, optimized for Apple Silicon via MPS GPU acceleration. Includes a centralized storage architecture and pre-configured workflows for production-quality character and environment synthesis.",
+        tags: ["Stable Diffusion", "SDXL", "LoRA", "Apple Silicon", "MPS", "Docker", "Fooocus"],
     },
     {
         repo: "Cplusplus",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Cplusplus",
         emoji: "⚙️",
         title: "C++ In Depth",
-        subtitle: "Advanced systems programming · Mastery sequence",
+        subtitle: "Advanced Systems Programming · Mastery Sequence",
         description:
-            "A comprehensive deep-dive into the C++ Object Model and Language Specification. Covers memory architecture, virtual tables, template metaprogramming (SFINAE), and policy-based design. Culminates in a type-erased, thread-safe heterogeneous container built entirely from scratch.",
-        tags: ["C++", "Systems Programming", "Memory Architecture", "Template Metaprogramming", "STL"],
+            "A 12-part sequence in high-performance C++ systems engineering. Covers the C++ Object Model under the hood, memory architecture, virtual tables, and template metaprogramming (SFINAE). Explores policy-based design and assembly-level reversing, culminating in a Mastery Project focusing on type-erased thread-safe containers.",
+        tags: ["C++", "Memory Architecture", "Metaprogramming", "STL", "Assembly"],
     },
     {
         repo: "Golang",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Golang",
         emoji: <span className="bg-[#00ADD8] text-white px-2 py-0.5 rounded-md text-xl font-bold italic tracking-tighter shadow-sm inline-flex items-center justify-center">Go</span>,
         title: "Golang Mastery Curriculum",
-        subtitle: "12-part guide · Microservices & gRPC",
+        subtitle: "Microservices & Concurrency · 12-part guide",
         description:
-            "A complete 12-part path to taking Go from zero to production. Covers fundamentals, the CSP concurrency model (Goroutines & Channels), Test-Driven Development, and Domain-Driven Design. Culminates in building multi-container microservices communicating over gRPC with Protocol Buffers. 100% Dockerized for zero-overhead local execution.",
-        tags: ["Go", "Microservices", "gRPC", "Protobufs", "Docker", "Concurrency", "DDD"],
+            "A comprehensive path from zero to production Go. Mentions the CSP concurrency model (Goroutines/Channels), Test-Driven Development (TDD), and Domain-Driven Design (DDD). Culminates in building multi-container microservices communicating over gRPC with Protocol Buffers, fully Dockerized for containerized local execution.",
+        tags: ["Go", "Microservices", "gRPC", "Protobufs", "Concurrency", "DDD", "Docker"],
     },
     {
         repo: "Linux",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Linux",
         emoji: "🐧",
         title: "Linux Mastery Curriculum",
-        subtitle: "13-part guide · Kernel & eBPF Sandboxes",
+        subtitle: "Kernel & Systems Engineering · 17-part guide",
         description:
-            "A hardcore 13-part curriculum synthesizing foundational bibles of system engineering. Takes you from basic CLI to custom Character Device Driver development in C, Deep Packet Inspection, and injecting live eBPF observability probes. Every module now features completely containerized execution via Docker and docker-compose, allowing you to safely execute dangerous kernel-level code and networking traces within an isolated sandbox on both Linux and macOS.",
-        tags: ["Linux", "Sysadmin", "Kernel", "Device Drivers", "Networking", "eBPF", "C", "Docker"],
+            "A deep 17-part curriculum synthesizing foundations of system engineering. Covers Linux philosophy, custom character device drivers in C, Deep Packet Inspection, and eBPF observability probes. Every module features completely containerized execution, allowing safe experimentation with kernel-level code and POSIX networking traces in an isolated sandbox.",
+        tags: ["Linux Kernel", "Device Drivers", "Networking", "eBPF", "C", "POSIX", "Docker"],
     },
 ];
 

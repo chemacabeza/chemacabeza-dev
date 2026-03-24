@@ -65,6 +65,16 @@ const githubProjects = [
         tags: ["Spring Boot 3", "Next.js 15", "OpenAI Whisper", "PostgreSQL", "Flyway", "Docker", "TypeScript"],
     },
     {
+        repo: "test-ai-asistant",
+        url: "https://github.com/chemacabeza/test-ai-asistant",
+        emoji: "🤖",
+        title: "AI Voice Assistant",
+        subtitle: "Conversational AI · Whisper + GPT-4o + TTS",
+        description:
+            "\"Hey Nova, tell me a joke.\" Speak naturally, and this full-stack AI assistant listens (Whisper), thinks (GPT-4o), and speaks back (TTS) — all in real time, right in your browser. Features wake word detection, 9 languages, 6 voice personas, custom AI naming, push-to-talk and continuous listening modes, and both online and offline backends. It's your own Alexa — but you built it, you control it, and it runs with a single Docker command.",
+        tags: ["Spring Boot 3", "React", "Vite", "OpenAI", "GPT-4o", "Whisper", "TTS", "Docker"],
+    },
+    {
         repo: "bash",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/bash",
         emoji: (

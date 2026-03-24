@@ -31,7 +31,7 @@ const githubProjects = [
         title: "AI Video Generation Studio",
         subtitle: "Hybrid Architecture · Online & Offline Video Synthesis",
         description:
-            "Type a prompt and watch AI turn it into a video. This full-stack, SaaS-grade video platform is built from scratch with a flexible hybrid architecture: run it entirely offline on your own hardware for true air-gapped privacy with local models, or connect it seamlessly to cloud APIs (like fal.ai) for massive scale. Engineered with Spring Boot 3, React, and PostgreSQL, it features async job orchestration, isolated Docker environments, and zero-downtime database migrations.",
+            "Type a prompt and watch AI turn it into a video. This full-stack, SaaS-grade video platform is built from scratch with a flexible hybrid architecture: a single configuration switch lets you instantly toggle between running it entirely offline on your local hardware for air-gapped privacy, or connecting it effortlessly to cloud APIs (like fal.ai) for massive scale. Engineered with Spring Boot 3, React, and PostgreSQL, it features async job orchestration, isolated Docker environments, and zero-downtime database migrations.",
         tags: ["Spring Boot 3", "React 18", "Hybrid Cloud", "Local Inference", "fal.ai", "Docker"],
     },
     {

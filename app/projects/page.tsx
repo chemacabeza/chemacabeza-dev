@@ -49,10 +49,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/test-audio-listener",
         emoji: "🎙️",
         title: "AI Audio Listener",
-        subtitle: "Speech-to-Text Transcription",
+        subtitle: "Hybrid Architecture · Online & Offline Transcription",
         description:
-            "A full-stack transcription pipeline powered by OpenAI Whisper, completely containerized to run effortlessly on your local machine. Featuring a Next.js 15 App Router frontend and a Spring Boot 3 & Java 21 backend backed by PostgreSQL and Flyway. Simply execute `./start.sh` to spin up the entire isolated transcription stack locally via Docker Compose — allowing seamless browser-based audio recording and historical tracking without relying on cloud-hosted application infrastructure.",
-        tags: ["Spring Boot 3", "Next.js 15", "PostgreSQL", "Whisper", "Docker"],
+            "A full-stack transcription pipeline powered by Whisper, engineered with a flexible hybrid architecture: a single configuration toggle lets you instantly choose between running transcription models entirely offline on your local hardware for strict privacy, or connecting to OpenAI cloud APIs for maximum scale and speed. Featuring a Next.js 15 App Router frontend and a Spring Boot 3 & Java 21 backend backed by PostgreSQL, you can spin up the entire isolated stack locally via Docker Compose — allowing seamless browser-based audio recording and historical tracking.",
+        tags: ["Spring Boot 3", "Next.js 15", "Hybrid Cloud", "Local Inference", "Whisper", "Docker"],
     },
     {
         repo: "test-for-audio-listener",

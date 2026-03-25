@@ -138,10 +138,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Linux",
         emoji: "🐧",
         title: "Linux Mastery Curriculum",
-        subtitle: "Kernel & Systems Engineering · 17-part guide",
+        subtitle: "Kernel & Systems Engineering · 18-part guide",
         description:
-            "A deep 17-part curriculum synthesizing foundations of system engineering. Covers Linux philosophy, custom character device drivers in C, Deep Packet Inspection, and eBPF observability probes. Every module features completely containerized execution, allowing safe experimentation with kernel-level code and POSIX networking traces in an isolated sandbox.",
-        tags: ["Linux Kernel", "Device Drivers", "Networking", "eBPF", "C", "POSIX", "Docker"],
+            "A hardcore 18-part curriculum synthesized from 15 foundational bibles of system engineering. Takes you from basic CLI to custom Character Device Driver development in C, eBPF observability, and the UNIX Programming Interface (TLPI) spanning POSIX threads and Socket programming. Culminates in Phase 6: Advanced Network Security, deep-diving into Kernel-level Netfilter and iptables rule engineering.",
+        tags: ["Linux Kernel", "Device Drivers", "Networking", "eBPF", "C", "POSIX", "iptables", "Docker"],
     },
 ];
 

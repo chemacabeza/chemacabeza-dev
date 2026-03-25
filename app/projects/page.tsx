@@ -140,8 +140,8 @@ const githubProjects = [
         title: "Linux Mastery Curriculum",
         subtitle: "Kernel & Systems Engineering · 18-part guide",
         description:
-            "A hardcore 18-part curriculum synthesized from 15 foundational bibles of system engineering. Takes you from basic CLI to custom Character Device Driver development in C, eBPF observability, and the UNIX Programming Interface (TLPI) spanning POSIX threads and Socket programming. Culminates in Phase 6: Advanced Network Security, deep-diving into Kernel-level Netfilter and iptables rule engineering.",
-        tags: ["Linux Kernel", "Device Drivers", "Networking", "eBPF", "C", "POSIX", "iptables", "Docker"],
+            "A hardcore 18-part curriculum synthesized from 15 foundational bibles of system engineering (TLPI, Systems Performance, BPF Tools). Journey from CLI survival to custom Character Device Driver development in Ring-0 and eBPF kernel observability. Now includes a comprehensive deep-dive into the UNIX Programming Interface, culminating in a Phase 6 two-node Docker Sandbox for interactive, high-stakes Netfilter and iptables rule engineering.",
+        tags: ["Linux Kernel", "Device Drivers", "Networking", "eBPF", "POSIX", "TLPI", "iptables", "Docker Sandbox"],
     },
 ];
 

@@ -98,9 +98,9 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/JavaSpringBoot",
         emoji: "☕",
         title: "Java + Spring Boot In Depth",
-        subtitle: "Mastery Curriculum · 24-part deep dive",
+        subtitle: "24-part deep dive · 70+ projects · 133+ tests",
         description:
-            "A massive mastery curriculum split into two deep tracks. The 13-part Java track spans OOP essentials, the Streams API, Concurrency, and JNI/Project Panama. The 11-part Spring Boot track covers REST, Security, JPA internal mappings, and advanced architectural patterns including Spring Modulith, event-driven design, and the Model Context Protocol (MCP) for LLM tool integration.",
+            "A massive mastery curriculum split into two deep tracks. The 13-part Java track spans OOP essentials, the Streams API, Concurrency, and JNI/Project Panama. The 11-part Spring Boot track covers REST, Security, JPA internal mappings, and advanced architectural patterns including Spring Modulith, event-driven design, and the Model Context Protocol (MCP) for LLM tool integration. The curriculum features a catalog of 70+ hands-on projects and a completely Dockerized Documentation Suite, guaranteeing instant, reproducible local execution across Mac and Linux.",
         tags: ["Java 21", "Spring Boot 3", "Project Panama", "Hibernate", "Modulith", "MCP", "Docker"],
     },
     {

@@ -138,10 +138,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Linux",
         emoji: "🐧",
         title: "Linux Mastery Curriculum",
-        subtitle: "Kernel & Systems Engineering · 21-part guide",
+        subtitle: "36 chapters · 12 phases · Kernel to Production",
         description:
-            "A hardcore 21-part curriculum synthesized from 15 professional systems engineering bibles (TLPI, Systems Performance, BPF Tools). Journey from CLI survival to Ring-0 Character Device Drivers and eBPF kernel observability. Culminates in Phase 7: Containerization Internals, where you deconstruct Docker into Namespaces and Cgroups by building a functional container runner from scratch using raw Bash and C.",
-        tags: ["Linux Kernel", "Device Drivers", "eBPF", "POSIX", "TLPI", "iptables", "Namespaces", "Cgroups", "Container Architect"],
+            "A hardcore 36-part curriculum synthesized from 15 professional systems engineering bibles. Spans 12 phases: from CLI survival and Ring-0 device drivers through eBPF observability, containerization internals (Namespaces/Cgroups), FUSE filesystems, SELinux/Seccomp security, XDP/DPDK kernel-bypass networking, and culminates in production engineering with live kernel patching and Kdump crash analysis.",
+        tags: ["Linux Kernel", "Device Drivers", "eBPF", "XDP", "FUSE", "SELinux", "Seccomp", "Live Patching", "DPDK"],
     },
 ];
 

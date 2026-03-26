@@ -37,7 +37,7 @@ const links = [
         icon: Calendar,
         label: "Calendly",
         value: "Book a 30-minute meeting",
-        href: "https://calendly.com/chema-chemacabeza/30-minute-meeting?timezone=Europe/Berlin",
+        href: "https://calendly.com/chema-chemacabeza-dev/30-minute-meeting?timezone=Europe/Berlin",
         description: "Schedule a direct 1-on-1 meeting with me.",
         color: "emerald",
     },

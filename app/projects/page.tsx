@@ -134,6 +134,16 @@ const githubProjects = [
         tags: ["Go", "Microservices", "gRPC", "Protobufs", "Concurrency", "DDD", "Docker"],
     },
     {
+        repo: "SystemDesign",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/SystemDesign",
+        emoji: "🏗️",
+        title: "System Design Mastery",
+        subtitle: "20 chapters · 5 phases · Scale to Millions",
+        description:
+            "How do you design YouTube? How does WhatsApp deliver a message in 30 ms? This 20-chapter curriculum, distilled from 9 elite textbooks including Designing Data-Intensive Applications and Alex Xu's System Design Interview series, takes you from first principles (CAP theorem, Raft consensus, Saga transactions) through production-grade building blocks (Kafka, Redis, API gateways) to designing real systems end-to-end: URL shorteners, real-time chat, news feeds, and video platforms — the exact problems asked at FAANG interviews.",
+        tags: ["DDIA", "Distributed Systems", "Kafka", "Redis", "CAP Theorem", "Microservices", "CQRS", "Kubernetes"],
+    },
+    {
         repo: "Linux",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Linux",
         emoji: "🐧",

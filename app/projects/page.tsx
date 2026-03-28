@@ -148,10 +148,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Linux",
         emoji: "🐧",
         title: "Linux Mastery Curriculum",
-        subtitle: "68 chapters · 17 phases · Kernel to Cybersecurity",
+        subtitle: "74 chapters · 20 phases · Kernel to Performance",
         description:
-            "A hardcore 68-part curriculum synthesized from 34 professional-grade textbooks. Spans 17 phases: from CLI survival and Ring-0 device drivers through eBPF observability, containerization internals, FUSE filesystems, SELinux/Seccomp security, XDP/DPDK kernel-bypass networking, live kernel patching, infrastructure services (GRUB, DNS, Nginx), DevOps hardening (KVM, SSH), advanced shell programming (Sed, Awk, Bash), and culminating in cybersecurity operations with reconnaissance, forensics, inotify file monitoring, and POSIX ACLs. Packed with hands-on execution exercises.",
-        tags: ["Linux Kernel", "Device Drivers", "eBPF", "XDP", "FUSE", "SELinux", "KVM", "Cybersecurity", "DevOps"],
+            "A hardcore 74-part curriculum synthesized from 34 professional-grade textbooks. Spans 20 phases: from CLI survival and Ring-0 device drivers through eBPF observability, containerization internals, FUSE filesystems, SELinux/Seccomp security, XDP/DPDK kernel-bypass networking, live kernel patching, cybersecurity operations, advanced systems programming (epoll/IPC), TCP/IP protocol mastery, and culminating in extreme Performance Engineering using Brendan Gregg's USE Method. Packed with hands-on execution exercises.",
+        tags: ["Linux Kernel", "Device Drivers", "eBPF", "Cybersecurity", "TCP/IP", "epoll", "Performance", "DevOps"],
     },
 ];
 

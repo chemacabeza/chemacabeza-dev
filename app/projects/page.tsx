@@ -138,10 +138,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/SystemDesign",
         emoji: "🏗️",
         title: "System Design Mastery",
-        subtitle: "20 chapters · 5 phases · Scale to Millions",
+        subtitle: "31 chapters · 8 phases · Scale to Millions",
         description:
-            "How do you design YouTube? How does WhatsApp deliver a message in 30 ms? This 20-chapter curriculum, distilled from 9 elite textbooks including Designing Data-Intensive Applications and Alex Xu's System Design Interview series, takes you from first principles (CAP theorem, Raft consensus, Saga transactions) through production-grade building blocks (Kafka, Redis, API gateways) to designing real systems end-to-end: URL shorteners, real-time chat, news feeds, and video platforms — the exact problems asked at FAANG interviews.",
-        tags: ["DDIA", "Distributed Systems", "Kafka", "Redis", "CAP Theorem", "Microservices", "CQRS", "Kubernetes"],
+            "How do you design YouTube? How does WhatsApp deliver a message in 30 ms? This 31-chapter curriculum, distilled from over 30 professional-grade textbooks including Designing Data-Intensive Applications and Alex Xu's System Design Interview series, takes you from first principles (CAP theorem, Raft consensus, Saga transactions) through production-grade building blocks (Kafka, Redis) to designing real systems end-to-end. It culminates in advanced architectural patterns, the C4 Model, geospatial proximity services, and deep-dive Apache Kafka internals.",
+        tags: ["DDIA", "Distributed Systems", "Kafka", "Redis", "Microservices", "CQRS", "C4 Model", "Kubernetes"],
     },
     {
         repo: "Linux",

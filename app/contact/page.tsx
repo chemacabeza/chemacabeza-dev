@@ -35,11 +35,19 @@ const links = [
     },
     {
         icon: Calendar,
-        label: "Calendly",
-        value: "Book a 30-minute meeting",
+        label: "Book a Free Meeting",
+        value: "calendly.com/chema-chemacabeza/30-minute-meeting",
+        href: "https://calendly.com/chema-chemacabeza/30-minute-meeting",
+        description: "Schedule a free 30-minute 1-on-1 with me. No charge, just a conversation.",
+        color: "green",
+    },
+    {
+        icon: Calendar,
+        label: "Book a Paid Session",
+        value: "calendly.com/chema-chemacabeza/new-meeting",
         href: "https://calendly.com/chema-chemacabeza/new-meeting",
-        description: "Schedule a direct 1-on-1 meeting with me.",
-        color: "emerald",
+        description: "Paid consulting session — deep-dive technical advice, architecture reviews, or career coaching.",
+        color: "red",
     },
 ];
 
@@ -50,6 +58,8 @@ const colorMap: Record<string, string> = {
         "bg-violet-500/10 border-violet-500/20 text-violet-400 hover:border-violet-500/50 hover:bg-violet-500/15",
     blue: "bg-blue-500/10 border-blue-500/20 text-blue-400 hover:border-blue-500/50 hover:bg-blue-500/15",
     emerald: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/15",
+    green: "bg-green-500/10 border-green-500/20 text-green-400 hover:border-green-500/50 hover:bg-green-500/15",
+    red: "bg-red-500/10 border-red-500/20 text-red-400 hover:border-red-500/50 hover:bg-red-500/15",
 };
 
 const iconBg: Record<string, string> = {
@@ -57,6 +67,8 @@ const iconBg: Record<string, string> = {
     violet: "bg-violet-500/10 border-violet-500/20 text-violet-400",
     blue: "bg-blue-500/10 border-blue-500/20 text-blue-400",
     emerald: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
+    green: "bg-green-500/10 border-green-500/20 text-green-400",
+    red: "bg-red-500/10 border-red-500/20 text-red-400",
 };
 
 export default function ContactPage() {

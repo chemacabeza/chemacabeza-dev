@@ -125,7 +125,7 @@ const githubProjects = [
     },
     {
         repo: "ai_and_MachineLearning",
-        url: "https://github.com/chemacabeza/my-github-projects/tree/master/ai_and_MachineLearning",
+        url: "https://github.com/chemacabeza/ai_and_MachineLearning",
         emoji: "🧬",
         title: "AI & Machine Learning Course",
         subtitle: "6 chapters · Hands-on · Fully Dockerized exercises",

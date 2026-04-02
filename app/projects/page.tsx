@@ -120,8 +120,8 @@ const githubProjects = [
         title: "Advanced AI Curriculum",
         subtitle: "12 chapters · 5 phases · Theoretical & Distributed AI",
         description:
-            "A comprehensive, senior-level systems engineering guide diving into the deepest technical layers of modern artificial intelligence. It focuses on how massive neural networks are compiled, accelerated via hardware, decentralized via Federated Learning, and secured at a planetary scale. Covers Graph Representation Learning, Applied GNNs, and Symbolic AI.",
-        tags: ["Deep Learning Systems", "Federated Learning", "GNN", "Model Compilers", "Distributed AI"],
+            "A comprehensive, senior-level systems engineering guide diving into the deepest technical layers of modern artificial intelligence. Spans 5 phases focusing on how massive neural networks are compiled and accelerated via hardware, decentralized via Federated Learning, and secured at scale. It extends into Graph Neural Networks, modern Natural Language pipelines, Autonomous Vehicle Perception, Biometric Security, and Symbolic AI (Logic Programming & PDDL).",
+        tags: ["Deep Learning Systems", "Federated Learning", "GNN", "Model Compilers", "Biometric Security", "NLP", "Symbolic AI"],
     },
     {
         repo: "Cplusplus",

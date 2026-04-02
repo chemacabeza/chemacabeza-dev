@@ -114,6 +114,16 @@ const githubProjects = [
         tags: ["Stable Diffusion", "SDXL", "LoRA", "Apple Silicon", "MPS", "Docker", "Fooocus"],
     },
     {
+        repo: "AdvancedAI",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/AdvancedAI",
+        emoji: "🔬",
+        title: "Advanced AI Curriculum",
+        subtitle: "12 chapters · 5 phases · Theoretical & Distributed AI",
+        description:
+            "A comprehensive, senior-level systems engineering guide diving into the deepest technical layers of modern artificial intelligence. It focuses on how massive neural networks are compiled, accelerated via hardware, decentralized via Federated Learning, and secured at a planetary scale. Covers Graph Representation Learning, Applied GNNs, and Symbolic AI.",
+        tags: ["Deep Learning Systems", "Federated Learning", "GNN", "Model Compilers", "Distributed AI"],
+    },
+    {
         repo: "Cplusplus",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Cplusplus",
         emoji: "⚙️",

@@ -124,6 +124,16 @@ const githubProjects = [
         tags: ["Deep Learning Systems", "Federated Learning", "GNN", "Model Compilers", "Biometric Security", "NLP", "Symbolic AI"],
     },
     {
+        repo: "ai_and_MachineLearning",
+        url: "https://github.com/chemacabeza/my-github-projects/tree/master/ai_and_MachineLearning",
+        emoji: "🤖",
+        title: "AI & Machine Learning Course",
+        subtitle: "6 chapters · Hands-on · Fully Dockerized exercises",
+        description:
+            "A hands-on, beginner-friendly curriculum that takes you from core Deep Learning principles all the way to autonomous Multi-Agent Systems. Every chapter is self-contained and includes a fully Dockerized exercise you can run immediately — no local setup beyond Docker. Covers neural networks from scratch with NumPy, Federated Learning, Q-Learning agents, Conversational AI & NLP, Support Vector Machines, and a dual trading-bot market simulation with Swarm AI.",
+        tags: ["Deep Learning", "Reinforcement Learning", "NLP", "SVM", "Multi-Agent Systems", "Docker"],
+    },
+    {
         repo: "Cplusplus",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Cplusplus",
         emoji: "⚙️",

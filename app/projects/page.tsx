@@ -178,9 +178,9 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/DDD",
         emoji: "🏛️",
         title: "Domain-Driven Design (DDD)",
-        subtitle: "6 chapters · Strategic & Tactical Patterns · Java",
+        subtitle: "7 chapters · Strategic & Tactical Patterns · Java",
         description:
-            "A curriculum synthesizing the foundational literature of Domain-Driven Design (Eric Evans, Vladik Khononov) to tackle complexity in the heart of software. It teaches how to bridge the gap between domain experts and developers using a Ubiquitous Language. Covers Strategic Design (Bounded Contexts, Context Mapping), Tactical Design (Entities, Value Objects, Aggregate Roots), Domain Events, and CQRS with Event Sourcing. All code examples are implemented in modern Java (17+).",
+            "A curriculum synthesizing the foundational literature of Domain-Driven Design (Eric Evans, Vladik Khononov) to tackle complexity in the heart of software. It teaches how to bridge the gap between domain experts and developers using a Ubiquitous Language. Covers Strategic Design (Bounded Contexts, Context Mapping), Tactical Design (Entities, Value Objects, Aggregate Roots), Domain Events, CQRS with Event Sourcing, and a comprehensive visual encyclopedia of all DDD Building Blocks. All code examples are implemented in modern Java (17+).",
         tags: ["DDD", "Java", "Architecture", "CQRS", "Event Sourcing", "Strategic Design"],
     },
     {

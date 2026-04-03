@@ -134,6 +134,16 @@ const githubProjects = [
         tags: ["Deep Learning", "Reinforcement Learning", "Computer Vision", "NLP", "Adversarial ML", "IoT", "Game Theory", "Docker"],
     },
     {
+        repo: "CyberSecurity",
+        url: "https://github.com/chemacabeza/CyberSecurity",
+        emoji: "🛡️",
+        title: "CyberSecurity Curriculum",
+        subtitle: "20 chapters · Red & Blue Team · Dockerized exercises",
+        description:
+            "A comprehensive, hands-on curriculum synthesized from 24 leading industry textbooks. Takes you from fundamental defensive principles and system hardening to advanced offensive red team operations. Includes fully Dockerized exercises covering Cryptography, Penetration Testing methodologies, Web App Security, Malware Analysis, Reverse Engineering with Ghidra, Digital Forensics, Cloud Security, and Security Automation.",
+        tags: ["CyberSecurity", "Red Team", "Blue Team", "Penetration Testing", "Digital Forensics", "Docker"],
+    },
+    {
         repo: "Cplusplus",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Cplusplus",
         emoji: "⚙️",

@@ -118,10 +118,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/AdvancedAI",
         emoji: "🔬",
         title: "Advanced AI Curriculum",
-        subtitle: "16 chapters · 6 phases · Theoretical & Distributed AI",
+        subtitle: "20 chapters · 7 phases · Theoretical & Distributed AI",
         description:
-            "A comprehensive, senior-level systems engineering guide diving into the deepest technical layers of modern artificial intelligence. Spans 6 phases focusing on how massive neural networks are compiled and accelerated via hardware, decentralized via Federated Learning, and secured at scale. It extends into Graph Neural Networks, modern Natural Language pipelines, Autonomous Vehicle Perception, Biometric Security, Symbolic AI (Logic Programming & PDDL), and deeply explores AI Agents (RAG) and Reinforcement Learning.",
-        tags: ["Deep Learning Systems", "Federated Learning", "GNN", "Model Compilers", "Biometric Security", "Symbolic AI", "AI Agents", "RL"],
+            "A comprehensive, senior-level systems engineering guide diving into the deepest technical layers of modern artificial intelligence. Spans 7 phases focusing on how massive neural networks are compiled and accelerated via hardware, decentralized via Federated Learning, and secured at scale. It extends into Graph Neural Networks, modern Natural Language pipelines, Autonomous Vehicle Perception, Biometric Security, Symbolic AI (Logic Programming & PDDL), AI Agents (RAG), and a deep exploration of Deep Learning Foundations exploring both TensorFlow and PyTorch architectures from scratch.",
+        tags: ["Deep Learning Systems", "TensorFlow", "PyTorch", "Federated Learning", "GNN", "Model Compilers", "AI Agents", "RL"],
     },
     {
         repo: "ai_and_MachineLearning",

@@ -168,10 +168,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/SystemDesign",
         emoji: "🏗️",
         title: "System Design Mastery",
-        subtitle: "33 chapters · 8 phases · Scale to Millions",
+        subtitle: "34 chapters · 8 phases · Scale to Millions",
         description:
-            "How do you design YouTube? How does WhatsApp deliver a message in 30 ms? This 33-chapter curriculum, distilled from over 30 professional-grade textbooks including Designing Data-Intensive Applications and Alex Xu's System Design Interview series, takes you from first principles (CAP theorem, Raft consensus, Saga transactions) through production-grade building blocks (Kafka, Redis) to designing real systems end-to-end. It culminates in advanced architectural patterns, the C4 Model, geospatial proximity services, deep-dive Apache Kafka internals, a comprehensive Load Balancers deep dive, and the Ultimate Tool Kit for tackling System Design Interviews.",
-        tags: ["DDIA", "Distributed Systems", "Kafka", "Redis", "Load Balancers", "Microservices", "C4 Model", "Kubernetes"],
+            "How do you design YouTube? How does WhatsApp deliver a message in 30 ms? This 34-chapter curriculum, distilled from over 30 professional-grade textbooks including Designing Data-Intensive Applications and Alex Xu's System Design Interview series, takes you from first principles (CAP theorem, Raft consensus, Saga transactions) through production-grade building blocks (Kafka, Redis) to designing real systems end-to-end. It culminates in advanced architectural patterns, the C4 Model, geospatial proximity services, deep-dive Apache Kafka internals, comprehensive deep dives into Load Balancers and Content Delivery Networks (CDNs), and the Ultimate Tool Kit for tackling System Design Interviews.",
+        tags: ["DDIA", "Distributed Systems", "Kafka", "Redis", "Load Balancers", "CDN", "Microservices", "C4 Model", "Kubernetes"],
     },
     {
         repo: "DDD",

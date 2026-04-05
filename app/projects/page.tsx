@@ -104,16 +104,6 @@ const githubProjects = [
         tags: ["Java 21", "Spring Boot 3", "Project Panama", "Hibernate", "Modulith", "MCP", "Docker"],
     },
     {
-        repo: "AI-related",
-        url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related",
-        emoji: "🎨",
-        title: "AI Image Generation Platform",
-        subtitle: "Stable Diffusion · Fooocus · Model Library",
-        description:
-            "A local high-performance art platform using Stable Diffusion and Fooocus. Features a 46GB model library with 7 SDXL checkpoints and 41 LoRAs, optimized for Apple Silicon via MPS GPU acceleration. Includes a centralized storage architecture and pre-configured workflows for production-quality character and environment synthesis.",
-        tags: ["Stable Diffusion", "SDXL", "LoRA", "Apple Silicon", "MPS", "Docker", "Fooocus"],
-    },
-    {
         repo: "AdvancedAI",
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/AdvancedAI",
         emoji: "🔬",

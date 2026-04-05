@@ -14,7 +14,7 @@ export const metadata: Metadata = createMetadata({
 const hobbyProjects = [
     {
         repo: "AI-related",
-        url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related",
+        url: "/hobbies/ai-image-generation",
         emoji: "🎨",
         title: "AI Image Generation Platform",
         subtitle: "Stable Diffusion · Fooocus · Model Library",
@@ -40,18 +40,20 @@ export default function HobbiesPage() {
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {hobbyProjects.map((proj) => (
+                    {hobbyProjects.map((proj) => {
+                        const isExternal = proj.url.startsWith("http");
+                        return (
                         <Link
                             key={proj.repo}
                             href={proj.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
                             className="group rounded-xl border border-slate-800/60 bg-slate-900/40 p-6 hover:border-fuchsia-500/40 hover:bg-slate-900/70 transition-all duration-300 flex flex-col"
                         >
                             {/* Header */}
                             <div className="flex items-start justify-between mb-4">
                                 <span className="text-3xl">{proj.emoji}</span>
-                                <ExternalLink className="w-4 h-4 text-slate-600 group-hover:text-fuchsia-400 transition-colors flex-shrink-0 mt-1" />
+                                {isExternal && <ExternalLink className="w-4 h-4 text-slate-600 group-hover:text-fuchsia-400 transition-colors flex-shrink-0 mt-1" />}
                             </div>
 
                             {/* Title */}
@@ -79,7 +81,8 @@ export default function HobbiesPage() {
                                 ))}
                             </div>
                         </Link>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </div>

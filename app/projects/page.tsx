@@ -120,8 +120,8 @@ const githubProjects = [
         title: "Advanced AI Curriculum",
         subtitle: "20 chapters · 7 phases · Theoretical & Distributed AI",
         description:
-            "A comprehensive, senior-level systems engineering guide diving into the deepest technical layers of modern artificial intelligence. Spans 7 phases focusing on how massive neural networks are compiled and accelerated via hardware, decentralized via Federated Learning, and secured at scale. It extends into Graph Neural Networks, modern Natural Language pipelines, Autonomous Vehicle Perception, Biometric Security, Symbolic AI (Logic Programming & PDDL), AI Agents (RAG), and a deep exploration of Deep Learning Foundations exploring both TensorFlow and PyTorch architectures from scratch.",
-        tags: ["Deep Learning Systems", "TensorFlow", "PyTorch", "Federated Learning", "GNN", "Model Compilers", "AI Agents", "RL"],
+            "A comprehensive, senior-level systems engineering guide synthesized from 10+ foundational textbooks (Goodfellow, Géron, Rashid, Nielsen, d2l.ai) diving into the deepest technical layers of modern AI. Spans 7 phases: hardware compilation & acceleration, Federated Learning, Graph Neural Networks, NLP pipelines, Autonomous Vehicle Perception, Biometric Security, Symbolic AI, AI Agents (RAG & Multiagent Systems), and Deep Learning Foundations covering Transformers, RNN/LSTM, Transfer Learning, TorchScript deployment, and Mixed Precision training across TensorFlow and PyTorch.",
+        tags: ["Deep Learning Systems", "TensorFlow", "PyTorch", "Transformers", "Federated Learning", "GNN", "AI Agents", "RL"],
     },
     {
         repo: "ai_and_MachineLearning",

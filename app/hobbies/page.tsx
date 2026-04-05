@@ -55,10 +55,10 @@ export default function HobbiesPage() {
                         </h2>
                         <div className="space-y-4 text-slate-300 leading-relaxed text-[17px]">
                             <p>
-                                Welcome to my AI experimentation zone — where creativity meets computation. This platform is a playground for exploring what&apos;s possible with modern generative AI, transforming thoughts into vibrant, intelligent art.
+                                Welcome to the ultimate playground of creativity! This is the section where imagination bridges the gap directly into computation. I extensively push the boundaries of <strong>Stable Diffusion</strong> and <strong>Fooocus</strong> to create vibrant, intelligent art and experiment with generative workflows.
                             </p>
                             <p>
-                                It features hands-on integrations with tools like Stable Diffusion and Fooocus, a custom macOS-optimized backend, and centralized model management. Whether running natively or dockerized, it serves as a complete toolkit for AI creation.
+                                It features hands-on tooling integrations, a custom macOS-optimized backend, and centralized model management. Whether running completely natively on Apple Silicon or dockerized, it serves as my complete, high-performance toolkit for AI synthesis.
                             </p>
                         </div>
                     </section>

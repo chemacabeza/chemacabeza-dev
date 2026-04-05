@@ -126,16 +126,19 @@ export default function HobbiesPage() {
                                 <h3 className="text-lg font-bold text-slate-100 mb-4">Selected LoRAs</h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {[
-                                        { name: "SDXL Offset Example", desc: "Improves overall contrast and dynamic range" },
-                                        { name: "Film Photography Style", desc: "Classic film photography aesthetic" },
-                                        { name: "Retro Neon Illustrious", desc: "Retro neon synthwave style" },
-                                        { name: "Pumps & Stilettos", desc: "Targeted accessories generation" },
-                                        { name: "Character Library", desc: "Extensive collection of 25+ geographically distinct characters" },
+                                        { name: "SDXL Offset Example", desc: "Improves overall contrast and dynamic range", url: "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0" },
+                                        { name: "Film Photography Style", desc: "Classic film photography aesthetic", url: "https://huggingface.co/mashb1t/fav_models" },
+                                        { name: "Retro Neon Illustrious", desc: "Retro neon synthwave style", url: "https://civitai.com/models/569937" },
+                                        { name: "Pumps & Stilettos", desc: "Targeted accessories generation", url: "https://civitai.com/models/94667" },
+                                        { name: "Character Library", desc: "Extensive collection of 25+ geographically distinct characters", url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related#loras" },
                                     ].map(lora => (
-                                        <div key={lora.name} className="p-4 rounded-lg border border-slate-800/60 bg-slate-900/30">
-                                            <h4 className="font-semibold text-slate-200">{lora.name}</h4>
+                                        <a key={lora.name} href={lora.url} target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 hover:border-fuchsia-500/30 transition-all group">
+                                            <div className="flex items-start justify-between gap-2">
+                                                <h4 className="font-semibold text-slate-200 group-hover:text-fuchsia-300 transition-colors">{lora.name}</h4>
+                                                <ExternalLink className="w-3.5 h-3.5 text-slate-600 group-hover:text-fuchsia-400 transition-colors flex-shrink-0 mt-1" />
+                                            </div>
                                             <p className="text-sm text-slate-400 mt-1">{lora.desc}</p>
-                                        </div>
+                                        </a>
                                     ))}
                                 </div>
                             </div>

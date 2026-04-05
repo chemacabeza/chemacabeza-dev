@@ -144,6 +144,43 @@ export default function HobbiesPage() {
                             </div>
                         </div>
                     </section>
+
+                    <section>
+                        <h2 className="text-sm font-semibold uppercase tracking-widest text-fuchsia-400 mb-4 block">
+                            Expert Tips & Advanced Workflows
+                        </h2>
+                        <p className="text-slate-300 leading-relaxed text-[17px] mb-6">
+                            Beyond standard generation, I also document advanced techniques and highly specialized workflows. Read through these guides to understand the finer details of AI creation:
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {[
+                                {
+                                    title: "Flux Prompt Crafting",
+                                    desc: "Learn to systematically construct highly detailed, natural language prompts optimized specifically for the unparalleled coherency of Flux models.",
+                                    url: "https://github.com/chemacabeza/my-github-projects/blob/master/AI-related/courses/ExpertTips_AdvancedWorkflows/Flux_Prompt_Crafter/README.md"
+                                },
+                                {
+                                    title: "Kling AI Video Directing",
+                                    desc: "Step-by-step techniques for translating static ideas or image generations into dynamic, cinematic video sequences using Kling AI.",
+                                    url: "https://github.com/chemacabeza/my-github-projects/blob/master/AI-related/courses/ExpertTips_AdvancedWorkflows/Kling_AI_Video_Prompts/README.md"
+                                },
+                                {
+                                    title: "CivitAI LoRA Training",
+                                    desc: "A comprehensive teardown on how to gather datasets, configure epochs, and successfully train custom Character or Stylistic LoRAs on CivitAI.",
+                                    url: "https://github.com/chemacabeza/my-github-projects/blob/master/AI-related/courses/ExpertTips_AdvancedWorkflows/CivitAI_LoRA_Training/README.md"
+                                }
+                            ].map(guide => (
+                                <a key={guide.title} href={guide.url} target="_blank" rel="noopener noreferrer" className="block p-5 rounded-xl border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 hover:border-fuchsia-500/30 transition-all group">
+                                    <div className="flex items-start justify-between gap-2 mb-2">
+                                        <h3 className="font-bold text-slate-200 group-hover:text-fuchsia-300 transition-colors leading-snug">{guide.title}</h3>
+                                        <ExternalLink className="w-4 h-4 text-slate-600 group-hover:text-fuchsia-400 transition-colors flex-shrink-0 mt-0.5" />
+                                    </div>
+                                    <p className="text-sm text-slate-400 leading-relaxed">{guide.desc}</p>
+                                </a>
+                            ))}
+                        </div>
+                    </section>
                 </div>
 
                 {/* Footer Link */}

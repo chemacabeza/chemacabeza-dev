@@ -128,10 +128,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/CyberSecurity",
         emoji: "🛡️",
         title: "CyberSecurity Curriculum",
-        subtitle: "20 chapters · Red & Blue Team · Dockerized exercises",
+        subtitle: "20 chapters · Red & Blue Team · 24 textbooks · Dockerized exercises",
         description:
-            "A comprehensive, hands-on curriculum synthesized from 24 leading industry textbooks. Takes you from fundamental defensive principles and system hardening to advanced offensive red team operations. Includes fully Dockerized exercises covering Cryptography, Penetration Testing methodologies, Web App Security, Malware Analysis, Reverse Engineering with Ghidra, Digital Forensics, Cloud Security, and Security Automation.",
-        tags: ["CyberSecurity", "Red Team", "Blue Team", "Penetration Testing", "Digital Forensics", "Docker"],
+            "A comprehensive, hands-on curriculum synthesized from 24 leading industry textbooks taking you from fundamental defensive principles to advanced offensive red team operations. Every chapter follows a rigorous pedagogical structure: a clear learning goal, distilled core concepts, interactive reflection questions with hidden answers, and a fully Dockerized reproducible exercise (Python or Bash) runnable in isolation. The 20 chapters cover: Security Foundations & CIA Triad, Threat Landscape, Networking for Security, Linux Hardening, Windows Hardening, Cryptography & PKI, Network Traffic Analysis, Penetration Testing Methodology, Exploitation Frameworks & Payloads, Web Application Security, Red Team Operations & Kill Chain, Malware Analysis, Reverse Engineering with Ghidra, Digital Forensics & Evidence Collection, Incident Response & SOC Operations, Cloud Security (AWS & Azure), Container & Kubernetes Security, Mobile & IoT Forensics, Threat Hunting & Intelligence, and Security Automation with Python.",
+        tags: ["CyberSecurity", "Red Team", "Blue Team", "Penetration Testing", "Ghidra", "Forensics", "Cloud Security", "Kubernetes", "Python", "Docker"],
     },
     {
         repo: "Cplusplus",

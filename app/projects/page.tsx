@@ -148,10 +148,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/Golang",
         emoji: <span className="bg-[#00ADD8] text-white px-2 py-0.5 rounded-md text-xl font-bold italic tracking-tighter shadow-sm inline-flex items-center justify-center">Go</span>,
         title: "Golang Mastery Curriculum",
-        subtitle: "Microservices & Concurrency · 12-part guide",
+        subtitle: "12 chapters · 4 phases · 100% Dockerized · 17 textbooks",
         description:
-            "A comprehensive path from zero to production Go. Mentions the CSP concurrency model (Goroutines/Channels), Test-Driven Development (TDD), and Domain-Driven Design (DDD). Culminates in building multi-container microservices communicating over gRPC with Protocol Buffers, fully Dockerized for containerized local execution.",
-        tags: ["Go", "Microservices", "gRPC", "Protobufs", "Concurrency", "DDD", "Docker"],
+            "A complete path from absolute beginner to production-ready multi-container microservices, synthesized from 17 professional-grade textbooks on gRPC, Concurrency, TDD, and DDD. Every module is 100% Dockerized with FROM scratch multi-stage builds — no local Go installation needed. Phase 1 (Foundations) covers Basics & Environment, Structs & Interfaces, and Go's explicit Error Handling with defer/panic/recover. Phase 2 (Advanced Mechanics) tackles the CSP Concurrency model (Goroutines, Channels, select), Functional Programming with Go 1.18+ Generics, and Test-Driven Development with Dependency Injection. Phase 3 (Systems & Data) covers Data Structures & Algorithms (Slice headers, Generic Queues), System Programming (POSIX, graceful SIGTERM shutdowns, bufio disk streaming), and building zero-dependency CLI binaries with Cobra. Phase 4 (Enterprise Microservices Capstone) implements Domain-Driven Design with Hexagonal Architecture (Ports & Adapters), replaces REST with gRPC over Protocol Buffers on HTTP/2, and culminates in a full multi-container microservice system linking an HTTP Gateway to a backend gRPC Core Service via Docker Compose.",
+        tags: ["Go", "gRPC", "Protobufs", "CSP Concurrency", "TDD", "DDD", "Hexagonal Architecture", "Generics", "CLI", "Docker"],
     },
     {
         repo: "SystemDesign",

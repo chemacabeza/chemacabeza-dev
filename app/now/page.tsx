@@ -25,7 +25,7 @@ export default function NowPage() {
                         What I&apos;m doing right now
                     </h1>
                     <p className="text-slate-400 leading-relaxed">
-                        A snapshot of my current focus. Last updated: <span className="text-slate-300">March 2025</span>.
+                        A snapshot of my current focus. Last updated: <span className="text-slate-300">April 2026</span>.
                     </p>
                     <p className="text-slate-500 text-sm mt-2">
                         Inspired by{" "}
@@ -88,23 +88,33 @@ export default function NowPage() {
                             <li className="flex gap-2">
                                 <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
                                 <span>
+                                    Expanding a <strong className="text-slate-300">massive open-source curriculum portfolio</strong> —
+                                    16+ deep-dive technical courses spanning Java/Spring Boot (24 parts), Linux (85 chapters),
+                                    System Design (34 chapters), AI &amp; ML (21 chapters), Advanced AI (20 chapters),
+                                    CyberSecurity (20 chapters), C++, Go, DDD, and Bash.
+                                </span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
+                                <span>
+                                    Building full-stack <strong className="text-slate-300">AI-powered applications</strong> —
+                                    an AI Video Generation Studio (5 models including Wan, Kling, LTX-2), an AI Voice Assistant
+                                    with Whisper + GPT-4o + TTS, and an ML Inference Pipeline (PyTorch → ONNX → Spring Boot).
+                                </span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
+                                <span>
+                                    Running a local <strong className="text-slate-300">AI Image Generation Platform</strong> with
+                                    Stable Diffusion and Fooocus — a 46GB model library with 7 SDXL checkpoints and 40+ LoRAs,
+                                    optimized for Apple Silicon via MPS GPU acceleration. Training custom character LoRAs on CivitAI.
+                                </span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
+                                <span>
                                     <strong className="text-slate-300">This website</strong> — built from scratch with
-                                    Next.js, Tailwind, and MDX. A permanent home for my writing, projects, and thinking.
-                                </span>
-                            </li>
-                            <li className="flex gap-2">
-                                <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
-                                <span>
-                                    Experimenting with <strong className="text-slate-300">AI image generation</strong>{" "}
-                                    tooling using Stable Diffusion and Fooocus — exploring practical applications in
-                                    creative and product workflows.
-                                </span>
-                            </li>
-                            <li className="flex gap-2">
-                                <span className="text-violet-500 mt-1 flex-shrink-0">→</span>
-                                <span>
-                                    A short-form technical writing habit — committing to one post every two weeks on
-                                    systems design, performance, and engineering leadership.
+                                    Next.js and deployed on Vercel. A permanent home for my writing, projects, hobbies, and thinking.
                                 </span>
                             </li>
                         </ul>
@@ -122,22 +132,39 @@ export default function NowPage() {
                             <li className="flex gap-2">
                                 <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    <strong className="text-slate-300">OKR methodology</strong> — applying structured
-                                    goal-setting frameworks to engineering teams and measuring what actually matters.
+                                    <strong className="text-slate-300">Deep Learning foundations</strong> — working through
+                                    Goodfellow, Géron, Rashid, Nielsen, and d2l.ai to build an Advanced AI curriculum covering
+                                    Transformers, RNN/LSTM, Federated Learning, Graph Neural Networks, and AI Agents.
+                                </span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
+                                <span>
+                                    <strong className="text-slate-300">Generative AI workflows</strong> — Flux prompt crafting,
+                                    Kling AI video directing, and CivitAI LoRA training for custom character creation.
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
                                 <span>
                                     Deepening <strong className="text-slate-300">Spring Boot 3 + Spring 6</strong> —
-                                    keeping my hands in the codebase alongside leading teams that run Java at scale.
+                                    exploring Spring Modulith, Model Context Protocol (MCP) for LLM tool integration,
+                                    and event-driven architectural patterns.
                                 </span>
                             </li>
                             <li className="flex gap-2">
                                 <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
                                 <span>
-                                    <strong className="text-slate-300">German</strong> — A2 level and pushing forward.
-                                    Living in Berlin makes this both necessary and rewarding.
+                                    <strong className="text-slate-300">CyberSecurity</strong> — building a 20-chapter
+                                    offensive/defensive curriculum from 24 textbooks, covering penetration testing,
+                                    reverse engineering with Ghidra, and digital forensics.
+                                </span>
+                            </li>
+                            <li className="flex gap-2">
+                                <span className="text-emerald-500 mt-1 flex-shrink-0">→</span>
+                                <span>
+                                    <strong className="text-slate-300">German</strong> — continuing to improve while
+                                    living in Berlin. Both necessary and rewarding.
                                 </span>
                             </li>
                         </ul>

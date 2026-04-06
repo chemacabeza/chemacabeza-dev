@@ -98,10 +98,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/my-github-projects/tree/master/JavaSpringBoot",
         emoji: "☕",
         title: "Java + Spring Boot In Depth",
-        subtitle: "24-part deep dive · 70+ projects · 133+ tests",
+        subtitle: "24-part deep dive · Java (13) + Spring Boot (11) + Advanced Topics",
         description:
-            "A massive mastery curriculum split into two deep tracks. The 13-part Java track spans OOP essentials, the Streams API, Concurrency, and JNI/Project Panama. The 11-part Spring Boot track covers REST, Security, JPA internal mappings, and advanced architectural patterns including Spring Modulith, event-driven design, and the Model Context Protocol (MCP) for LLM tool integration. The curriculum features a catalog of 70+ hands-on projects and a completely Dockerized Documentation Suite, guaranteeing instant, reproducible local execution across Mac and Linux.",
-        tags: ["Java 21", "Spring Boot 3", "Project Panama", "Hibernate", "Modulith", "MCP", "Docker"],
+            "A powerhouse mastery curriculum split into two comprehensive tracks. The 13-part Java track covers Fundamentals, OOP Essentials, Core APIs, Exception Handling, Generics & Type Safety, Lambda Expressions, Streams API, Concurrency & Multithreading, I/O & NIO, Advanced OOP & Design Patterns, Modern Java Features, JNI & Project Panama, and JVM Troubleshooting & Tuning. The 11-part Spring Boot track covers Spring Core & JPA CRUD, REST CRUD APIs, REST API Security, Spring MVC, JPA Advanced Mappings, AOP, Hibernate Deep Dive, and AspectJ Deep Dive. Also includes advanced standalone topics: Apache Kafka Integration, Spring Modulith, Model Context Protocol (MCP) for exposing Java tools natively to LLMs, and High-Performance gRPC Microservices.",
+        tags: ["Java 21", "Spring Boot 3", "JVM Tuning", "Hibernate", "AspectJ", "Kafka", "gRPC", "Modulith", "MCP", "Docker"],
     },
     {
         repo: "AdvancedAI",

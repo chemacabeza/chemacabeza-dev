@@ -14,43 +14,6 @@
   --card: #0f172a;
 }
 
-/* Custom semantic color utilities */
-@utility bg-background {
-  background-color: var(--background);
-}
-
-@utility bg-card {
-  background-color: var(--card);
-}
-
-@utility bg-muted {
-  background-color: var(--muted);
-}
-
-@utility text-foreground {
-  color: var(--foreground);
-}
-
-@utility text-muted-foreground {
-  color: var(--muted-foreground);
-}
-
-@utility border-border {
-  border-color: var(--border);
-}
-
-@utility bg-accent {
-  background-color: var(--accent);
-}
-
-@utility bg-accent-hover {
-  background-color: var(--accent-hover);
-}
-
-@utility text-accent {
-  color: var(--accent);
-}
-
 * {
   box-sizing: border-box;
 }

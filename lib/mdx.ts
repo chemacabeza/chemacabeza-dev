@@ -21,29 +21,6 @@ export interface Post {
     excerpt: string;
 }
 
-/**
- * Generates an excerpt from MDX/Markdown content by removing formatting.
- * Strips headings, bold, italic, code marks, and newlines to create a plain text preview.
- * Truncates to approximately 180 characters and appends an ellipsis.
- *
- * @param content - The raw MDX/Markdown content string
- * @returns A plain text excerpt of ~180 characters ending with "…"
- */
-function generateExcerpt(content: string): string {
-    if (!content) return "";
-    
-    const plainText = content
-        .replace(/#{1,6}\s/g, "")
-        .replace(/\*\*/g, "")
-        .replace(/\*/g, "")
-        .replace(/`/g, "")
-        .replace(/\n/g, " ")
-        .trim()
-        .slice(0, 180);
-
-    return plainText + (plainText.length >= 180 ? "…" : "");
-}
-
 export function getAllPosts(): Post[] {
     if (!fs.existsSync(postsDirectory)) return [];
 
@@ -58,12 +35,21 @@ export function getAllPosts(): Post[] {
         const { data, content } = matter(fileContents);
         const stats = readingTime(content);
 
+        const excerpt = content
+            .replace(/#{1,6}\s/g, "")
+            .replace(/\*\*/g, "")
+            .replace(/\*/g, "")
+            .replace(/`/g, "")
+            .replace(/\n/g, " ")
+            .trim()
+            .slice(0, 180);
+
         return {
             slug,
             frontmatter: data as PostFrontmatter,
             content,
             readingTime: stats.text,
-            excerpt: generateExcerpt(content),
+            excerpt: excerpt + "…",
         };
     });
 
@@ -85,12 +71,21 @@ export function getPostBySlug(slug: string): Post | null {
     const { data, content } = matter(fileContents);
     const stats = readingTime(content);
 
+    const excerpt = content
+        .replace(/#{1,6}\s/g, "")
+        .replace(/\*\*/g, "")
+        .replace(/\*/g, "")
+        .replace(/`/g, "")
+        .replace(/\n/g, " ")
+        .trim()
+        .slice(0, 180);
+
     return {
         slug,
         frontmatter: data as PostFrontmatter,
         content,
         readingTime: stats.text,
-        excerpt: generateExcerpt(content),
+        excerpt: excerpt + "…",
     };
 }
 

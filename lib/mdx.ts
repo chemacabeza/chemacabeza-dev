@@ -30,6 +30,8 @@ export interface Post {
  * @returns A plain text excerpt of ~180 characters ending with "…"
  */
 function generateExcerpt(content: string): string {
+    if (!content) return "";
+    
     const plainText = content
         .replace(/#{1,6}\s/g, "")
         .replace(/\*\*/g, "")
@@ -39,7 +41,7 @@ function generateExcerpt(content: string): string {
         .trim()
         .slice(0, 180);
 
-    return plainText + "…";
+    return plainText + (plainText.length >= 180 ? "…" : "");
 }
 
 export function getAllPosts(): Post[] {

@@ -7,6 +7,7 @@ import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
 import ArticleCard from "@/components/ArticleCard";
 import SectionHeader from "@/components/SectionHeader";
+import { generatePersonSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = createMetadata({
   title: "Engineering Manager & System Architect",
@@ -39,9 +40,15 @@ const principles = [
 export default async function HomePage() {
   const featuredPosts = getFeaturedPosts(3);
   const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
+  const personSchema = generatePersonSchema();
 
   return (
     <>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
         {/* Background orbs */}

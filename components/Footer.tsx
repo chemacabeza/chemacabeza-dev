@@ -24,7 +24,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="border-t border-slate-800/60 bg-[#020817]">
+        <footer className="border-t border-slate-800/60 bg-background">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     {/* Brand */}

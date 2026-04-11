@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
+import { generateBlogPostingSchema } from "@/lib/structured-data";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -33,9 +34,15 @@ export default async function PostPage({ params }: Props) {
     if (!post) notFound();
 
     const { frontmatter, content, readingTime } = post;
+    const blogPostingSchema = generateBlogPostingSchema(post as NonNullable<typeof post>, slug);
 
     return (
         <div className="pt-24 pb-32">
+            {/* Structured Data for SEO */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+            />
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full bg-indigo-600/5 blur-[100px]" />
             </div>

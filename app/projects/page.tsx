@@ -15,6 +15,16 @@ export const metadata: Metadata = createMetadata({
 
 const githubProjects = [
     {
+        repo: "llm_engineering",
+        url: "https://github.com/chemacabeza/llm_engineering",
+        emoji: "🚀",
+        title: "LLM Engineering Mastery",
+        subtitle: "8-week Journey · RAG & Agentic AI · 100% Hands-on",
+        description:
+            "An absolute game-changer! This high-octane, 8-week journey into the heart of modern AI takes you from local inference with Ollama (Llama 3.2) to building sophisticated, autonomous Agentic AI ecosystems. Master RAG pipelines, function calling, fine-tuning, and multi-agent orchestration across OpenAI, Anthropic, and Google Gemini models. 'An astoundingly fun ride that ASTOUNDS you each week as your projects build into a powerful AI ecosystem. If you want to go beyond the hype and actually build production-ready AI, this is the definitive roadmap. Pure joy in every chapter!'",
+        tags: ["LLMs", "RAG", "Agentic AI", "Ollama", "HuggingFace", "Python", "Docker"],
+    },
+    {
         repo: "neural-network-with-java",
         url: "https://github.com/chemacabeza/neural-network-with-java",
         emoji: "🧠",

@@ -15,8 +15,8 @@ export const metadata: Metadata = createMetadata({
 
 const githubProjects = [
     {
-        repo: "llm_engineering",
-        url: "https://github.com/chemacabeza/llm_engineering",
+        repo: "test-with-llms",
+        url: "https://github.com/chemacabeza/test-with-llms",
         emoji: "🚀",
         title: "LLM Engineering Mastery",
         subtitle: "8-week Journey · RAG & Agentic AI · 100% Hands-on",

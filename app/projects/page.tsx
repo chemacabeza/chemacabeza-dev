@@ -19,9 +19,9 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/test-with-llms",
         emoji: "🚀",
         title: "LLM Engineering Mastery",
-        subtitle: "20 chapters · Feynman Technique · RAG & Agentic AI",
+        subtitle: "30 chapters · Feynman Technique · RAG & Agentic AI",
         description:
-            "A deeply detailed, technically rigorous 20-chapter curriculum built using the Richard Feynman Technique. Synthesized from a 10-book technical library, this mastery sequence breaks down advanced concepts in LLM Engineering, RAG pipelines, fine-tuning, and Agentic autonomous ecosystems through layered narrative analogies and 60+ custom visual infographics. Master the deepest functional layers of modern AI—from local inference to multi-agent orchestration—by building production-ready architectures from scratch.",
+            "A deeply detailed, technically rigorous 30-chapter curriculum built using the Richard Feynman Technique. Synthesized from a 10-book technical library, this mastery sequence breaks down complex concepts in LLM Engineering—from transformer math and fine-tuning (LoRA/DPO) to advanced RAG pipelines, multimodal vision fusion, and local-first AI orchestration. Featuring layered narrative analogies and 90+ custom visual infographics, this curriculum takes you from the foundational next-token prediction logic into the deep deployment of production-ready, autonomous agentic systems.",
         tags: ["LLMs", "RAG", "Agentic AI", "Ollama", "HuggingFace", "Python", "Docker"],
     },
     {

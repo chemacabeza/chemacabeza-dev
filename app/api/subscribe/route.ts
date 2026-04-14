@@ -12,17 +12,25 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+        'Referer': 'https://chemacabezadev.substack.com/',
       },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ 
+        email: email,
+        referrer: 'https://chemacabeza.dev/',
+        source: 'custom_form'
+      }),
     });
 
     if (!response.ok) {
-        throw new Error('Substack subscription failed');
+        const errorText = await response.text();
+        console.error("Substack API error response:", errorText);
+        throw new Error(`Substack subscription failed: ${response.status} ${errorText}`);
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Newsletter subscription error:", error);
-    return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 });
+  } catch (error: any) {
+    console.error("Newsletter subscription error:", error.message);
+    return NextResponse.json({ error: error.message || 'Failed to subscribe' }, { status: 500 });
   }
 }

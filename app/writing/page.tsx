@@ -3,6 +3,7 @@ import { createMetadata } from "@/lib/metadata";
 import { getAllPosts } from "@/lib/mdx";
 import ArticleCard from "@/components/ArticleCard";
 import SectionHeader from "@/components/SectionHeader";
+import NewsletterForm from "@/components/NewsletterForm";
 
 export const metadata: Metadata = createMetadata({
     title: "Writing",
@@ -43,6 +44,8 @@ export default function WritingPage() {
                         ))}
                     </div>
                 )}
+
+                <NewsletterForm />
 
                 {posts.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

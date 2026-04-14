@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
+import NewsletterForm from "@/components/NewsletterForm";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -94,8 +95,12 @@ export default async function PostPage({ params }: Props) {
                     <MDXRemote source={content} />
                 </article>
 
+                <div className="mt-12">
+                    <NewsletterForm />
+                </div>
+
                 {/* Footer */}
-                <div className="mt-16 pt-8 border-t border-slate-800/40">
+                <div className="mt-10 pt-8 border-t border-slate-800/40">
                     <Link
                         href="/writing"
                         className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition-colors group"

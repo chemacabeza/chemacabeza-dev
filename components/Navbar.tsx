@@ -31,8 +31,8 @@ export default function Navbar() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-[#020817]/90 backdrop-blur-md border-b border-slate-800/60 shadow-lg shadow-black/20"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || open
+                ? "bg-[#020817]/95 backdrop-blur-md border-b border-slate-800/60 shadow-lg shadow-black/20"
                 : "bg-transparent"
                 }`}
         >
@@ -77,16 +77,20 @@ export default function Navbar() {
                     {/* Mobile hamburger */}
                     <button
                         onClick={() => setOpen(!open)}
-                        className="md:hidden p-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors"
+                        className="md:hidden p-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors focus:outline-none"
                         aria-label="Toggle menu"
                     >
-                        {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                        {open ? <X className="w-5 h-5 transition-transform duration-300 rotate-0" /> : <Menu className="w-5 h-5 transition-transform duration-300" />}
                     </button>
                 </div>
 
                 {/* Mobile menu */}
-                {open && (
-                    <div className="md:hidden py-4 border-t border-slate-800/60 space-y-1">
+                <div 
+                    className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+                        open ? "max-h-96 opacity-100 border-t border-slate-800/60" : "max-h-0 opacity-0 pointer-events-none"
+                    }`}
+                >
+                    <div className="py-4 space-y-1">
                         {navLinks.map((link) => {
                             const isActive =
                                 link.href === "/"
@@ -96,9 +100,9 @@ export default function Navbar() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className={`block px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${isActive
+                                    className={`block px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 ${isActive
                                         ? "text-indigo-400 bg-indigo-500/10"
-                                        : "text-slate-400 hover:text-slate-100 hover:bg-slate-800"
+                                        : "text-slate-300 hover:text-slate-100 hover:bg-slate-800/60"
                                         }`}
                                 >
                                     {link.label}
@@ -106,7 +110,7 @@ export default function Navbar() {
                             );
                         })}
                     </div>
-                )}
+                </div>
             </nav>
         </header>
     );

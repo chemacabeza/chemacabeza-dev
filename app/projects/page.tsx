@@ -15,6 +15,16 @@ export const metadata: Metadata = createMetadata({
 
 const githubProjects = [
     {
+        repo: "assistant-google",
+        url: "https://github.com/chemacabeza/assistant-google",
+        emoji: "🎩",
+        title: "Personal AI Assistant",
+        subtitle: "Alfred · Google OAuth2 · Gmail & Calendar · Spring Boot + React",
+        description:
+            "\"At your service, sir.\" A production-ready, full-stack AI butler that securely connects to your Google Account via OAuth 2.0 to manage Gmail and Calendar. Features an intelligent conversational routing engine, custom email reply templates, Google Maps integration, and AES-encrypted token storage at rest. Clone → configure your Google Cloud credentials → run ./start.sh → your personal Alfred is live at localhost:5173. Requires: Google Cloud OAuth 2.0 Client ID & Secret, Gmail API, Google Calendar API, and a PostgreSQL 16 instance (auto-provisioned via Docker Compose). Fully containerized: Spring Boot 3 backend on Eclipse Temurin + React 18/Vite frontend on Nginx + PostgreSQL — all orchestrated with a single Docker Compose command.",
+        tags: ["Spring Boot 3", "React 18", "Google OAuth2", "Gmail API", "Calendar API", "PostgreSQL", "AES Encryption", "Docker"],
+    },
+    {
         repo: "test-with-llms",
         url: "https://github.com/chemacabeza/test-with-llms",
         emoji: "🚀",

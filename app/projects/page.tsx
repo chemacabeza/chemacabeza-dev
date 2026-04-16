@@ -19,10 +19,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/assistant-google",
         emoji: "🎩",
         title: "Personal AI Assistant",
-        subtitle: "Alfred · Google OAuth2 · Gmail & Calendar · Spring Boot + React",
+        subtitle: "Alfred · OpenAI + Google OAuth2 · Gmail, Calendar & Maps",
         description:
-            "\"At your service, sir.\" A production-ready, full-stack AI butler that securely connects to your Google Account via OAuth 2.0 to manage Gmail and Calendar. Features an intelligent conversational routing engine, custom email reply templates, Google Maps integration, and AES-encrypted token storage at rest. Clone → configure your Google Cloud credentials → run ./start.sh → your personal Alfred is live at localhost:5173. Requires: Google Cloud OAuth 2.0 Client ID & Secret, Gmail API, Google Calendar API, and a PostgreSQL 16 instance (auto-provisioned via Docker Compose). Fully containerized: Spring Boot 3 backend on Eclipse Temurin + React 18/Vite frontend on Nginx + PostgreSQL — all orchestrated with a single Docker Compose command.",
-        tags: ["Spring Boot 3", "React 18", "Google OAuth2", "Gmail API", "Calendar API", "PostgreSQL", "AES Encryption", "Docker"],
+            "\"At your service, sir.\" A production-ready, full-stack AI butler that securely connects to your Google Account via OAuth 2.0 to manage Gmail, Calendar, and Maps. Powered by OpenAI for intelligent intent parsing and conversational responses, it features custom email reply templates, calendar event scheduling, geocoding via Google Maps, and AES-encrypted token storage at rest. Get started in 5 commands: git clone → cp .env.example .env → add your API keys → ./build.sh → ./start.sh → Alfred is live at localhost:5173. Requires 5 APIs: Google OAuth 2.0 Client ID & Secret, Gmail API, Google Calendar API, Google Maps API, and an OpenAI API Key. Fully containerized: Spring Boot 3 backend + React 18/Vite frontend + PostgreSQL 16 — all orchestrated with a single Docker Compose command.",
+        tags: ["Spring Boot 3", "React 18", "OpenAI", "Google OAuth2", "Gmail API", "Calendar API", "Maps API", "PostgreSQL", "Docker"],
     },
     {
         repo: "test-with-llms",

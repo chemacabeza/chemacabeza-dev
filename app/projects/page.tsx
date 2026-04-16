@@ -19,10 +19,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/assistant-google",
         emoji: "🎩",
         title: "Personal AI Assistant",
-        subtitle: "Alfred · OpenAI + Google OAuth2 · Gmail, Calendar & Maps",
+        subtitle: "Alfred · OpenAI · Spanish-Speaking · Gmail, Calendar & Maps",
         description:
-            "\"At your service, sir.\" A production-ready, full-stack AI butler that securely connects to your Google Account via OAuth 2.0 to manage Gmail, Calendar, and Maps. Powered by OpenAI for intelligent intent parsing and conversational responses, it features custom email reply templates, calendar event scheduling, geocoding via Google Maps, and AES-encrypted token storage at rest. Get started in 5 commands: git clone → cp .env.example .env → add your API keys → ./build.sh → ./start.sh → Alfred is live at localhost:5173. Requires 5 APIs: Google OAuth 2.0 Client ID & Secret, Gmail API, Google Calendar API, Google Maps API, and an OpenAI API Key. Fully containerized: Spring Boot 3 backend + React 18/Vite frontend + PostgreSQL 16 — all orchestrated with a single Docker Compose command.",
-        tags: ["Spring Boot 3", "React 18", "OpenAI", "Google OAuth2", "Gmail API", "Calendar API", "Maps API", "PostgreSQL", "Docker"],
+            "\"A su servicio, señor.\" A production-ready, full-stack AI butler that securely connects to your Google Account via OAuth 2.0 to manage Gmail, Calendar, and Maps — and converses entirely in Spanish. Powered by OpenAI for intelligent intent parsing and natural-language responses in español, it features custom email reply templates, calendar event scheduling, geocoding via Google Maps, and AES-encrypted token storage at rest. Get started in 5 commands: git clone → cp .env.example .env → add your API keys → ./build.sh → ./start.sh → Alfred is live at localhost:5173. Requires 5 APIs: Google OAuth 2.0 Client ID & Secret, Gmail API, Google Calendar API, Google Maps API, and an OpenAI API Key. Fully containerized: Spring Boot 3 backend + React 18/Vite frontend + PostgreSQL 16 — all orchestrated with a single Docker Compose command.",
+        tags: ["Spring Boot 3", "React 18", "OpenAI", "Spanish", "Google OAuth2", "Gmail API", "Calendar API", "Maps API", "PostgreSQL", "Docker"],
     },
     {
         repo: "test-with-llms",

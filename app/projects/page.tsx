@@ -19,10 +19,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/assistant-google",
         emoji: "🎩",
         title: "Personal AI Assistant",
-        subtitle: "Alfred · Native WhatsApp Bridge · QR Scan Auth · Socket.io Real-time · Android Auto · Gmail, Calendar & Maps",
+        subtitle: "Alfred · Native WA Bridge · Atomic Session Reset · QR Scan · Android Auto · Google Calendar & Gmail",
         description:
-            "\"At your service, sir!\" A production-ready, full-stack AI butler that securely connects to your Google Account via OAuth 2.0 to manage Gmail, Calendar, and Maps — and now connects natively to your WhatsApp via a custom Dockerized bridge (Baileys), with no Meta API tokens required. Simply scan a QR code in the high-fidelity dark-mode dashboard (mirroring WhatsApp Web) to link your personal account. The bridge synchronizes your entire chat history into PostgreSQL and uses Socket.io to push new messages in real-time. The AI assistant can send WhatsApp messages on your behalf and handle complex intents fluently in both English and Spanish. Also featuring native Android Auto and public transport integration for hands-free assistance while commuting by car or train. Powered by OpenAI for intelligent intent parsing, it features custom email reply templates, calendar event scheduling, geocoding via Google Maps, and AES-encrypted token storage at rest. Get started in 5 commands: git clone → ./build.sh → scan QR → Alfred is live at localhost:5173. Requires: Google OAuth 2.0, Gmail, Calendar, Maps, and OpenAI APIs. Fully containerized: Spring Boot 3 + React 18 + Node.js Bridge + PostgreSQL 16.",
-        tags: ["Spring Boot 3", "React 18", "Native WA Bridge", "Socket.io", "OpenAI", "QR Authentication", "Android Auto", "Google OAuth2", "Gmail API", "Calendar API", "Maps API", "PostgreSQL", "Docker"],
+            "\"At your service, sir!\" A production-ready, full-stack AI butler that securely connects to your Google Account via OAuth 2.0 to manage Gmail, Calendar, and Maps — and now connects natively to your WhatsApp via a custom Dockerized bridge (Baileys), with no Meta API tokens required. Simply scan a QR code in the high-fidelity dark-mode dashboard (mirroring WhatsApp Web) to link your personal account. Recently updated with a \"nuclear\" atomic session reset to purge stale connections instantly. The bridge synchronizes your entire chat history into PostgreSQL and uses Socket.io to push new messages in real-time. The AI assistant can send WhatsApp messages on your behalf, delete calendar events, and automatically generate Android Auto navigation links for any address in your schedule. Powered by OpenAI for intelligent intent parsing, it features custom email reply templates, geocoding via Google Maps, and AES-encrypted token storage at rest. Get started in 5 commands: git clone → ./build.sh → scan QR → Alfred is live at localhost:5173. Fully containerized: Spring Boot 3.4 + React 18 + Node.js Bridge + PostgreSQL 16.",
+        tags: ["Spring Boot 3.4", "React 18", "Native WA Bridge", "Socket.io", "OpenAI", "QR Authentication", "Android Auto", "Google OAuth2", "Gmail API", "Calendar API", "Maps API", "PostgreSQL 16", "Docker"],
     },
     {
         repo: "test-with-llms",
@@ -51,8 +51,8 @@ const githubProjects = [
         title: "AI Video Generation Studio",
         subtitle: "Hybrid Architecture · Online & Offline Video Synthesis",
         description:
-            "A full-stack video platform supporting 5 state-of-the-art models (Wan, Kling, LTX-2, PixVerse) via fal.ai. Engineered with a flexible hybrid architecture: a single configuration switch lets you toggle between running models entirely offline on local hardware or connecting to cloud APIs for scale. Features async job orchestration, isolated Docker environments, and zero-downtime database migrations.",
-        tags: ["Spring Boot 3", "React 18", "Hybrid Cloud", "Local Inference", "fal.ai", "Docker"],
+            "A full-stack video platform supporting 5 state-of-the-art models (Wan 2.6, Kling 2.5, LTX-2, PixVerse) via fal.ai. Engineered with a flexible hybrid architecture: a single configuration switch lets you toggle between running models entirely offline on local hardware or connecting to cloud APIs for scale. Features async job orchestration, isolated Docker environments, and zero-downtime database migrations with automated health checks.",
+        tags: ["Spring Boot 3.4", "React 18", "Hybrid Cloud", "Local Inference", "fal.ai", "Wan 2.6", "Kling 2.5", "Docker"],
     },
     {
         repo: "test-for-audio-generation",
@@ -63,16 +63,6 @@ const githubProjects = [
         description:
             "Convert text to natural-sounding speech instantly using the OpenAI TTS API. Choose from 11 expressive voices and stream raw MP3 audio straight to your browser. The secure architecture keeps API keys strictly server-side, while the Spring Boot backend and React frontend are fully Dockerized for effortless, horizontal scaling in any environment.",
         tags: ["Spring Boot 3", "React 18", "OpenAI TTS", "MP3 Streaming", "Docker"],
-    },
-    {
-        repo: "test-ai-asistant",
-        url: "https://github.com/chemacabeza/my-github-projects/tree/master/test-ai-asistant",
-        emoji: "🎙️",
-        title: "AI Voice Assistant",
-        subtitle: "Whisper STT · GPT-4o Chat · OpenAI TTS",
-        description:
-            "A production-ready voice assistant featuring speech-to-text (Whisper), intelligent GPT-4o chat responses, and natural TTS output. Includes configurable wake-word detection ('Nova'), support for 9 languages, and custom AI personas. Built with a premium dark-themed React UI and a Spring Boot backend, completely containerized for instant local deployment via Docker.",
-        tags: ["Spring Boot 3", "React 18", "GPT-4o", "Whisper", "Voice Assistant", "Docker"],
     },
     {
         repo: "test-audio-listener",
@@ -91,8 +81,8 @@ const githubProjects = [
         title: "AI Voice Assistant",
         subtitle: "Conversational AI · Whisper + GPT-4o + TTS",
         description:
-            "\"Hey Nova, tell me a joke.\" Speak naturally, and this full-stack AI assistant listens (Whisper), thinks (GPT-4o), and speaks back (TTS) — all in real time, right in your browser. Features wake word detection, 9 languages, 6 voice personas, custom AI naming, push-to-talk and continuous listening modes, and both online and offline backends. It's your own Alexa — but you built it, you control it, and it runs with a single Docker command.",
-        tags: ["Spring Boot 3", "React", "Vite", "OpenAI", "GPT-4o", "Whisper", "TTS", "Docker"],
+            "\"Hey Nova, tell me a joke.\" Speak naturally, and this full-stack AI assistant listens (Whisper), thinks (GPT-4o), and speaks back (TTS) — all in real time, right in your browser. Features wake word detection ('Nova'), 9 languages, 6 voice personas, custom AI naming, push-to-talk and continuous listening modes, and both online and offline backends. It's your own Alexa — but you built it, you control it, and it runs with a single Docker command.",
+        tags: ["Spring Boot 3.4", "React 18", "Vite", "OpenAI", "GPT-4o", "Whisper", "TTS", "Docker"],
     },
     {
         repo: "bash",

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { createMetadata, siteConfig } from "@/lib/metadata";
 import { Github, Linkedin, Mail, ArrowRight, Calendar } from "lucide-react";
-import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = createMetadata({
     title: "Contact",
@@ -53,8 +52,10 @@ const links = [
 ];
 
 const colorMap: Record<string, string> = {
-    indigo: "bg-indigo-500/10 border-indigo-500/20 text-indigo-400 hover:border-indigo-500/50 hover:bg-indigo-500/15",
-    violet: "bg-violet-500/10 border-violet-500/20 text-violet-400 hover:border-violet-500/50 hover:bg-violet-500/15",
+    indigo:
+        "bg-indigo-500/10 border-indigo-500/20 text-indigo-400 hover:border-indigo-500/50 hover:bg-indigo-500/15",
+    violet:
+        "bg-violet-500/10 border-violet-500/20 text-violet-400 hover:border-violet-500/50 hover:bg-violet-500/15",
     blue: "bg-blue-500/10 border-blue-500/20 text-blue-400 hover:border-blue-500/50 hover:bg-blue-500/15",
     emerald: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/15",
     green: "bg-green-500/10 border-green-500/20 text-green-400 hover:border-green-500/50 hover:bg-green-500/15",
@@ -117,17 +118,6 @@ export default function ContactPage() {
                         </a>
                     ))}
                 </div>
-
-                {/* Contact Form */}
-                <section className="rounded-xl border border-slate-800/60 bg-slate-900/40 p-7 mb-8">
-                    <div className="mb-6">
-                        <h2 className="font-bold text-slate-100 text-lg mb-1">Send a message</h2>
-                        <p className="text-sm text-slate-500">
-                            Prefer to write? Use the form below and I&apos;ll reply to your email directly.
-                        </p>
-                    </div>
-                    <ContactForm />
-                </section>
 
                 {/* What I'm open to */}
                 <section className="rounded-xl border border-slate-800/60 bg-slate-900/40 p-7">

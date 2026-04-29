@@ -128,10 +128,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/ai_and_MachineLearning",
         emoji: "🧬",
         title: "AI & Machine Learning Course",
-        subtitle: "21 chapters · Hands-on · Fully Dockerized exercises",
+        subtitle: "27 chapters · Hands-on · Fully Dockerized exercises",
         description:
-            "A hands-on, beginner-friendly curriculum synthesized from over 50 academic textbooks spanning 21 chapters of modern AI. Every chapter includes a fully Dockerized exercise — no local setup beyond Docker. Covers neural networks from scratch, Federated Learning, Reinforcement Learning, NLP, SVMs, Swarm AI, Computer Vision (CNNs), Transfer Learning, Semi-Supervised Learning, Autonomous Vehicles, Algorithmic Trading, Graph Neural Networks, DQN for games, Active Learning, Adversarial ML defenses, Fake News Detection, IoT Edge AI, Lifelong Learning, Metric Learning, ML Data Pipelines, and Game Theory.",
-        tags: ["Deep Learning", "Reinforcement Learning", "Computer Vision", "NLP", "Adversarial ML", "IoT", "Game Theory", "Docker"],
+            "A hands-on, beginner-friendly curriculum synthesized from over 50 academic textbooks spanning 27 chapters of modern AI. Every chapter includes a fully Dockerized exercise — no local setup beyond Docker. Covers neural networks from scratch, Federated Learning, Reinforcement Learning, NLP, SVMs, Swarm AI, Computer Vision (CNNs), Transfer Learning, Semi-Supervised Learning, Autonomous Vehicles, Algorithmic Trading, Graph Neural Networks, DQN for games, Active Learning, Adversarial ML defenses, Fake News Detection, IoT Edge AI, Lifelong Learning, Metric Learning, ML Data Pipelines, Game Theory, Bayesian Learning, Ensemble Methods, Dimensionality Reduction, Statistical Learning Theory, Kernel Methods, and Time Series Forecasting.",
+        tags: ["Deep Learning", "Reinforcement Learning", "Computer Vision", "NLP", "Adversarial ML", "Bayesian Learning", "Ensemble Methods", "Time Series", "Docker"],
     },
     {
         repo: "CyberSecurity",

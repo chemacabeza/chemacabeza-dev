@@ -1,0 +1,84 @@
+---
+title: "The Feynman Guide to the Model Context Protocol (MCP)"
+description: "Understanding the future of AI agents using simple analogies. A synthesis of the latest Model Context Protocol literature."
+date: "2026-04-29"
+tags: ["AI Agents", "System Design", "MCP", "LLMs"]
+featured: true
+---
+
+Imagine you have just bought a brand new, state-of-the-art home theater system. The speakers are incredible, the TV is 8K, and the receiver is top-of-the-line. There is just one massive problem: every single device uses a completely different, proprietary cable. To connect your DVD player to your TV, you need a custom adapter. To connect your gaming console to the speakers, you need to solder your own wires. 
+
+This nightmare scenario is exactly what the Artificial Intelligence industry has been facing. Every time you want a Large Language Model (LLM) to talk to a database, read a local file, or use a specific software tool, a developer had to write custom, one-off code to make the connection. 
+
+This is the **$N \times M$ integration problem**. If you have $N$ AI models and $M$ tools, you need $N \times M$ separate custom integrations.
+
+Enter the **Model Context Protocol (MCP)**. 
+
+To demystify how this protocol is revolutionizing AI, I've applied the **Richard Feynman Technique**: taking complex ideas from the latest MCP literature and explaining them using simple, relatable analogies. 
+
+Let's dive in.
+
+---
+
+## 1. The USB-C of Artificial Intelligence
+
+In the physical world, the technology industry solved the massive cable-clutter problem with **USB-C**. Suddenly, it didn't matter if you were connecting a laptop to a monitor, a phone to a charger, or a hard drive to a tablet. As long as both ends supported USB-C, they could communicate and share power.
+
+<div align="center">
+![MCP as USB-C for AI](/images/writing/mcp_usb_c_analogy.png)
+*MCP acts as the universal connector, allowing a single AI brain to plug seamlessly into any database or tool without custom integrations.*
+</div>
+
+**The Concept:** MCP is the USB-C standard for AI agents. It is an open-source protocol that standardizes how AI models securely connect to local and remote data sources. Instead of writing custom integration code for every new LLM, developers write **one** MCP Server. Once that server exists, *any* AI that supports the MCP standard (like Claude Desktop or Cursor) can instantly connect to it, read its data, and execute its tools.
+
+---
+
+## 2. The Architecture: Host, Client, and Server
+
+MCP separates concerns beautifully using a three-tier architecture. To understand this, think of a fancy restaurant.
+
+<div align="center">
+![MCP Architecture](/images/writing/mcp_architecture.png)
+*The elegant Client-Host-Server dance that keeps AI systems secure and modular.*
+</div>
+
+**The Concept:** 
+*   **The Host (The Chef):** This is the AI model itself (like Claude or GPT-4). The chef has the brain and the intelligence to cook the meal, but they are confined to the kitchen.
+*   **The Client (The Waiter):** The MCP Client sits between the Chef and the outside world. It securely translates the Chef's requests and carries them out.
+*   **The Server (The Pantry/Suppliers):** The MCP Servers are the specialized tools and databases. One server might be your local file system, another might be a PostgreSQL database, and another might be a GitHub repository. 
+
+When the Host needs data, it asks the Client. The Client routes the request to the appropriate Server, fetches the ingredients, and brings them back to the Host. The Host never touches the Server directly, ensuring strict security boundaries and local-first execution.
+
+---
+
+## 3. The Three Primitives: Resources, Tools, and Prompts
+
+How exactly does the Server expose its capabilities to the Host? It uses three specific building blocks, known as the MCP primitives.
+
+<div align="center">
+![MCP Primitives](/images/writing/mcp_primitives.png)
+*The Holy Trinity of MCP: Resources (The Library Card), Tools (The Wrench), and Prompts (The Script).*
+</div>
+
+**The Concept:**
+1.  **Resources (The Library Card):** Resources are **read-only** data. If the AI wants to read a local PDF, query a specific database row, or check the weather, it accesses a Resource. The AI can pull this data into its context window, but it cannot change it.
+2.  **Tools (The Wrench):** Tools are **executable actions**. This is where the AI affects the real world. If you want the AI to run a bash script, insert a row into a database, or push code to GitHub, the Server provides a Tool. For security, Tools are always user-controlled; the AI proposes the action, but the Client (often the human user) must approve it.
+3.  **Prompts (The Script):** Prompts are reusable, server-side templates. Imagine a company has a highly specific, complex prompt for generating legal contracts. Instead of the user typing it out every time, the MCP Server can host the prompt, and the AI can simply request it on demand.
+
+---
+
+## The Verdict
+
+The Model Context Protocol is not just a marginal improvement; it is a foundational shift in how AI systems are built. By acting as the "USB-C for AI," establishing a secure Client-Host-Server architecture, and standardizing interaction through Resources, Tools, and Prompts, MCP transforms isolated language models into powerful, fully integrated autonomous agents.
+
+We are moving away from monolithic AI applications that try to do everything, toward an elegant, distributed ecosystem where tools and intelligence can be seamlessly hot-swapped.
+
+---
+
+## References & Further Reading
+
+This post is a synthesis of the following resources from our System Design Library:
+
+*   **AI Agents and Applications With LangChain, LangGraph, and MCP** by Roberto Infante
+*   **AI Agents with MCP (Early Release)** by Kyle Stratis
+*   **The MCP Standard: A Developer's Guide to Building Universal AI Tools** by Srinivasan Sekar

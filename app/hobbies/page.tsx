@@ -100,7 +100,7 @@ export default function HobbiesPage() {
                             Curated Model Library
                         </h2>
                         <p className="text-slate-300 leading-relaxed text-[17px] mb-6">
-                            The platform comes heavily armed with a massive 46GB library featuring 7 SDXL Checkpoints and over 45 LoRAs downloaded from HuggingFace and CivitAI.
+                            The platform comes heavily armed with a massive 46GB library featuring 7 SDXL Checkpoints and 46 LoRAs downloaded from HuggingFace and CivitAI.
                         </p>
 
                         <div className="space-y-8">

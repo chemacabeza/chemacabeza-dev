@@ -130,7 +130,7 @@ export default function HobbiesPage() {
                                         { name: "Film Photography Style", desc: "Classic film photography aesthetic", url: "https://huggingface.co/mashb1t/fav_models" },
                                         { name: "Retro Neon Illustrious", desc: "Retro neon synthwave style", url: "https://civitai.com/models/569937" },
                                         { name: "Pumps & Stilettos", desc: "Targeted accessories generation", url: "https://civitai.com/models/94667" },
-                                        { name: "Character Library", desc: "Extensive collection of 41 geographically distinct characters, featuring the newly updated Emma (v2) from Ireland", url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related#loras" },
+                                        { name: "Character Library", desc: "Extensive collection of 41 geographically distinct characters, featuring the newly updated Hildur (v1) from Iceland", url: "https://github.com/chemacabeza/my-github-projects/tree/master/AI-related#loras" },
                                     ].map(lora => (
                                         <a key={lora.name} href={lora.url} target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg border border-slate-800/60 bg-slate-900/30 hover:bg-slate-900/60 hover:border-fuchsia-500/30 transition-all group">
                                             <div className="flex items-start justify-between gap-2">

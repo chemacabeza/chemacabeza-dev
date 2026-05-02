@@ -12,6 +12,7 @@ const navLinks = [
     { href: "/hobbies", label: "Hobbies" },
     { href: "/now", label: "Now" },
     { href: "/contact", label: "Contact" },
+    { href: "https://lora-character-marketplace-production.up.railway.app", label: "Marketplace" },
 ];
 
 export default function Navbar() {

@@ -52,6 +52,9 @@ export default function Footer() {
                             ["Hobbies", "/hobbies"],
                             ["Now", "/now"],
                             ["Contact", "/contact"],
+                            ["Support", "/support"],
+                            ["Privacy", "/privacy-policy"],
+                            ["Terms", "/terms-of-service"],
                         ].map(([label, href]) => (
                             <Link
                                 key={href}

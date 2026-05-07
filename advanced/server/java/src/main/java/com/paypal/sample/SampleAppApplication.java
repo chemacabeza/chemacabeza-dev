@@ -61,7 +61,7 @@ public class SampleAppApplication {
                         .responseConfig(logConfigBuilder -> logConfigBuilder.headers(true)))
                 .httpClientConfig(configBuilder -> configBuilder
                         .timeout(0))
-                .environment(Environment.SANDBOX)
+                .environment(Environment.PRODUCTION)
                 .clientCredentialsAuth(new ClientCredentialsAuthModel.Builder(
                         PAYPAL_CLIENT_ID, 
                         PAYPAL_CLIENT_SECRET)

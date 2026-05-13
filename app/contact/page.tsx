@@ -38,7 +38,7 @@ const links = [
         label: "Book a Free Meeting",
         value: "calendly.com/chema-chemacabeza/30-minute-meeting",
         href: "https://calendly.com/chema-chemacabeza/30-minute-meeting",
-        description: "Schedule a free 30-minute 1-on-1 with me. No charge, just a conversation.",
+        description: "Schedule a free 30-minute 1-on-1 with me. No charge, just a conversation. (Contact: chemacabeza@gmail.com)",
         color: "green",
     },
     {
@@ -46,7 +46,7 @@ const links = [
         label: "Book a Paid Session",
         value: "calendly.com/chema-chemacabeza/new-meeting",
         href: "https://calendly.com/chema-chemacabeza/new-meeting",
-        description: "Paid consulting session — deep-dive technical advice, architecture reviews, or career coaching.",
+        description: "Paid consulting session — deep-dive technical advice, architecture reviews, or career coaching. (Contact: chemacabeza@gmail.com)",
         color: "red",
     },
 ];

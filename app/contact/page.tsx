@@ -44,9 +44,9 @@ const links = [
     {
         icon: Calendar,
         label: "Book a Paid Session",
-        value: "calendly.com/chema-chemacabeza/new-meeting",
+        value: "chemacabeza@gmail.com",
         href: "https://calendly.com/chema-chemacabeza/new-meeting",
-        description: "Paid consulting session — deep-dive technical advice, architecture reviews, or career coaching. (Contact: chemacabeza@gmail.com)",
+        description: "Paid consulting session — deep-dive technical advice, architecture reviews, or career coaching.",
         color: "red",
     },
 ];

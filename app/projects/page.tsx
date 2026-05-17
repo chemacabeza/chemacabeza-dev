@@ -150,8 +150,8 @@ const githubProjects = [
         title: "Coding Algorithm",
         subtitle: "16 chapters · Visual Guides · Java, Python & C++",
         description:
-            "A comprehensive collection of 16 algorithm chapters with visual explanations, step-by-step diagrams, and complete implementations in Java, Python, and C++. Built from insights across classic computer science texts including Introduction to Algorithms (CLRS), Grokking Algorithms, The Algorithm Design Manual, and Cracking the Coding Interview. Covers Binary Search, Selection Sort, Merge Sort, Quicksort, BFS, Dijkstra's Algorithm, Dynamic Programming, Hash Tables, DFS, Hungarian Algorithm, Greedy Algorithms, Heapsort, Topological Sort, K-Nearest Neighbors (KNN), A* Search, and Bloom Filters — each with realistic hero images, execution diagrams, and tri-language code.",
-        tags: ["Algorithms", "Data Structures", "Java", "Python", "C++", "Graph Algorithms", "Dynamic Programming", "Sorting", "Pathfinding", "Machine Learning", "Probabilistic Data Structures"],
+            "A comprehensive collection of 16 algorithm chapters with visual explanations, step-by-step diagrams, and complete implementations in Java, Python, and C++. Built from insights across classic computer science texts including Introduction to Algorithms (CLRS), Grokking Algorithms, The Algorithm Design Manual, and Cracking the Coding Interview. Covers Binary Search, Selection Sort, Merge Sort, Quicksort, BFS, Dijkstra's Algorithm, Dynamic Programming, Hash Tables, DFS, Hungarian Algorithm, Greedy Algorithms, Heapsort, Topological Sort, K-Nearest Neighbors (KNN), A* Search, and Bloom Filters — each with realistic hero images, execution diagrams, mathematical foundations, and tri-language code.",
+        tags: ["Algorithms", "Data Structures", "Java", "Python", "C++", "Graph Algorithms", "Dynamic Programming", "Sorting", "Pathfinding", "Machine Learning", "Probabilistic Data Structures", "Mathematics"],
     },
     {
         repo: "Cplusplus",

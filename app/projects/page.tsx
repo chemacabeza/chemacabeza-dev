@@ -148,10 +148,10 @@ const githubProjects = [
         url: "https://github.com/chemacabeza/coding-algorithm",
         emoji: "🧮",
         title: "Coding Algorithm",
-        subtitle: "10 chapters · Visual Guides · Java, Python & C++",
+        subtitle: "15 chapters · Visual Guides · Java, Python & C++",
         description:
-            "A comprehensive collection of algorithm chapters with visual explanations, step-by-step diagrams, and complete implementations in Java, Python, and C++. Built from insights across classic computer science texts including Introduction to Algorithms (CLRS), Grokking Algorithms, The Algorithm Design Manual, and Cracking the Coding Interview. Covers Binary Search, Selection Sort, Merge Sort, Quicksort, BFS, Dijkstra's Algorithm, Dynamic Programming, Hash Tables, DFS, and the Hungarian Algorithm — each with realistic hero images, execution diagrams, and tri-language code.",
-        tags: ["Algorithms", "Data Structures", "Java", "Python", "C++", "Binary Search", "Graph Algorithms", "Dynamic Programming", "Sorting"],
+            "A comprehensive collection of 15 algorithm chapters with visual explanations, step-by-step diagrams, and complete implementations in Java, Python, and C++. Built from insights across classic computer science texts including Introduction to Algorithms (CLRS), Grokking Algorithms, The Algorithm Design Manual, and Cracking the Coding Interview. Covers Binary Search, Selection Sort, Merge Sort, Quicksort, BFS, Dijkstra's Algorithm, Dynamic Programming, Hash Tables, DFS, Hungarian Algorithm, Greedy Algorithms, Heapsort, Topological Sort, K-Nearest Neighbors (KNN), and A* Search — each with realistic hero images, execution diagrams, and tri-language code.",
+        tags: ["Algorithms", "Data Structures", "Java", "Python", "C++", "Graph Algorithms", "Dynamic Programming", "Sorting", "Pathfinding", "Machine Learning"],
     },
     {
         repo: "Cplusplus",

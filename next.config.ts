@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/rss.xml",
+        source: "/feed.xml",
         destination: "/api/rss",
       },
     ];

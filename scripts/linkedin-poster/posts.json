@@ -1,0 +1,80 @@
+[
+  {
+    "slug": "the-feynman-guide-to-apache-kafka",
+    "posted": true,
+    "postedAt": "2026-05-24T16:00:50.698Z",
+    "body": "Kafka isn't a queue. That's the first thing most engineers get wrong.\n\nIt's a distributed, append-only log — a \"nervous system\" that lets services react to events instead of asking each other for permission. Once that mental model clicks, everything else (partitions, consumer groups, offsets, exactly-once semantics) stops feeling like trivia and starts feeling like physics.\n\nI just published a Feynman-style breakdown of Kafka — the analogies, the failure modes, and the parts that even senior engineers tend to skip over.\n\nRead it here → https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka\n\n#ApacheKafka #SystemDesign #EventStreaming #DistributedSystems #SoftwareEngineering"
+  },
+  {
+    "slug": "the-feynman-guide-to-mcp",
+    "posted": true,
+    "postedAt": "2026-05-24T16:02:01.943Z",
+    "body": "Every AI agent demo right now ends the same way: \"...and then it calls a tool.\" But how?\n\nThe Model Context Protocol (MCP) is becoming the answer — a standard way for LLMs to discover and use external capabilities without bespoke glue code per integration. Think of it as USB for AI agents.\n\nI wrote a Feynman-style guide to MCP: what it actually is, why it's not just another wrapper around function calling, and where it breaks down today.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-mcp\n\n#AIAgents #MCP #LLMs #SystemDesign #AIEngineering"
+  },
+  {
+    "slug": "how-system-design-fails",
+    "posted": true,
+    "postedAt": "2026-05-24T16:03:09.143Z",
+    "body": "Most distributed systems don't fail because the architecture was wrong on day one. They fail because nobody saw the second-order effects coming.\n\nI put together a visual guide to the failure modes that crop up across DDIA, Software Architecture: The Hard Parts, and a dozen production postmortems — the stuff that makes architecture diagrams look clean and reality look messy.\n\nVisual breakdown here → https://chemacabeza.dev/writing/how-system-design-fails\n\n#SystemDesign #SoftwareArchitecture #DDIA #Microservices #DistributedSystems"
+  },
+  {
+    "slug": "the-feynman-guide-to-software-architecture",
+    "posted": true,
+    "postedAt": "2026-05-24T16:04:49.499Z",
+    "body": "\"Software architecture\" is one of those terms that sounds important and means almost nothing — until you've watched a system collapse under its own coupling.\n\nI read the entire O'Reilly 2024 Architecture collection and distilled it down to the analogies and trade-offs that actually matter. No fluff, no \"it depends\" without saying what it depends on.\n\nRead the Feynman-style synthesis → https://chemacabeza.dev/writing/the-feynman-guide-to-software-architecture\n\n#SoftwareArchitecture #SystemDesign #Microservices #DDD #Engineering"
+  },
+  {
+    "slug": "why-microservices-fail",
+    "posted": true,
+    "postedAt": "2026-05-24T16:06:18.720Z",
+    "body": "Microservices were supposed to give us scalability and team autonomy. Most implementations deliver the exact opposite: distributed monoliths with worse latency and harder debugging.\n\nI broke down the five failure modes that kill these systems — and what to do instead. If your \"microservices\" require a six-team coordinated deploy, this one's for you.\n\nRead it → https://chemacabeza.dev/writing/why-microservices-fail\n\n#Microservices #SoftwareArchitecture #DistributedSystems #SystemDesign #Engineering"
+  },
+  {
+    "slug": "the-feynman-guide-to-co-intelligence",
+    "posted": true,
+    "postedAt": "2026-05-24T16:07:53.320Z",
+    "body": "LLMs are talented parrots. Useful, surprising, occasionally brilliant — but parrots.\n\nThe interesting frontier isn't bigger models. It's wrapping them in feedback loops, memory, and tools so they stop being parrots and start being partners. That's what Agents actually are, stripped of the marketing.\n\nA Feynman-style breakdown of how we bridge the gap → https://chemacabeza.dev/writing/the-feynman-guide-to-co-intelligence\n\n#AIAgents #LLMs #CoIntelligence #AI #ProductEngineering"
+  },
+  {
+    "slug": "the-feynman-guide-to-vim",
+    "posted": true,
+    "postedAt": "2026-05-24T16:09:07.028Z",
+    "body": "A text editor from 1991 is still the gold standard for high-performance engineering. Why?\n\nThe answer isn't nostalgia — it's that Vim treats editing as a language. Verbs, nouns, modifiers. Once you stop fighting modal editing and start composing motions, you realize most modern editors are just expensive typewriters.\n\nI wrote a Feynman-style guide to Vim — from modal editing to the grammar of motion.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-vim\n\n#Vim #Productivity #Engineering #Linux #DeveloperTools"
+  },
+  {
+    "slug": "the-feynman-guide-to-llms",
+    "posted": true,
+    "postedAt": "2026-05-24T16:10:48.274Z",
+    "body": "How does a computer learn to speak?\n\nNot \"what is an LLM\" — every LinkedIn post answers that. I mean: what is actually happening inside attention layers, why does RAG work, and where do these models break in ways the demos never show?\n\nI used the Feynman Technique to demystify the internal world of LLMs — from attention to retrieval, in plain English.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-llms\n\n#LLMs #AI #MachineLearning #NLP #AIEngineering"
+  },
+  {
+    "slug": "the-feynman-guide-to-ddd",
+    "posted": true,
+    "postedAt": "2026-05-24T16:12:49.165Z",
+    "body": "Domain-Driven Design is the most misquoted methodology in software.\n\nHalf the people who cite it have never read Evans. The other half think it means \"use a lot of folders.\" DDD is actually about taking complexity seriously — modelling the business at the strategic level *and* the tactical level, and refusing to pretend they're the same thing.\n\nI broke it down using the Feynman Technique, from Bounded Contexts to Aggregates.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-ddd\n\n#DomainDrivenDesign #SoftwareArchitecture #SystemDesign #DDD #Engineering"
+  },
+  {
+    "slug": "the-feynman-guide-to-serverless",
+    "posted": false,
+    "postedAt": null,
+    "body": "Serverless isn't \"no servers\" — it's \"someone else's problem, billed by the millisecond.\"\n\nThe model is more interesting than the marketing. Think of it as a food truck: you don't own the kitchen, you only pay when someone orders, and scaling means parking another truck. That analogy explains both why serverless is brilliant for some workloads and disastrous for others.\n\nA Feynman-style breakdown of the trade-offs → https://chemacabeza.dev/writing/the-feynman-guide-to-serverless\n\n#Serverless #CloudComputing #SystemDesign #Architecture #AWS"
+  },
+  {
+    "slug": "the-feynman-guide-to-microservices",
+    "posted": false,
+    "postedAt": null,
+    "body": "\"Should we use microservices or a monolith?\" is the wrong question.\n\nThe right question is: where are your real coupling points, what change patterns do you actually see, and what's the cost of crossing a network boundary for your team? Most \"microservices vs monolith\" debates skip all three.\n\nI used the Feynman Technique to make the actual trade-offs visible — with analogies and insights from the people who lived it at scale.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-microservices\n\n#Microservices #SoftwareArchitecture #SystemDesign #Engineering #Monoliths"
+  },
+  {
+    "slug": "performance-is-a-product-feature",
+    "posted": false,
+    "postedAt": null,
+    "body": "We've been lying to ourselves: performance is not a \"non-functional requirement.\"\n\nIt's product. A 400ms page load doesn't fail a unit test — it fails the user. And by the time it shows up in your funnel metrics, you've spent six months making the rewrite cost ten times what the original optimization would have.\n\nI wrote about why performance belongs in the product spec, not the post-launch cleanup.\n\nRead it → https://chemacabeza.dev/writing/performance-is-a-product-feature\n\n#Performance #ProductEngineering #BackendDevelopment #UX #SoftwareEngineering"
+  },
+  {
+    "slug": "monolith-vs-microservices",
+    "posted": true,
+    "postedAt": "2026-05-24T16:20:27.485Z",
+    "body": "\"Modular monolith or microservices?\" is a binary that doesn't exist in reality.\n\nIt's a spectrum, and the right point on it depends on team size, change patterns, and how much pain you're willing to absorb at deploy time vs runtime. Picking too far right too early kills startups. Picking too far left too late kills scale-ups.\n\nA practical framework for choosing — and re-choosing as you grow → https://chemacabeza.dev/writing/monolith-vs-microservices\n\n#SoftwareArchitecture #Microservices #ModularMonolith #Engineering #SystemDesign"
+  }
+]

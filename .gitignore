@@ -37,6 +37,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# linkedin-poster persistent browser profile (contains LinkedIn session cookies)
+/scripts/linkedin-poster/.profile/
+# linkedin-poster diagnostic dumps (only useful at debug time)
+/scripts/linkedin-poster/debug-*
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         source: "/feed.xml",
         destination: "/api/rss",
       },
+      {
+        source: "/export/:slug",
+        destination: "/api/export/:slug",
+      },
     ];
   },
 };

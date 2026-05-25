@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "linkedin:setup": "node scripts/linkedin-poster/setup-auth.mjs",
-    "linkedin:publish": "node scripts/linkedin-poster/publish-via-api.mjs"
+    "linkedin:publish": "node scripts/linkedin-poster/publish-via-api.mjs",
+    "medium:prep": "node .github/scripts/prepare-medium-posts.mjs",
+    "medium:publish": "node scripts/medium-poster/publish-via-api.mjs"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",

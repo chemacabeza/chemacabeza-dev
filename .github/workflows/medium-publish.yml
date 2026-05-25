@@ -1,0 +1,58 @@
+name: Publish due Medium posts
+
+on:
+  schedule:
+    # Every 30 minutes. GH cron has up to ~15 min drift; the 12h delay is
+    # approximate by design, so this is plenty granular.
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: medium-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check secret configured
+        id: check
+        env:
+          TOKEN: ${{ secrets.MEDIUM_INTEGRATION_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::warning::MEDIUM_INTEGRATION_TOKEN secret is not set — skipping."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to Medium
+        if: steps.check.outputs.configured == 'true'
+        env:
+          MEDIUM_INTEGRATION_TOKEN: ${{ secrets.MEDIUM_INTEGRATION_TOKEN }}
+          MEDIUM_USER_ID: ${{ secrets.MEDIUM_USER_ID }}
+        run: node scripts/medium-poster/publish-via-api.mjs
+
+      - name: Commit posted-status updates
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          if git diff --quiet scripts/medium-poster/posts.json; then
+            echo "No status changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/medium-poster/posts.json
+          git commit -m "chore: mark Medium posts as published [skip ci]"
+          git push

@@ -1,0 +1,45 @@
+name: Prepare Medium queue
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'content/posts/**.mdx'
+  workflow_dispatch:
+
+# Serialise so concurrent merges can't double-enqueue.
+concurrency:
+  group: medium-prep
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Enqueue new posts with 12h delay
+        id: prep
+        run: node .github/scripts/prepare-medium-posts.mjs
+
+      - name: Commit updated queue
+        if: steps.prep.outputs.count != '0' && steps.prep.outputs.count != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/medium-poster/posts.json
+          git commit -m "chore: queue Medium cross-posts for new entries [skip ci]"
+          git push

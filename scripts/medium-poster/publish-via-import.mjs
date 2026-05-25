@@ -3,8 +3,13 @@
 // flow with Playwright. Medium killed the integration-token API in 2024, so
 // browser automation against the import URL is the cleanest remaining path.
 //
-// Required env:
-//   MEDIUM_SESSION_COOKIE  — value of the `sid` cookie from medium.com (HttpOnly)
+// Auth env — one of these is required:
+//   MEDIUM_COOKIE_JAR      — full `Cookie:` header value from a logged-in request
+//                            (e.g. "sid=...; uid=...; xsrf=...; ..."). Preferred:
+//                            replays every cookie, so Medium's session-bundle
+//                            (sid + uid + signature cookies) all land together.
+//   MEDIUM_SESSION_COOKIE  — fallback: just the `sid` value. Used only if
+//                            MEDIUM_COOKIE_JAR is unset.
 //
 // Optional env:
 //   MEDIUM_SITE_URL        — defaults to https://chemacabeza.dev
@@ -20,6 +25,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const POSTS_FILE = join(HERE, 'posts.json');
 const DEBUG_DIR = join(HERE, '.debug');
 
+const COOKIE_JAR = process.env.MEDIUM_COOKIE_JAR;
 const SESSION_COOKIE = process.env.MEDIUM_SESSION_COOKIE;
 const SITE_URL = process.env.MEDIUM_SITE_URL || 'https://chemacabeza.dev';
 const AUTO_PUBLISH = (process.env.MEDIUM_AUTO_PUBLISH || 'true') === 'true';
@@ -33,8 +39,41 @@ function die(msg, code = 2) {
   process.exit(code);
 }
 
-if (!DRY_RUN && !SESSION_COOKIE) {
-  die('Missing MEDIUM_SESSION_COOKIE. Copy the `sid` cookie value from medium.com and set it as a repo secret.');
+if (!DRY_RUN && !COOKIE_JAR && !SESSION_COOKIE) {
+  die('Missing auth. Set either MEDIUM_COOKIE_JAR (full Cookie header — preferred) or MEDIUM_SESSION_COOKIE (sid only).');
+}
+
+// Parse a `Cookie:` header value into [{name, value}, ...].
+// Input shape: "sid=abc; uid=def; xsrf=ghi".  Tolerant of extra whitespace and
+// missing values; skips empty pairs.
+function parseCookieJar(raw) {
+  return raw
+    .split(';')
+    .map((segment) => segment.trim())
+    .filter(Boolean)
+    .map((segment) => {
+      const eq = segment.indexOf('=');
+      if (eq < 0) return null;
+      const name = segment.slice(0, eq).trim();
+      const value = segment.slice(eq + 1).trim();
+      if (!name) return null;
+      return { name, value };
+    })
+    .filter(Boolean);
+}
+
+function buildCookies() {
+  const pairs = COOKIE_JAR ? parseCookieJar(COOKIE_JAR) : [{ name: 'sid', value: SESSION_COOKIE }];
+  // Medium issues most session cookies on the apex domain. Using ".medium.com"
+  // (leading dot) covers both apex and subdomains under Playwright's matcher.
+  return pairs.map(({ name, value }) => ({
+    name,
+    value,
+    domain: '.medium.com',
+    path: '/',
+    secure: true,
+    sameSite: 'Lax',
+  }));
 }
 
 async function launchBrowser() {
@@ -44,17 +83,9 @@ async function launchBrowser() {
       'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     viewport: { width: 1280, height: 900 },
   });
-  await context.addCookies([
-    {
-      name: 'sid',
-      value: SESSION_COOKIE,
-      domain: '.medium.com',
-      path: '/',
-      httpOnly: true,
-      secure: true,
-      sameSite: 'Lax',
-    },
-  ]);
+  const cookies = buildCookies();
+  console.log(`  → replaying ${cookies.length} cookie(s): ${cookies.map((c) => c.name).join(', ')}`);
+  await context.addCookies(cookies);
   return { browser, context };
 }
 
@@ -75,13 +106,13 @@ async function verifyLoggedIn(page) {
   await page.goto('https://medium.com/me', { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
   const url = page.url();
   if (/\/(m\/)?signin/.test(url)) {
-    throw new Error(`Session cookie rejected — landed on ${url}. The 'sid' cookie has likely expired; regenerate it.`);
+    throw new Error(`Session cookies rejected — landed on ${url}. The cookies have likely expired or are bound to a different client; refresh MEDIUM_COOKIE_JAR.`);
   }
   console.log(`  ✓ Logged-in session valid (landed on ${url})`);
 }
 
 if (VERIFY_ONLY) {
-  console.log('Cookie smoke test — opening medium.com/me with stored sid...');
+  console.log('Cookie smoke test — opening medium.com/me with stored cookies...');
   const { browser, context } = await launchBrowser();
   const page = await context.newPage();
   let code = 0;

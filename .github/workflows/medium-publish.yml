@@ -34,10 +34,11 @@ jobs:
       - name: Check secret configured
         id: check
         env:
-          COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
+          JAR: ${{ secrets.MEDIUM_COOKIE_JAR }}
+          SID: ${{ secrets.MEDIUM_SESSION_COOKIE }}
         run: |
-          if [ -z "$COOKIE" ]; then
-            echo "::warning::MEDIUM_SESSION_COOKIE secret is not set — skipping."
+          if [ -z "$JAR" ] && [ -z "$SID" ]; then
+            echo "::warning::Neither MEDIUM_COOKIE_JAR nor MEDIUM_SESSION_COOKIE is set — skipping."
             echo "configured=false" >> "$GITHUB_OUTPUT"
           else
             echo "configured=true" >> "$GITHUB_OUTPUT"
@@ -64,15 +65,17 @@ jobs:
         if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
         run: npx playwright install --with-deps chromium
 
-      - name: Smoke-test session cookie
+      - name: Smoke-test session cookies
         if: steps.check.outputs.configured == 'true' && inputs.verify_only == true
         env:
+          MEDIUM_COOKIE_JAR: ${{ secrets.MEDIUM_COOKIE_JAR }}
           MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
         run: node scripts/medium-poster/publish-via-import.mjs --verify-cookie
 
       - name: Publish to Medium via import
         if: steps.check.outputs.configured == 'true' && inputs.verify_only != true && steps.due.outputs.count != '0'
         env:
+          MEDIUM_COOKIE_JAR: ${{ secrets.MEDIUM_COOKIE_JAR }}
           MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
           MEDIUM_AUTO_PUBLISH: ${{ vars.MEDIUM_AUTO_PUBLISH || 'true' }}
         run: node scripts/medium-poster/publish-via-import.mjs

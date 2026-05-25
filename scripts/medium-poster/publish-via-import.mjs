@@ -26,6 +26,7 @@ const AUTO_PUBLISH = (process.env.MEDIUM_AUTO_PUBLISH || 'true') === 'true';
 const HEADLESS = (process.env.MEDIUM_HEADLESS || 'true') === 'true';
 const NAV_TIMEOUT = parseInt(process.env.MEDIUM_NAV_TIMEOUT_MS || '60000', 10);
 const DRY_RUN = process.argv.includes('--dry-run');
+const VERIFY_ONLY = process.argv.includes('--verify-cookie');
 
 function die(msg, code = 2) {
   console.error(msg);
@@ -34,6 +35,67 @@ function die(msg, code = 2) {
 
 if (!DRY_RUN && !SESSION_COOKIE) {
   die('Missing MEDIUM_SESSION_COOKIE. Copy the `sid` cookie value from medium.com and set it as a repo secret.');
+}
+
+async function launchBrowser() {
+  const browser = await chromium.launch({ headless: HEADLESS });
+  const context = await browser.newContext({
+    userAgent:
+      'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    viewport: { width: 1280, height: 900 },
+  });
+  await context.addCookies([
+    {
+      name: 'sid',
+      value: SESSION_COOKIE,
+      domain: '.medium.com',
+      path: '/',
+      httpOnly: true,
+      secure: true,
+      sameSite: 'Lax',
+    },
+  ]);
+  return { browser, context };
+}
+
+async function dumpDebug(page, tag) {
+  try {
+    mkdirSync(DEBUG_DIR, { recursive: true });
+    const ts = Date.now();
+    const shot = join(DEBUG_DIR, `medium-${tag}-${ts}.png`);
+    const html = join(DEBUG_DIR, `medium-${tag}-${ts}.html`);
+    await page.screenshot({ path: shot, fullPage: true }).catch(() => {});
+    writeFileSync(html, await page.content().catch(() => ''));
+    console.error(`  Screenshot: ${shot}`);
+    console.error(`  HTML:       ${html}`);
+  } catch {}
+}
+
+async function verifyLoggedIn(page) {
+  await page.goto('https://medium.com/me', { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
+  const url = page.url();
+  if (/\/(m\/)?signin/.test(url)) {
+    throw new Error(`Session cookie rejected — landed on ${url}. The 'sid' cookie has likely expired; regenerate it.`);
+  }
+  console.log(`  ✓ Logged-in session valid (landed on ${url})`);
+}
+
+if (VERIFY_ONLY) {
+  console.log('Cookie smoke test — opening medium.com/me with stored sid...');
+  const { browser, context } = await launchBrowser();
+  const page = await context.newPage();
+  let code = 0;
+  try {
+    await verifyLoggedIn(page);
+    console.log('\n✓ Cookie is valid. Workflow is ready to publish when posts come due.');
+  } catch (err) {
+    console.error(`\n✗ ${err.message}`);
+    await dumpDebug(page, 'verify');
+    code = 1;
+  } finally {
+    await browser.close();
+  }
+  process.exit(code);
 }
 
 const posts = JSON.parse(readFileSync(POSTS_FILE, 'utf8'));
@@ -60,29 +122,6 @@ if (DRY_RUN) {
   }
   console.log('\nDry run complete — exiting without browser launch.');
   process.exit(0);
-}
-
-async function dumpDebug(page, tag) {
-  try {
-    mkdirSync(DEBUG_DIR, { recursive: true });
-    const ts = Date.now();
-    const shot = join(DEBUG_DIR, `medium-${tag}-${ts}.png`);
-    const html = join(DEBUG_DIR, `medium-${tag}-${ts}.html`);
-    await page.screenshot({ path: shot, fullPage: true }).catch(() => {});
-    writeFileSync(html, await page.content().catch(() => ''));
-    console.error(`  Screenshot: ${shot}`);
-    console.error(`  HTML:       ${html}`);
-  } catch {}
-}
-
-async function verifyLoggedIn(page) {
-  await page.goto('https://medium.com/me', { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
-  // If the cookie is bad, Medium redirects to /m/signin or /signin.
-  const url = page.url();
-  if (/\/(m\/)?signin/.test(url)) {
-    throw new Error(`Session cookie rejected — landed on ${url}. The 'sid' cookie has likely expired; regenerate it.`);
-  }
-  console.log(`  ✓ Logged-in session valid (landed on ${url})`);
 }
 
 async function clickFirstVisible(page, locators, label) {
@@ -180,24 +219,7 @@ async function importOne(page, post) {
   return { url: finalUrl, status: 'published' };
 }
 
-const browser = await chromium.launch({ headless: HEADLESS });
-const context = await browser.newContext({
-  userAgent:
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-  viewport: { width: 1280, height: 900 },
-});
-await context.addCookies([
-  {
-    name: 'sid',
-    value: SESSION_COOKIE,
-    domain: '.medium.com',
-    path: '/',
-    httpOnly: true,
-    secure: true,
-    sameSite: 'Lax',
-  },
-]);
-
+const { browser, context } = await launchBrowser();
 const page = await context.newPage();
 
 let posted = 0;

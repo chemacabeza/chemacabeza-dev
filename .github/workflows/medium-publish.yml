@@ -6,6 +6,11 @@ on:
     # approximate by design, so this is plenty granular.
     - cron: '*/30 * * * *'
   workflow_dispatch:
+    inputs:
+      verify_only:
+        description: 'Just smoke-test the session cookie (no posting)'
+        type: boolean
+        default: false
 
 concurrency:
   group: medium-publish
@@ -39,7 +44,7 @@ jobs:
           fi
 
       - name: Skip-early check (anything due?)
-        if: steps.check.outputs.configured == 'true'
+        if: steps.check.outputs.configured == 'true' && inputs.verify_only != true
         id: due
         run: |
           DUE=$(node -e "
@@ -52,15 +57,21 @@ jobs:
           echo "Posts due: $DUE"
 
       - name: Install dependencies
-        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
+        if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
         run: npm ci
 
       - name: Install Playwright Chromium
-        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
+        if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
         run: npx playwright install --with-deps chromium
 
+      - name: Smoke-test session cookie
+        if: steps.check.outputs.configured == 'true' && inputs.verify_only == true
+        env:
+          MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
+        run: node scripts/medium-poster/publish-via-import.mjs --verify-cookie
+
       - name: Publish to Medium via import
-        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
+        if: steps.check.outputs.configured == 'true' && inputs.verify_only != true && steps.due.outputs.count != '0'
         env:
           MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
           MEDIUM_AUTO_PUBLISH: ${{ vars.MEDIUM_AUTO_PUBLISH || 'true' }}
@@ -76,7 +87,7 @@ jobs:
           retention-days: 7
 
       - name: Commit posted-status updates
-        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
+        if: steps.check.outputs.configured == 'true' && inputs.verify_only != true && steps.due.outputs.count != '0'
         run: |
           if git diff --quiet scripts/medium-poster/posts.json; then
             echo "No status changes to commit."

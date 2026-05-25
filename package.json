@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "linkedin:setup": "node scripts/linkedin-poster/setup-auth.mjs",
+    "linkedin:publish": "node scripts/linkedin-poster/publish-via-api.mjs"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",

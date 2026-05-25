@@ -1,0 +1,62 @@
+name: Publish queued LinkedIn posts
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'scripts/linkedin-poster/posts.json'
+  workflow_dispatch:
+
+# Serialise runs so concurrent merges can't double-post.
+concurrency:
+  group: linkedin-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # Skip on the bot's own status-update commits to avoid recursion.
+    if: github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check secrets configured
+        id: check
+        env:
+          TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          URN: ${{ secrets.LINKEDIN_PERSON_URN }}
+        run: |
+          if [ -z "$TOKEN" ] || [ -z "$URN" ]; then
+            echo "::warning::LINKEDIN_ACCESS_TOKEN or LINKEDIN_PERSON_URN secret is not set — skipping publish."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to LinkedIn
+        if: steps.check.outputs.configured == 'true'
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
+        run: node scripts/linkedin-poster/publish-via-api.mjs
+
+      - name: Commit posted-status updates
+        if: steps.check.outputs.configured == 'true'
+        run: |
+          if git diff --quiet scripts/linkedin-poster/posts.json; then
+            echo "No status changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/linkedin-poster/posts.json
+          git commit -m "chore: mark LinkedIn posts as published [skip ci]"
+          git push

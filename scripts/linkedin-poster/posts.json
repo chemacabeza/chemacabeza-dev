@@ -76,5 +76,11 @@
     "posted": true,
     "postedAt": "2026-05-24T16:20:27.485Z",
     "body": "\"Modular monolith or microservices?\" is a binary that doesn't exist in reality.\n\nIt's a spectrum, and the right point on it depends on team size, change patterns, and how much pain you're willing to absorb at deploy time vs runtime. Picking too far right too early kills startups. Picking too far left too late kills scale-ups.\n\nA practical framework for choosing — and re-choosing as you grow → https://chemacabeza.dev/writing/monolith-vs-microservices\n\n#SoftwareArchitecture #Microservices #ModularMonolith #Engineering #SystemDesign"
+  },
+  {
+    "slug": "the-feynman-guide-to-cdns",
+    "posted": false,
+    "postedAt": null,
+    "body": "Demystifying how the internet delivers content at lightning speed using the Feynman Technique, pizza analogies, and the hidden magic of edge servers.\n\nI just published \"The Feynman Guide to Content Delivery Networks\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-cdns\n\n#CDN #SystemDesign #Networking #Performance"
   }
 ]

@@ -39,17 +39,19 @@ if (DRY_RUN) console.log('DRY RUN — no requests will be sent.\n');
 const save = () => writeFileSync(POSTS_FILE, JSON.stringify(posts, null, 2) + '\n');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// LinkedIn `commentary` requires LinkedIn's "Little Text" escape: reserved chars must be backslash-escaped.
-// See: https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/posts-api
-const LITTLE_TEXT_RESERVED = /([|\\{}@\[\]()<>#*_~])/g;
-function escapeCommentary(text) {
-  return text.replace(LITTLE_TEXT_RESERVED, '\\$1');
+// LinkedIn's Little Text only requires escaping characters that would otherwise be parsed
+// as markup — primarily backslash, and the mention/hashtag markers when you want them
+// as literal text. Our blurbs are plain text with intentional #hashtags and URLs, no
+// @mentions, so escaping hashtags would make them render as literal `\#Foo` and kill
+// discoverability (which feeds boost eligibility).
+function formatCommentary(text) {
+  return text.replace(/\\/g, '\\\\');
 }
 
 async function publishOne(post) {
   const body = {
     author: PERSON_URN,
-    commentary: escapeCommentary(post.body),
+    commentary: formatCommentary(post.body),
     visibility: 'PUBLIC',
     distribution: {
       feedDistribution: 'MAIN_FEED',

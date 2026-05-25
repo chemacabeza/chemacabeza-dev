@@ -63,7 +63,19 @@ function parseCookieJar(raw) {
 }
 
 function buildCookies() {
-  const pairs = COOKIE_JAR ? parseCookieJar(COOKIE_JAR) : [{ name: 'sid', value: SESSION_COOKIE }];
+  let pairs;
+  if (COOKIE_JAR) {
+    pairs = parseCookieJar(COOKIE_JAR);
+    if (pairs.length === 0) {
+      throw new Error(
+        `MEDIUM_COOKIE_JAR is set but parsed to 0 name=value pairs. ` +
+        `Expected the full Cookie header value (many "name=value" pairs separated by "; "). ` +
+        `Got a value of length ${COOKIE_JAR.length} starting with: "${COOKIE_JAR.slice(0, 40)}..."`
+      );
+    }
+  } else {
+    pairs = [{ name: 'sid', value: SESSION_COOKIE }];
+  }
   // Medium issues most session cookies on the apex domain. Using ".medium.com"
   // (leading dot) covers both apex and subdomains under Playwright's matcher.
   return pairs.map(({ name, value }) => ({

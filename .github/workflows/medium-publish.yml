@@ -24,28 +24,59 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Check secret configured
         id: check
         env:
-          TOKEN: ${{ secrets.MEDIUM_INTEGRATION_TOKEN }}
+          COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
         run: |
-          if [ -z "$TOKEN" ]; then
-            echo "::warning::MEDIUM_INTEGRATION_TOKEN secret is not set — skipping."
+          if [ -z "$COOKIE" ]; then
+            echo "::warning::MEDIUM_SESSION_COOKIE secret is not set — skipping."
             echo "configured=false" >> "$GITHUB_OUTPUT"
           else
             echo "configured=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Publish to Medium
+      - name: Skip-early check (anything due?)
         if: steps.check.outputs.configured == 'true'
+        id: due
+        run: |
+          DUE=$(node -e "
+            const a = JSON.parse(require('node:fs').readFileSync('scripts/medium-poster/posts.json','utf8'));
+            const now = Date.now();
+            const n = a.filter(p => !p.posted && p.scheduledFor && new Date(p.scheduledFor).getTime() <= now).length;
+            console.log(n);
+          ")
+          echo "count=$DUE" >> "$GITHUB_OUTPUT"
+          echo "Posts due: $DUE"
+
+      - name: Install dependencies
+        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
+        run: npx playwright install --with-deps chromium
+
+      - name: Publish to Medium via import
+        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
         env:
-          MEDIUM_INTEGRATION_TOKEN: ${{ secrets.MEDIUM_INTEGRATION_TOKEN }}
-          MEDIUM_USER_ID: ${{ secrets.MEDIUM_USER_ID }}
-        run: node scripts/medium-poster/publish-via-api.mjs
+          MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
+          MEDIUM_AUTO_PUBLISH: ${{ vars.MEDIUM_AUTO_PUBLISH || 'true' }}
+        run: node scripts/medium-poster/publish-via-import.mjs
+
+      - name: Upload debug artifacts on failure
+        if: failure() && steps.check.outputs.configured == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: medium-debug
+          path: scripts/medium-poster/.debug/
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Commit posted-status updates
-        if: steps.check.outputs.configured == 'true'
+        if: steps.check.outputs.configured == 'true' && steps.due.outputs.count != '0'
         run: |
           if git diff --quiet scripts/medium-poster/posts.json; then
             echo "No status changes to commit."

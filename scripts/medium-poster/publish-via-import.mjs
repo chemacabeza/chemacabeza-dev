@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const POSTS_FILE = join(HERE, 'posts.json');
-const DEBUG_DIR = join(HERE, '.debug');
+const DEBUG_DIR = join(HERE, 'debug');
 
 const COOKIE_JAR = process.env.MEDIUM_COOKIE_JAR;
 const SESSION_COOKIE = process.env.MEDIUM_SESSION_COOKIE;
@@ -184,12 +184,52 @@ async function importOne(page, post) {
   console.log(`  → opening importer for ${sourceUrl}`);
 
   await page.goto('https://medium.com/p/import', { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
+  console.log(`    landed on: ${page.url()}`);
 
-  // URL input — Medium has used a few shapes for this; try them in order.
-  const urlInput = page.locator(
-    'input[type="url"], input[placeholder*="URL" i], input[name*="url" i], input[aria-label*="URL" i]'
-  ).first();
-  await urlInput.waitFor({ state: 'visible', timeout: NAV_TIMEOUT });
+  // URL input — Medium has used several shapes for this. Match generously so
+  // we survive small UI tweaks: any visible text/url input or textarea on the
+  // import page is almost certainly the story URL field.
+  const urlInput = page
+    .locator(
+      [
+        'input[type="url"]',
+        'input[type="text"][placeholder*="URL" i]',
+        'input[type="text"][placeholder*="link" i]',
+        'input[type="text"][placeholder*="story" i]',
+        'input[placeholder*="URL" i]',
+        'input[placeholder*="link" i]',
+        'input[placeholder*="story" i]',
+        'input[name*="url" i]',
+        'input[aria-label*="URL" i]',
+        'input[aria-label*="link" i]',
+        'input[aria-label*="story" i]',
+        'textarea[placeholder*="URL" i]',
+        'textarea[placeholder*="link" i]',
+        'textarea[placeholder*="story" i]',
+      ].join(', ')
+    )
+    .first();
+
+  // Wait a short window first so a fast failure dumps diagnostics quickly
+  // rather than burning the full 60s navigation timeout per post.
+  const found = await urlInput
+    .waitFor({ state: 'visible', timeout: 15000 })
+    .then(() => true)
+    .catch(() => false);
+
+  if (!found) {
+    console.error(`    ✗ URL input not found within 15s on ${page.url()}`);
+    const inputCount = await page.locator('input, textarea').count().catch(() => -1);
+    const buttonNames = await page
+      .locator('button')
+      .evaluateAll((els) => els.slice(0, 20).map((e) => (e.innerText || '').trim().slice(0, 60)))
+      .catch(() => []);
+    console.error(`    inputs/textareas on page: ${inputCount}`);
+    console.error(`    first few buttons: ${JSON.stringify(buttonNames)}`);
+    await dumpDebug(page, `import-no-input-${post.slug}`);
+    throw new Error('Import URL input not found — selectors likely out of date.');
+  }
+
   await urlInput.fill(sourceUrl);
 
   // Import button

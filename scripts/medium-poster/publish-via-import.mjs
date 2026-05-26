@@ -186,62 +186,58 @@ async function importOne(page, post) {
   await page.goto('https://medium.com/p/import', { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
   console.log(`    landed on: ${page.url()}`);
 
-  // URL input — Medium has used several shapes for this. Match generously so
-  // we survive small UI tweaks: any visible text/url input or textarea on the
-  // import page is almost certainly the story URL field.
-  const urlInput = page
-    .locator(
-      [
-        'input[type="url"]',
-        'input[type="text"][placeholder*="URL" i]',
-        'input[type="text"][placeholder*="link" i]',
-        'input[type="text"][placeholder*="story" i]',
-        'input[placeholder*="URL" i]',
-        'input[placeholder*="link" i]',
-        'input[placeholder*="story" i]',
-        'input[name*="url" i]',
-        'input[aria-label*="URL" i]',
-        'input[aria-label*="link" i]',
-        'input[aria-label*="story" i]',
-        'textarea[placeholder*="URL" i]',
-        'textarea[placeholder*="link" i]',
-        'textarea[placeholder*="story" i]',
-      ].join(', ')
-    )
-    .first();
+  // Cloudflare bot-detection challenge. If we landed on one, headless Playwright
+  // can't solve the challenge, so bail out cleanly instead of timing out.
+  if (page.url().includes('__cf_chl_rt_tk') || (await page.title()).match(/just a moment/i)) {
+    await dumpDebug(page, `cf-challenge-${post.slug}`);
+    throw new Error('Cloudflare bot challenge intercepted the request — headless session blocked.');
+  }
 
-  // Wait a short window first so a fast failure dumps diagnostics quickly
-  // rather than burning the full 60s navigation timeout per post.
+  // The import URL field is a contenteditable DIV with class js-importUrl,
+  // not a real <input>. fill() doesn't work on it; click+type does.
+  const urlInput = page.locator('.js-importUrl').first();
+
   const found = await urlInput
     .waitFor({ state: 'visible', timeout: 15000 })
     .then(() => true)
     .catch(() => false);
 
   if (!found) {
-    console.error(`    ✗ URL input not found within 15s on ${page.url()}`);
-    const inputCount = await page.locator('input, textarea').count().catch(() => -1);
+    console.error(`    ✗ js-importUrl not found within 15s on ${page.url()}`);
+    const inputCount = await page.locator('input, textarea, [contenteditable], .js-importUrl').count().catch(() => -1);
     const buttonNames = await page
       .locator('button')
       .evaluateAll((els) => els.slice(0, 20).map((e) => (e.innerText || '').trim().slice(0, 60)))
       .catch(() => []);
-    console.error(`    inputs/textareas on page: ${inputCount}`);
+    console.error(`    candidate fields on page: ${inputCount}`);
     console.error(`    first few buttons: ${JSON.stringify(buttonNames)}`);
     await dumpDebug(page, `import-no-input-${post.slug}`);
-    throw new Error('Import URL input not found — selectors likely out of date.');
+    throw new Error('Import URL field (.js-importUrl) not found — selectors likely out of date.');
   }
 
-  await urlInput.fill(sourceUrl);
+  await urlInput.click();
+  await page.keyboard.type(sourceUrl, { delay: 10 });
 
-  // Import button
-  const clicked = await clickFirstVisible(page, [
-    () => page.getByRole('button', { name: /^import$/i }).first(),
-    () => page.locator('button:has-text("Import")').first(),
-    () => page.locator('button[type="submit"]').first(),
-  ], 'Import');
-  if (!clicked) {
+  // Confirm the URL landed in the field before clicking Import — the
+  // contenteditable div may swallow input if focus didn't take.
+  const entered = (await urlInput.textContent().catch(() => '')) || '';
+  if (!entered.includes(sourceUrl)) {
+    console.error(`    field text after typing: "${entered.slice(0, 120)}"`);
+    // Fallback: set textContent + fire an input event so Medium's JS picks it up.
+    await urlInput.evaluate((el, url) => {
+      el.textContent = url;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    }, sourceUrl);
+  }
+
+  // Import button is unambiguous — it has data-action="import-url".
+  const importBtn = page.locator('button[data-action="import-url"]').first();
+  const visible = await importBtn.isVisible({ timeout: 5000 }).catch(() => false);
+  if (!visible) {
     await dumpDebug(page, `import-button-${post.slug}`);
-    throw new Error('Could not find the Import button.');
+    throw new Error('Import button (data-action="import-url") not found.');
   }
+  await importBtn.click();
 
   // Wait for Medium to fetch the URL and produce a draft. Medium routes to
   // /p/<storyId>/edit when import finishes. Allow generous time for long posts.
@@ -331,8 +327,14 @@ try {
         sessionFailure = true;
         break;
       }
+      if (/Cloudflare bot challenge/.test(err.message)) {
+        console.error('  → Cloudflare flagged this session; remaining posts will hit the same wall. Stopping batch.');
+        break;
+      }
     }
-    if (i < due.length - 1) await sleep(8000); // gap between imports
+    // Wide gap between imports to give Cloudflare time to forget us between
+    // requests. Medium fires the bot challenge on rapid successive imports.
+    if (i < due.length - 1) await sleep(45000);
   }
 } finally {
   await browser.close();

@@ -31,6 +31,12 @@ const SITE_URL = process.env.MEDIUM_SITE_URL || 'https://chemacabeza.dev';
 const AUTO_PUBLISH = (process.env.MEDIUM_AUTO_PUBLISH || 'true') === 'true';
 const HEADLESS = (process.env.MEDIUM_HEADLESS || 'true') === 'true';
 const NAV_TIMEOUT = parseInt(process.env.MEDIUM_NAV_TIMEOUT_MS || '60000', 10);
+// Medium fronts /p/import behind Cloudflare bot detection. Empirically the
+// first request from a fresh Playwright context is allowed through, but the
+// second is challenged. Cap per-run throughput to 1 and rely on the cron
+// (every 30 min) to drain the queue over a few hours. Override via env if
+// the bot heuristics ease.
+const PER_RUN_LIMIT = parseInt(process.env.MEDIUM_PER_RUN_LIMIT || '1', 10);
 const DRY_RUN = process.argv.includes('--dry-run');
 const VERIFY_ONLY = process.argv.includes('--verify-cookie');
 
@@ -146,12 +152,20 @@ const save = () => writeFileSync(POSTS_FILE, JSON.stringify(posts, null, 2) + '\
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const now = Date.now();
-const due = posts.filter(
+const allDue = posts.filter(
   (p) => !p.posted && p.scheduledFor && new Date(p.scheduledFor).getTime() <= now
 );
 const totalPending = posts.filter((p) => !p.posted).length;
 
-console.log(`Medium importer — ${due.length} due, ${totalPending} total pending.`);
+// Process at most PER_RUN_LIMIT entries this run; the rest stay queued for
+// the next cron tick. This is the workaround for Cloudflare flagging burst
+// imports from the same Playwright context.
+const due = allDue.slice(0, PER_RUN_LIMIT);
+
+console.log(
+  `Medium importer — ${allDue.length} due, ${totalPending} total pending, ` +
+  `processing ${due.length} this run (limit=${PER_RUN_LIMIT}).`
+);
 if (DRY_RUN) console.log('DRY RUN — no browser will be launched.\n');
 if (due.length === 0) {
   console.log('Nothing due yet.');
@@ -215,19 +229,22 @@ async function importOne(page, post) {
     throw new Error('Import URL field (.js-importUrl) not found — selectors likely out of date.');
   }
 
-  await urlInput.click();
-  await page.keyboard.type(sourceUrl, { delay: 10 });
+  // The div doesn't have contenteditable in the raw HTML — Medium's JS adds
+  // it on focus, but Playwright's click events don't always trigger that
+  // path. Force the attribute, set textContent, and fire input/change events
+  // so Medium's framework picks up the value.
+  await urlInput.evaluate((el, url) => {
+    el.setAttribute('contenteditable', 'true');
+    el.focus();
+    el.textContent = url;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }, sourceUrl);
 
-  // Confirm the URL landed in the field before clicking Import — the
-  // contenteditable div may swallow input if focus didn't take.
   const entered = (await urlInput.textContent().catch(() => '')) || '';
+  console.log(`    field text after fill: "${entered.slice(0, 120)}"`);
   if (!entered.includes(sourceUrl)) {
-    console.error(`    field text after typing: "${entered.slice(0, 120)}"`);
-    // Fallback: set textContent + fire an input event so Medium's JS picks it up.
-    await urlInput.evaluate((el, url) => {
-      el.textContent = url;
-      el.dispatchEvent(new Event('input', { bubbles: true }));
-    }, sourceUrl);
+    throw new Error('Could not populate the import URL field.');
   }
 
   // Import button is unambiguous — it has data-action="import-url".

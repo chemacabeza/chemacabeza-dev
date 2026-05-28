@@ -229,42 +229,112 @@ async function importOne(page, post) {
     throw new Error('Import URL field (.js-importUrl) not found — selectors likely out of date.');
   }
 
-  // The div doesn't have contenteditable in the raw HTML — Medium's JS adds
-  // it on first focus. Click activates that path; we then force the attribute
-  // as a safety net in case the JS didn't fire, focus, and type via real
-  // keyboard events. Real keystrokes are what Medium's framework listens for —
-  // a prior attempt that used `textContent =` populated the visible text but
-  // didn't update Medium's internal state, so the Import button stayed
-  // effectively no-op even though it looked clickable.
+  // Medium's import URL field is a contenteditable div. Their JS adds the
+  // contenteditable attribute on first focus and tracks the value via input
+  // events — NOT by reading textContent. Previous fixes have failed in two
+  // different ways: (a) setting textContent populates the visible text but
+  // leaves Medium's internal state empty, so the Import button click no-ops;
+  // (b) keyboard.type can no-op if contenteditable hasn't been initialised.
+  //
+  // Strategy: focus the field, force contenteditable as a safety net, then
+  // try input methods in order of "most realistic" until one populates the
+  // field. Log which method worked so we can simplify next time.
   await urlInput.click({ timeout: 5000 });
   await urlInput.evaluate((el) => {
     el.setAttribute('contenteditable', 'true');
     el.focus();
   });
-  await page.keyboard.type(sourceUrl, { delay: 15 });
+
+  let fillMethod = 'none';
+
+  // Method 1: execCommand('insertText') — dispatches a real beforeinput +
+  // input event with inputType='insertText'. This is what the browser fires
+  // when a real user types, so Medium's framework should pick it up.
+  await page.evaluate(() => {
+    const el = document.querySelector('.js-importUrl');
+    if (!el) return;
+    el.focus();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    range.deleteContents();
+    range.collapse(true);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
+  const execOk = await page.evaluate((url) => {
+    try { return document.execCommand('insertText', false, url); } catch { return false; }
+  }, sourceUrl);
+  if (execOk && ((await urlInput.textContent().catch(() => '')) || '').includes(sourceUrl)) {
+    fillMethod = 'execCommand';
+  }
+
+  // Method 2: real keyboard typing
+  if (fillMethod === 'none') {
+    await urlInput.evaluate((el) => { el.textContent = ''; el.focus(); });
+    await page.keyboard.type(sourceUrl, { delay: 15 });
+    if (((await urlInput.textContent().catch(() => '')) || '').includes(sourceUrl)) {
+      fillMethod = 'keyboard.type';
+    }
+  }
+
+  // Method 3: synthetic paste with DataTransfer
+  if (fillMethod === 'none') {
+    await urlInput.evaluate((el, url) => {
+      el.setAttribute('contenteditable', 'true');
+      el.focus();
+      const dt = new DataTransfer();
+      dt.setData('text/plain', url);
+      el.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true }));
+      if (!el.textContent.includes(url)) {
+        el.textContent = url;
+        el.dispatchEvent(new InputEvent('input', { inputType: 'insertFromPaste', bubbles: true }));
+      }
+    }, sourceUrl);
+    if (((await urlInput.textContent().catch(() => '')) || '').includes(sourceUrl)) {
+      fillMethod = 'paste-fallback';
+    }
+  }
 
   const entered = (await urlInput.textContent().catch(() => '')) || '';
-  console.log(`    field text after fill: "${entered.slice(0, 120)}"`);
+  console.log(`    field text after fill (${fillMethod}): "${entered.slice(0, 120)}"`);
   if (!entered.includes(sourceUrl)) {
     await dumpDebug(page, `import-empty-field-${post.slug}`);
-    throw new Error('Could not populate the import URL field.');
+    throw new Error('Could not populate the import URL field with any method.');
   }
 
-  // Wait for the Import button to be enabled. Medium keeps it disabled until
-  // its internal state reflects a valid URL, so this both finds the button
-  // and confirms our input was accepted.
-  const importBtn = page.locator('button[data-action="import-url"]:not([disabled])').first();
-  const ready = await importBtn.isVisible({ timeout: 10000 }).catch(() => false);
-  if (!ready) {
-    await dumpDebug(page, `import-button-${post.slug}`);
-    throw new Error('Import button never became enabled — Medium did not accept the URL input.');
-  }
-  await importBtn.click();
-  console.log(`    → clicked Import, waiting for /p/<id>/edit redirect ...`);
+  // Submit. Try the Import button first; if it stays disabled, fall back to
+  // pressing Enter in the URL field (most form-like UIs accept that as submit).
+  // Wait briefly for Medium's JS to validate the URL and enable the button.
+  await sleep(1000);
+  const btn = page.locator('button[data-action="import-url"]').first();
+  const btnVisible = await btn.isVisible({ timeout: 5000 }).catch(() => false);
+  const btnDisabled = btnVisible ? await btn.getAttribute('disabled').catch(() => null) : 'no-button';
+  const btnAriaDisabled = btnVisible ? await btn.getAttribute('aria-disabled').catch(() => null) : 'no-button';
+  console.log(`    import button: visible=${btnVisible}, disabled=${btnDisabled === null ? 'no' : 'yes'}, aria-disabled=${btnAriaDisabled || 'no'}`);
 
-  // Wait for Medium to fetch the URL and produce a draft. Medium routes to
-  // /p/<storyId>/edit when import finishes. Allow generous time for long posts.
-  await page.waitForURL(/medium\.com\/p\/[^/]+\/edit/, { timeout: 180000 });
+  if (!btnVisible) {
+    await dumpDebug(page, `import-button-missing-${post.slug}`);
+    throw new Error('Import button (data-action="import-url") not found.');
+  }
+
+  if (btnDisabled === null && btnAriaDisabled !== 'true') {
+    await btn.click();
+    console.log(`    → clicked Import button, waiting for redirect ...`);
+  } else {
+    console.log(`    → Import button is disabled; pressing Enter in URL field instead`);
+    await urlInput.press('Enter').catch(() => {});
+  }
+
+  // Wait for Medium to fetch the URL and produce a draft. If neither submit
+  // path worked, this will time out and dump a debug screenshot.
+  try {
+    await page.waitForURL(/medium\.com\/p\/[^/]+\/edit/, { timeout: 180000 });
+  } catch (err) {
+    console.error(`    ✗ no redirect after 180s. Final URL: ${page.url()}`);
+    await dumpDebug(page, `import-no-redirect-${post.slug}`);
+    throw err;
+  }
   const draftUrl = page.url();
   console.log(`    ✓ import complete → ${draftUrl}`);
 

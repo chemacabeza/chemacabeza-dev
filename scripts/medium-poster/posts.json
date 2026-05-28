@@ -192,5 +192,33 @@
     "posted": false,
     "postedAt": null,
     "mediumUrl": null
+  },
+  {
+    "slug": "the-feynman-guide-to-java-modules",
+    "title": "The Feynman Guide to Java Modules",
+    "tags": [
+      "Java",
+      "JPMS",
+      "System Design",
+      "Architecture"
+    ],
+    "scheduledFor": "2026-05-28T20:05:10.980Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
+  },
+  {
+    "slug": "the-feynman-guide-to-n8n",
+    "title": "The Feynman Guide to n8n",
+    "tags": [
+      "n8n",
+      "Automation",
+      "AI Agents",
+      "System Design"
+    ],
+    "scheduledFor": "2026-05-28T20:05:10.980Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

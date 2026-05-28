@@ -197,6 +197,30 @@ async function importOne(page, post) {
   const sourceUrl = `${SITE_URL}/writing/${post.slug}`;
   console.log(`  → opening importer for ${sourceUrl}`);
 
+  // Capture all non-CDN requests to medium.com so we can see whether the
+  // Import button click actually triggers any API call. If three submit
+  // strategies all silently fail, the handler isn't bound and we need a
+  // different angle entirely (likely posting to the API directly).
+  const apiCalls = [];
+  page.on('request', (req) => {
+    const u = req.url();
+    if (!u.includes('medium.com')) return;
+    if (u.includes('cdn-static-') || u.includes('cdn-images-') || u.includes('miro.medium.com')) return;
+    if (u.endsWith('.js') || u.endsWith('.css') || u.endsWith('.png') || u.endsWith('.svg') || u.endsWith('.ico')) return;
+    apiCalls.push({ url: u, method: req.method(), time: Date.now() });
+  });
+  page.on('response', async (res) => {
+    const u = res.url();
+    if (!u.includes('medium.com')) return;
+    if (u.includes('cdn-static-') || u.includes('cdn-images-') || u.includes('miro.medium.com')) return;
+    if (u.endsWith('.js') || u.endsWith('.css') || u.endsWith('.png') || u.endsWith('.svg') || u.endsWith('.ico')) return;
+    const call = apiCalls.find((c) => c.url === u && !c.status);
+    if (call) {
+      call.status = res.status();
+      call.time2 = Date.now();
+    }
+  });
+
   // Use 'load' (not 'domcontentloaded'). Medium serves the URL input as an
   // empty <div class="js-importUrl"> in the initial HTML, and an async JS
   // bundle later styles it + adds contenteditable. Until that JS finishes,
@@ -352,6 +376,15 @@ async function importOne(page, post) {
   }
 
   if (!submitOk) {
+    // Print the captured network log so we can see whether ANY of our
+    // submit strategies triggered a call to Medium. If apiCalls is empty
+    // (or only contains GETs from page load), the data-action handler is
+    // not bound and UI automation cannot work; we'd need to POST to the
+    // import endpoint directly.
+    console.error(`    network calls to medium.com during this attempt (${apiCalls.length}):`);
+    for (const c of apiCalls.slice(-20)) {
+      console.error(`      ${c.method} ${c.url}  →  ${c.status ?? '(no response)'}`);
+    }
     throw new Error('All submit strategies failed — Medium did not start the import.');
   }
   const draftUrl = page.url();

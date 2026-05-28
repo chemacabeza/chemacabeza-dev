@@ -248,19 +248,12 @@ async function importOne(page, post) {
     .catch(() => false);
   console.log(`    js-importUrl attached=true, contenteditable initialised by Medium=${jsInitialised}`);
 
-  // Medium's import URL field is a contenteditable div. Their JS adds the
-  // contenteditable attribute on first focus and tracks the value via input
-  // events — NOT by reading textContent. Previous fixes have failed in two
-  // different ways: (a) setting textContent populates the visible text but
-  // leaves Medium's internal state empty, so the Import button click no-ops;
-  // (b) keyboard.type can no-op if contenteditable hasn't been initialised.
-  //
-  // Strategy: focus the field, force contenteditable as a safety net, then
-  // try input methods in order of "most realistic" until one populates the
-  // field. Log which method worked so we can simplify next time.
-  // force:true because the empty .js-importUrl div may report zero height
-  // (Playwright's "actionable" heuristic refuses to click in that case).
-  await urlInput.click({ timeout: 5000, force: true });
+  // Focus the field and force contenteditable as a safety net. We don't
+  // urlInput.click() because if Medium's JS hasn't initialised the field
+  // yet, the div has zero size and Playwright refuses to click ("Element
+  // is outside of the viewport") even with force:true. el.focus() via
+  // evaluate has the same effect (triggers any Medium focus handlers) and
+  // doesn't have that size constraint.
   await urlInput.evaluate((el) => {
     el.setAttribute('contenteditable', 'true');
     el.focus();

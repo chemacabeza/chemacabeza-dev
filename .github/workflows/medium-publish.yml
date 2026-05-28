@@ -65,12 +65,24 @@ jobs:
         if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
         run: npx playwright install --with-deps chromium
 
+      # xvfb provides a virtual X display so we can run Chromium in HEADED
+      # mode without a real screen. Medium's framework JS doesn't fully
+      # initialise the import page in pure headless mode (no contenteditable
+      # attribute is added, the URL field stays zero-height, the Import
+      # button has no click handler). Running headed under xvfb bypasses
+      # whatever detection is gating that. Idempotent if already installed
+      # via playwright --with-deps.
+      - name: Install xvfb
+        if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
       - name: Smoke-test session cookies
         if: steps.check.outputs.configured == 'true' && inputs.verify_only == true
         env:
           MEDIUM_COOKIE_JAR: ${{ secrets.MEDIUMCOOKIEJAR }}
           MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
-        run: node scripts/medium-poster/publish-via-import.mjs --verify-cookie
+          MEDIUM_HEADLESS: 'false'
+        run: xvfb-run -a node scripts/medium-poster/publish-via-import.mjs --verify-cookie
 
       - name: Publish to Medium via import
         if: steps.check.outputs.configured == 'true' && inputs.verify_only != true && steps.due.outputs.count != '0'
@@ -78,7 +90,8 @@ jobs:
           MEDIUM_COOKIE_JAR: ${{ secrets.MEDIUMCOOKIEJAR }}
           MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
           MEDIUM_AUTO_PUBLISH: ${{ vars.MEDIUM_AUTO_PUBLISH || 'true' }}
-        run: node scripts/medium-poster/publish-via-import.mjs
+          MEDIUM_HEADLESS: 'false'
+        run: xvfb-run -a node scripts/medium-poster/publish-via-import.mjs
 
       - name: Upload debug artifacts on failure
         if: failure() && steps.check.outputs.configured == 'true'

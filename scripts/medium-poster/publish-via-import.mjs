@@ -197,7 +197,13 @@ async function importOne(page, post) {
   const sourceUrl = `${SITE_URL}/writing/${post.slug}`;
   console.log(`  → opening importer for ${sourceUrl}`);
 
-  await page.goto('https://medium.com/p/import', { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT });
+  // Use 'load' (not 'domcontentloaded'). Medium serves the URL input as an
+  // empty <div class="js-importUrl"> in the initial HTML, and an async JS
+  // bundle later styles it + adds contenteditable. Until that JS finishes,
+  // the div has zero rendered height — Playwright reports it as "not
+  // visible" and our wait times out. 'load' blocks until window.load fires,
+  // which means all async <script> tags have completed.
+  await page.goto('https://medium.com/p/import', { waitUntil: 'load', timeout: NAV_TIMEOUT });
   console.log(`    landed on: ${page.url()}`);
 
   // Cloudflare bot-detection challenge. If we landed on one, headless Playwright
@@ -207,27 +213,40 @@ async function importOne(page, post) {
     throw new Error('Cloudflare bot challenge intercepted the request — headless session blocked.');
   }
 
-  // The import URL field is a contenteditable DIV with class js-importUrl,
-  // not a real <input>. fill() doesn't work on it; click+type does.
   const urlInput = page.locator('.js-importUrl').first();
 
-  const found = await urlInput
-    .waitFor({ state: 'visible', timeout: 15000 })
+  // Wait for the element to be in the DOM (always true at load time per the
+  // HTML), then wait for Medium's JS to add contenteditable — that's the
+  // signal their JS finished initialising the field. If contenteditable
+  // never appears, we'll force it ourselves below and still try to type.
+  const attached = await urlInput
+    .waitFor({ state: 'attached', timeout: 15000 })
     .then(() => true)
     .catch(() => false);
-
-  if (!found) {
-    console.error(`    ✗ js-importUrl not found within 15s on ${page.url()}`);
+  if (!attached) {
     const inputCount = await page.locator('input, textarea, [contenteditable], .js-importUrl').count().catch(() => -1);
     const buttonNames = await page
       .locator('button')
       .evaluateAll((els) => els.slice(0, 20).map((e) => (e.innerText || '').trim().slice(0, 60)))
       .catch(() => []);
+    console.error(`    ✗ .js-importUrl never attached on ${page.url()}`);
     console.error(`    candidate fields on page: ${inputCount}`);
     console.error(`    first few buttons: ${JSON.stringify(buttonNames)}`);
     await dumpDebug(page, `import-no-input-${post.slug}`);
     throw new Error('Import URL field (.js-importUrl) not found — selectors likely out of date.');
   }
+
+  const jsInitialised = await page
+    .waitForFunction(
+      () => {
+        const el = document.querySelector('.js-importUrl');
+        return !!el && el.hasAttribute('contenteditable');
+      },
+      { timeout: 10000 },
+    )
+    .then(() => true)
+    .catch(() => false);
+  console.log(`    js-importUrl attached=true, contenteditable initialised by Medium=${jsInitialised}`);
 
   // Medium's import URL field is a contenteditable div. Their JS adds the
   // contenteditable attribute on first focus and tracks the value via input
@@ -239,7 +258,9 @@ async function importOne(page, post) {
   // Strategy: focus the field, force contenteditable as a safety net, then
   // try input methods in order of "most realistic" until one populates the
   // field. Log which method worked so we can simplify next time.
-  await urlInput.click({ timeout: 5000 });
+  // force:true because the empty .js-importUrl div may report zero height
+  // (Playwright's "actionable" heuristic refuses to click in that case).
+  await urlInput.click({ timeout: 5000, force: true });
   await urlInput.evaluate((el) => {
     el.setAttribute('contenteditable', 'true');
     el.focus();

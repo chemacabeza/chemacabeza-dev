@@ -230,31 +230,37 @@ async function importOne(page, post) {
   }
 
   // The div doesn't have contenteditable in the raw HTML — Medium's JS adds
-  // it on focus, but Playwright's click events don't always trigger that
-  // path. Force the attribute, set textContent, and fire input/change events
-  // so Medium's framework picks up the value.
-  await urlInput.evaluate((el, url) => {
+  // it on first focus. Click activates that path; we then force the attribute
+  // as a safety net in case the JS didn't fire, focus, and type via real
+  // keyboard events. Real keystrokes are what Medium's framework listens for —
+  // a prior attempt that used `textContent =` populated the visible text but
+  // didn't update Medium's internal state, so the Import button stayed
+  // effectively no-op even though it looked clickable.
+  await urlInput.click({ timeout: 5000 });
+  await urlInput.evaluate((el) => {
     el.setAttribute('contenteditable', 'true');
     el.focus();
-    el.textContent = url;
-    el.dispatchEvent(new Event('input', { bubbles: true }));
-    el.dispatchEvent(new Event('change', { bubbles: true }));
-  }, sourceUrl);
+  });
+  await page.keyboard.type(sourceUrl, { delay: 15 });
 
   const entered = (await urlInput.textContent().catch(() => '')) || '';
   console.log(`    field text after fill: "${entered.slice(0, 120)}"`);
   if (!entered.includes(sourceUrl)) {
+    await dumpDebug(page, `import-empty-field-${post.slug}`);
     throw new Error('Could not populate the import URL field.');
   }
 
-  // Import button is unambiguous — it has data-action="import-url".
-  const importBtn = page.locator('button[data-action="import-url"]').first();
-  const visible = await importBtn.isVisible({ timeout: 5000 }).catch(() => false);
-  if (!visible) {
+  // Wait for the Import button to be enabled. Medium keeps it disabled until
+  // its internal state reflects a valid URL, so this both finds the button
+  // and confirms our input was accepted.
+  const importBtn = page.locator('button[data-action="import-url"]:not([disabled])').first();
+  const ready = await importBtn.isVisible({ timeout: 10000 }).catch(() => false);
+  if (!ready) {
     await dumpDebug(page, `import-button-${post.slug}`);
-    throw new Error('Import button (data-action="import-url") not found.');
+    throw new Error('Import button never became enabled — Medium did not accept the URL input.');
   }
   await importBtn.click();
+  console.log(`    → clicked Import, waiting for /p/<id>/edit redirect ...`);
 
   // Wait for Medium to fetch the URL and produce a draft. Medium routes to
   // /p/<storyId>/edit when import finishes. Allow generous time for long posts.

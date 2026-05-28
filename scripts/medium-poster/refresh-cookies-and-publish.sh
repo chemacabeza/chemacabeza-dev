@@ -30,15 +30,18 @@ require gh
 require sqlite3 || true  # only needed for Firefox extraction
 
 # Find the Firefox profile most recently modified and dump its medium.com
-# cookies as a `name=value; name=value; ...` string.
+# cookies as a `name=value; name=value; ...` string. Looks in both the
+# classic ~/.mozilla path and the snap install path.
 extract_firefox() {
   local profile tmp
-  profile=$(find "$HOME/.mozilla/firefox" -maxdepth 2 -name cookies.sqlite -printf '%T@ %p\n' 2>/dev/null \
+  profile=$(find \
+      "$HOME/.mozilla/firefox" \
+      "$HOME/snap/firefox/common/.mozilla/firefox" \
+      -maxdepth 2 -name cookies.sqlite -printf '%T@ %p\n' 2>/dev/null \
     | sort -nr | head -1 | awk '{print $2}')
   [ -z "${profile:-}" ] && return 1
   tmp=$(mktemp)
   cp "$profile" "$tmp" 2>/dev/null || { rm -f "$tmp"; return 1; }
-  # Firefox can hold the file open; the copy lets us read without contention.
   local jar
   jar=$(sqlite3 "$tmp" "SELECT name || '=' || value FROM moz_cookies WHERE host LIKE '%medium.com%';" 2>/dev/null \
     | paste -sd '; ')
@@ -46,19 +49,55 @@ extract_firefox() {
   printf '%s' "$jar"
 }
 
+# Decrypt medium.com cookies from Linux Chrome via the Python helper.
+# Needs Python's `cryptography` library. `secret-tool` (apt: libsecret-tools)
+# is preferred — Chrome encrypts with a keyring secret when one is available —
+# but the helper falls back to Chrome's no-keyring default password ("peanuts"),
+# which works on profiles where Chrome itself uses that fallback.
+extract_chrome() {
+  command -v python3 >/dev/null 2>&1 || return 1
+  python3 -c 'import cryptography' >/dev/null 2>&1 || return 1
+  [ -f "$HOME/.config/google-chrome/Default/Cookies" ] || return 1
+  python3 "$HERE/_chrome_cookies.py" 2>/dev/null
+}
+
 echo "→ Refreshing Medium cookies and dispatching publish workflow"
 echo
 
 cookie_jar=""
-if command -v sqlite3 >/dev/null 2>&1 && [ -d "$HOME/.mozilla/firefox" ]; then
-  echo "→ Trying Firefox cookies.sqlite ..."
-  cookie_jar=$(extract_firefox || true)
+
+# Try Chrome first (most users' default). Requires secret-tool + cryptography.
+if [ -f "$HOME/.config/google-chrome/Default/Cookies" ]; then
+  echo "→ Trying Chrome cookies (decrypting via libsecret + AES) ..."
+  cookie_jar=$(extract_chrome || true)
   if [ -n "$cookie_jar" ] && [[ "$cookie_jar" == *sid=* ]]; then
     pair_count=$(awk -F'; ' '{print NF}' <<<"$cookie_jar")
-    echo "  ✓ Extracted $pair_count cookie pairs (incl. sid) from Firefox"
+    echo "  ✓ Extracted $pair_count cookie pairs (incl. sid) from Chrome"
   else
     cookie_jar=""
-    echo "  ✗ Firefox extraction returned no 'sid=' cookie"
+    if ! python3 -c 'import cryptography' >/dev/null 2>&1; then
+      echo "  ✗ Chrome extraction skipped — Python 'cryptography' missing"
+      echo "    one-time install: pip install cryptography"
+    else
+      echo "  ✗ Chrome extraction returned no 'sid=' cookie"
+      echo "    (if your Chrome uses gnome-keyring/kwallet, install libsecret-tools:"
+      echo "     sudo apt install -y libsecret-tools)"
+    fi
+  fi
+fi
+
+# Then Firefox as a secondary auto-extract path.
+if [ -z "$cookie_jar" ] && command -v sqlite3 >/dev/null 2>&1; then
+  if [ -d "$HOME/.mozilla/firefox" ] || [ -d "$HOME/snap/firefox/common/.mozilla/firefox" ]; then
+    echo "→ Trying Firefox cookies.sqlite ..."
+    cookie_jar=$(extract_firefox || true)
+    if [ -n "$cookie_jar" ] && [[ "$cookie_jar" == *sid=* ]]; then
+      pair_count=$(awk -F'; ' '{print NF}' <<<"$cookie_jar")
+      echo "  ✓ Extracted $pair_count cookie pairs (incl. sid) from Firefox"
+    else
+      cookie_jar=""
+      echo "  ✗ Firefox extraction returned no 'sid=' cookie"
+    fi
   fi
 fi
 

@@ -82,5 +82,12 @@
     "posted": false,
     "postedAt": null,
     "body": "Demystifying how the internet delivers content at lightning speed using the Feynman Technique, pizza analogies, and the hidden magic of edge servers.\n\nI just published \"The Feynman Guide to Content Delivery Networks\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-cdns\n\n#CDN #SystemDesign #Networking #Performance"
+  },
+  {
+    "slug": "the-feynman-guide-to-n8n",
+    "posted": false,
+    "postedAt": null,
+    "body": "Ever felt like a single restaurant worker trying to seat guests, cook, serve, and wash dishes all at once?\n\nThat's what modern digital work feels like: jumping between dozens of tabs to manually copy and paste data from email to spreadsheet to Slack.\n\nToday, I published a Feynman-style guide explaining n8n — the open-source automation platform that turns application integrations into LEGO-like workflows. We also demystify the transition to autonomous AI Agents (the 'robot helpers' with tools, not just parrots) and the Model Context Protocol (MCP).\n\nRead it here → https://chemacabeza.dev/writing/the-feynman-guide-to-n8n\n\n#n8n #Automation #AIAgents #SystemDesign #SoftwareEngineering #MCP"
   }
 ]
+

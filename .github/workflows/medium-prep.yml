@@ -42,4 +42,14 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add scripts/medium-poster/posts.json
           git commit -m "chore: queue Medium cross-posts for new entries [skip ci]"
-          git push
+          # Rebase-and-retry on push — master can move between our checkout
+          # and push if another workflow's status commit (or a human commit)
+          # landed in the meantime. Each workflow touches its own posts.json,
+          # so rebases never conflict.
+          n=0
+          until git push; do
+            n=$((n+1))
+            if [ $n -ge 3 ]; then echo "Push still rejected after 3 attempts" >&2; exit 1; fi
+            echo "Push rejected (attempt $n) — rebasing on origin/master and retrying..."
+            git pull --rebase origin master
+          done

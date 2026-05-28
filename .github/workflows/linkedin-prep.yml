@@ -43,7 +43,17 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add scripts/linkedin-poster/posts.json
           git commit -m "chore: queue LinkedIn blurbs for new posts [skip ci]"
-          git push
+          # Rebase-and-retry on push. Other workflows (medium-publish,
+          # linkedin-publish) also push to master with their own [skip ci]
+          # status commits, so master can move between our checkout and push.
+          # Each workflow touches its own posts.json, so rebases never conflict.
+          n=0
+          until git push; do
+            n=$((n+1))
+            if [ $n -ge 3 ]; then echo "Push still rejected after 3 attempts" >&2; exit 1; fi
+            echo "Push rejected (attempt $n) — rebasing on origin/master and retrying..."
+            git pull --rebase origin master
+          done
 
       - name: Open notification issue
         if: steps.prep.outputs.count != '0' && steps.prep.outputs.count != ''

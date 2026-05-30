@@ -1,5 +1,8 @@
 name: Publish due Medium posts
 
+# Live queue (updated by this workflow):
+#   https://github.com/chemacabeza/chemacabeza-dev/issues/2
+#
 # Medium killed both their integration-token API (2024) and now their UI
 # import flow for automated browsers (verified across multiple runs in
 # May 2026 — Playwright in headed xvfb mode with fresh cookies including

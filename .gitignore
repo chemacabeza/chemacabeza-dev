@@ -41,6 +41,8 @@ yarn-error.log*
 /scripts/linkedin-poster/.profile/
 # linkedin-poster diagnostic dumps (only useful at debug time)
 /scripts/linkedin-poster/debug-*
+# medium-poster Playwright debug dumps (failure screenshots + HTML)
+/scripts/medium-poster/debug/
 
 # typescript
 *.tsbuildinfo

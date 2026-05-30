@@ -1,127 +1,136 @@
 name: Publish due Medium posts
 
+# Medium killed both their integration-token API (2024) and now their UI
+# import flow for automated browsers (verified across multiple runs in
+# May 2026 — Playwright in headed xvfb mode with fresh cookies including
+# xsrf can populate the field but cannot trigger the Import handler;
+# Medium's framework actively suppresses it and returns 403 on follow-up
+# API calls). So this workflow no longer tries to publish. Instead it
+# maintains a single open "Medium queue" issue listing due posts with
+# one-click import URLs — manually imported in ~30s/post via the browser.
+#
+# To restore automated publishing later: revert to the pre-cleanup state
+# of this file and scripts/medium-poster/publish-via-import.mjs (kept on
+# disk as a starting point if Medium ever reopens automation).
+
 on:
   schedule:
-    # Every 30 minutes. GH cron has up to ~15 min drift; the 12h delay is
-    # approximate by design, so this is plenty granular.
+    # Every 30 minutes — same cadence as before. The issue is updated
+    # in-place so this isn't spammy; only the post-list and count change.
     - cron: '*/30 * * * *'
   workflow_dispatch:
-    inputs:
-      verify_only:
-        description: 'Just smoke-test the session cookie (no posting)'
-        type: boolean
-        default: false
 
 concurrency:
   group: medium-publish
   cancel-in-progress: false
 
 jobs:
-  publish:
+  notify:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      issues: write
     steps:
       - uses: actions/checkout@v4
+
+      - name: Compute due posts and sync queue issue
+        uses: actions/github-script@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Check secret configured
-        id: check
-        env:
-          JAR: ${{ secrets.MEDIUMCOOKIEJAR }}
-          SID: ${{ secrets.MEDIUM_SESSION_COOKIE }}
-        run: |
-          if [ -z "$JAR" ] && [ -z "$SID" ]; then
-            echo "::warning::Neither MEDIUMCOOKIEJAR nor MEDIUM_SESSION_COOKIE is set — skipping."
-            echo "configured=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "configured=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Skip-early check (anything due?)
-        if: steps.check.outputs.configured == 'true' && inputs.verify_only != true
-        id: due
-        run: |
-          DUE=$(node -e "
-            const a = JSON.parse(require('node:fs').readFileSync('scripts/medium-poster/posts.json','utf8'));
+          script: |
+            const fs = require('node:fs');
+            const posts = JSON.parse(fs.readFileSync('scripts/medium-poster/posts.json', 'utf8'));
             const now = Date.now();
-            const n = a.filter(p => !p.posted && p.scheduledFor && new Date(p.scheduledFor).getTime() <= now).length;
-            console.log(n);
-          ")
-          echo "count=$DUE" >> "$GITHUB_OUTPUT"
-          echo "Posts due: $DUE"
+            const due = posts.filter(
+              (p) => !p.posted && p.scheduledFor && new Date(p.scheduledFor).getTime() <= now,
+            );
+            const pending = posts.filter((p) => !p.posted);
+            const LABEL = 'medium-queue';
+            const SITE = process.env.SITE_URL || 'https://chemacabeza.dev';
 
-      - name: Install dependencies
-        if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
-        run: npm ci
+            // Find existing open queue issue (we maintain at most one).
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: LABEL,
+              state: 'open',
+              per_page: 5,
+            });
 
-      - name: Install Playwright Chromium
-        if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
-        run: npx playwright install --with-deps chromium
+            if (due.length === 0) {
+              if (existing.data.length > 0) {
+                for (const iss of existing.data) {
+                  await github.rest.issues.update({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: iss.number,
+                    state: 'closed',
+                    state_reason: 'completed',
+                  });
+                  console.log(`Closed queue issue #${iss.number} — nothing due.`);
+                }
+              }
+              return;
+            }
 
-      # xvfb provides a virtual X display so we can run Chromium in HEADED
-      # mode without a real screen. Medium's framework JS doesn't fully
-      # initialise the import page in pure headless mode (no contenteditable
-      # attribute is added, the URL field stays zero-height, the Import
-      # button has no click handler). Running headed under xvfb bypasses
-      # whatever detection is gating that. Idempotent if already installed
-      # via playwright --with-deps.
-      - name: Install xvfb
-        if: steps.check.outputs.configured == 'true' && (inputs.verify_only == true || steps.due.outputs.count != '0')
-        run: sudo apt-get update && sudo apt-get install -y xvfb
+            const line = (p) => {
+              const importUrl = `https://medium.com/p/import?url=${encodeURIComponent(SITE + '/writing/' + p.slug)}`;
+              const tags = (p.tags || []).join(', ');
+              return `- [ ] **${p.slug}** — [open in Medium importer](${importUrl})` +
+                (tags ? `  _(tags: ${tags})_` : '');
+            };
 
-      - name: Smoke-test session cookies
-        if: steps.check.outputs.configured == 'true' && inputs.verify_only == true
-        env:
-          MEDIUM_COOKIE_JAR: ${{ secrets.MEDIUMCOOKIEJAR }}
-          MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
-          MEDIUM_HEADLESS: 'false'
-        run: xvfb-run -a node scripts/medium-poster/publish-via-import.mjs --verify-cookie
+            const title = `📝 Medium queue: ${due.length} post${due.length === 1 ? '' : 's'} due` +
+              (pending.length > due.length ? ` (${pending.length} total pending)` : '');
 
-      - name: Publish to Medium via import
-        if: steps.check.outputs.configured == 'true' && inputs.verify_only != true && steps.due.outputs.count != '0'
-        env:
-          MEDIUM_COOKIE_JAR: ${{ secrets.MEDIUMCOOKIEJAR }}
-          MEDIUM_SESSION_COOKIE: ${{ secrets.MEDIUM_SESSION_COOKIE }}
-          MEDIUM_AUTO_PUBLISH: ${{ vars.MEDIUM_AUTO_PUBLISH || 'true' }}
-          MEDIUM_HEADLESS: 'false'
-        run: xvfb-run -a node scripts/medium-poster/publish-via-import.mjs
+            const body = [
+              `${due.length} post${due.length === 1 ? '' : 's'} scheduled for Medium cross-posting are due.`,
+              ``,
+              `**For each one:**`,
+              `1. Click the importer link below — it opens \`medium.com/p/import\` with the source URL prefilled.`,
+              `2. Click **Import** on the Medium page.`,
+              `3. Add tags on the publish dialog, then **Publish**.`,
+              `4. Tick the box here so others know it's done.`,
+              ``,
+              `**Due now:**`,
+              ...due.map(line),
+              pending.length > due.length ? `\n**Pending (scheduled for later):** ${pending.length - due.length}` : ``,
+              ``,
+              `---`,
+              `_When you've imported a post, mark its **\`posted: true\`** with a \`postedAt\` timestamp in_`,
+              `_\`scripts/medium-poster/posts.json\` so the next run removes it from this list. The cron_`,
+              `_updates this issue every 30 min._`,
+              ``,
+              `<sub>Auto-generated by .github/workflows/medium-publish.yml — do not delete this issue manually; it'll close itself when the queue is empty.</sub>`,
+            ].join('\n');
 
-      - name: Upload debug artifacts on failure
-        if: failure() && steps.check.outputs.configured == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: medium-debug
-          path: scripts/medium-poster/debug/
-          if-no-files-found: ignore
-          retention-days: 7
-          include-hidden-files: true
-
-      - name: Commit posted-status updates
-        if: steps.check.outputs.configured == 'true' && inputs.verify_only != true && steps.due.outputs.count != '0'
-        run: |
-          if git diff --quiet scripts/medium-poster/posts.json; then
-            echo "No status changes to commit."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/medium-poster/posts.json
-          git commit -m "chore: mark Medium posts as published [skip ci]"
-          # Rebase-and-retry on push — master can move between our checkout
-          # and push if another workflow's status commit (or a human commit)
-          # landed in the meantime. Each workflow touches its own posts.json,
-          # so rebases never conflict.
-          n=0
-          until git push; do
-            n=$((n+1))
-            if [ $n -ge 3 ]; then echo "Push still rejected after 3 attempts" >&2; exit 1; fi
-            echo "Push rejected (attempt $n) — rebasing on origin/master and retrying..."
-            git pull --rebase origin master
-          done
+            if (existing.data.length > 0) {
+              const iss = existing.data[0];
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: iss.number,
+                title,
+                body,
+              });
+              console.log(`Updated issue #${iss.number} — ${due.length} due.`);
+              // Close any extras (shouldn't happen, but defensive).
+              for (const extra of existing.data.slice(1)) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: extra.number,
+                  state: 'closed',
+                  state_reason: 'not_planned',
+                });
+                console.log(`Closed duplicate queue issue #${extra.number}`);
+              }
+            } else {
+              const created = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: [LABEL],
+              });
+              console.log(`Created issue #${created.data.number} — ${due.length} due.`);
+            }

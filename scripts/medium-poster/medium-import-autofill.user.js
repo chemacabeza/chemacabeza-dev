@@ -1,73 +1,127 @@
 // ==UserScript==
-// @name         Medium Import Auto-Fill + Submit
+// @name         Medium Import Auto-Fill + Submit + Publish
 // @namespace    https://chemacabeza.dev/
-// @version      1.0.0
-// @description  When visiting medium.com/p/import?url=<X>, auto-fill X into the import URL field and click Import. Works around Medium ignoring the ?url= query param.
+// @version      2.0.0
+// @description  Auto-fill /p/import URL field, click Import, and (when armed) auto-Publish the resulting /p/<id>/edit draft.
 // @match        https://medium.com/p/import*
+// @match        https://medium.com/p/*/edit*
 // @run-at       document-idle
 // @grant        none
 // ==/UserScript==
 //
-// Install in Tampermonkey (or any other userscript manager).
+// Two phases, picked by URL pathname:
 //
-// Pair with scripts/medium-poster/open-due-import-tabs.sh — that opens
-// every due post's /p/import?url=... in a Chrome tab; this script then
-// auto-imports each one. Result: zero clicks per post, real-Chrome
-// session so Cloudflare doesn't 403 the import.
+//   1. /p/import?url=<X>  → fill X into the URL field, click Import.
+//      Sets sessionStorage.medium-just-imported='1' so the resulting
+//      /p/<id>/edit page (loaded in the SAME tab, so the storage carries
+//      over) knows it's part of an automated chain.
+//
+//   2. /p/<id>/edit       → if sessionStorage flag is set OR the URL hash
+//      contains 'autopublish=1', click Publish, wait for the prepublish
+//      dialog, click "Publish now". Otherwise do nothing.
+//
+// The sessionStorage path covers freshly-imported drafts in the same tab.
+// The hash path lets you trigger publish on an existing draft tab via a
+// bookmarklet that appends #autopublish=1 and reloads — see
+// install-helpers.sh for that bookmarklet.
 (function () {
   'use strict';
-  const url = new URLSearchParams(location.search).get('url');
-  if (!url) return;
+  const FLAG_KEY = 'medium-just-imported';
+  const path = location.pathname;
 
-  // Try to fill the field repeatedly until Medium's JS has initialised it
-  // (the empty .js-importUrl div has no contenteditable attribute until
-  // Medium's bundle runs). Give up after ~10s.
-  const start = Date.now();
-  const TIMEOUT_MS = 10000;
-
-  function tryFill() {
-    if (Date.now() - start > TIMEOUT_MS) return;
-
-    const field = document.querySelector('.js-importUrl');
-    if (!field) { setTimeout(tryFill, 150); return; }
-
-    // Already filled? (e.g. user re-ran on a partially-loaded page)
-    if (field.textContent && field.textContent.includes(url)) {
-      clickImport();
-      return;
+  if (path === '/p/import') {
+    runImport();
+  } else if (/^\/p\/[^/]+\/edit\/?$/.test(path)) {
+    const armed = sessionStorage.getItem(FLAG_KEY) === '1' || /autopublish=1/.test(location.hash);
+    if (armed) {
+      sessionStorage.removeItem(FLAG_KEY);
+      runPublish();
     }
+  }
 
-    field.setAttribute('contenteditable', 'true');
-    field.focus();
-
-    // execCommand('insertText') fires a real beforeinput + input event,
-    // which is what Medium's framework binds its URL-state tracker to.
-    try {
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      const range = document.createRange();
-      range.selectNodeContents(field);
-      range.collapse(false);
-      sel.addRange(range);
-      const ok = document.execCommand('insertText', false, url);
-      if (!ok) {
-        // Older fallback — direct textContent + synthetic input event
+  function runImport() {
+    const url = new URLSearchParams(location.search).get('url');
+    if (!url) return;
+    const started = Date.now();
+    const tryFill = () => {
+      if (Date.now() - started > 10000) return;
+      const field = document.querySelector('.js-importUrl');
+      if (!field) { setTimeout(tryFill, 150); return; }
+      if (field.textContent && field.textContent.includes(url)) {
+        return clickImport();
+      }
+      field.setAttribute('contenteditable', 'true');
+      field.focus();
+      try {
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        const range = document.createRange();
+        range.selectNodeContents(field);
+        range.collapse(false);
+        sel.addRange(range);
+        if (!document.execCommand('insertText', false, url)) {
+          field.textContent = url;
+          field.dispatchEvent(new InputEvent('input', { inputType: 'insertFromPaste', bubbles: true }));
+        }
+      } catch (_) {
         field.textContent = url;
         field.dispatchEvent(new InputEvent('input', { inputType: 'insertFromPaste', bubbles: true }));
       }
-    } catch (_) {
-      field.textContent = url;
-      field.dispatchEvent(new InputEvent('input', { inputType: 'insertFromPaste', bubbles: true }));
-    }
-
-    // Give Medium's listeners a beat to register the URL, then click.
-    setTimeout(clickImport, 400);
+      setTimeout(clickImport, 400);
+    };
+    setTimeout(tryFill, 400);
   }
 
   function clickImport() {
     const btn = document.querySelector('button[data-action="import-url"]');
-    if (btn && !btn.disabled) btn.click();
+    if (btn && !btn.disabled) {
+      sessionStorage.setItem(FLAG_KEY, '1');  // arm the /edit handler
+      btn.click();
+    }
   }
 
-  setTimeout(tryFill, 400);
+  function runPublish() {
+    const started = Date.now();
+    const tryOpenDialog = () => {
+      if (Date.now() - started > 15000) return;
+      // Prepublish dialog open button — try multiple selectors as Medium
+      // varies them across editor versions.
+      const candidates = [
+        () => document.querySelector('button[data-action="show-prepublish"]'),
+        () => Array.from(document.querySelectorAll('button')).find((b) =>
+          /^publish$/i.test((b.innerText || '').trim()) && !b.disabled
+        ),
+        () => Array.from(document.querySelectorAll('[role="button"]')).find((b) =>
+          /^publish$/i.test((b.innerText || '').trim())
+        ),
+      ];
+      for (const get of candidates) {
+        const el = get();
+        if (el) { el.click(); return setTimeout(tryFinalize, 800); }
+      }
+      setTimeout(tryOpenDialog, 200);
+    };
+
+    const tryFinalize = () => {
+      const finStarted = Date.now();
+      const tick = () => {
+        if (Date.now() - finStarted > 15000) return;
+        // "Publish now" button in the prepublish modal
+        const candidates = [
+          () => document.querySelector('button[data-action="publish"]'),
+          () => Array.from(document.querySelectorAll('button')).find((b) =>
+            /publish now/i.test((b.innerText || '').trim()) && !b.disabled
+          ),
+        ];
+        for (const get of candidates) {
+          const el = get();
+          if (el) { el.click(); return; }
+        }
+        setTimeout(tick, 200);
+      };
+      tick();
+    };
+
+    setTimeout(tryOpenDialog, 1500);
+  }
 })();

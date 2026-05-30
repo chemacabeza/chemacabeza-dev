@@ -42,5 +42,17 @@ BOOKMARKLET URL (copy this whole line):
 
 javascript:(function(){var u=new URLSearchParams(location.search).get('url');if(!u){alert('No ?url= in this URL');return;}var s=Date.now();var t=function(){if(Date.now()-s>10000)return;var f=document.querySelector('.js-importUrl');if(!f){setTimeout(t,150);return;}f.setAttribute('contenteditable','true');f.focus();try{var sel=window.getSelection();sel.removeAllRanges();var r=document.createRange();r.selectNodeContents(f);r.collapse(false);sel.addRange(r);if(!document.execCommand('insertText',false,u)){f.textContent=u;f.dispatchEvent(new InputEvent('input',{inputType:'insertFromPaste',bubbles:true}));}}catch(_){f.textContent=u;f.dispatchEvent(new InputEvent('input',{inputType:'insertFromPaste',bubbles:true}));}setTimeout(function(){var b=document.querySelector('button[data-action="import-url"]');if(b&&!b.disabled)b.click();},400);};setTimeout(t,400);})();
 
+OPTION 3 — "Publish this draft" bookmarklet (auto-publish current /edit tab)
+-------------------------------------------------------------
+Use this on a /p/<id>/edit tab to publish the draft. Useful for the
+batch of drafts already open in tabs after a bulk import — click the
+bookmarklet on each one and the userscript handles the rest (it appends
+#autopublish=1 and reloads, then the userscript fires Publish + Publish now).
+
+  1. Add another bookmark — Name: Publish this draft
+  2. URL: paste the one-liner below.
+
+javascript:(function(){if(!/\/p\/[^/]+\/edit\/?$/.test(location.pathname)){alert('Not on a /p/<id>/edit page');return;}location.hash='autopublish=1';location.reload();})();
+
 =============================================================
 EOF

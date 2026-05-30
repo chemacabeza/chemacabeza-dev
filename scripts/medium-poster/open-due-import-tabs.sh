@@ -49,5 +49,14 @@ done
 
 echo
 echo "✓ All $count tabs opened."
-echo "  After you've published each post, mark it posted=true with a postedAt timestamp in"
-echo "  scripts/medium-poster/posts.json. Issue #2 updates itself on the next */30 cron."
+echo
+echo "  IMPORTANT: Medium's /p/import?url=... DOES NOT prefill the field — each"
+echo "  tab opens with an empty input. You have two options:"
+echo
+echo "  (a) Install the Tampermonkey userscript so tabs auto-import:"
+echo "        ./scripts/medium-poster/install-helpers.sh"
+echo "  (b) Manually paste the URL into each tab (it's in the tab's URL bar"
+echo "      after ?url= — decode it, paste, click Import)."
+echo
+echo "  After publishing each post, set posted=true + postedAt in"
+echo "  scripts/medium-poster/posts.json. Issue #2 updates on next */30 cron."

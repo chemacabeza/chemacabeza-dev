@@ -180,41 +180,73 @@ try {
     log(`    "${b.text}" data-action=${b.action} testid=${b.testid} vis=${b.visible}`);
   }
 
+  // The new Medium prepublish dialog has the button labelled exactly
+  // "Publish" (not "Publish now"). Confirmed via button inventory:
+  // ["Change preview image", "Submit", "Publish", "Schedule for later"].
+  // The toolbar Publish that opened the dialog is no longer in the
+  // tab order while the modal is open, so the role+exact-name match
+  // is unambiguous.
   let finalized = false;
-  const publishNowCandidates = [
-    'button[data-action="publish"]',
-    'button[data-testid="publishConfirmButton"]',
-    'button[data-action="publishConfirm"]',
-    'button:has-text("Publish now")',
-  ];
-  for (const sel of publishNowCandidates) {
-    const loc = page.locator(sel).first();
-    if (await loc.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await loc.click({ timeout: 5000 }).catch((e) => log(`click failed on ${sel}: ${e.message.split('\n')[0]}`));
+  const byRoleExact = page.getByRole('button', { name: 'Publish', exact: true }).last();
+  if (await byRoleExact.isVisible({ timeout: 4000 }).catch(() => false)) {
+    await byRoleExact.click({ timeout: 5000 });
+    finalized = true;
+    log('clicked dialog Publish via role+exact name');
+  }
+  if (!finalized) {
+    // Fallback to text-based locator
+    const byText = page.locator('div[role="dialog"] button:has-text("Publish")').first();
+    if (await byText.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await byText.click({ timeout: 5000 });
       finalized = true;
-      log(`clicked Publish-now via ${sel}`);
-      break;
+      log('clicked dialog Publish via text in dialog');
     }
   }
   if (!finalized) {
-    const byRole = page.getByRole('button', { name: /publish now/i }).first();
-    if (await byRole.isVisible({ timeout: 3000 }).catch(() => false)) {
-      await byRole.click();
-      finalized = true;
-      log('clicked Publish-now via role match');
+    // Final fallback: any visible button whose text is exactly "Publish"
+    const handle = await page.evaluateHandle(() => {
+      const btns = Array.from(document.querySelectorAll('button'));
+      return btns.find(
+        (b) => (b.innerText || '').trim() === 'Publish' && b.offsetParent !== null && !b.disabled,
+      );
+    });
+    if (handle) {
+      const found = await handle.evaluate((el) => !!el);
+      if (found) {
+        await handle.asElement()?.click();
+        finalized = true;
+        log('clicked dialog Publish via JS scan');
+      }
     }
   }
   if (!finalized) {
     await shot('publish-now-missing');
-    throw new Error('Publish-now button not found in prepublish dialog');
+    throw new Error('Publish button (in prepublish dialog) not found');
   }
 
-  // Wait for redirect off /edit (means the article is now live)
-  log('waiting for redirect off /edit');
+  // Wait for the final published article URL. Medium first redirects
+  // off /edit to an intermediate /submission?... page, then to the
+  // canonical /@<user>/<slug>-<id> URL. The script previously stopped at
+  // the first redirect (the /submission URL is not actually browseable
+  // by readers); we want the final public URL.
+  log('waiting for final published article URL');
   await page.waitForFunction(
-    () => !location.pathname.includes('/edit'),
-    { timeout: 45000 },
-  );
+    () => {
+      const p = location.pathname;
+      // canonical Medium article: /@username/slug-postId  OR  /publication/slug-postId
+      return /^\/@[^/]+\/.+-[a-f0-9]{8,}$/.test(p) || /^\/(?!p\/)[^/]+\/.+-[a-f0-9]{8,}$/.test(p);
+    },
+    { timeout: 60000 },
+  ).catch(async (e) => {
+    // Fallback — try resolving the post ID via the /p/<id> shortcut
+    log(`final URL wait timed out; resolving via /p/<id> redirect`);
+    const m = page.url().match(/\/p\/([a-f0-9]+)/);
+    if (m) {
+      await page.goto(`https://medium.com/p/${m[1]}`, { waitUntil: 'load', timeout: 30000 });
+    } else {
+      throw e;
+    }
+  });
 
   const publishedUrl = page.url();
   log(`published: ${publishedUrl}`);

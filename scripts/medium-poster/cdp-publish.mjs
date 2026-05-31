@@ -101,6 +101,31 @@ try {
   await page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => {});
   await page.waitForTimeout(3000);
 
+  // Medium sometimes shows an onboarding/tooltip overlay
+  // (`<div class="overlay" data-action-scope="...">`) that intercepts
+  // clicks on the Publish button. Dismiss it: try Escape first, then
+  // remove ONLY elements with class "overlay" (NOT the toolbar, which
+  // is also position:fixed). The previous aggressive cleanup removed
+  // the publish toolbar itself.
+  log('dismissing any onboarding/tooltip overlays');
+  await page.keyboard.press('Escape').catch(() => {});
+  await page.waitForTimeout(400);
+  await page
+    .evaluate(() => {
+      // Target very specifically: only divs with class CONTAINING "overlay"
+      // AND a data-action-scope attribute (the tooltip pattern). The toolbar
+      // and other UI bits don't match this combination.
+      const overlays = document.querySelectorAll('div.overlay[data-action-scope]');
+      let removed = 0;
+      for (const el of overlays) {
+        el.remove();
+        removed++;
+      }
+      return removed;
+    })
+    .then((n) => log(`removed ${n} overlay element(s)`))
+    .catch(() => {});
+
   // Open prepublish dialog
   log('opening prepublish dialog');
   const publishCandidates = [
@@ -131,18 +156,41 @@ try {
     throw new Error('Publish button not found on the editor');
   }
 
-  // Wait for the prepublish dialog and the "Publish now" button
-  await page.waitForTimeout(2500);
-  log('clicking "Publish now"');
+  // Wait for the prepublish dialog and the "Publish now" button. The
+  // dialog can take a beat to mount its React tree, especially in a
+  // headed-offscreen Chrome where rendering is slightly throttled.
+  await page.waitForTimeout(5000);
+  log('looking for "Publish now" button');
+
+  // Diagnostic: log all buttons currently on the page so we can adjust
+  // selectors if Medium has changed names.
+  const buttonInventory = await page.evaluate(() =>
+    Array.from(document.querySelectorAll('button'))
+      .map((b) => ({
+        text: (b.innerText || '').trim().slice(0, 50),
+        action: b.getAttribute('data-action') || '',
+        testid: b.getAttribute('data-testid') || '',
+        visible: b.offsetParent !== null,
+      }))
+      .filter((b) => b.text || b.action || b.testid)
+      .slice(0, 40),
+  );
+  log(`button inventory (${buttonInventory.length}):`);
+  for (const b of buttonInventory) {
+    log(`    "${b.text}" data-action=${b.action} testid=${b.testid} vis=${b.visible}`);
+  }
+
+  let finalized = false;
   const publishNowCandidates = [
     'button[data-action="publish"]',
     'button[data-testid="publishConfirmButton"]',
+    'button[data-action="publishConfirm"]',
+    'button:has-text("Publish now")',
   ];
-  let finalized = false;
   for (const sel of publishNowCandidates) {
     const loc = page.locator(sel).first();
     if (await loc.isVisible({ timeout: 2000 }).catch(() => false)) {
-      await loc.click();
+      await loc.click({ timeout: 5000 }).catch((e) => log(`click failed on ${sel}: ${e.message.split('\n')[0]}`));
       finalized = true;
       log(`clicked Publish-now via ${sel}`);
       break;
@@ -177,6 +225,7 @@ try {
   await shot('failure');
   process.exit(1);
 } finally {
-  // Don't close the browser — it's the user's Chrome.
-  try { await page.close(); } catch {}
+  // Navigate the tab to about:blank rather than closing it. Closing
+  // the LAST tab makes Chrome exit, which kills CDP for the next run.
+  try { await page.goto('about:blank', { timeout: 5000 }); } catch {}
 }

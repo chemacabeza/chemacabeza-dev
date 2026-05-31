@@ -70,15 +70,18 @@ log "  → $TAB_URL"
 # CDP gives us observable, step-by-step control of the user's real
 # Chrome session (valid cf_clearance, no Cloudflare 403).
 if ! curl -sS -m 2 "http://127.0.0.1:9222/json/version" >/dev/null 2>&1; then
-  log "SKIP: Chrome is not running with --remote-debugging-port=9222."
-  log "      Start it with: scripts/medium-poster/start-chrome-with-cdp.sh"
-  log "      Then this slot retries on next fire (09/15/21)."
-  # Best-effort desktop notification so it's visible without checking logs
-  if command -v notify-send >/dev/null 2>&1; then
-    notify-send -u normal "Medium auto-publish skipped" \
-      "Chrome needs CDP enabled. Run scripts/medium-poster/start-chrome-with-cdp.sh" || true
+  log "CDP not reachable; (re-)starting headed-offscreen Chrome with --remote-debugging-port=9222"
+  "$REPO/scripts/medium-poster/start-chrome-with-cdp.sh" >/dev/null 2>&1 || true
+  # Give it a moment to bind
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    sleep 2
+    curl -sS -m 1 "http://127.0.0.1:9222/json/version" >/dev/null 2>&1 && break
+  done
+  if ! curl -sS -m 2 "http://127.0.0.1:9222/json/version" >/dev/null 2>&1; then
+    log "SKIP: couldn't bring up CDP after 20s. Next slot retries."
+    exit 0
   fi
-  exit 0
+  log "CDP came up"
 fi
 
 # CDP available — drive Publish via Playwright. The mjs script

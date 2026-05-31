@@ -1,58 +1,66 @@
 #!/usr/bin/env bash
-# Relaunch your Chrome with --remote-debugging-port=9222 so the auto-publish
-# cron can drive it via Chrome DevTools Protocol.
+# Start a SECONDARY Chrome instance for the auto-publish cron to drive
+# via Chrome DevTools Protocol. We don't touch your main Chrome — it
+# stays open with all your tabs. The secondary instance lives in a
+# separate user-data-dir, opens offscreen so it doesn't interrupt your
+# work, and copies your medium.com cookies (including cf_clearance) from
+# the main profile so Medium and Cloudflare accept it.
 #
-# WARNING: closes your currently-open Chrome instance. If Chrome's setting
-# "On startup → Continue where you left off" is enabled (chrome://settings/onStartup),
-# your tabs will be restored when Chrome reopens here. Otherwise they'll be
-# closed.
-set -euo pipefail
+# Idempotent: re-running just verifies CDP is up.
+set -uo pipefail  # not -e — we want to keep going past non-fatal errors
 
 PORT=9222
-PROFILE_DIR="${CHROME_PROFILE_DIR:-$HOME/.config/google-chrome}"
+CDP_PROFILE="${CHROME_CDP_PROFILE_DIR:-$HOME/.config/google-chrome-cdp}"
+MAIN_PROFILE="${CHROME_PROFILE_DIR:-$HOME/.config/google-chrome}"
 
+# Fast path: CDP already reachable, nothing to do.
 if curl -sS -m 2 "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&1; then
-  echo "✓ CDP is already reachable at http://127.0.0.1:$PORT — nothing to do."
-  curl -sS "http://127.0.0.1:$PORT/json/version" 2>/dev/null | head -3
+  echo "✓ CDP already reachable at http://127.0.0.1:$PORT — nothing to do."
   exit 0
 fi
 
-echo "→ Chrome is not currently running with --remote-debugging-port=$PORT."
-echo
-echo "  This script will close your existing Chrome instance and restart it"
-echo "  with debug enabled. Your tabs WILL be restored IF you have"
-echo "  'Continue where you left off' enabled in chrome://settings/onStartup."
-echo
-read -r -p "Continue? [y/N] " yn
-case "$yn" in
-  [yY]|[yY][eE][sS]) ;;
-  *) echo "Aborted."; exit 1 ;;
-esac
-
-echo "→ closing Chrome ..."
-pkill -f 'google-chrome' 2>/dev/null || true
-# wait for processes to settle
-for _ in 1 2 3 4 5 6 7 8 9 10; do
-  pgrep -f 'google-chrome' >/dev/null 2>&1 || break
-  sleep 1
+# One-time profile init: copy cookies + Local State (which contains the
+# AES key for cookie value encryption) from main profile so the CDP
+# Chrome's Medium session is already logged in. Re-doing this on every
+# run keeps cookies fresh (cf_clearance rotates).
+echo "→ syncing cookies from main profile to CDP profile"
+mkdir -p "$CDP_PROFILE/Default"
+# Lock files: skip Singleton* / "Last Version" etc.
+for f in Cookies "Local State" Preferences; do
+  src="$MAIN_PROFILE/Default/$f"
+  [ -f "$src" ] || src="$MAIN_PROFILE/$f"
+  [ -f "$src" ] && cp -p "$src" "$CDP_PROFILE/Default/$f" 2>/dev/null
 done
+# Also copy the top-level Local State (encryption key lives there)
+[ -f "$MAIN_PROFILE/Local State" ] && cp -p "$MAIN_PROFILE/Local State" "$CDP_PROFILE/Local State" 2>/dev/null
 
-echo "→ launching Chrome with --remote-debugging-port=$PORT ..."
+echo "→ launching headed Chrome with CDP at port $PORT (window pushed offscreen)"
+# Headless was 403'd by Cloudflare's bot challenge — we need real GUI
+# rendering. --window-position=-2400,-2400 puts the window offscreen so
+# you don't see it; it still renders correctly for Cloudflare/Medium.
+# --disable-blink-features=AutomationControlled hides webdriver flag.
 DISPLAY="${DISPLAY:-:0}" nohup google-chrome \
   --remote-debugging-port="$PORT" \
-  --user-data-dir="$PROFILE_DIR" \
-  >/dev/null 2>&1 &
-disown
+  --user-data-dir="$CDP_PROFILE" \
+  --no-first-run \
+  --no-default-browser-check \
+  --disable-blink-features=AutomationControlled \
+  --window-position=-2400,-2400 \
+  --window-size=1280,1800 \
+  about:blank \
+  > "$CDP_PROFILE/chrome.stdout.log" 2> "$CDP_PROFILE/chrome.stderr.log" </dev/null &
+disown 2>/dev/null || true
 
-# Give Chrome a few seconds to bind the port
-for _ in 1 2 3 4 5 6 7 8 9 10; do
+# Wait for port
+for i in $(seq 1 20); do
+  sleep 1
   if curl -sS -m 1 "http://127.0.0.1:$PORT/json/version" >/dev/null 2>&1; then
-    echo "✓ Chrome is running with CDP enabled."
-    curl -sS "http://127.0.0.1:$PORT/json/version" | head -3
+    echo "✓ CDP up after ${i}s"
+    curl -sS "http://127.0.0.1:$PORT/json/version" 2>/dev/null | head -3
     exit 0
   fi
-  sleep 1
 done
 
-echo "✗ Chrome started but CDP port didn't respond. Check Chrome's stderr / try again." >&2
+echo "✗ CDP didn't come up. Last 20 stderr lines:"
+tail -20 "$CDP_PROFILE/chrome.stderr.log" 2>/dev/null
 exit 1

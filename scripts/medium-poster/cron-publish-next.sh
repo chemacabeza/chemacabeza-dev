@@ -65,11 +65,65 @@ log "  → $TAB_URL"
 xdg-open "$TAB_URL" >/dev/null 2>&1 &
 
 # Give the import + publish chain time to complete. Medium typically
-# settles in 20-40s; 70s leaves margin for slow responses.
-sleep 70
+# settles in 20-60s; 120s leaves margin for slow responses.
+sleep 120
 
-# Mark posted optimistically. If Medium rejected, the user can revert
-# this entry manually.
+# Verify the post actually published via Medium's RSS feed. The feed is
+# public, not gated by Cloudflare (unlike the HTML profile), and updates
+# within seconds of a successful publish. We match by post title because
+# Medium's URL slugs are auto-generated from the H1, not our internal slug.
+# If we don't find the title, we treat it as "not yet published" and exit
+# WITHOUT marking the post posted=true. The next timer slot will retry.
+log "verifying publication via RSS feed"
+RSS_FILE="$(mktemp)"
+trap 'rm -f "$RSS_FILE"' EXIT
+
+curl -sS --max-time 30 \
+  -H "User-Agent: Mozilla/5.0 (compatible; Feedfetcher)" \
+  "https://medium.com/feed/@chemacabeza" \
+  -o "$RSS_FILE" || { log "WARN: RSS fetch failed; leaving $NEXT unposted, will retry next slot"; exit 0; }
+
+# Title to look for in the feed.
+TITLE=$(node -e "
+const posts = require('./scripts/medium-poster/posts.json');
+const p = posts.find(x => x.slug === '$NEXT');
+if (p && p.title) console.log(p.title);
+")
+
+if [ -z "$TITLE" ]; then
+  log "WARN: no title for slug $NEXT in posts.json; skipping verification"
+  exit 0
+fi
+
+# Find the matching <item> and extract its <link>. We exit 0 from the
+# Python helper either way; URL printed to stdout means verified.
+MEDIUM_URL=$(python3 - "$TITLE" "$RSS_FILE" <<'PYEOF'
+import re, sys
+want = sys.argv[1]
+with open(sys.argv[2]) as f:
+    body = f.read()
+items = re.findall(r'<item>(.+?)</item>', body, re.DOTALL)
+for item in items:
+    # Title may be CDATA-wrapped; HTML-entity-decode not needed for simple match
+    t = re.search(r'<title>(?:\s*<!\[CDATA\[)?(.+?)(?:\]\]>)?\s*</title>', item, re.DOTALL)
+    if not t: continue
+    if want in t.group(1):
+        link = re.search(r'<link>\s*([^<]+?)\s*</link>', item)
+        if link:
+            print(link.group(1).strip().split('?')[0])
+            sys.exit(0)
+sys.exit(0)
+PYEOF
+)
+
+if [ -z "$MEDIUM_URL" ]; then
+  log "NOT VERIFIED: '$NEXT' (title: '$TITLE') not in RSS feed. Leaving posted=false; next slot will retry."
+  exit 0
+fi
+
+log "verified ✓ → $MEDIUM_URL"
+
+# Mark posted with the actual published URL.
 node -e "
 const fs = require('node:fs');
 const posts = JSON.parse(fs.readFileSync('scripts/medium-poster/posts.json','utf8'));
@@ -79,7 +133,7 @@ if (p.posted) { console.error('already marked posted; skipping write'); process.
 p.posted = true;
 p.postedAt = new Date().toISOString();
 p.mediumStatus = 'published';
-p.mediumUrl = 'https://medium.com/@chemacabeza';
+p.mediumUrl = '$MEDIUM_URL';
 fs.writeFileSync('scripts/medium-poster/posts.json', JSON.stringify(posts, null, 2) + '\n');
 "
 

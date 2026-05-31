@@ -9,10 +9,7 @@
       "Microservices"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-31T07:02:04.451Z",
-    "mediumStatus": "published",
-    "mediumUrl": "https://medium.com/@chemacabeza"
+    "posted": false
   },
   {
     "slug": "monolith-vs-microservices",
@@ -36,7 +33,7 @@
     "scheduledFor": "2026-05-25T21:33:45.873Z",
     "posted": true,
     "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
+    "mediumUrl": "https://medium.com/@chemacabeza/performance-is-a-product-feature-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-2835a76a7262",
     "mediumStatus": "published"
   },
   {
@@ -63,7 +60,7 @@
     "scheduledFor": "2026-05-25T21:33:45.873Z",
     "posted": true,
     "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-content-delivery-networks-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-17d2751fcb0c",
     "mediumStatus": "published"
   },
   {

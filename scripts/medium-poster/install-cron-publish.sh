@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Install the systemd USER timer that fires cron-publish-next.sh at
-# 09:00 and 21:00 local time. User units = no sudo needed, but they
-# only run while you're logged in (or while linger is enabled via
-# `loginctl enable-linger <user>` — flagged below).
+# 09:00, 15:00, and 21:00 local time (3x/day, 6h apart). User units =
+# no sudo needed, but they only run while you're logged in (or while
+# linger is enabled via `loginctl enable-linger <user>` — flagged
+# below).
 #
 # To uninstall: pass --uninstall.
 set -euo pipefail
@@ -47,10 +48,11 @@ EOF
 
 cat > "$TMR" <<EOF
 [Unit]
-Description=Twice-daily Medium auto-publish (09:00 + 21:00 local)
+Description=Thrice-daily Medium auto-publish (09:00, 15:00, 21:00 local)
 
 [Timer]
 OnCalendar=*-*-* 09:00:00
+OnCalendar=*-*-* 15:00:00
 OnCalendar=*-*-* 21:00:00
 Persistent=true
 Unit=medium-publish.service

@@ -23,7 +23,10 @@
       "Engineering"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-05-31T16:56:32.616Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/modular-monolith-vs-microservices-a-practical-guide-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-4e765ae28b05"
   },
   {
     "slug": "performance-is-a-product-feature",

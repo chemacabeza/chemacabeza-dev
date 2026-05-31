@@ -9,7 +9,10 @@
       "Microservices"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-05-31T07:02:04.451Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza"
   },
   {
     "slug": "monolith-vs-microservices",

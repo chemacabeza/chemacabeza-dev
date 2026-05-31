@@ -126,6 +126,23 @@ try {
     .then((n) => log(`removed ${n} overlay element(s)`))
     .catch(() => {});
 
+  // Wait for the editor's "Saving..." → "Publish" state transition.
+  // The toolbar Publish button (data-action="show-prepublish") shows
+  // "Saving..." while Medium is persisting the imported draft; clicking
+  // it during that state silently no-ops and we end up with no dialog.
+  log('waiting for editor save to settle');
+  await page
+    .waitForFunction(
+      () => {
+        const btn = document.querySelector('button[data-action="show-prepublish"]');
+        if (!btn) return false;
+        const t = (btn.innerText || '').trim();
+        return t !== 'Saving...' && t !== '' && !btn.disabled;
+      },
+      { timeout: 30000 },
+    )
+    .catch(() => log('save state never cleared in 30s; trying anyway'));
+
   // Open prepublish dialog
   log('opening prepublish dialog');
   const publishCandidates = [
@@ -156,29 +173,37 @@ try {
     throw new Error('Publish button not found on the editor');
   }
 
-  // Wait for the prepublish dialog and the "Publish now" button. The
-  // dialog can take a beat to mount its React tree, especially in a
-  // headed-offscreen Chrome where rendering is slightly throttled.
+  // Wait for the prepublish dialog and the "Publish" button. The dialog
+  // can take a beat to mount its React tree; React's StrictMode-like
+  // double-render also briefly destroys the JS execution context, so
+  // any page.evaluate fired too early throws "context destroyed".
   await page.waitForTimeout(5000);
-  log('looking for "Publish now" button');
+  log('looking for the dialog Publish button');
 
   // Diagnostic: log all buttons currently on the page so we can adjust
-  // selectors if Medium has changed names.
-  const buttonInventory = await page.evaluate(() =>
-    Array.from(document.querySelectorAll('button'))
-      .map((b) => ({
-        text: (b.innerText || '').trim().slice(0, 50),
-        action: b.getAttribute('data-action') || '',
-        testid: b.getAttribute('data-testid') || '',
-        visible: b.offsetParent !== null,
-      }))
-      .filter((b) => b.text || b.action || b.testid)
-      .slice(0, 40),
-  );
-  log(`button inventory (${buttonInventory.length}):`);
-  for (const b of buttonInventory) {
-    log(`    "${b.text}" data-action=${b.action} testid=${b.testid} vis=${b.visible}`);
+  // selectors if Medium has changed names. Non-fatal — if the inventory
+  // throws on a transient navigation, we just press on with the selectors.
+  try {
+    const buttonInventory = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('button'))
+        .map((b) => ({
+          text: (b.innerText || '').trim().slice(0, 50),
+          action: b.getAttribute('data-action') || '',
+          testid: b.getAttribute('data-testid') || '',
+          visible: b.offsetParent !== null,
+        }))
+        .filter((b) => b.text || b.action || b.testid)
+        .slice(0, 40),
+    );
+    log(`button inventory (${buttonInventory.length}):`);
+    for (const b of buttonInventory) {
+      log(`    "${b.text}" data-action=${b.action} testid=${b.testid} vis=${b.visible}`);
+    }
+  } catch (e) {
+    log(`inventory dump skipped: ${e.message.split('\n')[0]}`);
   }
+  // Settle once more before clicking
+  await page.waitForTimeout(1500);
 
   // The new Medium prepublish dialog has the button labelled exactly
   // "Publish" (not "Publish now"). Confirmed via button inventory:

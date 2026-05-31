@@ -62,66 +62,43 @@ TAB_URL="https://medium.com/p/import?url=$ENCODED"
 log "publishing: $NEXT"
 log "  → $TAB_URL"
 
-xdg-open "$TAB_URL" >/dev/null 2>&1 &
-
-# Give the import + publish chain time to complete. Medium typically
-# settles in 20-60s; 120s leaves margin for slow responses.
-sleep 120
-
-# Verify the post actually published via Medium's RSS feed. The feed is
-# public, not gated by Cloudflare (unlike the HTML profile), and updates
-# within seconds of a successful publish. We match by post title because
-# Medium's URL slugs are auto-generated from the H1, not our internal slug.
-# If we don't find the title, we treat it as "not yet published" and exit
-# WITHOUT marking the post posted=true. The next timer slot will retry.
-log "verifying publication via RSS feed"
-RSS_FILE="$(mktemp)"
-trap 'rm -f "$RSS_FILE"' EXIT
-
-curl -sS --max-time 30 \
-  -H "User-Agent: Mozilla/5.0 (compatible; Feedfetcher)" \
-  "https://medium.com/feed/@chemacabeza" \
-  -o "$RSS_FILE" || { log "WARN: RSS fetch failed; leaving $NEXT unposted, will retry next slot"; exit 0; }
-
-# Title to look for in the feed.
-TITLE=$(node -e "
-const posts = require('./scripts/medium-poster/posts.json');
-const p = posts.find(x => x.slug === '$NEXT');
-if (p && p.title) console.log(p.title);
-")
-
-if [ -z "$TITLE" ]; then
-  log "WARN: no title for slug $NEXT in posts.json; skipping verification"
+# Reliable path: drive Chrome via Chrome DevTools Protocol.
+# Requires Chrome to be running with --remote-debugging-port=9222
+# (see start-chrome-with-cdp.sh). The userscript path was unreliable
+# — Chrome would background-throttle the new tab, the userscript
+# chain would stall, and we had no way to know which step failed.
+# CDP gives us observable, step-by-step control of the user's real
+# Chrome session (valid cf_clearance, no Cloudflare 403).
+if ! curl -sS -m 2 "http://127.0.0.1:9222/json/version" >/dev/null 2>&1; then
+  log "SKIP: Chrome is not running with --remote-debugging-port=9222."
+  log "      Start it with: scripts/medium-poster/start-chrome-with-cdp.sh"
+  log "      Then this slot retries on next fire (09/15/21)."
+  # Best-effort desktop notification so it's visible without checking logs
+  if command -v notify-send >/dev/null 2>&1; then
+    notify-send -u normal "Medium auto-publish skipped" \
+      "Chrome needs CDP enabled. Run scripts/medium-poster/start-chrome-with-cdp.sh" || true
+  fi
   exit 0
 fi
 
-# Find the matching <item> and extract its <link>. We exit 0 from the
-# Python helper either way; URL printed to stdout means verified.
-MEDIUM_URL=$(python3 - "$TITLE" "$RSS_FILE" <<'PYEOF'
-import re, sys
-want = sys.argv[1]
-with open(sys.argv[2]) as f:
-    body = f.read()
-items = re.findall(r'<item>(.+?)</item>', body, re.DOTALL)
-for item in items:
-    # Title may be CDATA-wrapped; HTML-entity-decode not needed for simple match
-    t = re.search(r'<title>(?:\s*<!\[CDATA\[)?(.+?)(?:\]\]>)?\s*</title>', item, re.DOTALL)
-    if not t: continue
-    if want in t.group(1):
-        link = re.search(r'<link>\s*([^<]+?)\s*</link>', item)
-        if link:
-            print(link.group(1).strip().split('?')[0])
-            sys.exit(0)
-sys.exit(0)
-PYEOF
-)
-
-if [ -z "$MEDIUM_URL" ]; then
-  log "NOT VERIFIED: '$NEXT' (title: '$TITLE') not in RSS feed. Leaving posted=false; next slot will retry."
+# CDP available — drive Publish via Playwright. The mjs script
+# prints the published URL to stdout on success; non-zero exit means
+# the publish chain failed (selectors gone, Cloudflare flagged the
+# session, etc.). All progress / error detail goes to stderr — we
+# capture it to the log so failures are debuggable.
+log "CDP available; running cdp-publish.mjs"
+STDERR_LOG="$(mktemp)"
+if PUBLISHED_URL=$(MEDIUM_SITE_URL="$SITE_URL" \
+    node "$REPO/scripts/medium-poster/cdp-publish.mjs" "$NEXT" 2>"$STDERR_LOG"); then
+  sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"
+  rm -f "$STDERR_LOG"
+  log "verified ✓ → $PUBLISHED_URL"
+else
+  log "CDP publish failed; per-step detail below. posted=false; next slot retries."
+  sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"
+  rm -f "$STDERR_LOG"
   exit 0
 fi
-
-log "verified ✓ → $MEDIUM_URL"
 
 # Mark posted with the actual published URL.
 node -e "
@@ -133,7 +110,7 @@ if (p.posted) { console.error('already marked posted; skipping write'); process.
 p.posted = true;
 p.postedAt = new Date().toISOString();
 p.mediumStatus = 'published';
-p.mediumUrl = '$MEDIUM_URL';
+p.mediumUrl = '$PUBLISHED_URL';
 fs.writeFileSync('scripts/medium-poster/posts.json', JSON.stringify(posts, null, 2) + '\n');
 "
 

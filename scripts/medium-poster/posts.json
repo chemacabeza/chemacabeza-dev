@@ -9,10 +9,7 @@
       "Microservices"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "monolith-vs-microservices",
@@ -23,10 +20,7 @@
       "Engineering"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "performance-is-a-product-feature",
@@ -52,10 +46,7 @@
       "Distributed Systems"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-cdns",
@@ -82,10 +73,7 @@
       "Feynman Technique"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-ddd",
@@ -97,10 +85,7 @@
       "Software Engineering"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-llms",
@@ -112,10 +97,7 @@
       "NLP"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-mcp",
@@ -127,10 +109,7 @@
       "LLMs"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-microservices",
@@ -142,10 +121,7 @@
       "Monoliths"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-serverless",
@@ -157,10 +133,7 @@
       "Cloud"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-software-architecture",
@@ -172,10 +145,7 @@
       "DDD"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-vim",
@@ -187,10 +157,7 @@
       "Linux"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "why-microservices-fail",
@@ -202,10 +169,7 @@
       "System Design"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-java-modules",
@@ -217,10 +181,7 @@
       "Architecture"
     ],
     "scheduledFor": "2026-05-28T20:05:10.980Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-n8n",
@@ -232,9 +193,6 @@
       "System Design"
     ],
     "scheduledFor": "2026-05-28T20:05:10.980Z",
-    "posted": true,
-    "postedAt": "2026-05-30T08:10:08.999Z",
-    "mediumUrl": "https://medium.com/@chemacabeza",
-    "mediumStatus": "published"
+    "posted": false
   }
 ]

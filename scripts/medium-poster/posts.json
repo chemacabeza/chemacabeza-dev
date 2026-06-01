@@ -82,7 +82,10 @@
       "Feynman Technique"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-01T13:01:58.797Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/67b92221bd8c"
   },
   {
     "slug": "the-feynman-guide-to-ddd",

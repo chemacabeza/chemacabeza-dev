@@ -97,7 +97,10 @@
       "Software Engineering"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-01T19:02:03.489Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/domain-driven-design-the-feynman-explanation-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-68c48f5dcb74"
   },
   {
     "slug": "the-feynman-guide-to-llms",

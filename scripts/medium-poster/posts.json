@@ -127,7 +127,10 @@
       "LLMs"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-02T13:01:57.789Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/2ee552498a0a"
   },
   {
     "slug": "the-feynman-guide-to-microservices",

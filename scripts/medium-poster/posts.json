@@ -142,7 +142,10 @@
       "Monoliths"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-02T19:01:57.793Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/e9056dd9490a"
   },
   {
     "slug": "the-feynman-guide-to-serverless",

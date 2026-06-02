@@ -88,6 +88,12 @@
     "posted": false,
     "postedAt": null,
     "body": "Ever felt like a single restaurant worker trying to seat guests, cook, serve, and wash dishes all at once?\n\nThat's what modern digital work feels like: jumping between dozens of tabs to manually copy and paste data from email to spreadsheet to Slack.\n\nToday, I published a Feynman-style guide explaining n8n — the open-source automation platform that turns application integrations into LEGO-like workflows. We also demystify the transition to autonomous AI Agents (the 'robot helpers' with tools, not just parrots) and the Model Context Protocol (MCP).\n\nRead it here → https://chemacabeza.dev/writing/the-feynman-guide-to-n8n\n\n#n8n #Automation #AIAgents #SystemDesign #SoftwareEngineering #MCP"
+  },
+  {
+    "slug": "the-feynman-guide-to-java-modules",
+    "posted": true,
+    "postedAt": "2026-06-02T10:40:00.000Z",
+    "body": "For over two decades, Java's \"encapsulation\" was a polite suggestion. You could access any class from any JAR — and production classpath collisions proved it daily.\n\nThen came the Java Platform Module System (JPMS). Think of it as replacing a city with no zoning laws with one that has proper districts, guarded gates, and explicit trade agreements between neighborhoods.\n\nI used the Feynman Technique to explain how modules finally gave Java real architectural boundaries — from module-info.java to the end of classpath hell.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-java-modules\n\n#Java #JPMS #SystemDesign #SoftwareArchitecture #BackendDevelopment"
   }
 ]
 

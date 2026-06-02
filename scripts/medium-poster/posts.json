@@ -112,7 +112,10 @@
       "NLP"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-02T07:01:20.807Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/large-language-models-the-feynman-guide-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-0f7d73b59f62"
   },
   {
     "slug": "the-feynman-guide-to-mcp",

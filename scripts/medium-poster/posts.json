@@ -217,7 +217,10 @@
       "Architecture"
     ],
     "scheduledFor": "2026-05-28T20:05:10.980Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-03T11:02:06.471Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/649454c1a9a6"
   },
   {
     "slug": "the-feynman-guide-to-n8n",

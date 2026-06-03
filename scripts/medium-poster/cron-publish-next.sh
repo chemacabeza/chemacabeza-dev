@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Publish the next due Medium post, called 3x daily (09:00, 15:00,
-# 21:00 local) by the medium-publish.timer systemd user unit (see
-# install-cron-publish.sh).
+# Publish the next due Medium post, called every 30 minutes by the
+# medium-publish.timer systemd user unit (see install-cron-publish.sh).
 #
 # Flow per invocation:
 #   1. Find the oldest unposted post whose scheduledFor is in the past.

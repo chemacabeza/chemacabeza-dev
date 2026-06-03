@@ -157,7 +157,10 @@
       "Cloud"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-03T08:39:19.603Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/serverless-computing-the-feynman-explanation-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-593c87e8ad10"
   },
   {
     "slug": "the-feynman-guide-to-software-architecture",

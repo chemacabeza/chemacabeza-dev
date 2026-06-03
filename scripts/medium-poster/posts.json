@@ -172,7 +172,10 @@
       "DDD"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-03T09:32:08.941Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/9fcadea7fec6"
   },
   {
     "slug": "the-feynman-guide-to-vim",

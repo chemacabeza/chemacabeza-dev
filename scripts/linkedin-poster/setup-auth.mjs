@@ -12,6 +12,7 @@
 //        http://localhost:5174/callback
 //   4. Copy the Client ID and Client Secret, then run:
 //        LINKEDIN_CLIENT_ID=xxx LINKEDIN_CLIENT_SECRET=yyy node scripts/linkedin-poster/setup-auth.mjs
+import './_ipv4-fetch.mjs'; // must precede any fetch(); see file for why
 import http from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { exec } from 'node:child_process';
@@ -110,11 +111,14 @@ const server = http.createServer(async (req, res) => {
   res.end('<h2>Done. Return to the terminal — your secrets are printed there.</h2>');
 
   const expiresDays = Math.round((tokenJson.expires_in || 0) / 86400);
+  const expiresOn = new Date(Date.now() + (tokenJson.expires_in || 0) * 1000)
+    .toISOString()
+    .slice(0, 10);
   console.log('\n──────── COPY THESE INTO GITHUB REPO SECRETS ────────');
   console.log(`LINKEDIN_ACCESS_TOKEN=${accessToken}`);
   console.log(`LINKEDIN_PERSON_URN=${personUrn || '(failed to fetch — call /v2/userinfo manually)'}`);
   console.log('───────────────────────────────────────────────────────');
-  console.log(`\nToken expires in ${tokenJson.expires_in}s (~${expiresDays} days).`);
+  console.log(`\nToken expires in ~${expiresDays} days — on ${expiresOn}. Set a reminder to re-run this then.`);
   console.log('Set them at:  https://github.com/<owner>/<repo>/settings/secrets/actions');
   console.log('\nWhen the token expires, re-run this script and update LINKEDIN_ACCESS_TOKEN.');
   server.close();

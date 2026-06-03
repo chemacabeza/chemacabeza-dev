@@ -90,11 +90,29 @@ fi
 # capture it to the log so failures are debuggable.
 log "CDP available; running cdp-publish.mjs"
 STDERR_LOG="$(mktemp)"
-if PUBLISHED_URL=$(MEDIUM_SITE_URL="$SITE_URL" \
-    node "$REPO/scripts/medium-poster/cdp-publish.mjs" "$NEXT" 2>"$STDERR_LOG"); then
+PUBLISHED_URL=$(MEDIUM_SITE_URL="$SITE_URL" \
+    node "$REPO/scripts/medium-poster/cdp-publish.mjs" "$NEXT" 2>"$STDERR_LOG")
+RC=$?
+if [ "$RC" -eq 0 ]; then
   sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"
   rm -f "$STDERR_LOG"
   log "verified ✓ → $PUBLISHED_URL"
+elif [ "$RC" -eq 3 ]; then
+  # Session expired (Fix 3) — the one failure that needs a human. Make it loud
+  # in the log AND fire a desktop notification so it doesn't rot silently.
+  log "════════════════════════════════════════════════════════════════"
+  log "⚠️  MEDIUM SESSION EXPIRED — auto-publish is PAUSED"
+  log "    Nothing will publish until you log into medium.com in Chrome."
+  log "    (stuck on: $NEXT)"
+  log "════════════════════════════════════════════════════════════════"
+  if command -v notify-send >/dev/null 2>&1; then
+    DISPLAY="${DISPLAY:-:0}" notify-send -u critical \
+      "Medium auto-publish paused" \
+      "Session expired — log into medium.com in Chrome to resume." 2>/dev/null || true
+  fi
+  sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"
+  rm -f "$STDERR_LOG"
+  exit 0
 else
   log "CDP publish failed; per-step detail below. posted=false; next slot retries."
   sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"

@@ -2,6 +2,7 @@
 // Publish queued LinkedIn blurbs via the official Posts REST API.
 // Run locally:   LINKEDIN_ACCESS_TOKEN=... LINKEDIN_PERSON_URN=urn:li:person:xxx node scripts/linkedin-poster/publish-via-api.mjs
 // Run in CI:     same env vars, sourced from repo secrets (see .github/workflows/linkedin-publish.yml).
+import './_ipv4-fetch.mjs'; // must precede any fetch(); see file for why
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,8 +12,15 @@ const POSTS_FILE = join(HERE, 'posts.json');
 
 const TOKEN = process.env.LINKEDIN_ACCESS_TOKEN;
 const PERSON_URN = process.env.LINKEDIN_PERSON_URN;
-const API_VERSION = process.env.LINKEDIN_API_VERSION || '202605';
+const FALLBACK_API_VERSION = '202605'; // last-known-good if version probing fails
+let apiVersion = process.env.LINKEDIN_API_VERSION || FALLBACK_API_VERSION;
 const DRY_RUN = process.argv.includes('--dry-run');
+const IN_CI = !!process.env.GITHUB_ACTIONS;
+
+// Emit a GitHub Actions annotation (surfaces in the run summary) when in CI.
+function ghAnnotate(level, msg) {
+  if (IN_CI) console.log(`::${level}::${msg.replace(/\n/g, '%0A')}`);
+}
 
 function die(msg, code = 2) {
   console.error(msg);
@@ -48,6 +56,58 @@ function formatCommentary(text) {
   return text.replace(/\\/g, '\\\\');
 }
 
+// Fix 4 — validate the token up front so an expired/invalid token yields one
+// loud, actionable message (and a CI annotation) instead of N cryptic per-post
+// 401s. The token is opaque, so we can't count down to its expiry without the
+// client secret; this catches expiry the moment it takes effect.
+async function preflightToken() {
+  let res;
+  try {
+    res = await fetch('https://api.linkedin.com/v2/userinfo', {
+      headers: { Authorization: `Bearer ${TOKEN}` },
+    });
+  } catch (e) {
+    console.error(`  preflight network error (${e.cause?.code || e.message}); continuing.`);
+    return;
+  }
+  if (res.status === 401) {
+    const msg =
+      'LinkedIn access token is EXPIRED or INVALID. Re-run `npm run linkedin:setup`, ' +
+      'then update the LINKEDIN_ACCESS_TOKEN repository secret.';
+    ghAnnotate('error', msg);
+    die(`\n✗ ${msg}`, 2);
+  }
+}
+
+// Fix 1 — LinkedIn retires each dated API version after ~1 year (a retired
+// version returns HTTP 426 NONEXISTENT_VERSION). Rather than hardcode one,
+// probe newest→oldest monthly versions and use the newest that's still active,
+// so the publisher self-heals as LinkedIn rolls versions forward. Override with
+// LINKEDIN_API_VERSION to pin a specific one.
+async function resolveApiVersion() {
+  if (process.env.LINKEDIN_API_VERSION) return process.env.LINKEDIN_API_VERSION;
+  const now = new Date();
+  for (let i = 0; i < 18; i++) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const v = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}`;
+    let res;
+    try {
+      res = await fetch('https://api.linkedin.com/rest/me', {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+          'LinkedIn-Version': v,
+          'X-Restli-Protocol-Version': '2.0.0',
+        },
+      });
+    } catch {
+      continue; // transient network blip — try the next candidate
+    }
+    if (res.status !== 426) return v; // any non-426 means this version is active
+  }
+  console.error(`  could not detect an active API version; falling back to ${FALLBACK_API_VERSION}.`);
+  return FALLBACK_API_VERSION;
+}
+
 async function publishOne(post) {
   const body = {
     author: PERSON_URN,
@@ -72,7 +132,7 @@ async function publishOne(post) {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       'Content-Type': 'application/json',
-      'LinkedIn-Version': API_VERSION,
+      'LinkedIn-Version': apiVersion,
       'X-Restli-Protocol-Version': '2.0.0',
     },
     body: JSON.stringify(body),
@@ -85,6 +145,12 @@ async function publishOne(post) {
 
   const text = await res.text().catch(() => '');
   return { ok: false, status: res.status, error: text.slice(0, 800) };
+}
+
+if (!DRY_RUN) {
+  await preflightToken();
+  apiVersion = await resolveApiVersion();
+  console.log(`Using LinkedIn-Version: ${apiVersion}\n`);
 }
 
 let posted = 0;
@@ -126,6 +192,10 @@ for (let i = 0; i < pending.length; i++) {
 console.log(`\nDone. posted=${posted} failed=${failed}`);
 
 if (authFailure) {
+  ghAnnotate(
+    'error',
+    'LinkedIn token expired/invalid mid-run. Re-run `npm run linkedin:setup` and update the LINKEDIN_ACCESS_TOKEN secret.',
+  );
   console.error('\nRe-issue an access token by running:  node scripts/linkedin-poster/setup-auth.mjs');
   console.error('Then update the LINKEDIN_ACCESS_TOKEN repository secret.');
 }

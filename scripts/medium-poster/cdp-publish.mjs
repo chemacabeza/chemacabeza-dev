@@ -62,6 +62,20 @@ try {
   await page.goto(IMPORT_URL, { waitUntil: 'load', timeout: 60000 });
   await page.bringToFront();
 
+  // Health check (Fix 3): if Medium bounced us to a sign-in / login page,
+  // the logged-in session cookies have expired. Fail fast with a distinct
+  // exit code (3) and a loud, actionable message instead of silently timing
+  // out 30s on .js-importUrl every slot. The cron wrapper turns code 3 into
+  // a prominent "auto-publish paused" warning.
+  const landedPath = new URL(page.url()).pathname;
+  if (/(^|\/)(m\/)?(signin|login)(\/|$)/.test(landedPath)) {
+    log('MEDIUM SESSION EXPIRED — import page redirected to sign-in:');
+    log(`  ${page.url()}`);
+    log('  FIX: open Chrome, log into medium.com, then the next run re-syncs cookies.');
+    await shot('session-expired');
+    process.exit(3);
+  }
+
   log('waiting for .js-importUrl field');
   await page.waitForSelector('.js-importUrl', { state: 'attached', timeout: 30000 });
 

@@ -187,7 +187,10 @@
       "Linux"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-03T10:02:01.217Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/8cbb342ea39b"
   },
   {
     "slug": "why-microservices-fail",

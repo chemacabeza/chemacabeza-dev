@@ -202,7 +202,10 @@
       "System Design"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-03T10:32:00.704Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/752536d26e9f"
   },
   {
     "slug": "the-feynman-guide-to-java-modules",

@@ -55,21 +55,24 @@
   },
   {
     "slug": "the-feynman-guide-to-serverless",
-    "posted": false,
-    "postedAt": null,
-    "body": "Serverless isn't \"no servers\" — it's \"someone else's problem, billed by the millisecond.\"\n\nThe model is more interesting than the marketing. Think of it as a food truck: you don't own the kitchen, you only pay when someone orders, and scaling means parking another truck. That analogy explains both why serverless is brilliant for some workloads and disastrous for others.\n\nA Feynman-style breakdown of the trade-offs → https://chemacabeza.dev/writing/the-feynman-guide-to-serverless\n\n#Serverless #CloudComputing #SystemDesign #Architecture #AWS"
+    "posted": true,
+    "postedAt": "2026-06-03T15:58:39.547Z",
+    "body": "Serverless isn't \"no servers\" — it's \"someone else's problem, billed by the millisecond.\"\n\nThe model is more interesting than the marketing. Think of it as a food truck: you don't own the kitchen, you only pay when someone orders, and scaling means parking another truck. That analogy explains both why serverless is brilliant for some workloads and disastrous for others.\n\nA Feynman-style breakdown of the trade-offs → https://chemacabeza.dev/writing/the-feynman-guide-to-serverless\n\n#Serverless #CloudComputing #SystemDesign #Architecture #AWS",
+    "linkedinPostId": "urn:li:share:7467968000004894720"
   },
   {
     "slug": "the-feynman-guide-to-microservices",
-    "posted": false,
-    "postedAt": null,
-    "body": "\"Should we use microservices or a monolith?\" is the wrong question.\n\nThe right question is: where are your real coupling points, what change patterns do you actually see, and what's the cost of crossing a network boundary for your team? Most \"microservices vs monolith\" debates skip all three.\n\nI used the Feynman Technique to make the actual trade-offs visible — with analogies and insights from the people who lived it at scale.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-microservices\n\n#Microservices #SoftwareArchitecture #SystemDesign #Engineering #Monoliths"
+    "posted": true,
+    "postedAt": "2026-06-03T15:58:41.938Z",
+    "body": "\"Should we use microservices or a monolith?\" is the wrong question.\n\nThe right question is: where are your real coupling points, what change patterns do you actually see, and what's the cost of crossing a network boundary for your team? Most \"microservices vs monolith\" debates skip all three.\n\nI used the Feynman Technique to make the actual trade-offs visible — with analogies and insights from the people who lived it at scale.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-microservices\n\n#Microservices #SoftwareArchitecture #SystemDesign #Engineering #Monoliths",
+    "linkedinPostId": "urn:li:share:7467968009991647232"
   },
   {
     "slug": "performance-is-a-product-feature",
-    "posted": false,
-    "postedAt": null,
-    "body": "We've been lying to ourselves: performance is not a \"non-functional requirement.\"\n\nIt's product. A 400ms page load doesn't fail a unit test — it fails the user. And by the time it shows up in your funnel metrics, you've spent six months making the rewrite cost ten times what the original optimization would have.\n\nI wrote about why performance belongs in the product spec, not the post-launch cleanup.\n\nRead it → https://chemacabeza.dev/writing/performance-is-a-product-feature\n\n#Performance #ProductEngineering #BackendDevelopment #UX #SoftwareEngineering"
+    "posted": true,
+    "postedAt": "2026-06-03T15:58:44.223Z",
+    "body": "We've been lying to ourselves: performance is not a \"non-functional requirement.\"\n\nIt's product. A 400ms page load doesn't fail a unit test — it fails the user. And by the time it shows up in your funnel metrics, you've spent six months making the rewrite cost ten times what the original optimization would have.\n\nI wrote about why performance belongs in the product spec, not the post-launch cleanup.\n\nRead it → https://chemacabeza.dev/writing/performance-is-a-product-feature\n\n#Performance #ProductEngineering #BackendDevelopment #UX #SoftwareEngineering",
+    "linkedinPostId": "urn:li:share:7467968019726585856"
   },
   {
     "slug": "monolith-vs-microservices",
@@ -79,15 +82,17 @@
   },
   {
     "slug": "the-feynman-guide-to-cdns",
-    "posted": false,
-    "postedAt": null,
-    "body": "Demystifying how the internet delivers content at lightning speed using the Feynman Technique, pizza analogies, and the hidden magic of edge servers.\n\nI just published \"The Feynman Guide to Content Delivery Networks\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-cdns\n\n#CDN #SystemDesign #Networking #Performance"
+    "posted": true,
+    "postedAt": "2026-06-03T15:58:46.694Z",
+    "body": "Demystifying how the internet delivers content at lightning speed using the Feynman Technique, pizza analogies, and the hidden magic of edge servers.\n\nI just published \"The Feynman Guide to Content Delivery Networks\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-cdns\n\n#CDN #SystemDesign #Networking #Performance",
+    "linkedinPostId": "urn:li:share:7467968030010937344"
   },
   {
     "slug": "the-feynman-guide-to-n8n",
-    "posted": false,
-    "postedAt": null,
-    "body": "Ever felt like a single restaurant worker trying to seat guests, cook, serve, and wash dishes all at once?\n\nThat's what modern digital work feels like: jumping between dozens of tabs to manually copy and paste data from email to spreadsheet to Slack.\n\nToday, I published a Feynman-style guide explaining n8n — the open-source automation platform that turns application integrations into LEGO-like workflows. We also demystify the transition to autonomous AI Agents (the 'robot helpers' with tools, not just parrots) and the Model Context Protocol (MCP).\n\nRead it here → https://chemacabeza.dev/writing/the-feynman-guide-to-n8n\n\n#n8n #Automation #AIAgents #SystemDesign #SoftwareEngineering #MCP"
+    "posted": true,
+    "postedAt": "2026-06-03T15:58:48.986Z",
+    "body": "Ever felt like a single restaurant worker trying to seat guests, cook, serve, and wash dishes all at once?\n\nThat's what modern digital work feels like: jumping between dozens of tabs to manually copy and paste data from email to spreadsheet to Slack.\n\nToday, I published a Feynman-style guide explaining n8n — the open-source automation platform that turns application integrations into LEGO-like workflows. We also demystify the transition to autonomous AI Agents (the 'robot helpers' with tools, not just parrots) and the Model Context Protocol (MCP).\n\nRead it here → https://chemacabeza.dev/writing/the-feynman-guide-to-n8n\n\n#n8n #Automation #AIAgents #SystemDesign #SoftwareEngineering #MCP",
+    "linkedinPostId": "urn:li:share:7467968039733329920"
   },
   {
     "slug": "the-feynman-guide-to-java-modules",
@@ -96,4 +101,3 @@
     "body": "For over two decades, Java's \"encapsulation\" was a polite suggestion. You could access any class from any JAR — and production classpath collisions proved it daily.\n\nThen came the Java Platform Module System (JPMS). Think of it as replacing a city with no zoning laws with one that has proper districts, guarded gates, and explicit trade agreements between neighborhoods.\n\nI used the Feynman Technique to explain how modules finally gave Java real architectural boundaries — from module-info.java to the end of classpath hell.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-java-modules\n\n#Java #JPMS #SystemDesign #SoftwareArchitecture #BackendDevelopment"
   }
 ]
-

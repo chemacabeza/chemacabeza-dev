@@ -11,7 +11,7 @@ const POSTS_FILE = join(HERE, 'posts.json');
 
 const TOKEN = process.env.LINKEDIN_ACCESS_TOKEN;
 const PERSON_URN = process.env.LINKEDIN_PERSON_URN;
-const API_VERSION = process.env.LINKEDIN_API_VERSION || '202401';
+const API_VERSION = process.env.LINKEDIN_API_VERSION || '202605';
 const DRY_RUN = process.argv.includes('--dry-run');
 
 function die(msg, code = 2) {

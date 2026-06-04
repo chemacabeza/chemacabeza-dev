@@ -225,8 +225,9 @@
       "System Design"
     ],
     "scheduledFor": "2026-05-20T00:00:00.000Z",
-    "posted": false,
-    "mediumDraftId": "58dc4c2190a6",
-    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish"
+    "posted": true,
+    "postedAt": "2026-06-04T09:11:11.289Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-n8n-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-58dc4c2190a6"
   }
 ]

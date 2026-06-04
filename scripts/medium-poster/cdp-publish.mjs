@@ -312,27 +312,52 @@ try {
     process.exit(4);
   }
 
-  // STRICT: require the canonical public URL (/@user/slug-id). No /p/<id>
-  // fallback — that previously "resolved" rate-limited drafts and reported
-  // them as published, the exact bug that left 8 silent drafts.
-  log('waiting for PUBLIC published URL (strict)');
-  const reachedPublic = await page
-    .waitForFunction(() => /^\/@[^/]+\/.+-[a-f0-9]{6,}$/.test(location.pathname), { timeout: 60000 })
+  // A successful publish lands on either the canonical /@user/slug-id URL OR
+  // /p/<id>?postPublishedType=... (Medium's immediate post-publish confirmation,
+  // which doesn't always redirect to the slug within our wait). Accept either —
+  // but ONLY these signals, so a still-draft never counts as published.
+  log('waiting for publish confirmation (canonical URL or postPublishedType)');
+  const confirmed = await page
+    .waitForFunction(
+      () => {
+        const u = new URL(location.href);
+        return (
+          u.searchParams.has('postPublishedType') ||
+          /^\/@[^/]+\/.+-[a-f0-9]{6,}$/.test(u.pathname)
+        );
+      },
+      { timeout: 60000 },
+    )
     .then(() => true)
     .catch(() => false);
 
-  if (!reachedPublic) {
+  if (!confirmed) {
     if (await rateLimited()) {
       log('RATE LIMITED — Medium 2-stories/24h cap hit; post left as draft, retry next slot.');
       await shot('rate-limited');
       process.exit(4);
     }
-    log(`FAILED: did not reach a public URL (still ${page.url()}); left as draft.`);
+    log(`FAILED: no publish confirmation (still ${page.url()}); left as draft.`);
     await shot('not-published');
     process.exit(1);
   }
 
-  const publishedUrl = page.url();
+  // Publish confirmed — resolve the canonical public URL (the post-publish URL
+  // is /p/<id>?postPublishedType=...). Using /p/<id> is safe here because we
+  // only reach this after a genuine publish signal, never for a draft.
+  let publishedUrl = page.url();
+  if (!/^\/@[^/]+\/.+-[a-f0-9]{6,}$/.test(new URL(publishedUrl).pathname)) {
+    const idm = publishedUrl.match(/\/p\/([a-f0-9]+)/);
+    const pid = idm ? idm[1] : DRAFT_ID;
+    if (pid) {
+      for (let i = 0; i < 3; i++) {
+        await page.goto(`https://medium.com/p/${pid}`, { waitUntil: 'domcontentloaded', timeout: 30000 }).catch(() => {});
+        await page.waitForTimeout(2000);
+        if (/^\/@[^/]+\/.+-[a-f0-9]{6,}$/.test(new URL(page.url()).pathname)) break;
+      }
+      publishedUrl = page.url();
+    }
+  }
   log(`published: ${publishedUrl}`);
   process.stdout.write(publishedUrl + '\n');
   process.exit(0);

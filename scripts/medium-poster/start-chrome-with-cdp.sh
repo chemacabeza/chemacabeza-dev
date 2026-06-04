@@ -34,12 +34,52 @@ done
 # Also copy the top-level Local State (encryption key lives there)
 [ -f "$MAIN_PROFILE/Local State" ] && cp -p "$MAIN_PROFILE/Local State" "$CDP_PROFILE/Local State" 2>/dev/null
 
+# Ensure a usable X display for the *headed* Chrome (headless is Cloudflare-403'd).
+# Prefer a real desktop session ($DISPLAY, e.g. :0). If none is reachable — e.g.
+# nobody is logged in graphically and we're running under systemd linger — spin
+# up a virtual framebuffer (Xvfb) so Chrome can still render fully offscreen.
+ensure_display() {
+  if [ -n "${DISPLAY:-}" ] && DISPLAY="$DISPLAY" timeout 3 xset q >/dev/null 2>&1; then
+    echo "→ using existing display $DISPLAY"
+    return 0
+  fi
+  local vd="${XVFB_DISPLAY:-:99}"
+  if DISPLAY="$vd" timeout 2 xset q >/dev/null 2>&1; then
+    echo "→ reusing virtual display $vd"
+    export DISPLAY="$vd"
+    return 0
+  fi
+  if ! command -v Xvfb >/dev/null 2>&1; then
+    echo "✗ no usable X display and Xvfb is not installed (run: sudo apt-get install -y xvfb)"
+    return 1
+  fi
+  echo "→ no real display; starting Xvfb on $vd"
+  nohup Xvfb "$vd" -screen 0 1280x1800x24 -nolisten tcp \
+    > "$CDP_PROFILE/xvfb.log" 2>&1 </dev/null &
+  disown 2>/dev/null || true
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    sleep 0.5
+    DISPLAY="$vd" xset q >/dev/null 2>&1 && break
+  done
+  if ! DISPLAY="$vd" timeout 2 xset q >/dev/null 2>&1; then
+    echo "✗ Xvfb failed to come up on $vd; see $CDP_PROFILE/xvfb.log"
+    return 1
+  fi
+  export DISPLAY="$vd"
+  echo "✓ virtual display $vd up"
+}
+
+if ! ensure_display; then
+  echo "✗ aborting: no X display available for Chrome"
+  exit 1
+fi
+
 echo "→ launching headed Chrome with CDP at port $PORT (window pushed offscreen)"
 # Headless was 403'd by Cloudflare's bot challenge — we need real GUI
 # rendering. --window-position=-2400,-2400 puts the window offscreen so
 # you don't see it; it still renders correctly for Cloudflare/Medium.
 # --disable-blink-features=AutomationControlled hides webdriver flag.
-DISPLAY="${DISPLAY:-:0}" nohup google-chrome \
+DISPLAY="$DISPLAY" nohup google-chrome \
   --remote-debugging-port="$PORT" \
   --user-data-dir="$CDP_PROFILE" \
   --no-first-run \

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Publish the next due Medium post, called every 30 minutes by the
+# Publish the next due Medium post, called twice daily (09:00, 21:00) by the
 # medium-publish.timer systemd user unit (see install-cron-publish.sh).
+# Medium caps publishing at 2 stories / 24h, so the cadence matches that.
 #
 # Flow per invocation:
 #   1. Find the oldest unposted post whose scheduledFor is in the past.
@@ -23,8 +24,11 @@ cd "$REPO"
 LOG_TS() { date '+%Y-%m-%d %H:%M:%S'; }
 log() { echo "[$(LOG_TS)] $*"; }
 
-# Find the next due post (oldest scheduledFor first).
-NEXT=$(node -e "
+# Find the next due post (oldest scheduledFor first). Emit "slug<TAB>draftId"
+# — draftId is set for posts that are already an unpublished Medium draft (a
+# prior rate-limited publish), so we re-publish that draft instead of importing
+# a duplicate.
+NEXT_LINE=$(node -e "
 const fs = require('node:fs');
 const posts = JSON.parse(fs.readFileSync('scripts/medium-poster/posts.json','utf8'));
 const now = Date.now();
@@ -32,13 +36,16 @@ const due = posts
   .filter(p => !p.posted && p.scheduledFor && new Date(p.scheduledFor).getTime() <= now)
   .sort((a,b) => new Date(a.scheduledFor) - new Date(b.scheduledFor));
 if (due.length === 0) process.exit(0);
-console.log(due[0].slug);
+console.log(due[0].slug + '\t' + (due[0].mediumDraftId || ''));
 " 2>&1)
 
-if [ -z "$NEXT" ]; then
+if [ -z "$NEXT_LINE" ]; then
   log "no due posts, nothing to publish"
   exit 0
 fi
+
+NEXT=$(printf '%s' "$NEXT_LINE" | cut -f1)
+DRAFT_ID=$(printf '%s' "$NEXT_LINE" | cut -f2)
 
 # Bail if Chrome isn't running — better to skip a slot than to launch
 # Chrome cold and race the userscript against extension init.
@@ -88,15 +95,47 @@ fi
 # the publish chain failed (selectors gone, Cloudflare flagged the
 # session, etc.). All progress / error detail goes to stderr — we
 # capture it to the log so failures are debuggable.
-log "CDP available; running cdp-publish.mjs"
+log "CDP available; running cdp-publish.mjs${DRAFT_ID:+ (existing draft $DRAFT_ID)}"
 STDERR_LOG="$(mktemp)"
-PUBLISHED_URL=$(MEDIUM_SITE_URL="$SITE_URL" \
+# Disable errexit around the publisher: it intentionally exits non-zero (1/3/4)
+# and we branch on RC below. Under `set -e` a bare assignment with a failing
+# command substitution would abort the script before we handle the exit code.
+set +e
+PUBLISHED_URL=$(MEDIUM_SITE_URL="$SITE_URL" MEDIUM_DRAFT_ID="$DRAFT_ID" \
     node "$REPO/scripts/medium-poster/cdp-publish.mjs" "$NEXT" 2>"$STDERR_LOG")
 RC=$?
+set -e
+# The script emits "MEDIUM_DRAFT_ID=<id>" once it has a draft (imported or
+# reopened). Capture it so a failed/rate-limited publish persists the draft id
+# and the next run re-publishes that draft instead of importing a duplicate.
+EMITTED_DRAFT_ID=$(grep -oE 'MEDIUM_DRAFT_ID=[a-f0-9]+' "$STDERR_LOG" | tail -1 | cut -d= -f2)
+[ -z "$EMITTED_DRAFT_ID" ] && EMITTED_DRAFT_ID="$DRAFT_ID"
+
+# Persist a draft id onto the post (used by exit 1/4 paths below).
+persist_draft_id() {
+  [ -z "$EMITTED_DRAFT_ID" ] && return 0
+  node -e "
+const fs=require('node:fs');
+const f='scripts/medium-poster/posts.json';
+const posts=JSON.parse(fs.readFileSync(f,'utf8'));
+const p=posts.find(x=>x.slug==='$NEXT');
+if(p && !p.posted && p.mediumDraftId!=='$EMITTED_DRAFT_ID'){p.mediumDraftId='$EMITTED_DRAFT_ID';fs.writeFileSync(f,JSON.stringify(posts,null,2)+'\n');}
+" 2>/dev/null || true
+}
+
 if [ "$RC" -eq 0 ]; then
   sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"
   rm -f "$STDERR_LOG"
   log "verified ✓ → $PUBLISHED_URL"
+elif [ "$RC" -eq 4 ]; then
+  # Rate limited (Medium 2 stories / 24h). Not an error — the draft is fine,
+  # we just can't publish more right now. Persist the draft id and back off so
+  # the next slot re-publishes this exact draft (no duplicate import).
+  persist_draft_id
+  log "rate limited (2 stories/24h); '$NEXT' stays a draft (id ${EMITTED_DRAFT_ID:-?}). Will retry next slot."
+  sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"
+  rm -f "$STDERR_LOG"
+  exit 0
 elif [ "$RC" -eq 3 ]; then
   # Session expired (Fix 3) — the one failure that needs a human. Make it loud
   # in the log AND fire a desktop notification so it doesn't rot silently.
@@ -114,6 +153,7 @@ elif [ "$RC" -eq 3 ]; then
   rm -f "$STDERR_LOG"
   exit 0
 else
+  persist_draft_id
   log "CDP publish failed; per-step detail below. posted=false; next slot retries."
   sed 's/^/    /' "$STDERR_LOG" >> "$HOME/.local/state/medium-publish.log"
   rm -f "$STDERR_LOG"
@@ -131,6 +171,7 @@ p.posted = true;
 p.postedAt = new Date().toISOString();
 p.mediumStatus = 'published';
 p.mediumUrl = '$PUBLISHED_URL';
+delete p.mediumDraftId; // published now — no longer a pending draft
 fs.writeFileSync('scripts/medium-poster/posts.json', JSON.stringify(posts, null, 2) + '\n');
 "
 

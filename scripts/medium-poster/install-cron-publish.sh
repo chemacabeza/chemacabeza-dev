@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Install the systemd USER timer that fires cron-publish-next.sh every
-# 30 minutes (one due post per run). User units =
+# Install the systemd USER timer that fires cron-publish-next.sh twice a day
+# (09:00 and 21:00 local). Medium caps publishing at 2 stories / 24h, so two
+# evenly-spaced slots sustain the max throughput. User units =
 # no sudo needed, but they only run while you're logged in (or while
 # linger is enabled via `loginctl enable-linger <user>` — flagged
 # below).
@@ -48,10 +49,11 @@ EOF
 
 cat > "$TMR" <<EOF
 [Unit]
-Description=Medium auto-publish every 30 minutes (one post per run)
+Description=Medium auto-publish twice daily (09:00, 21:00) — respects Medium's 2-stories/24h cap
 
 [Timer]
-OnCalendar=*:0/30
+OnCalendar=*-*-* 09:00:00
+OnCalendar=*-*-* 21:00:00
 Persistent=true
 Unit=medium-publish.service
 

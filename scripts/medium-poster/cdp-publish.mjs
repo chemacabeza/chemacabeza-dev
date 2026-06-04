@@ -29,6 +29,10 @@ const SITE = process.env.MEDIUM_SITE_URL || 'https://chemacabeza.dev';
 const CDP_URL = process.env.CDP_URL || 'http://127.0.0.1:9222';
 const SOURCE = `${SITE}/writing/${slug}`;
 const IMPORT_URL = `https://medium.com/p/import?url=${encodeURIComponent(SOURCE)}`;
+// When set, publish this EXISTING draft (open its editor) instead of importing
+// — avoids creating duplicate drafts when a prior publish was rate-limited.
+const DRAFT_ID = process.env.MEDIUM_DRAFT_ID || '';
+const EDIT_URL = (id) => `https://medium.com/p/${id}/edit`;
 
 const log = (...a) => console.error('[cdp]', ...a);
 
@@ -57,9 +61,39 @@ async function shot(tag) {
   } catch {}
 }
 
+// Medium caps publishing at 2 stories per 24h. When exceeded it manifests two
+// ways: (1) a transient red banner toast, and (2) the Publish button rendered
+// disabled (data-action="show-disabled-button-info") whose tooltip explains
+// why. Detect both so we back off (exit 4) rather than mistake a blocked
+// publish for success.
+const RATE_RE = /two stories in the past 24 hours|publish or schedule again in 24 hours/i;
+async function rateLimited() {
+  try {
+    // (1) transient toast banner
+    const body = await page.evaluate(() => document.body?.innerText || '');
+    if (RATE_RE.test(body)) return true;
+    // (2) disabled Publish button — hover to reveal the reason tooltip
+    const disabled = page.locator('button[data-action="show-disabled-button-info"]').first();
+    if (await disabled.isVisible({ timeout: 500 }).catch(() => false)) {
+      await disabled.hover().catch(() => {});
+      await page.waitForTimeout(800);
+      const withTip = await page.evaluate(() => document.body?.innerText || '');
+      if (RATE_RE.test(withTip)) return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
 try {
-  log(`navigating to ${IMPORT_URL}`);
-  await page.goto(IMPORT_URL, { waitUntil: 'load', timeout: 60000 });
+  if (DRAFT_ID) {
+    log(`opening existing draft ${DRAFT_ID} (no re-import)`);
+    await page.goto(EDIT_URL(DRAFT_ID), { waitUntil: 'load', timeout: 60000 });
+  } else {
+    log(`navigating to ${IMPORT_URL}`);
+    await page.goto(IMPORT_URL, { waitUntil: 'load', timeout: 60000 });
+  }
   await page.bringToFront();
 
   // Health check (Fix 3): if Medium bounced us to a sign-in / login page,
@@ -76,40 +110,46 @@ try {
     process.exit(3);
   }
 
-  log('waiting for .js-importUrl field');
-  await page.waitForSelector('.js-importUrl', { state: 'attached', timeout: 30000 });
+  if (!DRAFT_ID) {
+    log('waiting for .js-importUrl field');
+    await page.waitForSelector('.js-importUrl', { state: 'attached', timeout: 30000 });
 
-  // Let Medium's framework JS init the contenteditable. If it doesn't,
-  // force it ourselves and keep going.
-  await page
-    .waitForFunction(
-      () => {
-        const el = document.querySelector('.js-importUrl');
-        return el && el.hasAttribute('contenteditable');
-      },
-      { timeout: 10000 },
-    )
-    .catch(() => log('contenteditable not auto-set; forcing'));
+    // Let Medium's framework JS init the contenteditable. If it doesn't,
+    // force it ourselves and keep going.
+    await page
+      .waitForFunction(
+        () => {
+          const el = document.querySelector('.js-importUrl');
+          return el && el.hasAttribute('contenteditable');
+        },
+        { timeout: 10000 },
+      )
+      .catch(() => log('contenteditable not auto-set; forcing'));
 
-  await page.evaluate(() => {
-    const el = document.querySelector('.js-importUrl');
-    el.setAttribute('contenteditable', 'true');
-    el.focus();
-  });
+    await page.evaluate(() => {
+      const el = document.querySelector('.js-importUrl');
+      el.setAttribute('contenteditable', 'true');
+      el.focus();
+    });
 
-  log(`typing source URL: ${SOURCE}`);
-  await page.keyboard.type(SOURCE, { delay: 25 });
-  await page.waitForTimeout(1500);
+    log(`typing source URL: ${SOURCE}`);
+    await page.keyboard.type(SOURCE, { delay: 25 });
+    await page.waitForTimeout(1500);
 
-  // Click Import. Wait for it to be visible AND enabled.
-  log('waiting for enabled Import button');
-  const importBtn = page.locator('button[data-action="import-url"]:not([disabled])').first();
-  await importBtn.waitFor({ state: 'visible', timeout: 10000 });
-  await importBtn.click();
-  log('clicked Import — waiting for redirect to /p/<id>/edit');
+    // Click Import. Wait for it to be visible AND enabled.
+    log('waiting for enabled Import button');
+    const importBtn = page.locator('button[data-action="import-url"]:not([disabled])').first();
+    await importBtn.waitFor({ state: 'visible', timeout: 10000 });
+    await importBtn.click();
+    log('clicked Import — waiting for redirect to /p/<id>/edit');
 
-  await page.waitForURL(/\/p\/[^/]+\/edit/, { timeout: 90000 });
+    await page.waitForURL(/\/p\/[^/]+\/edit/, { timeout: 90000 });
+  }
   log(`reached edit page: ${page.url()}`);
+  // Emit the post id so the caller can persist it — if publishing then fails
+  // (e.g. rate limit), the next run reuses this draft instead of re-importing.
+  const _idMatch = page.url().match(/\/p\/([a-f0-9]+)/);
+  if (_idMatch) log(`MEDIUM_DRAFT_ID=${_idMatch[1]}`);
 
   // Editor needs time to load its toolbar
   await page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => {});
@@ -263,29 +303,34 @@ try {
     throw new Error('Publish button (in prepublish dialog) not found');
   }
 
-  // Wait for the final published article URL. Medium first redirects
-  // off /edit to an intermediate /submission?... page, then to the
-  // canonical /@<user>/<slug>-<id> URL. The script previously stopped at
-  // the first redirect (the /submission URL is not actually browseable
-  // by readers); we want the final public URL.
-  log('waiting for final published article URL');
-  await page.waitForFunction(
-    () => {
-      const p = location.pathname;
-      // canonical Medium article: /@username/slug-postId  OR  /publication/slug-postId
-      return /^\/@[^/]+\/.+-[a-f0-9]{8,}$/.test(p) || /^\/(?!p\/)[^/]+\/.+-[a-f0-9]{8,}$/.test(p);
-    },
-    { timeout: 60000 },
-  ).catch(async (e) => {
-    // Fallback — try resolving the post ID via the /p/<id> shortcut
-    log(`final URL wait timed out; resolving via /p/<id> redirect`);
-    const m = page.url().match(/\/p\/([a-f0-9]+)/);
-    if (m) {
-      await page.goto(`https://medium.com/p/${m[1]}`, { waitUntil: 'load', timeout: 30000 });
-    } else {
-      throw e;
+  // Fast rate-limit check: Medium's "2 stories / 24h" banner appears within a
+  // second or two of clicking Publish. Catch it before the long URL wait.
+  await page.waitForTimeout(2500);
+  if (await rateLimited()) {
+    log('RATE LIMITED — Medium 2-stories/24h cap hit; post left as draft, retry next slot.');
+    await shot('rate-limited');
+    process.exit(4);
+  }
+
+  // STRICT: require the canonical public URL (/@user/slug-id). No /p/<id>
+  // fallback — that previously "resolved" rate-limited drafts and reported
+  // them as published, the exact bug that left 8 silent drafts.
+  log('waiting for PUBLIC published URL (strict)');
+  const reachedPublic = await page
+    .waitForFunction(() => /^\/@[^/]+\/.+-[a-f0-9]{6,}$/.test(location.pathname), { timeout: 60000 })
+    .then(() => true)
+    .catch(() => false);
+
+  if (!reachedPublic) {
+    if (await rateLimited()) {
+      log('RATE LIMITED — Medium 2-stories/24h cap hit; post left as draft, retry next slot.');
+      await shot('rate-limited');
+      process.exit(4);
     }
-  });
+    log(`FAILED: did not reach a public URL (still ${page.url()}); left as draft.`);
+    await shot('not-published');
+    process.exit(1);
+  }
 
   const publishedUrl = page.url();
   log(`published: ${publishedUrl}`);

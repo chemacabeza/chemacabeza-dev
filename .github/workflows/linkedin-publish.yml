@@ -14,8 +14,10 @@ concurrency:
 
 jobs:
   publish:
-    # Skip on the bot's own status-update commits to avoid recursion.
-    if: github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[skip ci]')
+    # Always run when explicitly dispatched (e.g. by linkedin-prep after it
+    # queues a new blurb). For push events, skip the bot's own status-update
+    # commits to avoid recursion.
+    if: github.event_name == 'workflow_dispatch' || (github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, '[skip ci]'))
     runs-on: ubuntu-latest
     permissions:
       contents: write

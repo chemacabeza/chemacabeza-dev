@@ -19,6 +19,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      actions: write # to dispatch linkedin-publish after queueing
     steps:
       - uses: actions/checkout@v4
         with:
@@ -55,6 +56,23 @@ jobs:
             git pull --rebase origin master
           done
 
+      - name: Trigger LinkedIn publish
+        # The queue commit above carries [skip ci] (so Vercel doesn't rebuild and
+        # GitHub doesn't auto-fire workflows), so we explicitly dispatch the
+        # publisher to post the new blurb(s) now. Its own status commit is
+        # [skip ci], so this does not recurse.
+        if: steps.prep.outputs.count != '0' && steps.prep.outputs.count != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'linkedin-publish.yml',
+              ref: 'master',
+            });
+            core.info('Dispatched linkedin-publish.yml to post the new blurb(s).');
+
       - name: Open notification issue
         if: steps.prep.outputs.count != '0' && steps.prep.outputs.count != ''
         uses: actions/github-script@v7
@@ -67,17 +85,13 @@ jobs:
             const count = process.env.COUNT;
             const added = process.env.ADDED.split(',').filter(Boolean);
             const body = process.env.BODY || '';
-            const title = `📝 ${count} new post${count === '1' ? '' : 's'} ready to share on LinkedIn`;
+            const title = `📝 ${count} new post${count === '1' ? '' : 's'} auto-published to LinkedIn`;
             const intro = [
-              `Draft blurbs have been added to \`scripts/linkedin-poster/posts.json\` (commit by github-actions[bot]).`,
+              `Blurbs were added to \`scripts/linkedin-poster/posts.json\` and **the publish workflow was dispatched automatically** — these post to LinkedIn without any manual step.`,
               ``,
-              `To publish:`,
-              `\`\`\`bash`,
-              `git pull`,
-              `node scripts/linkedin-poster/post.mjs --auto`,
-              `\`\`\``,
+              `Check the run: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/workflows/linkedin-publish.yml`,
               ``,
-              `To edit a blurb before publishing, open the queue file:`,
+              `If a blurb needs editing, change it in the queue file and re-run that workflow:`,
               `https://github.com/${context.repo.owner}/${context.repo.repo}/blob/master/scripts/linkedin-poster/posts.json`,
               ``,
               `---`,

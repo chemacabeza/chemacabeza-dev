@@ -231,5 +231,19 @@
     "postedAt": "2026-06-04T09:11:11.289Z",
     "mediumStatus": "published",
     "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-n8n-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-58dc4c2190a6"
+  },
+  {
+    "slug": "the-feynman-guide-to-system-design-interviews",
+    "title": "The Feynman Guide to System Design Interviews",
+    "tags": [
+      "System Design",
+      "Interviews",
+      "Architecture",
+      "Career"
+    ],
+    "scheduledFor": "2026-06-05T19:43:37.403Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

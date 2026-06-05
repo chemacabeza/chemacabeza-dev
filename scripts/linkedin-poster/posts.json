@@ -99,5 +99,11 @@
     "posted": true,
     "postedAt": "2026-06-02T10:40:00.000Z",
     "body": "For over two decades, Java's \"encapsulation\" was a polite suggestion. You could access any class from any JAR — and production classpath collisions proved it daily.\n\nThen came the Java Platform Module System (JPMS). Think of it as replacing a city with no zoning laws with one that has proper districts, guarded gates, and explicit trade agreements between neighborhoods.\n\nI used the Feynman Technique to explain how modules finally gave Java real architectural boundaries — from module-info.java to the end of classpath hell.\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-java-modules\n\n#Java #JPMS #SystemDesign #SoftwareArchitecture #BackendDevelopment"
+  },
+  {
+    "slug": "the-feynman-guide-to-system-design-interviews",
+    "posted": false,
+    "postedAt": null,
+    "body": "Conquering the most dreaded tech interview using the Feynman Technique, GPS navigation analogies, and the architecture of clear thinking.\n\nI just published \"The Feynman Guide to System Design Interviews\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-interviews\n\n#SystemDesign #Interviews #Architecture #Career"
   }
 ]

@@ -44,6 +44,10 @@ yarn-error.log*
 # medium-poster Playwright debug dumps (failure screenshots + HTML)
 /scripts/medium-poster/debug/
 
+# Claude Code local settings + transient state (machine-local, not shared)
+.claude/settings.local.json
+.claude/*.lock
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - 'content/posts/**.mdx'
+  workflow_dispatch: # manual re-kick if a post lands without auto-firing
 
 # One queue update at a time so concurrent merges can't race on posts.json.
 concurrency:

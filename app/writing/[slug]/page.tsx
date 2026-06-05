@@ -6,6 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
 import NewsletterForm from "@/components/NewsletterForm";
+import FollowLinks from "@/components/FollowLinks";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -94,6 +95,9 @@ export default async function PostPage({ params }: Props) {
                 <article className="prose prose-invert sm:prose-lg max-w-none overflow-hidden">
                     <MDXRemote source={content} />
                 </article>
+
+                {/* Cross-posting / archive links — shown on every post */}
+                <FollowLinks />
 
                 <div className="mt-12">
                     <NewsletterForm />

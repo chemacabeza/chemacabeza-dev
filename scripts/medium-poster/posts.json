@@ -242,8 +242,9 @@
       "Career"
     ],
     "scheduledFor": "2026-05-19T00:00:00.000Z",
-    "posted": false,
-    "postedAt": null,
-    "mediumUrl": null
+    "posted": true,
+    "postedAt": "2026-06-05T09:19:08.716Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-system-design-interviews-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-e4e1b89e3577",
+    "mediumStatus": "published"
   }
 ]

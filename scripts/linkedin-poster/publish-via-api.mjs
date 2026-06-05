@@ -53,7 +53,13 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // @mentions, so escaping hashtags would make them render as literal `\#Foo` and kill
 // discoverability (which feeds boost eligibility).
 function formatCommentary(text) {
-  return text.replace(/\\/g, '\\\\');
+  // LinkedIn "Little Text" reserves these characters — unescaped, they can
+  // truncate or mangle the post (an unescaped "(" once cut a post off
+  // mid-sentence, dropping the link + hashtags). Escape each with a backslash.
+  // We deliberately do NOT escape '#' so hashtags stay clickable; blurbs have
+  // no @-mentions. Backslash is in the class, so it's escaped too (handled
+  // in a single pass since replace() doesn't re-scan inserted text).
+  return text.replace(/[\\()[\]{}<>@|~*_]/g, '\\$&');
 }
 
 // Fix 4 — validate the token up front so an expired/invalid token yields one

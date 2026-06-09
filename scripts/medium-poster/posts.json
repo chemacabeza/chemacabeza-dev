@@ -129,9 +129,11 @@
       "LLMs"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false,
-    "mediumDraftId": "2ee552498a0a",
-    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish"
+    "posted": true,
+    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish",
+    "postedAt": "2026-06-09T07:00:37.386Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-the-model-context-protocol-mcp-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-2ee552498a0a"
   },
   {
     "slug": "the-feynman-guide-to-microservices",

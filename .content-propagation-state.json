@@ -510,6 +510,37 @@
       "fullTextPropagated": false,
       "fullTextArtifact": true,
       "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-machine-learning::substack": {
+      "slug": "the-feynman-guide-to-machine-learning",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-machine-learning",
+      "contentHash": "35581bf06ca2e0a5",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T12:59:48.493Z"
+    },
+    "the-feynman-guide-to-machine-learning::medium": {
+      "slug": "the-feynman-guide-to-machine-learning",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-machine-learning",
+      "contentHash": "35581bf06ca2e0a5",
+      "platform": "medium",
+      "platformUrl": "https://medium.com/@chemacabeza/machine-learning-the-feynman-guide-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-d27c05c88dfe?source=rss-b88f2e9b3f39------2",
+      "status": "created",
+      "fullTextPropagated": true,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T12:59:48.493Z"
+    },
+    "the-feynman-guide-to-machine-learning::linkedin": {
+      "slug": "the-feynman-guide-to-machine-learning",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-machine-learning",
+      "contentHash": "35581bf06ca2e0a5",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T12:59:48.493Z"
     }
   }
 }

@@ -280,7 +280,9 @@
       "Algorithms"
     ],
     "date": "2026-06-10",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-06-10T12:49:38.746Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/machine-learning-the-feynman-guide"
   }
 ]
-

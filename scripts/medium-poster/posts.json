@@ -252,5 +252,19 @@
     "postedAt": "2026-06-05T09:19:08.716Z",
     "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-system-design-interviews-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-e4e1b89e3577",
     "mediumStatus": "published"
+  },
+  {
+    "slug": "the-feynman-guide-to-machine-learning",
+    "title": "Machine Learning: The Feynman Guide",
+    "tags": [
+      "AI",
+      "Machine Learning",
+      "Data Science",
+      "Algorithms"
+    ],
+    "scheduledFor": "2026-06-11T00:29:09.379Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

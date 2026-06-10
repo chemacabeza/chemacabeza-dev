@@ -33,6 +33,15 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!/.env.example
+
+# content-propagation generated artifacts live under /out/ (already ignored above).
+# The sync state file .content-propagation-state.json IS committed on purpose
+# (non-secret mapping data — see lib/propagation/state.ts).
+
+# substack-poster transient run logs (machine-local)
+/scripts/substack-poster/*.log
+/scripts/substack-poster/run.out
 
 # vercel
 .vercel

@@ -109,8 +109,9 @@
   },
   {
     "slug": "the-feynman-guide-to-machine-learning",
-    "posted": false,
-    "postedAt": null,
-    "body": "Demystifying the core engine of modern AI using the Feynman Technique, kitchen apprentice analogies, and the mathematics of clean thinking.\n\nI just published \"Machine Learning: The Feynman Guide\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-machine-learning\n\n#AI #MachineLearning #DataScience #Algorithms"
+    "posted": true,
+    "postedAt": "2026-06-10T12:29:24.292Z",
+    "body": "Demystifying the core engine of modern AI using the Feynman Technique, kitchen apprentice analogies, and the mathematics of clean thinking.\n\nI just published \"Machine Learning: The Feynman Guide\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-machine-learning\n\n#AI #MachineLearning #DataScience #Algorithms",
+    "linkedinPostId": "urn:li:share:7470452054683971585"
   }
 ]

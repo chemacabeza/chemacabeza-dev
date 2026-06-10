@@ -1,0 +1,272 @@
+[
+  {
+    "slug": "monolith-vs-microservices",
+    "title": "Modular monolith vs microservices: a practical guide",
+    "subtitle": "Stop treating modular monolith and microservices as a binary choice. Here is a framework for thinking about the right architecture at the right stage.",
+    "tags": [
+      "Architecture",
+      "Microservices",
+      "Engineering"
+    ],
+    "date": "2025-02-10",
+    "posted": true,
+    "postedAt": "2026-06-10T04:43:09.085Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/modular-monolith-vs-microservices"
+  },
+  {
+    "slug": "performance-is-a-product-feature",
+    "title": "Performance is a product feature",
+    "subtitle": "We treat performance as a non-functional requirement — something to address after the product is built. That is a mistake. Performance is product.",
+    "tags": [
+      "Performance",
+      "Product",
+      "Backend Systems"
+    ],
+    "date": "2025-03-01",
+    "posted": true,
+    "postedAt": "2026-06-10T04:43:59.437Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/performance-is-a-product-feature"
+  },
+  {
+    "slug": "the-feynman-guide-to-microservices",
+    "title": "Microservices vs Monoliths: The Feynman Explanation",
+    "subtitle": "Understanding the most debated architectural trade-off in software engineering using the Feynman Technique, visual analogies, and insights from industry giants.",
+    "tags": [
+      "System Design",
+      "Architecture",
+      "Microservices",
+      "Monoliths"
+    ],
+    "date": "2026-04-09",
+    "posted": true,
+    "postedAt": "2026-06-10T04:44:50.546Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/microservices-vs-monoliths-the-feynman"
+  },
+  {
+    "slug": "the-feynman-guide-to-ddd",
+    "title": "Domain-Driven Design: The Feynman Explanation",
+    "subtitle": "Tackling software complexity at its heart. Understanding Domain-Driven Design (DDD) through simple analogies, from Strategic modeling down to Tactical patterns.",
+    "tags": [
+      "System Design",
+      "Architecture",
+      "Domain-Driven Design",
+      "Software Engineering"
+    ],
+    "date": "2026-04-10",
+    "posted": true,
+    "postedAt": "2026-06-10T04:45:41.178Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/domain-driven-design-the-feynman"
+  },
+  {
+    "slug": "the-feynman-guide-to-serverless",
+    "title": "Serverless Computing: The Feynman Explanation",
+    "subtitle": "Demystifying Serverless architecture using the Feynman Technique, food truck analogies, and the evolution of the cloud.",
+    "tags": [
+      "System Design",
+      "Architecture",
+      "Serverless",
+      "Cloud"
+    ],
+    "date": "2026-04-10",
+    "posted": true,
+    "postedAt": "2026-06-10T04:46:31.034Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/serverless-computing-the-feynman"
+  },
+  {
+    "slug": "the-feynman-guide-to-llms",
+    "title": "Large Language Models: The Feynman Guide",
+    "subtitle": "How do computers learn to speak? Using the Feynman Technique to demystify the internal world of LLMs—from the Attention mechanism to the secrets of RAG.",
+    "tags": [
+      "AI",
+      "LLMs",
+      "Machine Learning",
+      "NLP"
+    ],
+    "date": "2026-04-11",
+    "posted": true,
+    "postedAt": "2026-06-10T04:47:20.971Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/large-language-models-the-feynman"
+  },
+  {
+    "slug": "the-feynman-guide-to-vim",
+    "title": "VIM: The Feynman Guide",
+    "subtitle": "Why is a text editor from 1991 still the gold standard for high-performance engineering? Demystifying Vim using the Feynman Technique—from Modal Editing to the Grammar of Motion.",
+    "tags": [
+      "Vim",
+      "Engineering",
+      "Productivity",
+      "Linux"
+    ],
+    "date": "2026-04-14",
+    "posted": true,
+    "postedAt": "2026-06-10T04:41:40.737Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/vim-the-feynman-guide"
+  },
+  {
+    "slug": "the-feynman-guide-to-co-intelligence",
+    "title": "The Feynman Guide to Co-Intelligence",
+    "subtitle": "Why LLMs are like talented parrots, and how we bridge the gap to true digital partnership using Agents.",
+    "tags": [
+      "LLMs",
+      "AI Agents",
+      "Co-Intelligence",
+      "Feynman Technique"
+    ],
+    "date": "2026-04-16",
+    "posted": true,
+    "postedAt": "2026-06-10T04:48:10.470Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-co-intelligence"
+  },
+  {
+    "slug": "why-microservices-fail",
+    "title": "Why most microservices architectures fail",
+    "subtitle": "Microservices promise scalability and autonomy. Most implementations deliver the opposite. A Feynman-style breakdown of the five failure modes that kill distributed systems — and what to do instead.",
+    "tags": [
+      "Microservices",
+      "Architecture",
+      "Distributed Systems",
+      "System Design"
+    ],
+    "date": "2026-04-18",
+    "posted": true,
+    "postedAt": "2026-06-10T04:49:00.993Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/why-most-microservices-architectures"
+  },
+  {
+    "slug": "the-feynman-guide-to-software-architecture",
+    "title": "The Feynman Guide to Software Architecture",
+    "subtitle": "Understanding complex software design using simple analogies. A synthesis of the O'Reilly 2024 Architecture collection.",
+    "tags": [
+      "Software Architecture",
+      "System Design",
+      "Microservices",
+      "DDD"
+    ],
+    "date": "2026-04-25",
+    "posted": true,
+    "postedAt": "2026-06-10T04:49:50.764Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-software-architecture"
+  },
+  {
+    "slug": "how-system-design-fails",
+    "title": "How System Design Fails: A Visual Guide",
+    "subtitle": "Why distributed architectures break down, explained simply using core principles from DDIA, Software Architecture: The Hard Parts, and more.",
+    "tags": [
+      "System Design",
+      "Software Architecture",
+      "DDIA",
+      "Microservices"
+    ],
+    "date": "2026-04-28",
+    "posted": true,
+    "postedAt": "2026-06-10T04:50:40.599Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/how-system-design-fails-a-visual"
+  },
+  {
+    "slug": "the-feynman-guide-to-mcp",
+    "title": "The Feynman Guide to the Model Context Protocol (MCP)",
+    "subtitle": "Understanding the future of AI agents using simple analogies. A synthesis of the latest Model Context Protocol literature.",
+    "tags": [
+      "AI Agents",
+      "System Design",
+      "MCP",
+      "LLMs"
+    ],
+    "date": "2026-04-29",
+    "posted": true,
+    "postedAt": "2026-06-10T04:51:30.668Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-the-model-context"
+  },
+  {
+    "slug": "the-feynman-guide-to-apache-kafka",
+    "title": "The Feynman Guide to Apache Kafka",
+    "subtitle": "Understanding the nervous system of modern data architectures. A synthesis of core Kafka literature using simple analogies.",
+    "tags": [
+      "Apache Kafka",
+      "System Design",
+      "Event Streaming",
+      "Distributed Systems"
+    ],
+    "date": "2026-04-30",
+    "posted": true,
+    "postedAt": "2026-06-10T04:52:19.658Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-apache-kafka"
+  },
+  {
+    "slug": "the-feynman-guide-to-cdns",
+    "title": "The Feynman Guide to Content Delivery Networks",
+    "subtitle": "Demystifying how the internet delivers content at lightning speed using the Feynman Technique, pizza analogies, and the hidden magic of edge servers.",
+    "tags": [
+      "CDN",
+      "System Design",
+      "Networking",
+      "Performance"
+    ],
+    "date": "2026-05-25",
+    "posted": true,
+    "postedAt": "2026-06-10T04:53:09.832Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-content-delivery"
+  },
+  {
+    "slug": "the-feynman-guide-to-java-modules",
+    "title": "The Feynman Guide to Java Modules",
+    "subtitle": "Escaping Classpath Hell: understanding the Java Platform Module System using the Feynman Technique, city analogies, and the architecture of modern Java.",
+    "tags": [
+      "Java",
+      "JPMS",
+      "System Design",
+      "Architecture"
+    ],
+    "date": "2026-05-26",
+    "posted": true,
+    "postedAt": "2026-06-10T04:54:00.017Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-java-modules"
+  },
+  {
+    "slug": "the-feynman-guide-to-n8n",
+    "title": "The Feynman Guide to n8n",
+    "subtitle": "From digital chaos to automated workflows: understanding n8n, node-based automation, and autonomous AI agents using the Feynman Technique and Lego analogies.",
+    "tags": [
+      "n8n",
+      "Automation",
+      "AI Agents",
+      "System Design"
+    ],
+    "date": "2026-05-28",
+    "posted": true,
+    "postedAt": "2026-06-10T04:54:50.367Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-n8n"
+  },
+  {
+    "slug": "the-feynman-guide-to-system-design-interviews",
+    "title": "The Feynman Guide to System Design Interviews",
+    "subtitle": "Conquering the most dreaded tech interview using the Feynman Technique, GPS navigation analogies, and the architecture of clear thinking.",
+    "tags": [
+      "System Design",
+      "Interviews",
+      "Architecture",
+      "Career"
+    ],
+    "date": "2026-06-05",
+    "posted": true,
+    "postedAt": "2026-06-10T04:55:40.850Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-system-design"
+  }
+]

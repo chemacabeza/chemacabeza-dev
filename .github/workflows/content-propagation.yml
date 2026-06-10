@@ -1,0 +1,57 @@
+name: Content propagation
+
+# Manual only. NEVER runs on push. Defaults to dry-run; publishing requires
+# explicitly setting dry_run=false. Credentials come from GitHub Secrets and are
+# never written to the repo.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Run without publishing"
+        type: boolean
+        default: true
+      slug:
+        description: "Optional post slug (blank = all)"
+        required: false
+      platform:
+        description: "substack, medium, linkedin, or all"
+        default: "all"
+
+permissions:
+  contents: read
+
+jobs:
+  propagate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Propagate
+        env:
+          SITE_BASE_URL: https://chemacabeza.dev
+          SUBSTACK_PUBLICATION_URL: https://chemacabeza.substack.com
+          MEDIUM_INTEGRATION_TOKEN: ${{ secrets.MEDIUM_INTEGRATION_TOKEN }}
+          MEDIUM_AUTHOR_ID: ${{ secrets.MEDIUM_AUTHOR_ID }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+        run: |
+          ARGS="--platform ${{ inputs.platform }}"
+          if [ -n "${{ inputs.slug }}" ]; then ARGS="$ARGS --slug ${{ inputs.slug }}"; else ARGS="$ARGS --all"; fi
+          if [ "${{ inputs.dry_run }}" = "false" ]; then ARGS="$ARGS --publish"; else ARGS="$ARGS --dry-run"; fi
+          echo "Running: npm run propagate:posts -- $ARGS"
+          npm run propagate:posts -- $ARGS
+
+      - name: Upload generated artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crosspost-artifacts
+          path: out/crosspost/
+          if-no-files-found: ignore

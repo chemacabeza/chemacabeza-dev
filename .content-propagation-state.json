@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "records": {
+    "the-feynman-guide-to-system-design-interviews::substack": {
+      "slug": "the-feynman-guide-to-system-design-interviews",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-interviews",
+      "contentHash": "b2a1f2d5d479072d",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-system-design-interviews::medium": {
+      "slug": "the-feynman-guide-to-system-design-interviews",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-interviews",
+      "contentHash": "b2a1f2d5d479072d",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-system-design-interviews::linkedin": {
+      "slug": "the-feynman-guide-to-system-design-interviews",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-interviews",
+      "contentHash": "b2a1f2d5d479072d",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-n8n::substack": {
+      "slug": "the-feynman-guide-to-n8n",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-n8n",
+      "contentHash": "a6e52c6691f48aab",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-n8n::medium": {
+      "slug": "the-feynman-guide-to-n8n",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-n8n",
+      "contentHash": "a6e52c6691f48aab",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-n8n::linkedin": {
+      "slug": "the-feynman-guide-to-n8n",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-n8n",
+      "contentHash": "a6e52c6691f48aab",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-java-modules::substack": {
+      "slug": "the-feynman-guide-to-java-modules",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-java-modules",
+      "contentHash": "9f1eed4d725096e0",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-java-modules::medium": {
+      "slug": "the-feynman-guide-to-java-modules",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-java-modules",
+      "contentHash": "9f1eed4d725096e0",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-java-modules::linkedin": {
+      "slug": "the-feynman-guide-to-java-modules",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-java-modules",
+      "contentHash": "9f1eed4d725096e0",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-cdns::substack": {
+      "slug": "the-feynman-guide-to-cdns",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-cdns",
+      "contentHash": "d3298343d3949ed7",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-cdns::medium": {
+      "slug": "the-feynman-guide-to-cdns",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-cdns",
+      "contentHash": "d3298343d3949ed7",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-cdns::linkedin": {
+      "slug": "the-feynman-guide-to-cdns",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-cdns",
+      "contentHash": "d3298343d3949ed7",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-apache-kafka::substack": {
+      "slug": "the-feynman-guide-to-apache-kafka",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka",
+      "contentHash": "8a21b99e5a033da8",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-apache-kafka::medium": {
+      "slug": "the-feynman-guide-to-apache-kafka",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka",
+      "contentHash": "8a21b99e5a033da8",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-apache-kafka::linkedin": {
+      "slug": "the-feynman-guide-to-apache-kafka",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka",
+      "contentHash": "8a21b99e5a033da8",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-mcp::substack": {
+      "slug": "the-feynman-guide-to-mcp",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-mcp",
+      "contentHash": "c5bad5e8a06552ea",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-mcp::medium": {
+      "slug": "the-feynman-guide-to-mcp",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-mcp",
+      "contentHash": "c5bad5e8a06552ea",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-mcp::linkedin": {
+      "slug": "the-feynman-guide-to-mcp",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-mcp",
+      "contentHash": "c5bad5e8a06552ea",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "how-system-design-fails::substack": {
+      "slug": "how-system-design-fails",
+      "canonicalUrl": "https://chemacabeza.dev/writing/how-system-design-fails",
+      "contentHash": "66a4eaf7e8acc39f",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "how-system-design-fails::medium": {
+      "slug": "how-system-design-fails",
+      "canonicalUrl": "https://chemacabeza.dev/writing/how-system-design-fails",
+      "contentHash": "66a4eaf7e8acc39f",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "how-system-design-fails::linkedin": {
+      "slug": "how-system-design-fails",
+      "canonicalUrl": "https://chemacabeza.dev/writing/how-system-design-fails",
+      "contentHash": "66a4eaf7e8acc39f",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-software-architecture::substack": {
+      "slug": "the-feynman-guide-to-software-architecture",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-software-architecture",
+      "contentHash": "f0f01930511a0ed6",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-software-architecture::medium": {
+      "slug": "the-feynman-guide-to-software-architecture",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-software-architecture",
+      "contentHash": "f0f01930511a0ed6",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-software-architecture::linkedin": {
+      "slug": "the-feynman-guide-to-software-architecture",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-software-architecture",
+      "contentHash": "f0f01930511a0ed6",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "why-microservices-fail::substack": {
+      "slug": "why-microservices-fail",
+      "canonicalUrl": "https://chemacabeza.dev/writing/why-microservices-fail",
+      "contentHash": "0d130fcaa7e31c30",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "why-microservices-fail::medium": {
+      "slug": "why-microservices-fail",
+      "canonicalUrl": "https://chemacabeza.dev/writing/why-microservices-fail",
+      "contentHash": "0d130fcaa7e31c30",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "why-microservices-fail::linkedin": {
+      "slug": "why-microservices-fail",
+      "canonicalUrl": "https://chemacabeza.dev/writing/why-microservices-fail",
+      "contentHash": "0d130fcaa7e31c30",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-co-intelligence::substack": {
+      "slug": "the-feynman-guide-to-co-intelligence",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-co-intelligence",
+      "contentHash": "ae4639ad10f40ca7",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-co-intelligence::medium": {
+      "slug": "the-feynman-guide-to-co-intelligence",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-co-intelligence",
+      "contentHash": "ae4639ad10f40ca7",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-co-intelligence::linkedin": {
+      "slug": "the-feynman-guide-to-co-intelligence",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-co-intelligence",
+      "contentHash": "ae4639ad10f40ca7",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-vim::substack": {
+      "slug": "the-feynman-guide-to-vim",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-vim",
+      "contentHash": "e2a9fec35f1b055c",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-vim::medium": {
+      "slug": "the-feynman-guide-to-vim",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-vim",
+      "contentHash": "e2a9fec35f1b055c",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-vim::linkedin": {
+      "slug": "the-feynman-guide-to-vim",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-vim",
+      "contentHash": "e2a9fec35f1b055c",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-llms::substack": {
+      "slug": "the-feynman-guide-to-llms",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-llms",
+      "contentHash": "159528e3f465ddc7",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-llms::medium": {
+      "slug": "the-feynman-guide-to-llms",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-llms",
+      "contentHash": "159528e3f465ddc7",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-llms::linkedin": {
+      "slug": "the-feynman-guide-to-llms",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-llms",
+      "contentHash": "159528e3f465ddc7",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-ddd::substack": {
+      "slug": "the-feynman-guide-to-ddd",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-ddd",
+      "contentHash": "5dc35c91aa3aa07c",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-ddd::medium": {
+      "slug": "the-feynman-guide-to-ddd",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-ddd",
+      "contentHash": "5dc35c91aa3aa07c",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-ddd::linkedin": {
+      "slug": "the-feynman-guide-to-ddd",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-ddd",
+      "contentHash": "5dc35c91aa3aa07c",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-serverless::substack": {
+      "slug": "the-feynman-guide-to-serverless",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-serverless",
+      "contentHash": "ecb048a3a6f715a9",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-serverless::medium": {
+      "slug": "the-feynman-guide-to-serverless",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-serverless",
+      "contentHash": "ecb048a3a6f715a9",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-serverless::linkedin": {
+      "slug": "the-feynman-guide-to-serverless",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-serverless",
+      "contentHash": "ecb048a3a6f715a9",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-microservices::substack": {
+      "slug": "the-feynman-guide-to-microservices",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-microservices",
+      "contentHash": "b1b9d7c65c6c86b6",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-microservices::medium": {
+      "slug": "the-feynman-guide-to-microservices",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-microservices",
+      "contentHash": "b1b9d7c65c6c86b6",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "the-feynman-guide-to-microservices::linkedin": {
+      "slug": "the-feynman-guide-to-microservices",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-microservices",
+      "contentHash": "b1b9d7c65c6c86b6",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "performance-is-a-product-feature::substack": {
+      "slug": "performance-is-a-product-feature",
+      "canonicalUrl": "https://chemacabeza.dev/writing/performance-is-a-product-feature",
+      "contentHash": "7e905c757a3d80bd",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "performance-is-a-product-feature::medium": {
+      "slug": "performance-is-a-product-feature",
+      "canonicalUrl": "https://chemacabeza.dev/writing/performance-is-a-product-feature",
+      "contentHash": "7e905c757a3d80bd",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "performance-is-a-product-feature::linkedin": {
+      "slug": "performance-is-a-product-feature",
+      "canonicalUrl": "https://chemacabeza.dev/writing/performance-is-a-product-feature",
+      "contentHash": "7e905c757a3d80bd",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "monolith-vs-microservices::substack": {
+      "slug": "monolith-vs-microservices",
+      "canonicalUrl": "https://chemacabeza.dev/writing/monolith-vs-microservices",
+      "contentHash": "ea64128db2f65701",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "monolith-vs-microservices::medium": {
+      "slug": "monolith-vs-microservices",
+      "canonicalUrl": "https://chemacabeza.dev/writing/monolith-vs-microservices",
+      "contentHash": "ea64128db2f65701",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    },
+    "monolith-vs-microservices::linkedin": {
+      "slug": "monolith-vs-microservices",
+      "canonicalUrl": "https://chemacabeza.dev/writing/monolith-vs-microservices",
+      "contentHash": "ea64128db2f65701",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+    }
+  }
+}

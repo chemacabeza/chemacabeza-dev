@@ -10,13 +10,17 @@
     "linkedin:setup": "node scripts/linkedin-poster/setup-auth.mjs",
     "linkedin:publish": "node scripts/linkedin-poster/publish-via-api.mjs",
     "medium:prep": "node .github/scripts/prepare-medium-posts.mjs",
-    "medium:publish": "node scripts/medium-poster/publish-via-import.mjs"
+    "medium:publish": "node scripts/medium-poster/publish-via-import.mjs",
+    "propagate:posts": "tsx scripts/propagate/cli.ts",
+    "validate:post-propagation": "tsx scripts/propagate/validate.ts",
+    "test": "node --import tsx --test tests/*.test.ts"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.577.0",
+    "marked": "^15.0.6",
     "next": "16.2.0",
     "next-mdx-remote": "^6.0.0",
     "react": "19.2.4",
@@ -33,6 +37,7 @@
     "eslint-config-next": "16.2.0",
     "playwright": "^1.60.0",
     "tailwindcss": "4.0.0",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   },
   "engines": {

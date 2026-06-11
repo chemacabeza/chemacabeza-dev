@@ -126,7 +126,7 @@ body {
   color: #a5b4fc;
 }
 
-.prose code {
+.prose code:not(.hljs) {
   color: #a5b4fc;
   background: #1e293b;
   padding: 0.15em 0.4em;
@@ -135,7 +135,7 @@ body {
 }
 
 .prose pre {
-  background: #0f172a;
+  background: #282c34; /* Match atom-one-dark */
   border: 1px solid #1e293b;
   border-radius: 8px;
   overflow-x: auto;

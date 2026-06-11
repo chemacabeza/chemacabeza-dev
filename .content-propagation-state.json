@@ -124,32 +124,32 @@
     "the-feynman-guide-to-apache-kafka::substack": {
       "slug": "the-feynman-guide-to-apache-kafka",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka",
-      "contentHash": "8a21b99e5a033da8",
+      "contentHash": "893bf88053019424",
       "platform": "substack",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+      "lastSyncedAt": "2026-06-11T10:17:39.790Z"
     },
     "the-feynman-guide-to-apache-kafka::medium": {
       "slug": "the-feynman-guide-to-apache-kafka",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka",
-      "contentHash": "8a21b99e5a033da8",
+      "contentHash": "893bf88053019424",
       "platform": "medium",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+      "lastSyncedAt": "2026-06-11T10:17:39.790Z"
     },
     "the-feynman-guide-to-apache-kafka::linkedin": {
       "slug": "the-feynman-guide-to-apache-kafka",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka",
-      "contentHash": "8a21b99e5a033da8",
+      "contentHash": "893bf88053019424",
       "platform": "linkedin",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-10T09:10:01.667Z"
+      "lastSyncedAt": "2026-06-11T10:17:39.790Z"
     },
     "the-feynman-guide-to-mcp::substack": {
       "slug": "the-feynman-guide-to-mcp",

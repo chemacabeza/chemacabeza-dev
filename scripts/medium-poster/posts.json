@@ -191,9 +191,11 @@
       "Linux"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false,
-    "mediumDraftId": "8cbb342ea39b",
-    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish"
+    "posted": true,
+    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish",
+    "postedAt": "2026-06-11T07:01:32.740Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/vim-the-feynman-guide-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-8cbb342ea39b"
   },
   {
     "slug": "why-microservices-fail",

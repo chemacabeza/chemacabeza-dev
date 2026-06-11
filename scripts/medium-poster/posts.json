@@ -268,5 +268,19 @@
     "posted": false,
     "postedAt": null,
     "mediumUrl": null
+  },
+  {
+    "slug": "the-feynman-guide-to-okrs",
+    "title": "The Feynman Guide to OKRs: Engineering Strategy Execution",
+    "tags": [
+      "Management",
+      "Strategy",
+      "System Design",
+      "Leadership"
+    ],
+    "scheduledFor": "2026-06-12T04:28:51.529Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

@@ -1,0 +1,31 @@
+name: Crosspost
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  crosspost:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/chemacabeza-crosspost
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: tools/chemacabeza-crosspost/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm dev publish --strict
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
+          MEDIUM_TOKEN: ${{ secrets.MEDIUM_TOKEN }}
+          SUBSTACK_MODE: manual
+          DRY_RUN: "false"

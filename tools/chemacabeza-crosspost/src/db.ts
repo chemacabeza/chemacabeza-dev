@@ -106,6 +106,18 @@ export class Db {
     return changed;
   }
 
+  getSourceMeta(
+    sourceUrl: string,
+  ): { sourceUrl: string; slug: string; title: string } | undefined {
+    return this.sqlite
+      .prepare(
+        `SELECT source_url AS sourceUrl, slug, title FROM source_articles WHERE source_url = ?`,
+      )
+      .get(sourceUrl) as
+      | { sourceUrl: string; slug: string; title: string }
+      | undefined;
+  }
+
   getPublication(
     sourceUrl: string,
     target: TargetName,

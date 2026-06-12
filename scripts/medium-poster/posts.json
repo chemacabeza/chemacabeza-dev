@@ -282,5 +282,20 @@
     "posted": false,
     "postedAt": null,
     "mediumUrl": null
+  },
+  {
+    "slug": "the-feynman-guide-to-effective-ai",
+    "title": "The Feynman Guide to Effective AI: Building a $10M Business with Zero Employees",
+    "tags": [
+      "AI",
+      "Management",
+      "Strategy",
+      "System Design",
+      "Automation"
+    ],
+    "scheduledFor": "2026-06-12T19:45:00.489Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

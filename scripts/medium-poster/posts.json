@@ -207,9 +207,11 @@
       "System Design"
     ],
     "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": false,
-    "mediumDraftId": "752536d26e9f",
-    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish"
+    "posted": true,
+    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish",
+    "postedAt": "2026-06-12T19:00:56.295Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/why-most-microservices-architectures-fail-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-752536d26e9f"
   },
   {
     "slug": "the-feynman-guide-to-java-modules",

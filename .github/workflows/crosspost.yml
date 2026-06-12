@@ -22,7 +22,7 @@ jobs:
           cache: pnpm
           cache-dependency-path: tools/chemacabeza-crosspost/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
-      - run: pnpm dev publish --strict
+      - run: pnpm dev publish
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}

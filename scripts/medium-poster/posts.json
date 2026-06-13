@@ -223,9 +223,11 @@
       "Architecture"
     ],
     "scheduledFor": "2026-05-28T20:05:10.980Z",
-    "posted": false,
-    "mediumDraftId": "649454c1a9a6",
-    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish"
+    "posted": true,
+    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish",
+    "postedAt": "2026-06-13T19:01:08.407Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-java-modules-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-649454c1a9a6"
   },
   {
     "slug": "the-feynman-guide-to-n8n",

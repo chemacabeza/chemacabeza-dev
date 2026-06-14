@@ -284,9 +284,10 @@
       "Leadership"
     ],
     "scheduledFor": "2026-06-12T04:28:51.529Z",
-    "posted": false,
-    "postedAt": null,
-    "mediumUrl": null
+    "posted": true,
+    "postedAt": "2026-06-14T19:01:32.457Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-okrs-engineering-strategy-execution-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-9d3d2a6065bb",
+    "mediumStatus": "published"
   },
   {
     "slug": "the-feynman-guide-to-effective-ai",

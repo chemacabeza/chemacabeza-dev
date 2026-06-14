@@ -130,8 +130,9 @@
   },
   {
     "slug": "how-not-to-tackle-a-system-design-interview",
-    "posted": false,
-    "postedAt": null,
-    "body": "Avoiding the most common System Design Interview traps using the Feynman Technique—from prescribing without diagnosis to delivering a single pizza in an 18-wheeler.\n\nI just published \"How NOT to Tackle a System Design Interview\".\n\nRead it → https://chemacabeza.dev/writing/how-not-to-tackle-a-system-design-interview\n\n#SystemDesign #Interviews #Architecture #Career"
+    "posted": true,
+    "postedAt": "2026-06-14T07:50:26.560Z",
+    "body": "Avoiding the most common System Design Interview traps using the Feynman Technique—from prescribing without diagnosis to delivering a single pizza in an 18-wheeler.\n\nI just published \"How NOT to Tackle a System Design Interview\".\n\nRead it → https://chemacabeza.dev/writing/how-not-to-tackle-a-system-design-interview\n\n#SystemDesign #Interviews #Architecture #Career",
+    "linkedinPostId": "urn:li:share:7471831402829791232"
   }
 ]

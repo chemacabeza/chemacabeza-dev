@@ -1,0 +1,105 @@
+---
+title: "How NOT to Tackle a System Design Interview"
+description: "Avoiding the most common System Design Interview traps using the Feynman Technique—from prescribing without diagnosis to delivering a single pizza in an 18-wheeler."
+date: "2026-06-14"
+tags: ["System Design", "Interviews", "Architecture", "Career"]
+featured: false
+---
+
+The System Design Interview (SDI) is the ultimate Rorschach test for software engineers. Handed a blank whiteboard and a vague prompt like "Design Twitter," candidates reveal exactly how they approach complex, ambiguous problems. 
+
+Having analyzed the defining literature on system design—from Alex Xu's *System Design Interview* to Martin Kleppmann's *Designing Data-Intensive Applications* and Zhiyong Tan's frameworks—I've noticed a pattern. The people who fail these interviews rarely fail because they don't know enough technologies. They fail because of *how* they approach the problem.
+
+Let's use the **Richard Feynman Technique**—translating complex scenarios into simple, everyday analogies—to explore the four most common ways engineers sabotage their own System Design Interviews, and how to avoid them.
+
+---
+
+## 1. The Prescription Without Diagnosis (Jumping to Architecture)
+
+Imagine walking into a doctor's office with a mild headache. Before you can even sit down or explain your symptoms, the doctor shoves a massive bottle of heavy-duty prescription painkillers into your hands and yells, "Take these!" 
+
+You'd run out of the room. Yet, this is exactly what happens in an SDI.
+
+<div align="center">
+
+![The Prescription Without Diagnosis](/images/writing/sdi-mistake-doctor.png)
+*The Prescription Without Diagnosis: Prescribing a complex architecture before asking a single clarifying question about the requirements.*
+
+</div>
+
+The interviewer says, "Design a URL shortener," and the candidate immediately replies: *"Okay, I'll use a cluster of Node.js microservices, a Cassandra database for high write throughput, and Redis for caching!"*
+
+**Why this fails:** You just prescribed medicine without examining the patient. System design prompts are intentionally vague. Are we building this for 10 users or 10 million? Do the links expire? Do we need analytics? 
+
+**The Fix:** Be the doctor. Spend the first 10-15 minutes gathering **Functional Requirements** (what it must do) and **Non-Functional Requirements** (scale, latency, availability). Never draw a box until you understand the scope.
+
+---
+
+## 2. The Infinite Teacup (Ignoring Estimation)
+
+Imagine trying to pour an entire roaring waterfall into a delicate, 4-ounce porcelain teacup. No matter how nice the teacup is, it's going to overflow instantly.
+
+<div align="center">
+
+![The Infinite Teacup](/images/writing/sdi-mistake-teacup.png)
+*The Infinite Teacup: Designing a system without running back-of-the-envelope calculations, assuming infinite resources or vastly underestimating scale.*
+
+</div>
+
+In the interview, this happens when candidates design a system without doing any **back-of-the-envelope estimation**. They might propose storing all daily analytics events in a single relational database instance. 
+
+**Why this fails:** If you don't calculate the math, you don't know if your design actually works. If your system ingests 1 million events per second, at 1KB per event, that's 1GB per second, or roughly 86 Terabytes per day. A single PostgreSQL instance on standard hardware is going to melt.
+
+**The Fix:** Calculate the flow of the waterfall. Estimate your read/write ratio, Requests Per Second (RPS), and storage requirements for the next 5 years. These numbers will mathematically prove whether you need a cache, whether you need to shard your database, and what kind of network bandwidth you require.
+
+---
+
+## 3. The Semi-Truck Pizza Delivery (Over-Engineering & Buzzword Dropping)
+
+You order a single medium pepperoni pizza. Twenty minutes later, an enormous, 18-wheeler, heavy-duty semi-truck with a roaring diesel engine pulls up to your driveway just to hand you that one small box.
+
+<div align="center">
+
+![The Semi-Truck Pizza Delivery](/images/writing/sdi-mistake-pizza-truck.png)
+*The Semi-Truck Pizza Delivery: Using massively complex, enterprise-grade distributed systems to solve a problem that could be handled by a simple monolith.*
+
+</div>
+
+This is the most common trap for eager candidates. They want to show off everything they know. So, to design a simple internal dashboard used by 50 employees, they propose a Kubernetes-orchestrated, event-driven microservices architecture using Apache Kafka and gRPC.
+
+**Why this fails:** Every technology introduces complexity, latency, and operational overhead. In the real world, you don't hire a semi-truck for a pizza. Interviewers view "resume-driven development" and unnecessary complexity as a massive red flag. 
+
+**The Fix:** Start simple. Propose the simplest possible architecture that meets the requirements (e.g., a load balancer, a single web server, and a relational DB). Only introduce complex technologies (like message queues or NoSQL clusters) when the simple design hits a specific bottleneck.
+
+---
+
+## 4. The Indestructible Sinking Bridge (Ignoring Trade-offs)
+
+An engineer is tasked with building a bridge. To ensure it absolutely never breaks under any circumstances, they build it out of the thickest, heaviest solid steel and concrete possible. It's truly indestructible! But it's so heavy that it instantly sinks into the mud at the bottom of the river. 
+
+<div align="center">
+
+![The Indestructible Bridge](/images/writing/sdi-mistake-bridge.png)
+*The Indestructible Sinking Bridge: Designing for "perfect" consistency and availability without acknowledging the reality of architectural trade-offs.*
+
+</div>
+
+In an interview, candidates often try to design a "perfect" system. When asked how they will handle database replication, they might say, "We'll use synchronous replication across five global data centers so we never lose data." 
+
+**Why this fails:** They forgot the **CAP Theorem** (you can only have two of Consistency, Availability, and Partition Tolerance). Synchronous global replication means every single write must wait for five data centers across the world to acknowledge it. The system will be perfectly consistent, but so incredibly slow that it's practically unavailable. It sinks under its own weight.
+
+**The Fix:** Acknowledge that architecture is about **trade-offs**, not perfection. When you make a design choice, explicitly tell the interviewer what you are sacrificing. *"We will use asynchronous replication here to maintain high availability and low latency, but the trade-off is that we accept eventual consistency and minor data loss in a failover scenario."*
+
+---
+
+## Conclusion
+
+A System Design Interview isn't a test of whether you've memorized the architecture of Netflix. It's an evaluation of your engineering maturity.
+
+The next time you walk into an SDI, remember:
+1. **Don't prescribe without diagnosing** (ask requirements).
+2. **Don't pour an ocean into a teacup** (do the math).
+3. **Don't deliver a pizza in a semi-truck** (keep it simple).
+4. **Don't build a sinking bridge** (embrace trade-offs).
+
+Master these principles, and you'll navigate the panic room with the confidence of a seasoned architect.

@@ -302,5 +302,19 @@
     "posted": false,
     "postedAt": null,
     "mediumUrl": null
+  },
+  {
+    "slug": "how-not-to-tackle-a-system-design-interview",
+    "title": "How NOT to Tackle a System Design Interview",
+    "tags": [
+      "System Design",
+      "Interviews",
+      "Architecture",
+      "Career"
+    ],
+    "scheduledFor": "2026-06-14T19:50:02.163Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

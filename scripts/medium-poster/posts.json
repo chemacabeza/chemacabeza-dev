@@ -300,9 +300,10 @@
       "Automation"
     ],
     "scheduledFor": "2026-06-12T19:45:00.489Z",
-    "posted": false,
-    "postedAt": null,
-    "mediumUrl": null
+    "posted": true,
+    "postedAt": "2026-06-15T07:01:46.135Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-effective-ai-building-a-10m-business-with-zero-employees-jos%C3%A9-mar%C3%ADa-cabeza-5e6ad565a167",
+    "mediumStatus": "published"
   },
   {
     "slug": "how-not-to-tackle-a-system-design-interview",

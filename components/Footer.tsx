@@ -91,7 +91,7 @@ export default function Footer() {
                     <a href="https://websitelaunches.com/site/chemacabeza.dev" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition-opacity">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="https://websitelaunches.com/badge/chemacabeza.dev.svg"
+                            src="https://websitelaunches.com/badge/chemacabeza.dev.svg?theme=dark"
                             alt="Established online - Public launch record"
                             width={255}
                             height={55}

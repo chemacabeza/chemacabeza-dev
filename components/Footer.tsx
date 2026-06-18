@@ -83,11 +83,20 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-slate-800/40 text-center text-xs text-slate-600">
+                <div className="mt-8 pt-6 border-t border-slate-800/40 flex flex-col items-center gap-4 text-center text-xs text-slate-600">
                     <p>
                         © {year} {siteConfig.name}. Built with Next.js & Tailwind CSS.
                         Deployed on Vercel.
                     </p>
+                    <a href="https://websitelaunches.com/site/chemacabeza.dev" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition-opacity">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="https://websitelaunches.com/badge/chemacabeza.dev.svg"
+                            alt="Established online - Public launch record"
+                            width={255}
+                            height={55}
+                        />
+                    </a>
                 </div>
             </div>
         </footer>

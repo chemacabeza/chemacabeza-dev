@@ -284,5 +284,22 @@
     "postedAt": "2026-06-10T12:49:38.746Z",
     "substackStatus": "published",
     "substackUrl": "https://chemacabeza.substack.com/p/machine-learning-the-feynman-guide"
+  },
+  {
+    "slug": "the-feynman-guide-to-system-design-fundamentals",
+    "title": "The Feynman Guide to System Design Fundamentals",
+    "subtitle": "Demystifying APIs, databases, caching, CDNs, load balancing, and production infrastructure using simple analogies and the Richard Feynman Technique.",
+    "tags": [
+      "System Design",
+      "Backend Systems",
+      "APIs",
+      "Databases",
+      "Infrastructure"
+    ],
+    "date": "2026-06-24",
+    "posted": false,
+    "postedAt": null,
+    "substackStatus": "draft",
+    "substackUrl": null
   }
 ]

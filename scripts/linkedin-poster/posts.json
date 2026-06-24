@@ -134,5 +134,11 @@
     "postedAt": "2026-06-14T07:50:26.560Z",
     "body": "Avoiding the most common System Design Interview traps using the Feynman Technique—from prescribing without diagnosis to delivering a single pizza in an 18-wheeler.\n\nI just published \"How NOT to Tackle a System Design Interview\".\n\nRead it → https://chemacabeza.dev/writing/how-not-to-tackle-a-system-design-interview\n\n#SystemDesign #Interviews #Architecture #Career",
     "linkedinPostId": "urn:li:share:7471831402829791232"
+  },
+  {
+    "slug": "the-feynman-guide-to-system-design-fundamentals",
+    "posted": false,
+    "postedAt": null,
+    "body": "Demystifying APIs, databases, caching, CDNs, load balancing, and production infrastructure using simple analogies and the Richard Feynman Technique.\n\nI just published \"The Feynman Guide to System Design Fundamentals\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals\n\n#SystemDesign #BackendSystems #APIs #Databases #Infrastructure"
   }
 ]

@@ -1,0 +1,98 @@
+---
+title: "The Feynman Guide to System Design Fundamentals"
+description: "Demystifying APIs, databases, caching, CDNs, load balancing, and production infrastructure using simple analogies and the Richard Feynman Technique."
+date: "2026-06-24"
+tags: ["System Design", "Backend Systems", "APIs", "Databases", "Infrastructure"]
+featured: true
+---
+
+System Design is often treated as a dark art, spoken of in hushed whispers of "high availability," "consistent hashing," and "distributed consensus." But at its core, system design is just about solving real-world scaling problems—managing how computers talk to each other, store data, and share the workload.
+
+To make these concepts intuitive, I've applied the **Richard Feynman Technique**: breaking down the fundamentals of backend infrastructure (inspired by the excellent freeCodeCamp curriculum) using simple, everyday analogies.
+
+Let's demystify the magic.
+
+---
+
+## 1. The Single Chef vs. The Kitchen Brigade (Client-Server & Scaling)
+
+Every time you open a website, a **Client** (your browser) sends a request to a **Server** (a computer in a data center) asking for data, and the server returns a response. 
+
+Imagine a small local diner with a single chef in the kitchen. 
+
+When a diner (client) orders a burger, the chef (server) cooks it and sends it out. If five diners arrive, the chef stays busy. But what if a tour bus drops off 50 hungry people all at once? 
+
+The chef becomes a **Single Point of Failure (SPOF)**. The orders pile up, wait times skyrocket, and the chef eventually collapses under stress (server crash). To solve this, we can scale:
+
+*   **Vertical Scaling (Scaling Up):** We buy the chef a faster stove, a sharper knife, and a larger counter. We upgraded the existing server's CPU, RAM, and storage. But there's a physical limit: a stove can only get so hot, and a single chef only has two hands.
+*   **Horizontal Scaling (Scaling Out):** We hire five more identical chefs and build duplicate cooking stations. We add more servers to our pool. If one chef gets sick (server failure), the others keep cooking. The kitchen can now handle infinite tour buses.
+
+<div align="center">
+![Vertical vs. Horizontal Scaling](/images/writing/system_scaling_vertical_horizontal.png)
+*Vertical scaling (upgrading one server) vs. Horizontal scaling (adding more servers).*
+</div>
+
+---
+
+## 2. Ordering Dinner: Set Menu, Buffet, or Pneumatic Tube (APIs)
+
+An **API (Application Programming Interface)** is the contract that defines how the client and server talk to each other. It’s the waiter who takes your order and delivers the food. There are three major patterns:
+
+*   **REST (The Set Menu):** Predictable and structured. The menu says: "Combo A: Burger, Fries, and Drink." You make a request to a specific URL (like `/api/burgers`), and you get a predefined bundle of data back. The downside? If you only wanted the burger, you still get the fries (over-fetching). If you want dessert, you have to place a second order (under-fetching).
+*   **GraphQL (The Custom Buffet):** You get a blank plate and tell the waiter: "I want exactly two slices of sushi, one slice of kiwi, and no rice." You request exactly the data fields you need, and nothing more. The server packages it up and delivers it in a single trip.
+*   **gRPC (The Pneumatic Mail Tube):** Designed for high-speed backend communications between servers. Instead of a waiter walking back and forth carrying plates (verbose JSON text data over HTTP), servers shoot compressed binary packages (Protobuf) through a high-speed pneumatic tube. It is incredibly fast and efficient, but not meant for a human client reading a standard menu.
+
+<div align="center">
+![API Protocols Comparison](/images/writing/api_protocols_comparison.png)
+*REST (fixed combos), GraphQL (custom plates), and gRPC (high-speed binary tubes).*
+</div>
+
+---
+
+## 3. Filing Cabinets vs. Storage Crates (SQL vs. NoSQL Databases)
+
+Servers need a place to store data. Databases generally fall into two categories:
+
+*   **SQL (Relational - The Filing Cabinet):** Imagine a heavy metal filing cabinet. Every drawer is labeled, and every folder has strict, color-coded dividers (tables, columns, schemas). Every customer file must contain exactly: First Name, Last Name, and Email. If you want to add "Favorite Color" tomorrow, you must open every folder in the cabinet and add that tab (schema migration). It’s perfect for banking or transactions because files are meticulously cross-referenced (relational joins).
+*   **NoSQL (Non-Relational - The Storage Crates):** Imagine throwing index cards, notebooks, and folders into plastic storage bins. One document has a phone number; another has a shopping list. There is no predefined schema (schema-less). It's extremely fast to write to and scales horizontally across multiple servers easily, but finding cross-referenced relations is slow and messy.
+
+---
+
+## 4. The Desk Drawer and the Local Corner Store (Caching & CDNs)
+
+Fetching data from a database is slow. To speed things up, we use caching and Content Delivery Networks:
+
+*   **Caching (The Desk Drawer):** If you are an accountant and your boss asks you for the tax report every five minutes, you don't walk down to the basement archives (database) every time. You keep a copy in your desk drawer (Cache / Redis). It’s extremely fast to pull out, but if the report changes in the archives, your drawer copy is outdated (cache invalidation).
+*   **CDNs (Neighborhood Corner Stores):** If a soda factory is in Atlanta (Origin Server), shipping a single can of soda to a customer in Tokyo takes days. To solve this, the factory ships thousands of cans to corner stores in Tokyo (CDN Edge Servers). When the Tokyo customer wants a soda, they walk to the corner store and get it instantly. A CDN caches static files (images, videos, JS) on servers placed close to users globally.
+
+<div align="center">
+![CDNs and Caching Analogy](/images/writing/cdn_caching_analogy.png)
+*Origin Server (central factory) distributing content to CDN Edge Servers (local stores) and local Caches.*
+</div>
+
+---
+
+## 5. The Traffic Cop at the Intersection (Load Balancing & Health Checks)
+
+When you scale horizontally and have multiple servers running, how do you decide which server handles which request? Enter the **Load Balancer**.
+
+Imagine a busy intersection with cars streaming in. A friendly robot traffic director (Load Balancer) stands at the center.
+
+As cars (user requests) arrive, the robot points them to different lanes: "Car 1 goes to Server A, Car 2 goes to Server B, Car 3 goes to Server C." This is **Round-Robin** load balancing.
+
+But what if Server B crashes? If the robot keeps directing traffic there, cars will pile up in a ditch. To prevent this, the load balancer runs **Health Checks**. Every few seconds, it whispers to the servers: *"Are you okay?"* If Server B doesn't respond, the robot temporarily closes that lane and routes traffic elsewhere until it recovers.
+
+<div align="center">
+![Load Balancer Traffic Director](/images/writing/load_balancer_traffic.png)
+*A Load Balancer directing incoming user requests to healthy backend servers.*
+</div>
+
+---
+
+## Wrapping Up
+
+System design isn't about memorizing complex buzzwords. It's about understanding how to scale workflows, negotiate trade-offs, and design systems that are resilient to failures.
+
+Whether you're managing a kitchen brigade of servers, deciding how to write orders with APIs, organizing databases like office filing cabinets, caching data in desk drawers, or directing traffic with load balancers, the core principles remain the same. 
+
+Strip away the jargon, look for the underlying human analogy, and you'll find that system design makes perfect sense.

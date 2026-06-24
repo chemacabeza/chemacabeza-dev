@@ -319,5 +319,20 @@
     "postedAt": "2026-06-16T19:01:37.310Z",
     "mediumUrl": "https://medium.com/@chemacabeza/how-not-to-tackle-a-system-design-interview-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-46da0c474857",
     "mediumStatus": "published"
+  },
+  {
+    "slug": "the-feynman-guide-to-system-design-fundamentals",
+    "title": "The Feynman Guide to System Design Fundamentals",
+    "tags": [
+      "System Design",
+      "Backend Systems",
+      "APIs",
+      "Databases",
+      "Infrastructure"
+    ],
+    "scheduledFor": "2026-06-24T00:00:00.000Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

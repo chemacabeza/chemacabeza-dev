@@ -137,8 +137,9 @@
   },
   {
     "slug": "the-feynman-guide-to-system-design-fundamentals",
-    "posted": false,
-    "postedAt": null,
-    "body": "Demystifying APIs, databases, caching, CDNs, load balancing, and production infrastructure using simple analogies and the Richard Feynman Technique.\n\nI just published \"The Feynman Guide to System Design Fundamentals\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals\n\n#SystemDesign #BackendSystems #APIs #Databases #Infrastructure"
+    "posted": true,
+    "postedAt": "2026-06-24T15:10:25.242Z",
+    "body": "Demystifying APIs, databases, caching, CDNs, load balancing, and production infrastructure using simple analogies and the Richard Feynman Technique.\n\nI just published \"The Feynman Guide to System Design Fundamentals\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals\n\n#SystemDesign #BackendSystems #APIs #Databases #Infrastructure",
+    "linkedinPostId": "urn:li:share:7475566005595963392"
   }
 ]

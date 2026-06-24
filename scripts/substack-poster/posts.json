@@ -297,9 +297,9 @@
       "Infrastructure"
     ],
     "date": "2026-06-24",
-    "posted": false,
-    "postedAt": null,
-    "substackStatus": "draft",
-    "substackUrl": null
+    "posted": true,
+    "postedAt": "2026-06-24T15:26:19.753Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-system-design-6f2"
   }
 ]

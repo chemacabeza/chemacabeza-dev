@@ -640,7 +640,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-24T14:56:10.947Z"
+      "lastSyncedAt": "2026-06-24T15:25:30.911Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::medium": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
@@ -650,7 +650,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-24T14:56:10.947Z"
+      "lastSyncedAt": "2026-06-24T15:25:30.911Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::linkedin": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
@@ -660,7 +660,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-24T14:56:10.947Z"
+      "lastSyncedAt": "2026-06-24T15:25:30.911Z"
     }
   }
 }

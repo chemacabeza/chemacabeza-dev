@@ -17,7 +17,8 @@ export default function NewsletterForm() {
         {/* Official Substack Embed */}
         <div className="rounded-xl overflow-hidden border border-slate-800/50 bg-white/5 backdrop-blur-sm">
           <iframe
-            src="https://chemacabezadev.substack.com/embed"
+            loading="lazy"
+            src="https://chemacabeza.substack.com/embed"
             width="100%"
             height="320"
             style={{ 

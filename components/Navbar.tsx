@@ -26,10 +26,6 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useEffect(() => {
-        setOpen(false);
-    }, [pathname]);
-
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || open
@@ -80,13 +76,16 @@ export default function Navbar() {
                         onClick={() => setOpen(!open)}
                         className="md:hidden p-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors focus:outline-none"
                         aria-label="Toggle menu"
+                        aria-expanded={open}
+                        aria-controls="mobile-menu"
                     >
                         {open ? <X className="w-5 h-5 transition-transform duration-300 rotate-0" /> : <Menu className="w-5 h-5 transition-transform duration-300" />}
                     </button>
                 </div>
 
                 {/* Mobile menu */}
-                <div 
+                <div
+                    id="mobile-menu"
                     className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
                         open ? "max-h-96 opacity-100 border-t border-slate-800/60" : "max-h-0 opacity-0 pointer-events-none"
                     }`}
@@ -101,6 +100,7 @@ export default function Navbar() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
+                                    onClick={() => setOpen(false)}
                                     className={`block px-4 py-3 rounded-md text-sm font-medium transition-all duration-200 ${isActive
                                         ? "text-indigo-400 bg-indigo-500/10"
                                         : "text-slate-300 hover:text-slate-100 hover:bg-slate-800/60"

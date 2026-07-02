@@ -6,7 +6,7 @@ export const siteConfig = {
     description:
         "Engineering Manager with 15+ years building high-performance backend systems, distributed architectures, and the teams that deliver them. Based in Berlin.",
     url: "https://chemacabeza.dev",
-    ogImage: "https://chemacabeza.dev/og-image.png",
+    ogImage: "https://chemacabeza.dev/opengraph-image",
     author: {
         name: "José María Cabeza Rodríguez",
         email: "chema@chemacabeza.dev",
@@ -21,11 +21,17 @@ export function createMetadata({
     description,
     path = "",
     ogImage,
+    type = "website",
+    publishedTime,
+    tags,
 }: {
     title?: string;
     description?: string;
     path?: string;
     ogImage?: string;
+    type?: "website" | "article";
+    publishedTime?: string;
+    tags?: string[];
 }): Metadata {
     const fullTitle = title
         ? `${title} — ${siteConfig.name}`
@@ -44,8 +50,15 @@ export function createMetadata({
             url: fullUrl,
             siteName: siteConfig.name,
             images: [{ url: image, width: 1200, height: 630, alt: fullTitle }],
-            type: "website",
+            type,
             locale: "en_US",
+            ...(type === "article" && publishedTime
+                ? {
+                      publishedTime,
+                      authors: [siteConfig.author.name],
+                      tags,
+                  }
+                : {}),
         },
         twitter: {
             card: "summary_large_image",

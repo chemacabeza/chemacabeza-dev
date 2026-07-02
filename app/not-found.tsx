@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
+import { siteConfig } from "@/lib/metadata";
+
+export const metadata: Metadata = {
+    title: `Page not found — ${siteConfig.name}`,
+    description: "The page you requested does not exist.",
+    robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
     return (

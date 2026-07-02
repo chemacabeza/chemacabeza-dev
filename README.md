@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# chemacabeza.dev
 
-## Getting Started
+Personal site and engineering blog built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**.
 
-First, run the development server:
+Live at [chemacabeza.dev](https://chemacabeza.dev).
+
+## What’s in this repo
+
+- **Site** — App Router pages under `app/` (home, about, projects, writing, contact, etc.)
+- **Blog** — MDX posts in `content/posts/`; rendered via `lib/mdx.ts` and `next-mdx-remote`
+- **Cross-posting** — Scripts and GitHub Actions that mirror new posts to LinkedIn, Medium, and Substack
+
+For agent/AI context and pipeline details, see [`CLAUDE.md`](./CLAUDE.md).
+
+## Requirements
+
+- Node.js **≥ 20.9.0**
+
+## Commands
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # http://localhost:3000
+npm run build    # production build (same as Vercel)
+npm run start    # serve the production build
+npm run lint     # ESLint (flat config)
+npm run test     # propagation layer tests (Node test runner + tsx)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Blog posts live in `content/posts/*.mdx`. The **filename is the slug**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Frontmatter fields: `title`, `description`, `date` (ISO), `tags[]`, optional `featured`.
 
-## Learn More
+## Cross-posting (short version)
 
-To learn more about Next.js, take a look at the following resources:
+New MDX posts trigger prep workflows that enqueue LinkedIn/Medium entries. LinkedIn publishes via API in CI; Medium is manual import; Substack uses local CDP automation or the `tools/chemacabeza-crosspost` package.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See [`CLAUDE.md`](./CLAUDE.md) and [`docs/content-propagation.md`](./docs/content-propagation.md) for the full picture.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hosted on [Vercel](https://vercel.com). Pushes to `master` deploy automatically.

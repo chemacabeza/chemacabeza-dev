@@ -4,9 +4,11 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllPosts, getPostBySlug } from "@/lib/mdx";
-import { createMetadata } from "@/lib/metadata";
+import { createMetadata, siteConfig } from "@/lib/metadata";
+import { deriveCoverImage } from "@/lib/cover-image";
 import NewsletterForm from "@/components/NewsletterForm";
 import FollowLinks from "@/components/FollowLinks";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -21,10 +23,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const post = getPostBySlug(slug);
     if (!post) return {};
+    const coverImage = deriveCoverImage(post.content);
     return createMetadata({
         title: post.frontmatter.title,
         description: post.frontmatter.description,
         path: `/writing/${slug}`,
+        ogImage: coverImage,
+        type: "article",
+        publishedTime: post.frontmatter.date,
+        tags: post.frontmatter.tags,
     });
 }
 
@@ -35,8 +42,19 @@ export default async function PostPage({ params }: Props) {
     if (!post) notFound();
 
     const { frontmatter, content, readingTime } = post;
+    const coverImage = deriveCoverImage(content);
+    const postUrl = `${siteConfig.url}/writing/${slug}`;
 
     return (
+        <>
+            <ArticleJsonLd
+                title={frontmatter.title}
+                description={frontmatter.description}
+                url={postUrl}
+                datePublished={frontmatter.date}
+                image={coverImage}
+                tags={frontmatter.tags}
+            />
         <div className="pt-24 pb-32">
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full bg-indigo-600/5 blur-[100px]" />
@@ -115,5 +133,6 @@ export default async function PostPage({ params }: Props) {
                 </div>
             </div>
         </div>
+        </>
     );
 }

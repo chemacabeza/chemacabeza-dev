@@ -22,7 +22,7 @@ function markdownToHtml(md: string): string {
     let listType: "ul" | "ol" | null = null;
 
     for (let i = 0; i < lines.length; i++) {
-        let line = lines[i];
+        const line = lines[i];
 
         // Horizontal rule
         if (/^---+\s*$/.test(line)) {

@@ -17,9 +17,10 @@ npm run dev      # dev server at http://localhost:3000
 npm run build    # production build (also what Vercel runs)
 npm run start    # serve the production build
 npm run lint     # eslint (flat config: eslint.config.mjs)
+npm run test     # node native test runner (tests/*.test.ts via tsx)
 ```
 
-There is **no test framework** configured — no `test` script, no test runner. Don't invent test commands; verify changes via `npm run build` / `npm run dev`.
+Tests cover the content propagation layer (`lib/propagation/`). There is no browser/E2E test suite — verify UI changes via `npm run build` / `npm run dev`. CI runs lint, test, and build on every push/PR (`.github/workflows/ci.yml`).
 
 Node `>=20.9.0` is required (see `package.json` `engines`).
 

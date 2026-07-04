@@ -141,5 +141,10 @@
     "postedAt": "2026-06-24T15:10:25.242Z",
     "body": "Demystifying APIs, databases, caching, CDNs, load balancing, and production infrastructure using simple analogies and the Richard Feynman Technique.\n\nI just published \"The Feynman Guide to System Design Fundamentals\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals\n\n#SystemDesign #BackendSystems #APIs #Databases #Infrastructure",
     "linkedinPostId": "urn:li:share:7475566005595963392"
+  },
+  {
+    "slug": "the-feynman-guide-to-system-design-fundamentals-v2",
+    "posted": false,
+    "body": "I just expanded my Feynman Guide to System Design Fundamentals with 3 new sections — covering the parts of the freeCodeCamp course that were missing.\n\nThe original covered APIs, databases, caching, CDNs, and load balancing. Now it also includes:\n\n🌐 Networking & Protocols — How the internet works like a postal system. DNS is the phone book, TCP is registered mail (numbered, signed, guaranteed), UDP is postcards (fast, no guarantees). HTTP sits on top of all of it.\n\n🔐 Authentication & Authorization — The bouncer checks your ID (authentication: who are you?). The hostess checks the VIP list (authorization: what can you access?). JWT tokens are the wristbands that let you move freely once you're in.\n\n🏰 Security & Defense in Depth — A secure system is a medieval castle. Firewall moat. HTTPS drawbridge. Input validation gate guards. Rate limiting walls. Least privilege inner keep. No single layer is enough — you need all of them.\n\nFull updated guide → https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals\n\n#SystemDesign #BackendSystems #Networking #Security #APIs #Infrastructure"
   }
 ]

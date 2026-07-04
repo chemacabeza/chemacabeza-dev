@@ -1,8 +1,8 @@
 ---
 title: "The Feynman Guide to System Design Fundamentals"
-description: "Demystifying APIs, databases, caching, CDNs, load balancing, and production infrastructure using simple analogies and the Richard Feynman Technique."
-date: "2026-06-24"
-tags: ["System Design", "Backend Systems", "APIs", "Databases", "Infrastructure"]
+description: "Demystifying APIs, databases, caching, CDNs, load balancing, networking, authentication, and security using simple analogies and the Richard Feynman Technique."
+date: "2026-07-04"
+tags: ["System Design", "Backend Systems", "APIs", "Databases", "Infrastructure", "Networking", "Security"]
 featured: true
 ---
 
@@ -89,10 +89,72 @@ But what if Server B crashes? If the robot keeps directing traffic there, cars w
 
 ---
 
+## 6. The Postal System of the Internet (Networking & Protocols)
+
+Every time your browser loads a webpage, data travels across the internet through a system that works remarkably like a postal service.
+
+First, every device on the internet has an **IP Address**—its unique postal address. Just like a letter needs a "To" and "From" address to be delivered, every data packet stamped with a source IP and destination IP.
+
+But nobody memorizes postal codes. When you type `www.google.com`, your browser doesn't know where that is. It asks the **DNS (Domain Name System)**—the internet's phone book—to look up the name and return the actual IP address (like `142.250.80.46`). This happens in milliseconds, invisibly, before any data is sent.
+
+Once we know the address, how do we deliver the data? Two protocols handle the heavy lifting:
+
+*   **TCP (Transmission Control Protocol - Registered Mail):** TCP is like sending a package via registered mail. Every piece is numbered, tracked, and signed for. If package #3 of 5 gets lost in transit, the sender is notified and re-sends it. The receiver assembles all pieces in the correct order before opening the box. TCP guarantees **reliable, ordered delivery**—perfect for web pages, emails, and file downloads where you need every single byte.
+*   **UDP (User Datagram Protocol - Postcards):** UDP is like throwing postcards out of a moving motorcycle. They're fast and lightweight, but there's no tracking number, no signature, and no guarantee they arrive (or arrive in order). If one postcard is lost, nobody re-sends it. UDP is perfect for **live video calls, online gaming, and streaming**—where speed matters more than perfection, and a dropped frame is better than a frozen screen.
+
+On top of these transport protocols sits **HTTP (Hypertext Transfer Protocol)**—the language your browser and web servers speak. It defines the rules for "I want this webpage" (request) and "Here's the webpage" (response). It rides on top of TCP, ensuring every webpage loads completely and correctly.
+
+<div align="center">
+![Networking Postal System](/images/writing/networking_postal_system.png)
+*DNS translates names to addresses. TCP delivers reliably like registered mail. UDP delivers fast like postcards—no guarantees.*
+</div>
+
+---
+
+## 7. The Bouncer and the VIP List (Authentication & Authorization)
+
+Imagine a trendy nightclub with a line around the block. Before anyone gets inside, two checkpoints must be passed—and they solve two fundamentally different problems.
+
+**Authentication ("Who are you?")** is the bouncer at the door. He checks your photo ID against your face. If they match, you're verified—you are who you claim to be. In the digital world, this is logging in with a username and password, scanning a fingerprint, or using a one-time code sent to your phone (multi-factor authentication).
+
+**Authorization ("What are you allowed to do?")** is the hostess with the clipboard. Even after you've proven who you are, not everyone gets into the VIP lounge. The hostess checks the list: "You have a General Admission ticket—you can access the dance floor. But the VIP lounge and backstage? Those require an upgrade." In code, this is **Role-Based Access Control (RBAC)**: an `admin` can delete users, an `editor` can publish articles, and a `viewer` can only read.
+
+But there's a practical problem: if the bouncer had to check your ID every time you walked to the bar and back, the line would be insufferable. The solution? **Wristbands** (Tokens).
+
+After your first ID check, the bouncer gives you a colored wristband. For the rest of the night, you just flash the wristband—no ID needed. In web systems, this wristband is a **JWT (JSON Web Token)**. After you log in once, the server gives your browser a signed token. Every subsequent request sends this token instead of re-entering credentials. The server reads the token, verifies the signature ("is this wristband genuine?"), and checks the permissions embedded inside.
+
+<div align="center">
+![Authentication and Authorization](/images/writing/auth_bouncer_vip.png)
+*Authentication is the bouncer checking your ID. Authorization is the hostess checking the VIP list. JWT tokens are the wristbands that let you move freely.*
+</div>
+
+---
+
+## 8. The Castle Walls (Security)
+
+If authentication and authorization are the front door, **security** is the entire fortress. And a well-designed fortress never relies on a single wall.
+
+Imagine a medieval castle protecting a kingdom's treasury. The architects didn't just build one gate and hope for the best. They built **layers of defense**—a strategy called **Defense in Depth**:
+
+*   **The Moat (Firewall):** The outermost ring. A firewall filters incoming traffic before it even reaches your servers, blocking obviously malicious connections. Just like a moat stops a charging army from reaching the walls.
+*   **The Drawbridge (HTTPS / TLS Encryption):** All data traveling between client and server is encrypted with **TLS (Transport Layer Security)**. Even if an attacker intercepts the data mid-transit, all they see is scrambled gibberish. The drawbridge only lowers for those with the right cryptographic keys.
+*   **The Gate Guards (Input Validation):** Guards at the gate inspect every package entering the castle. They open crates and check for weapons. In web systems, this means validating and sanitizing all user input to prevent **SQL Injection** (where an attacker types database commands into a login form) and **Cross-Site Scripting (XSS)** (where an attacker injects malicious JavaScript into a webpage that other users load).
+*   **The Rate-Limiting Walls:** Even legitimate visitors are only allowed through the gate at a controlled pace. If someone tries to batter the gate with a thousand requests per second (a brute-force attack or DDoS), the guards slow them down or lock them out. **Rate limiting** caps how many requests a user or IP can make in a given time window.
+*   **The Inner Keep (Principle of Least Privilege):** The treasury isn't accessible to every soldier inside the castle. Only the treasurer holds the key. In software, every component should have the **minimum permissions** necessary to do its job—nothing more. A web server that only needs to read from the database should never have write or delete access.
+
+<div align="center">
+![Security Defense in Depth](/images/writing/security_castle_walls.png)
+*A secure system is a castle with layers: firewall (moat), HTTPS (drawbridge), input validation (gate guards), rate limiting (walls), and least privilege (inner keep).*
+</div>
+
+The critical insight is that **no single layer is enough**. Firewalls can be bypassed. Encryption can be misconfigured. Input validation can miss edge cases. But when you stack all these defenses together, an attacker has to breach every single layer to reach the treasure. That's the power of defense in depth.
+
+---
+
 ## Wrapping Up
 
 System design isn't about memorizing complex buzzwords. It's about understanding how to scale workflows, negotiate trade-offs, and design systems that are resilient to failures.
 
-Whether you're managing a kitchen brigade of servers, deciding how to write orders with APIs, organizing databases like office filing cabinets, caching data in desk drawers, or directing traffic with load balancers, the core principles remain the same. 
+Whether you're managing a kitchen brigade of servers, deciding how to write orders with APIs, organizing databases like office filing cabinets, caching data in desk drawers, directing traffic with load balancers, navigating the postal routes of the internet, checking IDs at the nightclub door, or building castle walls to keep attackers out—the core principles remain the same.
 
 Strip away the jargon, look for the underlying human analogy, and you'll find that system design makes perfect sense.

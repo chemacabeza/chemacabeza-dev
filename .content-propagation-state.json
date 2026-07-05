@@ -635,32 +635,32 @@
     "the-feynman-guide-to-system-design-fundamentals::substack": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals",
-      "contentHash": "1a6f40450f1695c0",
+      "contentHash": "cd1504fc8b70e975",
       "platform": "substack",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-24T15:25:30.911Z"
+      "lastSyncedAt": "2026-07-04T08:39:35.865Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::medium": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals",
-      "contentHash": "1a6f40450f1695c0",
+      "contentHash": "cd1504fc8b70e975",
       "platform": "medium",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-24T15:25:30.911Z"
+      "lastSyncedAt": "2026-07-04T08:39:35.865Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::linkedin": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-system-design-fundamentals",
-      "contentHash": "1a6f40450f1695c0",
+      "contentHash": "cd1504fc8b70e975",
       "platform": "linkedin",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-06-24T15:25:30.911Z"
+      "lastSyncedAt": "2026-07-04T08:39:35.865Z"
     }
   }
 }

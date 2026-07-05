@@ -629,10 +629,12 @@
       "canonicalUrl": "https://chemacabeza.dev/writing/how-not-to-tackle-a-system-design-interview",
       "contentHash": "3d6dbd940a87d154",
       "platform": "linkedin",
-      "status": "created",
-      "fullTextPropagated": false,
+      "status": "published",
+      "platformPostId": "urn:li:share:7479413310652690432",
+      "platformUrl": "https://www.linkedin.com/feed/update/urn:li:share:7479413310652690432",
+      "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-07-05T05:55:02.838Z"
+      "lastSyncedAt": "2026-07-05T05:58:14.753Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::substack": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",

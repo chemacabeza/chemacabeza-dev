@@ -317,5 +317,19 @@
     "postedAt": "2026-07-05T06:04:21.000Z",
     "substackStatus": "published",
     "substackUrl": "https://chemacabeza.substack.com/p/how-not-to-tackle-a-system-design"
+  },
+  {
+    "slug": "the-feynman-guide-to-docker",
+    "title": "The Feynman Guide to Docker",
+    "subtitle": "Demystifying containerization, layers, volumes, and networking using simple analogies and the Richard Feynman Technique.",
+    "tags": [
+      "DevOps",
+      "Docker",
+      "Containers",
+      "System Design",
+      "Infrastructure"
+    ],
+    "date": "2026-07-05",
+    "posted": false
   }
 ]

@@ -665,6 +665,36 @@
       "fullTextPropagated": false,
       "fullTextArtifact": true,
       "lastSyncedAt": "2026-07-04T08:39:35.865Z"
+    },
+    "the-feynman-guide-to-docker::substack": {
+      "slug": "the-feynman-guide-to-docker",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-docker",
+      "contentHash": "f97631704a761182",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-05T12:29:54.466Z"
+    },
+    "the-feynman-guide-to-docker::medium": {
+      "slug": "the-feynman-guide-to-docker",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-docker",
+      "contentHash": "f97631704a761182",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-05T12:29:54.466Z"
+    },
+    "the-feynman-guide-to-docker::linkedin": {
+      "slug": "the-feynman-guide-to-docker",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-docker",
+      "contentHash": "f97631704a761182",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-05T12:29:54.466Z"
     }
   }
 }

@@ -149,6 +149,12 @@ A Volume is like an **external USB hard drive**. You plug it into the container 
 
 Even if the container is deleted, crashed, or upgraded, the external drive (volume) remains plugged into the host machine, keeping your data perfectly safe.
 
+In practice, you mount a volume using the `-v` flag. Here is how you might run a Postgres database with a persistent volume:
+
+```bash
+docker run -v my-db-volume:/var/lib/postgresql/data postgres:15
+```
+
 ---
 
 ## 6. Container Networking: The Apartment Intercom
@@ -167,6 +173,57 @@ You are telling your computer: *"Whenever anyone calls door number `8080` on my 
 
 ### Bridge Networks
 When you run multiple containers (e.g., a frontend app, a backend API, and a database) and want them to talk to each other, you place them on the same **Docker Network**. Docker automatically assigns them internal DNS names, letting Container A call `http://database:5432` without needing to know the host's actual IP address.
+
+---
+
+## 7. Tying It All Together: Docker Compose (The Building Manager)
+
+Running individual containers with `docker run` commands can get messy. If you have a web application, a database, and a cache, remembering all the long commands with port mappings and volumes is exhausting.
+
+Enter **Docker Compose**. Think of it as the **Building Manager**. Instead of giving individual instructions to the plumber, the electrician, and the doorman every single day, you write a single master manifest (a `docker-compose.yml` file). You hand it to the Building Manager, and they make sure the entire apartment complex is set up perfectly.
+
+Here is what a real-world Docker Compose file looks like, bringing together everything we've learned—Images, Ports, Volumes, and Networks:
+
+```yaml
+version: '3.8'
+
+services:
+  # The Web Application
+  web:
+    build: .                           # Use the local Dockerfile (Blueprint)
+    ports:
+      - "8080:80"                      # Port Mapping (Building buzzer routing)
+    depends_on:
+      - database                       # Wait for the database to start
+    networks:
+      - app-network                    # Bridge Network (Apartment Intercom)
+
+  # The Database
+  database:
+    image: postgres:15                 # Use a pre-built Blueprint from Docker Hub
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpassword
+    volumes:
+      - db-data:/var/lib/postgresql/data # Volume (External Hard Drive) for data persistence
+    networks:
+      - app-network                    # Bridge Network (Apartment Intercom)
+
+# Define the Volumes and Networks explicitly
+volumes:
+  db-data:                             # Declare the external hard drive
+
+networks:
+  app-network:                         # Declare the intercom system
+```
+
+With this single file, you can bring up your entire infrastructure with one command:
+
+```bash
+docker-compose up -d
+```
+
+And just like that, your code works identically on your machine, your coworker's laptop, and the production server.
 
 ---
 

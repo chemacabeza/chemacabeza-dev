@@ -9,6 +9,44 @@ export function generateStaticParams() {
     return posts.map((post) => ({ slug: post.slug }));
 }
 
+function renderTable(rows: string[]): string {
+    if (rows.length === 0) return "";
+    
+    const parseRow = (row: string) => {
+        const parts = row.split("|").map(p => p.trim());
+        if (parts[0] === "") parts.shift();
+        if (parts[parts.length - 1] === "") parts.pop();
+        return parts;
+    };
+
+    let html = "<table>";
+    const secondRow = rows[1];
+    const isSeparator = secondRow && /^\s*\|?\s*(:?-+:?\s*\|)+\s*(:?-+:?\s*\|?)*\s*$/.test(secondRow);
+
+    let startIndex = 0;
+    if (isSeparator) {
+        const headers = parseRow(rows[0]);
+        html += "<thead><tr>";
+        for (const h of headers) {
+            html += `<th>${inlineMarkdown(h)}</th>`;
+        }
+        html += "</tr></thead>";
+        startIndex = 2;
+    }
+
+    html += "<tbody>";
+    for (let i = startIndex; i < rows.length; i++) {
+        const cells = parseRow(rows[i]);
+        html += "<tr>";
+        for (const c of cells) {
+            html += `<td>${inlineMarkdown(c)}</td>`;
+        }
+        html += "</tr>";
+    }
+    html += "</tbody></table>";
+    return html;
+}
+
 /**
  * Convert basic markdown to HTML without external dependencies.
  * Handles: headings, bold, italic, links, images, blockquotes,
@@ -20,9 +58,33 @@ function markdownToHtml(md: string): string {
     const htmlLines: string[] = [];
     let inList = false;
     let listType: "ul" | "ol" | null = null;
+    let inTable = false;
+    let tableRows: string[] = [];
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
+
+        // Table row check
+        if (line.trim().startsWith("|")) {
+            if (inList) {
+                htmlLines.push(listType === "ul" ? "</ul>" : "</ol>");
+                inList = false;
+                listType = null;
+            }
+            if (!inTable) {
+                inTable = true;
+                tableRows = [];
+            }
+            tableRows.push(line);
+            continue;
+        }
+
+        // If we were in a table but this line is not a table row, process and render the table
+        if (inTable && !line.trim().startsWith("|")) {
+            htmlLines.push(renderTable(tableRows));
+            inTable = false;
+            tableRows = [];
+        }
 
         // Horizontal rule
         if (/^---+\s*$/.test(line)) {
@@ -108,6 +170,10 @@ function markdownToHtml(md: string): string {
 
         // Paragraph (default)
         htmlLines.push(`<p>${inlineMarkdown(line)}</p>`);
+    }
+
+    if (inTable) {
+        htmlLines.push(renderTable(tableRows));
     }
 
     if (inList) {

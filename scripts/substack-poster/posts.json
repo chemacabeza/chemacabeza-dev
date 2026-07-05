@@ -301,5 +301,21 @@
     "postedAt": "2026-06-24T15:26:19.753Z",
     "substackStatus": "published",
     "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-system-design-6f2"
+  },
+  {
+    "slug": "how-not-to-tackle-a-system-design-interview",
+    "title": "How NOT to Tackle a System Design Interview",
+    "subtitle": "Avoiding the most common System Design Interview traps using the Feynman Technique—from prescribing without diagnosis to delivering a single pizza in an 18-wheeler.",
+    "tags": [
+      "System Design",
+      "Interviews",
+      "Architecture",
+      "Career"
+    ],
+    "date": "2026-07-05",
+    "posted": true,
+    "postedAt": "2026-07-05T06:04:21.000Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/how-not-to-tackle-a-system-design"
   }
 ]

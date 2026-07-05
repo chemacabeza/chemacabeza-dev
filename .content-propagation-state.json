@@ -607,27 +607,29 @@
       "canonicalUrl": "https://chemacabeza.dev/writing/how-not-to-tackle-a-system-design-interview",
       "contentHash": "3d6dbd940a87d154",
       "platform": "substack",
-      "status": "manual_required",
-      "fullTextPropagated": false,
+      "status": "published",
+      "platformUrl": "https://chemacabeza.substack.com/p/how-not-to-tackle-a-system-design",
+      "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-07-05T05:55:02.838Z"
+      "lastSyncedAt": "2026-07-05T06:04:21.000Z"
     },
     "how-not-to-tackle-a-system-design-interview::medium": {
       "slug": "how-not-to-tackle-a-system-design-interview",
       "canonicalUrl": "https://chemacabeza.dev/writing/how-not-to-tackle-a-system-design-interview",
       "contentHash": "3d6dbd940a87d154",
       "platform": "medium",
-      "status": "manual_required",
-      "fullTextPropagated": false,
+      "status": "published",
+      "platformUrl": "https://medium.com/@chemacabeza/how-not-to-tackle-a-system-design-interview-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-e6ed529c0123",
+      "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-07-05T05:55:02.838Z"
+      "lastSyncedAt": "2026-07-05T06:03:36.000Z"
     },
     "how-not-to-tackle-a-system-design-interview::linkedin": {
       "slug": "how-not-to-tackle-a-system-design-interview",
       "canonicalUrl": "https://chemacabeza.dev/writing/how-not-to-tackle-a-system-design-interview",
       "contentHash": "3d6dbd940a87d154",
       "platform": "linkedin",
-      "status": "manual_required",
+      "status": "created",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
       "lastSyncedAt": "2026-07-05T05:55:02.838Z"

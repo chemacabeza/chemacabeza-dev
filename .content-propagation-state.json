@@ -674,7 +674,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-07-05T12:42:05.939Z"
+      "lastSyncedAt": "2026-07-05T12:52:11.228Z"
     },
     "the-feynman-guide-to-docker::medium": {
       "slug": "the-feynman-guide-to-docker",
@@ -684,7 +684,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-07-05T12:42:05.939Z"
+      "lastSyncedAt": "2026-07-05T12:52:11.228Z"
     },
     "the-feynman-guide-to-docker::linkedin": {
       "slug": "the-feynman-guide-to-docker",
@@ -694,7 +694,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-07-05T12:42:05.939Z"
+      "lastSyncedAt": "2026-07-05T12:52:11.228Z"
     }
   }
 }

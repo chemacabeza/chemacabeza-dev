@@ -21,7 +21,7 @@ function renderTable(rows: string[]): string {
 
     let html = "<table>";
     const secondRow = rows[1];
-    const isSeparator = secondRow && /^\s*\|?\s*(:?-+:?\s*\|)+\s*(:?-+:?\s*\|?)*\s*$/.test(secondRow);
+    const isSeparator = secondRow && /^[\s|:-]+$/.test(secondRow.trim());
 
     let startIndex = 0;
     if (isSeparator) {

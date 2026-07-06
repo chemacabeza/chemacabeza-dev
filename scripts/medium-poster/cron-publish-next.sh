@@ -108,7 +108,7 @@ set -e
 # The script emits "MEDIUM_DRAFT_ID=<id>" once it has a draft (imported or
 # reopened). Capture it so a failed/rate-limited publish persists the draft id
 # and the next run re-publishes that draft instead of importing a duplicate.
-EMITTED_DRAFT_ID=$(grep -oE 'MEDIUM_DRAFT_ID=[a-f0-9]+' "$STDERR_LOG" | tail -1 | cut -d= -f2)
+EMITTED_DRAFT_ID=$(grep -oE 'MEDIUM_DRAFT_ID=[a-f0-9]+' "$STDERR_LOG" | tail -1 | cut -d= -f2 || true)
 [ -z "$EMITTED_DRAFT_ID" ] && EMITTED_DRAFT_ID="$DRAFT_ID"
 
 # Persist a draft id onto the post (used by exit 1/4 paths below).

@@ -1,7 +1,7 @@
 ---
 title: "The Feynman Guide to Apache Kafka"
-description: "Understanding the central nervous system of modern data architectures. A deep technical synthesis of core Kafka literature using simple analogies."
-date: "2026-06-11"
+description: "Demystifying distributed event streaming, topics, partitions, replication, Kafka Connect, and stream processing using simple analogies and the Richard Feynman Technique."
+date: "2026-07-06"
 tags: ["Apache Kafka", "System Design", "Event Streaming", "Distributed Systems", "Java"]
 featured: true
 ---
@@ -12,88 +12,111 @@ As the company grows, more departments are added: Analytics, Customer Support, M
 
 In software architecture, this is known as the **point-to-point integration problem**. As your system grows from two microservices to twenty, the number of direct connections explodes, creating a fragile "spaghetti" architecture.
 
-Enter **Apache Kafka**.
+To solve this, the tech world created **Apache Kafka**. 
 
-To understand how Kafka completely revolutionized data engineering, I've applied the **Richard Feynman Technique**: breaking down highly technical distributed systems concepts from definitive Kafka literature into simple, intuitive analogies, backed by concrete Java implementations.
-
-Let's dive in.
+Let's use the **Richard Feynman Technique**—translating complex technical concepts into simple, everyday analogies—to understand exactly how Apache Kafka works, why it is the central nervous system of modern data architectures, and how to use it.
 
 ---
 
-## 1. The End of Spaghetti Architecture
+## 1. The End of Spaghetti Architecture: The Event Hub
 
 In our office analogy, the solution isn't to make the employees run faster. The solution is to build a central **Post Office Hub**. 
 
 When Sales closes a deal, they don't walk to Accounting or Shipping. They simply drop a single "Deal Closed" memo into the central Post Office. Accounting and Shipping, whenever they are ready, walk to the Post Office and read the memos they care about.
 
 <div align="center">
-![Spaghetti Architecture vs Kafka](/images/writing/kafka-central-nervous-system.png)
-*Kafka replaces the chaotic N x M point-to-point connections with a clean, centralized event streaming hub.*
+
+![Spaghetti Architecture vs Event Hub Architecture](/images/writing/kafka-hub-architecture.png)
+*Kafka replaces chaotic N × M point-to-point connections with a clean, centralized event streaming hub.*
+
 </div>
 
-**The Technical Reality:** Apache Kafka acts as the central nervous system for your data. It flips the traditional architecture by relying on a Publish/Subscribe messaging model combined with the persistence of an enterprise storage system. Instead of databases and microservices communicating synchronously over HTTP/gRPC, they produce and consume asynchronous events to/from Kafka.
+**The Technical Reality:** 
+Traditionally, systems communicate using commands (request-response via REST/gRPC). If Service A needs data from Service B, it asks for it. However, this couples services together. If Service B is slow or down, Service A fails too.
+
+Kafka shifts this paradigm to **event-driven architecture**. Instead of active commands, services publish passive **events** ("something happened") to a central log. Other services subscribe to these events. This decouples the systems entirely: producers don't care who consumes their data, and consumers don't care who produced it.
 
 ---
 
 ## 2. The Anatomy of a Topic: The Immutable Ledger
 
-How does this Post Office actually store the messages? 
+How does this central hub actually store the events? 
 
-Imagine a massive, indestructible **Logbook**. Every time a message arrives, a scribe writes it on the very last line of the book, numbers it sequentially, and stamps the time. Once a line is written, it can **never be changed or erased**.
+Imagine a massive, indestructible **Logbook**. Every time a message arrives, a scribe writes it on the very last line of the book, numbers it sequentially, and stamps the time. Once a line is written, it can **never be changed or erased**. This is an **immutable, append-only log**.
 
-But if a single logbook gets too big, one scribe can't write fast enough, and readers will crowd around it. So, the logbook is torn into multiple smaller notebooks called **Partitions**, spread across different tables.
+But if a single logbook gets too big, a single scribe can't write fast enough, and readers will crowd around it. To scale, we tear the logbook into multiple smaller notebooks called **Partitions**, spread across different tables (servers).
 
 <div align="center">
-![Anatomy of a Kafka Partition](/images/writing/kafka-commit-log-partitions.png)
-*A Partition is an append-only log. Data goes in at the end, and readers track their position using sequential Offsets.*
+
+![Kafka Topic and Partitions](/images/writing/kafka-topics-partitions.png)
+*A Topic is split into Partitions (append-only logs). Messages are ordered sequentially within each partition by their Offset.*
+
 </div>
 
-**The Technical Reality:** 
-*   **Topic:** A logical category or feed name (e.g., `user_clicks`).
-*   **Partition:** To scale horizontally, a Topic is divided into Partitions. Each Partition is an **append-only, totally ordered log** stored on disk. Kafka's high throughput comes from relying heavily on the filesystem page cache and sequential disk I/O, which is remarkably fast even on spinning HDDs.
-*   **Offset:** Every message in a partition is assigned a unique sequential ID called an Offset. It acts as a bookmark, guaranteeing local ordering within that partition.
+**The Technical Reality:**
+* **Topic:** A logical stream of events (e.g., `user-clicks` or `order-status`).
+* **Partition:** To scale horizontally, a topic is split into partitions. Each partition is a single, totally ordered, append-only log file on disk. 
+* **Offset:** Every message inside a partition gets an incremental integer ID called an offset. Offsets guarantee strict ordering *within a single partition*, but not across the entire topic.
+* **Retention Policy:** Unlike message queues that delete messages after they are read, Kafka persists events. You configure how long to keep them (e.g., 7 days, or forever) based on time or size.
 
 ---
 
 ## 3. Producers: The Scribe's Assembly Line
 
-When a microservice wants to send a message, it doesn't just blindly throw it at Kafka. There is an entire assembly line that prepares the message.
+How do events get into these partitions? 
 
 Imagine a scribe who must first translate a memo into a universal language (Serialization), decide which notebook to put it in (Partitioning), and then hold onto it until they have a big enough stack of memos to make the trip to the vault worthwhile (Batching).
 
 <div align="center">
-![Producer Internals](/images/writing/kafka-producer-internals.png)
-*The lifecycle of a ProducerRecord: It flows through a Serializer, a Partitioner, accumulates into batches in memory, and is finally sent by a background I/O thread.*
+
+![Kafka Producer Internals](/images/writing/kafka-producer-pipeline.png)
+*The Producer pipeline serializes keys/values, decides the target partition, batches messages in memory, and sends them in bulk.*
+
 </div>
 
-**The Technical Reality:** The Kafka Producer is a complex client. When you call `.send()`, the data is serialized into byte arrays, routed by a partitioner (usually hashing the record's key to ensure all events for the same entity go to the same partition), and placed into a `RecordAccumulator` buffer. A separate I/O thread groups these records into batches to minimize network overhead and maximize throughput.
+**The Technical Reality:**
+When you call `.send()` on a Kafka Producer, the record goes through a pipeline:
+1. **Serializer:** Converts key and value objects into raw byte arrays (e.g., String, JSON, Avro).
+2. **Partitioner:** Determines which partition the record belongs to. If a key is provided, it hashes the key to ensure all records with the same key always land in the same partition. If no key is provided, it round-robins them.
+3. **Record Accumulator:** Instead of sending every record over the network instantly, the producer batches them by topic-partition.
+4. **Sender Thread:** A background thread that ships these batches to the Kafka brokers.
 
-Here is what a highly-configurable Kafka Producer looks like in Java:
+Here is a highly resilient Kafka Producer in Java:
 
 ```java
-Properties props = new Properties();
-props.put("bootstrap.servers", "localhost:9092");
-// Translating objects to byte arrays
-props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-// Guaranteeing durability: wait for all replicas to acknowledge
-props.put("acks", "all");
-// Batching configurations for high throughput
-props.put("linger.ms", 5); 
-props.put("batch.size", 16384); 
+import org.apache.kafka.clients.producer.*;
+import java.util.Properties;
 
-Producer<String, String> producer = new KafkaProducer<>(props);
-
-// Key "Banana" ensures this customer's events always hash to the same partition
-ProducerRecord<String, String> record =
-    new ProducerRecord<>("CustomerCountry", "Banana", "France");
-
-try {
-    producer.send(record).get(); // Synchronous send for illustration
-} catch (Exception e) {
-    e.printStackTrace();
-} finally {
-    producer.close();
+public class OrderProducer {
+    public static void main(String[] args) {
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+        
+        // Resilience and Performance Configs
+        props.put(ProducerConfig.ACKS_CONFIG, "all"); // Wait for full replication write
+        props.put(ProducerConfig.RETRIES_CONFIG, 3);
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 5); // Wait up to 5ms for batches to fill
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384); // 16KB batch size
+        
+        Producer<String, String> producer = new KafkaProducer<>(props);
+        
+        // Sending an event (Key: Order ID, Value: Order Details)
+        ProducerRecord<String, String> record = 
+            new ProducerRecord<>("orders", "order-9923", "{ \"status\": \"PLACED\", \"amount\": 149.99 }");
+            
+        producer.send(record, (metadata, exception) -> {
+            if (exception == null) {
+                System.out.printf("Sent order to Partition %d at Offset %d\n", 
+                    metadata.partition(), metadata.offset());
+            } else {
+                exception.printStackTrace();
+            }
+        });
+        
+        producer.close();
+    }
 }
 ```
 
@@ -101,42 +124,57 @@ try {
 
 ## 4. Consumers & Consumer Groups: The Team of Clerks
 
-Let's say the `payment_transactions` Topic is receiving 10,000 messages a second. A single Accounting clerk (a Consumer) will quickly fall behind. 
+If a topic receives 10,000 messages a second, a single consumer will quickly fall behind. We need to hire a team of clerks. 
 
-We need to hire a team of clerks. But if they all read the *same* messages, they'll process payments twice! We organize them into a **Consumer Group**, where a supervisor ensures each clerk is assigned exclusive access to specific notebooks (Partitions). If a clerk calls in sick, the supervisor immediately reassigns their notebooks to the remaining clerks (Rebalancing).
+However, if they all read the *same* messages, they will process duplicate payments! To prevent this, we organize them into a **Consumer Group**. A supervisor ensures each clerk gets exclusive access to specific partitions. If a clerk fails, their partitions are instantly reassigned to the remaining active clerks (Rebalancing).
 
 <div align="center">
-![Kafka Consumer Groups](/images/writing/kafka-consumer-groups-rebalancing.png)
-*Horizontal scaling in action: A Consumer Group automatically divides the workload. If a node crashes, a rebalance assigns its partition to a healthy node.*
+
+![Kafka Consumer Groups and Rebalancing](/images/writing/kafka-consumer-groups.png)
+*A Consumer Group splits partitions among its members. Rebalancing automatically reallocates partitions if a consumer goes down.*
+
 </div>
 
-**The Technical Reality:** Kafka guarantees that **each partition is read by exactly one consumer within a group**. This parallelizes processing without risking double-reads. Consumers continuously poll Kafka for new data and periodically commit their offsets back to Kafka to mark their progress.
+**The Technical Reality:**
+* **Consumer Group:** A set of consumers cooperating to read from a topic. Kafka guarantees that **each partition is assigned to exactly one consumer within a group**.
+* **Rebalancing:** The process of reassigning partition ownership when a consumer joins or leaves the group.
+* **Offset Commits:** Consumers keep track of their progress by sending a periodic confirmation ("I've processed up to offset 45") back to a special internal Kafka topic (`__consumer_offsets`).
+
+Here is a typical poll-loop consumer implementation in Java:
 
 ```java
-Properties props = new Properties();
-props.put("bootstrap.servers", "localhost:9092");
-props.put("group.id", "AccountingGroup"); // The Consumer Group
-props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-// Disable auto-commit to take manual control of offset management
-props.put("enable.auto.commit", "false"); 
+import org.apache.kafka.clients.consumer.*;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.Properties;
 
-KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-consumer.subscribe(Collections.singletonList("CustomerCountry"));
-
-try {
-    while (true) {
-        // The Poll Loop: heartbeat and data fetch
-        ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-        for (ConsumerRecord<String, String> record : records) {
-            System.out.printf("Processed transaction for %s from %s\n", 
-                record.key(), record.value());
+public class OrderConsumer {
+    public static void main(String[] args) {
+        Properties props = new Properties();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "order-processing-group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false"); // Manual offset commit for safety
+        
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Collections.singletonList("orders"));
+        
+        try {
+            while (true) {
+                // Poll Kafka for new batches of records
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+                for (ConsumerRecord<String, String> record : records) {
+                    System.out.printf("Processing order %s: %s\n", record.key(), record.value());
+                }
+                
+                // Commit offsets manually after processing the batch
+                consumer.commitSync();
+            }
+        } finally {
+            consumer.close();
         }
-        // Commit asynchronously to avoid blocking the poll loop
-        consumer.commitAsync(); 
     }
-} finally {
-    consumer.close();
 }
 ```
 
@@ -144,72 +182,168 @@ try {
 
 ## 5. Brokers & Replication: The Distributed Vault
 
-Kafka doesn't run on a single machine—that would be a catastrophic single point of failure. It runs as a cluster of multiple servers, called **Brokers**.
+Kafka doesn't run on a single machine—that would be a catastrophic single point of failure. It runs as a cluster of multiple servers called **Brokers**.
 
-Imagine having three identically fortified Post Office vaults in different cities. If one is destroyed by a lightning strike, the mail shouldn't be lost. Kafka achieves this through **Replication**. For every partition, one vault acts as the Leader, and the others are Followers. 
+Imagine having three identically fortified Post Office vaults in different cities. If one is destroyed by a disaster, the mail shouldn't be lost. Kafka achieves this through **Replication**. For every partition, one vault acts as the Leader, and the others are Followers.
 
 <div align="center">
-![Kafka Replication](/images/writing/kafka-replication-leader-election.png)
-*Replication and Leader Election: All clients read and write from the Leader. Followers blindly copy the Leader's log. If the Leader dies, a Follower is instantly promoted.*
+
+![Kafka Replication and Leader Election](/images/writing/kafka-replication.png)
+*Partition replication across brokers. If the leader fails, one of the In-Sync Replicas (ISRs) is promoted to leader.*
+
 </div>
 
-**The Technical Reality:** Kafka replicates partition data across multiple brokers. A partition has one **Leader** broker that handles all client reads and writes. The **Follower** brokers act like passive consumers, pulling messages from the leader and writing them to their own disks. If the leader goes offline, Kafka's controller (historically via ZooKeeper, now via the internal KRaft consensus protocol) detects the failure and promotes an In-Sync Replica (ISR) to be the new leader. The system recovers in milliseconds.
+**The Technical Reality:**
+* **Leader Partition:** Handles all read and write requests from clients.
+* **Follower Partitions:** Do not serve clients directly; they constantly pull events from the leader to keep their copy of the partition log identical.
+* **In-Sync Replicas (ISR):** Followers that are successfully caught up with the leader.
+* **KRaft (Kafka Raft Consensus):** Modern Kafka clusters use an internal consensus protocol (KRaft) rather than ZooKeeper to elect cluster controllers, manage metadata, and coordinate leader elections instantly when a broker goes down.
 
 ---
 
-## 6. Kafka Streams & ksqlDB: The Real-Time Factory
+## 6. Kafka Connect: The Universal Adapter
 
-Kafka is exceptional at moving and storing data. But what if you want to *transform* the data as it flows? 
+Imagine our Post Office wants to automatically sync database records with external storage, but we don't want to write custom client code for every single system.
 
-Imagine our Post Office adds a robotic assembly line. Instead of just storing memos, a robotic arm grabs a continuous stream of "Deal Closed" memos, looks up the customer's history from a side database table, merges the information, and drops a brand new "Enriched Deal" memo onto a new conveyor belt.
+Kafka Connect acts like a set of **universal plugs and sockets**. You plug one connector into PostgreSQL, another into Kafka, and a third into Elasticsearch. Data flows automatically between them without you writing a single line of application code.
 
 <div align="center">
-![Kafka Streams Processing](/images/writing/kafka-streams-processing-factory.png)
-*Stream Processing: Data packets flow through transformation stations—filtering, joining with tables, and aggregating—before being written to a sink topic.*
+
+![Kafka Connect - The Universal Adapter](/images/writing/kafka-connect-ecosystem.png)
+*Kafka Connect simplifies ingestion (Source Connectors) and exporting (Sink Connectors) between Kafka and external datastores.*
+
 </div>
 
-**The Technical Reality:** **Kafka Streams** is a powerful Java client library for building real-time, stateful stream processing applications. It introduces the concept of **Stream-Table Duality**—recognizing that a stream is just a changelog of a table, and a table is just a snapshot of a stream. 
+**The Technical Reality:**
+* **Source Connector:** Pulls data from an external system (e.g., capturing row inserts from MySQL via Debezium) and writes it into a Kafka topic.
+* **Sink Connector:** Reads data from a Kafka topic and writes it to an external destination (e.g., exporting user logs into Amazon S3 or Snowflake).
 
-Here is how elegantly you can implement a real-time word count topology using the Kafka Streams DSL:
+---
+
+## 7. Kafka Streams: The Real-Time Factory
+
+Moving data is great, but what if we need to clean, enrich, or aggregate events on the fly?
+
+Imagine our Post Office installs a robotic assembly line. Instead of just storing memos, a robotic arm grabs a continuous stream of "Deal Closed" memos, looks up the customer's history from a side database table, merges the information, and drops a brand new "Enriched Deal" memo onto a new conveyor belt.
+
+<div align="center">
+
+![Kafka Streams - Real-Time Stream Processing](/images/writing/kafka-streams-processing.png)
+*Kafka Streams processes live records step-by-step, transforming and aggregating event streams with state stores.*
+
+</div>
+
+**The Technical Reality:**
+**Kafka Streams** is a Java client library that lets you build stateful, real-time stream processing applications. It introduces **Stream-Table Duality**:
+* **KStream:** A record stream representing a sequence of independent facts (e.g., clickstream log).
+* **KTable:** A changelog stream representing the current state of a dataset (e.g., user profiles).
+
+Here is a Kafka Streams program that counts words from a stream of sentences in real time:
 
 ```java
-StreamsBuilder builder = new StreamsBuilder();
+import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.streams.*;
+import org.apache.kafka.streams.kstream.*;
+import java.util.Arrays;
+import java.util.Properties;
 
-// Read from the source topic as a KStream
-KStream<String, String> source = builder.stream("text-input");
-
-source
-    // Stateless transformation: split sentences into words
-    .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
-    // Group by word to prepare for aggregation
-    .groupBy((key, word) -> word)
-    // Stateful transformation: continuously aggregate the count
-    .count(Materialized.as("word-count-store"))
-    // Convert the resulting KTable back to a stream and output to a sink topic
-    .toStream()
-    .to("word-count-output", Produced.with(Serdes.String(), Serdes.Long()));
-
-KafkaStreams streams = new KafkaStreams(builder.build(), props);
-streams.start();
+public class WordCountApp {
+    public static void main(String[] args) {
+        Properties config = new Properties();
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-application");
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        
+        StreamsBuilder builder = new StreamsBuilder();
+        KStream<String, String> textLines = builder.stream("word-input-topic");
+        
+        KTable<String, Long> wordCounts = textLines
+            .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
+            .groupBy((key, word) -> word)
+            .count(Materialized.as("CountsStore"));
+            
+        wordCounts.toStream().to("word-output-topic", Produced.with(Serdes.String(), Serdes.Long()));
+        
+        KafkaStreams streams = new KafkaStreams(builder.build(), config);
+        streams.start();
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
+    }
+}
 ```
-
-If writing Java code is too heavy, **ksqlDB** allows you to define these identical streaming topologies using familiar SQL syntax.
 
 ---
 
-## The Verdict
+## 8. Schema Registry: The Data Contract
 
-Apache Kafka is radically more than just a message queue. It is a distributed, fault-tolerant, highly scalable event streaming platform. By treating data not as static rows in a database, but as a continuous, immutable stream of events, Kafka allows organizations to build decoupled architectures that can handle massive throughput while remaining perfectly synchronized.
+If a producer changes the format of its events (e.g., renaming a field), downstream consumers will instantly crash.
 
-It is the robust, high-speed nervous system required to build a modern enterprise.
+The **Schema Registry** acts like a **notary office**. Before a producer can send an event, it submits the event's template (schema) to the notary. The notary checks if this template complies with compatibility rules (e.g., versioning). If valid, the producer writes the data, and the consumer asks the notary how to decode it.
+
+<div align="center">
+
+![Schema Registry - The Data Contract](/images/writing/kafka-schema-registry.png)
+*The Schema Registry enforces compatibility rules on message formats, preventing producers from publishing breaking changes.*
+
+</div>
+
+**The Technical Reality:**
+By using serialization frameworks like Apache Avro, Protobuf, or JSON Schema, you store the schema definition in the central Schema Registry. Producers register schemas, and messages are sent with a small prefix containing the schema ID. Consumers fetch the schema ID from the registry to deserialize the bytes. This guarantees that your event streaming pipeline stays robust against breaking API changes.
+
+---
+
+## Running a Local Kafka Environment (Docker Compose)
+
+Ready to start building? Save the following `docker-compose.yml` to spin up a local single-broker KRaft Kafka environment alongside a modern Web UI console (`provectus-labs/kafka-ui`) for exploring topics, partitions, and messages:
+
+```yaml
+version: '3.8'
+
+services:
+  kafka:
+    image: apache/kafka:latest
+    container_name: kafka-kraft
+    ports:
+      - "9092:9092"
+    environment:
+      # Configure Kafka to run in KRaft mode (no ZooKeeper)
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:9093'
+      KAFKA_LISTENERS: 'PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "8080:8080"
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+      KAFKA_CLUSTERS_0_NAME: 'local-kraft-cluster'
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 'kafka:9092'
+```
+
+To start the cluster, run:
+```bash
+docker compose up -d
+```
+Then navigate to `http://localhost:8080` in your browser to view your topics, configure partitions, inspect incoming messages, and monitor consumer offsets.
 
 ---
 
 ## References & Further Reading
 
-This post synthesizes core architectural concepts and code patterns from the definitive literature on event streaming:
+This guide synthesizes core architectural patterns and code conventions from the definitive literature on event streaming:
 
-*   **Kafka: The Definitive Guide (2nd Edition)** by Gwen Shapira, Todd Palino, Rajini Sivaram, and Kriti Pramod.
-*   **Mastering Kafka Streams and ksqlDB** by Mitch Seymour.
-*   **Making Sense of Stream Processing** by Martin Kleppmann.
-*   **Designing Data-Intensive Applications** by Martin Kleppmann.
+* **Kafka: The Definitive Guide (2nd Edition)** by Gwen Shapira, Todd Palino, Rajini Sivaram, and Kriti Pramod.
+* **Mastering Kafka Streams and ksqlDB** by Mitch Seymour.
+* **Designing Data-Intensive Applications** by Martin Kleppmann.
+* **Apache Kafka 101 Fundamentals** Course (Confluent Developer Resources).

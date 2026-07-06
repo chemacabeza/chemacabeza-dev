@@ -57,7 +57,60 @@ But if a single logbook gets too big, a single scribe can't write fast enough, a
 * **Topic:** A logical stream of events (e.g., `user-clicks` or `order-status`).
 * **Partition:** To scale horizontally, a topic is split into partitions. Each partition is a single, totally ordered, append-only log file on disk. 
 * **Offset:** Every message inside a partition gets an incremental integer ID called an offset. Offsets guarantee strict ordering *within a single partition*, but not across the entire topic.
-* **Retention Policy:** Unlike message queues that delete messages after they are read, Kafka persists events. You configure how long to keep them (e.g., 7 days, or forever) based on time or size.
+
+### Configuring the Ledger: Topic Settings & Best Practices
+
+According to *Kafka: The Definitive Guide (2nd Edition)*, topic configurations allow you to tune reliability, durability, and availability guarantees for individual streams of data. 
+
+Here are the most critical parameters you must configure:
+
+#### 1. Replication Factor (`replication.factor`)
+The number of brokers hosting copies of a partition. 
+* **Analogy:** The number of independent, fortified vaults duplicating our logbook.
+* **Best Practice:** For production environments, always set this to at least **3**. This ensures that if one broker fails or is down for maintenance, your topic remains fully operational and durable.
+
+#### 2. Minimum In-Sync Replicas (`min.insync.replicas`)
+Specifies the minimum number of replicas that must acknowledge a write before a producer's request is considered successful when `acks=all`.
+* **Analogy:** The minimum number of vault clerks who must sign off on a new page of the ledger before telling the customer the record is permanent.
+* **Best Practice:** If replication factor is 3, set `min.insync.replicas` to **2**. This allows one broker to be down without blocking write operations. If you set it to 3 and one broker goes down, all writes will fail (raising a `NotEnoughReplicasException`).
+
+#### 3. Unclean Leader Election (`unclean.leader.election.enable`)
+Determines whether an out-of-sync replica (one that has missed some updates) can be elected as the leader if the current leader fails and no in-sync replicas are available.
+* **Analogy:** If the head clerk goes missing, do we allow an assistant clerk with outdated, half-missing records to manage the ledger, or do we freeze the vault until the head clerk returns?
+* **Best Practice:** Set to **`false`** (the default in modern Kafka) for consistency-focused applications (like payment systems). Setting it to `true` prioritizes availability but risks major data loss and out-of-order replication.
+
+#### 4. Cleanup Policy (`cleanup.policy`)
+Controls how Kafka recovers space on disk:
+* **`delete`:** Standard event retention. Kafka discards log segments older than `retention.ms` (defaults to 7 days) or when the partition size exceeds `retention.bytes`.
+* **`compact`:** Log Compaction. Kafka retains only the latest message value for any given key. Perfect for restoring application state from changelogs (Stream-Table Duality).
+
+---
+
+### Command Line Topic Configuration Examples
+
+To configure these parameters in your local environment, use the official `kafka-topics.sh` and `kafka-configs.sh` command-line tools:
+
+#### Creating a Durable, High-Reliability Topic:
+```bash
+# Executing inside the kafka container to create the 'orders' topic
+docker exec -it kafka-kraft kafka-topics.sh --bootstrap-server localhost:9092 \
+  --create \
+  --topic orders \
+  --partitions 3 \
+  --replication-factor 1 \
+  --config min.insync.replicas=1
+```
+*(Note: For a single-node local docker setup, `replication-factor` and `min.insync.replicas` are set to 1. In a production cluster of 3+ brokers, you would change these to 3 and 2, respectively).*
+
+#### Modifying Retention Policy on an Existing Topic:
+If a topic's data volume is too high and you want to reduce retention from the default 7 days to 24 hours (86,400,000 milliseconds):
+```bash
+docker exec -it kafka-kraft kafka-configs.sh --bootstrap-server localhost:9092 \
+  --alter \
+  --entity-type topics \
+  --entity-name orders \
+  --add-config retention.ms=86400000
+```
 
 ---
 

@@ -200,7 +200,10 @@
       "Distributed Systems"
     ],
     "date": "2026-07-06",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-07-06T16:04:25.263Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-apache-kafka-171"
   },
   {
     "slug": "the-feynman-guide-to-cdns",
@@ -327,6 +330,9 @@
       "Infrastructure"
     ],
     "date": "2026-07-05",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-07-06T16:05:18.039Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-docker-c09"
   }
 ]

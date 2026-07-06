@@ -1,9 +1,8 @@
 [
   {
     "slug": "the-feynman-guide-to-apache-kafka",
-    "posted": true,
-    "postedAt": "2026-05-24T16:00:50.698Z",
-    "body": "Kafka isn't a queue. That's the first thing most engineers get wrong.\n\nIt's a distributed, append-only log — a \"nervous system\" that lets services react to events instead of asking each other for permission. Once that mental model clicks, everything else (partitions, consumer groups, offsets, exactly-once semantics) stops feeling like trivia and starts feeling like physics.\n\nI just published a Feynman-style breakdown of Kafka — the analogies, the failure modes, and the parts that even senior engineers tend to skip over.\n\nRead it here → https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka\n\n#ApacheKafka #SystemDesign #EventStreaming #DistributedSystems #SoftwareEngineering"
+    "posted": false,
+    "body": "I have completely rewritten and expanded \"The Feynman Guide to Apache Kafka\" with 8 new visual diagrams, deep technical pipelines, and a production-ready KRaft Docker compose setup!\n\nIf you work with event-driven systems, Kafka is one of the most powerful tools in your stack. But it can also feel like a black box. I break down the core components using the Richard Feynman Technique (simple everyday analogies):\n\n📦 The Event Hub — Decoupling services with passive events vs active commands.\n📖 The Immutable Logbook & Partitions — Scaling out horizontally while keeping order.\n🏭 The Producer Pipeline — Serialization, Partitioning, Accumulation, and Batching.\n👥 Consumer Groups & Rebalancing — Dividing workloads without duplicate processing.\n🏰 Brokers & KRaft Consensus — How replication and leader election work without ZooKeeper.\n🔌 Universal Adapters (Kafka Connect) — Syncing databases and storage systems automatically.\n🤖 Robotic Assembly Line (Kafka Streams) — Real-time stream-table transformations.\n✍️ The Data Notary (Schema Registry) — Enforcing Avro/Protobuf data contracts to prevent crashes.\n\nCheck out the full guide here → https://chemacabeza.dev/writing/the-feynman-guide-to-apache-kafka\n\n#ApacheKafka #SystemDesign #EventStreaming #DistributedSystems #SoftwareEngineering #DevOps"
   },
   {
     "slug": "the-feynman-guide-to-mcp",

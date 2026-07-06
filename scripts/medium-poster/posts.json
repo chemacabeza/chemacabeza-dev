@@ -51,12 +51,8 @@
       "Event Streaming",
       "Distributed Systems"
     ],
-    "scheduledFor": "2026-05-25T21:33:45.873Z",
-    "posted": true,
-    "mediumNote": "was a silent draft (Medium 2/24h rate limit); pending re-publish",
-    "postedAt": "2026-06-04T19:01:20.120Z",
-    "mediumStatus": "published",
-    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-apache-kafka-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-54031607ed5a"
+    "scheduledFor": "2026-07-06T18:00:00.000Z",
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-cdns",

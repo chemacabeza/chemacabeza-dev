@@ -192,18 +192,15 @@
   {
     "slug": "the-feynman-guide-to-apache-kafka",
     "title": "The Feynman Guide to Apache Kafka",
-    "subtitle": "Understanding the nervous system of modern data architectures. A synthesis of core Kafka literature using simple analogies.",
+    "subtitle": "Demystifying distributed event streaming, topics, partitions, replication, Kafka Connect, and stream processing using simple analogies and the Richard Feynman Technique.",
     "tags": [
       "Apache Kafka",
       "System Design",
       "Event Streaming",
       "Distributed Systems"
     ],
-    "date": "2026-04-30",
-    "posted": true,
-    "postedAt": "2026-06-10T04:52:19.658Z",
-    "substackStatus": "published",
-    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-apache-kafka"
+    "date": "2026-07-06",
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-cdns",

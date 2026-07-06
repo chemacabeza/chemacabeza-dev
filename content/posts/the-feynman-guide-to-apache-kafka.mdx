@@ -293,10 +293,26 @@ By using serialization frameworks like Apache Avro, Protobuf, or JSON Schema, yo
 
 ---
 
-## Running a Local Kafka Environment (Docker Compose)
+## Quickstart: Build and Run a Complete Kafka App
 
-Ready to start building? Save the following `docker-compose.yml` to spin up a local single-broker KRaft Kafka environment alongside a modern Web UI console (`provectus-labs/kafka-ui`) for exploring topics, partitions, and messages:
+To try these examples yourself, you can set up a local Kafka cluster and run the Java Producer and Consumer using the following copy-pasteable configuration.
 
+### 1. Project Directory Structure
+Create a new directory on your machine with the following layout:
+```text
+my-kafka-app/
+├── docker-compose.yml
+├── pom.xml
+└── src/
+    └── main/
+        └── java/
+            ├── OrderProducer.java
+            ├── OrderConsumer.java
+            └── WordCountApp.java
+```
+
+### 2. Configure Infrastructure (`docker-compose.yml`)
+Save this file in the root of your directory to boot up a single-broker Kafka cluster using **KRaft mode** (no ZooKeeper required) along with a web administration UI:
 ```yaml
 version: '3.8'
 
@@ -307,7 +323,6 @@ services:
     ports:
       - "9092:9092"
     environment:
-      # Configure Kafka to run in KRaft mode (no ZooKeeper)
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: 'broker,controller'
       KAFKA_CONTROLLER_QUORUM_VOTERS: '1@localhost:9093'
@@ -331,11 +346,67 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 'kafka:9092'
 ```
 
-To start the cluster, run:
+### 3. Build Configuration (`pom.xml`)
+Save the following Maven file to automatically fetch the required Kafka clients and streams libraries:
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.feynman.kafka</groupId>
+    <artifactId>kafka-quickstart</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <kafka.version>3.7.0</kafka.version>
+    </properties>
+
+    <dependencies>
+        <!-- Kafka Clients (Producer & Consumer APIs) -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+        <!-- Kafka Streams (Processing Library) -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+            <version>${kafka.version}</version>
+        </dependency>
+        <!-- SLF4J Simple Logger for Console Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+    </dependencies>
+</project>
+```
+
+### 4. Create Java Source Files
+Save the `OrderProducer.java` (from Section 3), `OrderConsumer.java` (from Section 4), and `WordCountApp.java` (from Section 7) inside the `src/main/java/` directory.
+
+### 5. Start and Run
+
+First, launch the Kafka infrastructure in the background:
 ```bash
 docker compose up -d
 ```
-Then navigate to `http://localhost:8080` in your browser to view your topics, configure partitions, inspect incoming messages, and monitor consumer offsets.
+
+Open a terminal and start the consumer to listen for incoming messages:
+```bash
+mvn exec:java -Dexec.mainClass="OrderConsumer"
+```
+
+Open a second terminal and run the producer to publish an event:
+```bash
+mvn exec:java -Dexec.mainClass="OrderProducer"
+```
+
+You will see the consumer instantly output the received order! You can also head over to `http://localhost:8080` in your web browser to explore your `orders` topic, inspect partition offsets, and track active consumer groups visually.
 
 ---
 

@@ -86,6 +86,7 @@ Partitions = Max( (Target Write Throughput / Single Producer Throughput),
 #### Step 2: Choose Your Topic Profile (Durability vs. Performance)
 Different types of data require different configurations. You must configure your topic parameters based on your business requirements:
 
+<div className="overflow-x-auto my-6">
 <table>
   <thead>
     <tr>
@@ -93,7 +94,7 @@ Different types of data require different configurations. You must configure you
       <th align="center">Replication Factor</th>
       <th align="center"><code>min.insync.replicas</code></th>
       <th align="center"><code>acks</code> (Producer)</th>
-      <th align="center"><code>unclean.leader.election.enable</code></th>
+      <th align="center"><code>unclean.leader.election</code></th>
       <th align="center">Cleanup Policy</th>
     </tr>
   </thead>
@@ -133,6 +134,7 @@ Different types of data require different configurations. You must configure you
     </tr>
   </tbody>
 </table>
+</div>
 
 ##### 1. Replication Factor (`replication.factor`)
 The number of independent brokers hosting copies of your data.

@@ -344,5 +344,18 @@
     ],
     "scheduledFor": "2026-07-05T00:00:00.000Z",
     "posted": false
+  },
+  {
+    "slug": "the-feynman-guide-to-the-cap-theorem",
+    "title": "The Feynman Guide to the CAP Theorem",
+    "tags": [
+      "System Design",
+      "Distributed Systems",
+      "Database",
+      "CAP Theorem",
+      "Architecture"
+    ],
+    "scheduledFor": "2026-07-07T00:00:00.000Z",
+    "posted": false
   }
 ]

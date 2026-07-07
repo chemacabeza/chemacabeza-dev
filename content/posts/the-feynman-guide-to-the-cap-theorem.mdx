@@ -92,16 +92,10 @@ When the customer asks Bob for their pre-order details, Bob decides to answer an
 In 2012, computer scientist Daniel Abadi realized that the CAP Theorem only describes what happens when a system is *failing* (during a network partition). But what about when things are running normally? 
 
 He formulated the **PACELC Theorem**:
-
-```text
-       ┌─── [A]vailability (AP)
-  IF [P]artition ───┤
-  │                 └─── [C]onsistency (CP)
-──┤
-  │                 ┌─── [L]atency (PC/EC)
-  ELSE (Normal) ────┤
-                    └─── [C]onsistency (PC/DY)
-```
+<div align="center">
+![PACELC Theorem Flowchart](/images/writing/pacelc-theorem.png)
+*The PACELC Theorem flowchart: choosing trade-offs in both partition and normal states.*
+</div>
 
 It reads: **If there is a Partition (P), how does the system trade off Availability (A) vs Consistency (C)? Else (E), how does the system trade off Latency (L) vs Consistency (C)?**
 

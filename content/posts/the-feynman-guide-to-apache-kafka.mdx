@@ -69,11 +69,16 @@ To configure a topic correctly, follow this three-step blueprint:
 #### Step 1: Calculate the Partition Count (The Throughput Formula)
 Partitions are Kafka's unit of scalability. You cannot scale a consumer group beyond the number of partitions in a topic. To calculate the correct number of partitions, use the **Throughput Formula**:
 
-$$\text{Partitions} = \max\left( \frac{\text{Target Write Throughput}}{\text{Single Producer Throughput}}, \frac{\text{Target Read Throughput}}{\text{Single Consumer Throughput}} \right)$$
+```text
+Partitions = Max( (Target Write Throughput / Single Producer Throughput), 
+                  (Target Read Throughput / Single Consumer Throughput) )
+```
 
 * **The Sizing Rule:** Producers are fast (often 100+ MB/s), but consumers are slow (often limited by database writes or API calls to 10 MB/s). 
 * **Example:** If your target throughput is **100 MB/s** and a single consumer thread can process **10 MB/s** before hitting a database bottleneck:
-  $$\text{Partitions} = \frac{100 \text{ MB/s}}{10 \text{ MB/s}} = 10 \text{ partitions}$$
+  ```text
+  Partitions = 100 MB/s / 10 MB/s = 10 partitions
+  ```
 * **Partition Warning:** Do not simply set 100 partitions "just in case". Every partition requires file descriptors and memory on the broker, and having too many partitions increases controller metadata sync time and slows down partition leader election during broker failover.
 
 ---
@@ -83,9 +88,9 @@ Different types of data require different configurations. You must configure you
 
 | Use Case | Replication Factor | `min.insync.replicas` | `acks` (Producer) | `unclean.leader.election.enable` | `cleanup.policy` |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Financial / Transactions** <br>*(Zero Data Loss)* | **3** | **2** | `all` | `false` | `delete` |
-| **Telemetry / Clickstream** <br>*(High Throughput)* | **3** (or 2) | **1** | `1` | `true` | `delete` |
-| **User Profile / DB Sync** <br>*(State Restore)* | **3** | **2** | `all` | `false` | `compact` |
+| **Financial / Transactions** <br />*(Zero Data Loss)* | **3** | **2** | `all` | `false` | `delete` |
+| **Telemetry / Clickstream** <br />*(High Throughput)* | **3** (or 2) | **1** | `1` | `true` | `delete` |
+| **User Profile / DB Sync** <br />*(State Restore)* | **3** | **2** | `all` | `false` | `compact` |
 
 ##### 1. Replication Factor (`replication.factor`)
 The number of independent brokers hosting copies of your data.

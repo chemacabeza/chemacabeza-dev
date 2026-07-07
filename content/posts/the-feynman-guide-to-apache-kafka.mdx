@@ -162,28 +162,47 @@ Determines if an out-of-sync follower (which has missed some updates) can be ele
 
 ### Command Line Topic Configuration Examples
 
-To configure these parameters in your local environment, use the official `kafka-topics.sh` and `kafka-configs.sh` command-line tools:
+To configure these topic profiles in your environment, use the official `kafka-topics.sh` command-line tool. 
 
-#### Creating a Durable, High-Reliability Topic:
+> [!NOTE]
+> If you are running the single-node Docker Compose setup from this guide, you must change `--replication-factor 3` to `1` and `min.insync.replicas=2` to `1` because a single broker cannot host multiple replicas. The commands below show the **production-grade configurations** for a standard 3-broker cluster.
+
+#### Profile 1: Financial & Transactions (Zero Data Loss)
+This creates a topic with 3 replicas, requiring a minimum of 2 in-sync replicas to acknowledge writes, with unclean leader election disabled:
 ```bash
-# Executing inside the kafka container to create the 'orders' topic
 docker exec -it kafka-kraft kafka-topics.sh --bootstrap-server localhost:9092 \
   --create \
-  --topic orders \
-  --partitions 3 \
-  --replication-factor 1 \
-  --config min.insync.replicas=1
+  --topic financial-transactions \
+  --partitions 6 \
+  --replication-factor 3 \
+  --config min.insync.replicas=2 \
+  --config unclean.leader.election.enable=false
 ```
-*(Note: For a single-node local docker setup, `replication-factor` and `min.insync.replicas` are set to 1. In a production cluster of 3+ brokers, you would change these to 3 and 2, respectively).*
 
-#### Modifying Retention Policy on an Existing Topic:
-If a topic's data volume is too high and you want to reduce retention from the default 7 days to 24 hours (86,400,000 milliseconds):
+#### Profile 2: Telemetry & Clickstream (High Throughput)
+This creates a topic optimized for massive volumes of sensor or web data. It enables compression, uses a shorter 24-hour log retention, and tolerates minor replica lag by setting `min.insync.replicas=1`:
 ```bash
-docker exec -it kafka-kraft kafka-configs.sh --bootstrap-server localhost:9092 \
-  --alter \
-  --entity-type topics \
-  --entity-name orders \
-  --add-config retention.ms=86400000
+docker exec -it kafka-kraft kafka-topics.sh --bootstrap-server localhost:9092 \
+  --create \
+  --topic telemetry-metrics \
+  --partitions 12 \
+  --replication-factor 3 \
+  --config min.insync.replicas=1 \
+  --config compression.type=zstd \
+  --config retention.ms=86400000
+```
+
+#### Profile 3: User Profile & Database Sync (State Restore)
+This creates a topic with log compaction enabled, retaining only the latest value for each key so consumers can restore application state instantly:
+```bash
+docker exec -it kafka-kraft kafka-topics.sh --bootstrap-server localhost:9092 \
+  --create \
+  --topic user-profiles \
+  --partitions 3 \
+  --replication-factor 3 \
+  --config min.insync.replicas=2 \
+  --config cleanup.policy=compact \
+  --config min.cleanable.dirty.ratio=0.5
 ```
 
 ---

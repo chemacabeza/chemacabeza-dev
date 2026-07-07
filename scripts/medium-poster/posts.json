@@ -356,6 +356,9 @@
       "Architecture"
     ],
     "scheduledFor": "2026-07-07T00:00:00.000Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-07-07T08:24:18.000Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-the-cap-theorem-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-c5653cd0b641",
+    "mediumStatus": "published"
   }
 ]

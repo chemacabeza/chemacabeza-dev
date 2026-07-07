@@ -347,6 +347,9 @@
       "Architecture"
     ],
     "date": "2026-07-07",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-07-07T08:16:25.000Z",
+    "substackStatus": "published",
+    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-the-cap-theorem"
   }
 ]

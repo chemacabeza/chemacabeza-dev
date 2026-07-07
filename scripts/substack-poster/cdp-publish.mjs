@@ -88,6 +88,10 @@ async function fetchContent() {
   const firstHr = body.search(/<hr\s*\/?>/i);
   if (firstHr !== -1) body = body.slice(firstHr).replace(/^<hr\s*\/?>/i, '');
   body = body.trim();
+  // Rewrite relative links/images to absolute (pointing to https://chemacabeza.dev)
+  body = body.replace(/(src|href)="\/([^"]*)"/g, (m, attr, path) => {
+    return `${attr}="https://chemacabeza.dev/${path}"`;
+  });
   // Append a canonical attribution footer.
   body += `\n<hr/>\n<p><em>Originally published at <a href="${CANONICAL}">${CANONICAL}</a>.</em></p>`;
   return { title, subtitle, body };

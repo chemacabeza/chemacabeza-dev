@@ -51,6 +51,28 @@ if (!context) {
   process.exit(2);
 }
 
+const COOKIE_JAR = process.env.MEDIUM_COOKIE_JAR || '';
+if (COOKIE_JAR) {
+  log(`injecting ${COOKIE_JAR.length} chars of cookies from MEDIUM_COOKIE_JAR`);
+  const cookies = COOKIE_JAR.split(';')
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((s) => {
+      const eq = s.indexOf('=');
+      if (eq < 0) return null;
+      return {
+        name: s.slice(0, eq).trim(),
+        value: s.slice(eq + 1).trim(),
+        domain: '.medium.com',
+        path: '/',
+        secure: true,
+        sameSite: 'Lax',
+      };
+    })
+    .filter(Boolean);
+  await context.addCookies(cookies);
+}
+
 const page = await context.newPage();
 
 async function shot(tag) {

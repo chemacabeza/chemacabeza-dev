@@ -695,6 +695,38 @@
       "fullTextPropagated": false,
       "fullTextArtifact": true,
       "lastSyncedAt": "2026-07-05T12:52:11.228Z"
+    },
+    "the-feynman-guide-to-the-cap-theorem::substack": {
+      "slug": "the-feynman-guide-to-the-cap-theorem",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-the-cap-theorem",
+      "contentHash": "f3d35fab4b7878a7",
+      "platform": "substack",
+      "status": "published",
+      "platformUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-the-cap-theorem",
+      "fullTextPropagated": true,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-07T08:30:30.000Z"
+    },
+    "the-feynman-guide-to-the-cap-theorem::medium": {
+      "slug": "the-feynman-guide-to-the-cap-theorem",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-the-cap-theorem",
+      "contentHash": "f3d35fab4b7878a7",
+      "platform": "medium",
+      "status": "published",
+      "platformUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-the-cap-theorem-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-c5653cd0b641",
+      "fullTextPropagated": true,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-07T08:30:30.000Z"
+    },
+    "the-feynman-guide-to-the-cap-theorem::linkedin": {
+      "slug": "the-feynman-guide-to-the-cap-theorem",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-the-cap-theorem",
+      "contentHash": "f3d35fab4b7878a7",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-07T08:05:12.961Z"
     }
   }
 }

@@ -440,7 +440,117 @@ Save the following Maven file to automatically fetch the required Kafka clients 
 ```
 
 ### 4. Create Java Source Files
-Save the `OrderProducer.java` (from Section 3), `OrderConsumer.java` (from Section 4), and `WordCountApp.java` (from Section 7) inside the `src/main/java/` directory.
+
+Save the following three Java classes inside your `src/main/java/` directory:
+
+#### `OrderProducer.java`
+```java
+import org.apache.kafka.clients.producer.*;
+import java.util.Properties;
+
+public class OrderProducer {
+    public static void main(String[] args) {
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+        
+        // Resilience and Performance Configs
+        props.put(ProducerConfig.ACKS_CONFIG, "all"); // Wait for full replication write
+        props.put(ProducerConfig.RETRIES_CONFIG, 3);
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 5); // Wait up to 5ms for batches to fill
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384); // 16KB batch size
+        
+        Producer<String, String> producer = new KafkaProducer<>(props);
+        
+        // Sending an event (Key: Order ID, Value: Order Details)
+        ProducerRecord<String, String> record = 
+            new ProducerRecord<>("orders", "order-9923", "{ \"status\": \"PLACED\", \"amount\": 149.99 }");
+            
+        producer.send(record, (metadata, exception) -> {
+            if (exception == null) {
+                System.out.printf("Sent order to Partition %d at Offset %d\n", 
+                    metadata.partition(), metadata.offset());
+            } else {
+                exception.printStackTrace();
+            }
+        });
+        
+        producer.close();
+    }
+}
+```
+
+#### `OrderConsumer.java`
+```java
+import org.apache.kafka.clients.consumer.*;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.Properties;
+
+public class OrderConsumer {
+    public static void main(String[] args) {
+        Properties props = new Properties();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "order-processing-group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false"); // Manual offset commit for safety
+        
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Collections.singletonList("orders"));
+        
+        try {
+            while (true) {
+                // Poll Kafka for new batches of records
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+                for (ConsumerRecord<String, String> record : records) {
+                    System.out.printf("Processing order %s: %s\n", record.key(), record.value());
+                }
+                
+                // Commit offsets manually after processing the batch
+                consumer.commitSync();
+            }
+        } finally {
+            consumer.close();
+        }
+    }
+}
+```
+
+#### `WordCountApp.java`
+```java
+import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.streams.*;
+import org.apache.kafka.streams.kstream.*;
+import java.util.Arrays;
+import java.util.Properties;
+
+public class WordCountApp {
+    public static void main(String[] args) {
+        Properties config = new Properties();
+        config.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-application");
+        config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+        
+        StreamsBuilder builder = new StreamsBuilder();
+        KStream<String, String> textLines = builder.stream("word-input-topic");
+        
+        KTable<String, Long> wordCounts = textLines
+            .flatMapValues(value -> Arrays.asList(value.toLowerCase().split("\\W+")))
+            .groupBy((key, word) -> word)
+            .count(Materialized.as("CountsStore"));
+            
+        wordCounts.toStream().to("word-output-topic", Produced.with(Serdes.String(), Serdes.Long()));
+        
+        KafkaStreams streams = new KafkaStreams(builder.build(), config);
+        streams.start();
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
+    }
+}
+```
 
 ### 5. Start and Run
 

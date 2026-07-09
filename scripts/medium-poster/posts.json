@@ -52,7 +52,8 @@
       "Distributed Systems"
     ],
     "scheduledFor": "2026-07-06T18:00:00.000Z",
-    "posted": false
+    "posted": false,
+    "mediumDraftId": "b1a57aafc635"
   },
   {
     "slug": "the-feynman-guide-to-cdns",
@@ -343,10 +344,7 @@
       "Infrastructure"
     ],
     "scheduledFor": "2026-07-05T00:00:00.000Z",
-    "posted": true,
-    "postedAt": "2026-07-08T19:01:00.030Z",
-    "mediumStatus": "published",
-    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-docker-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-6d11d76a4651"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-the-cap-theorem",

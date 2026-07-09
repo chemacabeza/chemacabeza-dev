@@ -330,10 +330,7 @@
       "Infrastructure"
     ],
     "date": "2026-07-05",
-    "posted": true,
-    "postedAt": "2026-07-06T16:05:18.039Z",
-    "substackStatus": "published",
-    "substackUrl": "https://chemacabeza.substack.com/p/the-feynman-guide-to-docker-c09"
+    "posted": false
   },
   {
     "slug": "the-feynman-guide-to-the-cap-theorem",

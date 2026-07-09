@@ -68,7 +68,25 @@ In tech terms, containers share the **Host OS Kernel** (the core engine of the o
 
 ---
 
-## 3. Images vs. Containers: The Blueprint vs. The House
+## 3. Under the Hood: Namespaces and Cgroups (The Blinders and the Resource Warden)
+
+Since containers share the Host OS kernel, what stops one container from reading another container's database files, killing its processes, or hogging all the host's memory? 
+
+Under the hood, Linux uses two core technologies to keep containers isolated and well-behaved:
+
+### Namespaces: The Horse Blinders
+A **Namespace** determines what a container is allowed to **see**. 
+* **Analogy:** Think of putting horse blinders on a container. It can only look straight ahead at its own private lane. 
+* Linux has different types of namespaces. For instance, the Process ID (PID) namespace makes a container believe it is running alone as Process #1, completely blind to the fact that there are thousands of other processes running on the host machine. The Mount (mnt) namespace ensures it only sees its own filesystem.
+
+### Control Groups (Cgroups): The Resource Warden
+A **Cgroup** determines what a container is allowed to **use**.
+* **Analogy:** Think of a strict dormitory warden who manages electricity and water allowance. If you use too much, they shut off your supply.
+* Without Cgroups, one runaway container could consume 100% of the host CPU and memory, crashing every other application on the server. Cgroups enforce strict limits, saying: *"Container A, you only get a maximum of 512MB of RAM and 1 CPU core."*
+
+---
+
+## 4. Images vs. Containers: The Blueprint vs. The House
 
 Two terms you will hear constantly are **Image** and **Container**. The easiest way to separate them is to think of them as a **Blueprint** and a **House**.
 
@@ -77,7 +95,7 @@ Two terms you will hear constantly are **Image** and **Container**. The easiest 
 
 ---
 
-## 4. Layer Caching: The Stack of Transparent Sheets
+## 5. Layer Caching: The Stack of Transparent Sheets
 
 How are Docker images actually constructed? They are built using **Layers**. 
 
@@ -128,7 +146,55 @@ If you copied your entire codebase before running `npm install`, any minor comme
 
 ---
 
-## 5. Data Persistence: Volumes (The External Hard Drive)
+## 6. Multi-Stage Builds: The Sculptor's Studio
+
+When building an image, you often need heavy compilers, package managers, and software development kits (SDKs) to compile your code. But once the application is compiled into a single executable, you don't need those heavy tools anymore.
+
+* **Analogy:** Imagine a sculptor's studio. To carve a marble statue, you need heavy chisels, hammers, scaffolding, and safety goggles. But when the statue is finished, you don't ship the hammers, scaffolding, and marble dust to the museum. You only ship the finished statue!
+* Prior to **Multi-Stage Builds**, developers had to ship all the build tools in their Docker images, resulting in bloated, gigabyte-sized production images.
+* With Multi-Stage builds, you use multiple `FROM` instructions in a single `Dockerfile`. You compile your code in a temporary "build stage" containing all the compilers, and then copy *only* the compiled artifact into a final, clean, lightweight "production stage."
+
+Here is what a multi-stage `Dockerfile` looks like:
+
+```dockerfile
+# Stage 1: The Builder (The Sculptor's Studio)
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build # Compiles TS or bundles JS
+
+# Stage 2: The Production Image (The Museum Exhibit)
+FROM node:18-alpine AS runner
+WORKDIR /app
+# Copy only the built assets from the previous stage
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json ./package.json
+RUN npm install --only=production
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+---
+
+## 7. ENTRYPOINT vs CMD: The Tool vs The Subcommand
+
+Many beginners get confused by the `ENTRYPOINT` and `CMD` instructions in a `Dockerfile` since both seem to run commands. 
+
+Here is the difference:
+* **ENTRYPOINT (The Tool):** This is the executable that is *always* run when the container starts. It defines the identity of the container.
+* **CMD (The Default Arguments):** This defines the default arguments passed to the ENTRYPOINT. 
+
+* **Analogy:** Imagine you have a custom container that wraps the `git` command. 
+  - You set the `ENTRYPOINT` to `["git"]`.
+  - You set the `CMD` to `["status"]`.
+  - If you run the container normally, it runs `git status`.
+  - But if you run it with an argument (e.g., `docker run my-git-app log`), Docker overrides the `CMD` (arguments) with `log`, running `git log`. The tool (`ENTRYPOINT`) remains `git`, but the subcommand (`CMD`) was easily changed!
+
+---
+
+## 8. Data Persistence: Volumes (The External Hard Drive)
 
 By default, Docker containers are **ephemeral**—meaning they are temporary. 
 
@@ -157,7 +223,30 @@ docker run -v my-db-volume:/var/lib/postgresql/data postgres:15
 
 ---
 
-## 6. Container Networking: The Apartment Intercom
+## 9. Container Security: The Guest Bedroom Rule (Running as Non-Root)
+
+By default, Docker runs the processes inside a container as the `root` user. This is a massive security hazard. If an attacker finds a vulnerability in your web application and exploits it, they gain root access *inside* the container, which increases the risk of a "container escape"—breaking out of the container to take control of the host operating system.
+
+* **Analogy:** When you rent a guest room in your house to a tenant, you don't hand them the master keys to the front door, the garage, and your personal safe. You only give them the key to their bedroom.
+* To secure your container, always create and switch to a non-root user in your `Dockerfile` after executing commands that require admin permissions (like installing system packages).
+
+```dockerfile
+FROM alpine:3.19
+RUN apk add --no-cache curl
+
+# Create a non-privileged group and user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Switch to the non-root user
+USER appuser
+
+# Subsequent commands run under limited permissions
+CMD ["curl", "https://chemacabeza.dev"]
+```
+
+---
+
+## 10. Container Networking: The Apartment Intercom
 
 By default, containers live in absolute isolation. They are locked rooms. If you run a web app inside container A on port `80`, your computer (the host) cannot reach it, and container B (a database) cannot talk to it either.
 
@@ -176,7 +265,7 @@ When you run multiple containers (e.g., a frontend app, a backend API, and a dat
 
 ---
 
-## 7. Tying It All Together: Docker Compose (The Building Manager)
+## 11. Tying It All Together: Docker Compose (The Building Manager)
 
 Running individual containers with `docker run` commands can get messy. If you have a web application, a database, and a cache, remembering all the long commands with port mappings and volumes is exhausting.
 

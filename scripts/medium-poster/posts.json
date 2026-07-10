@@ -344,7 +344,10 @@
       "Infrastructure"
     ],
     "scheduledFor": "2026-07-05T00:00:00.000Z",
-    "posted": false
+    "posted": true,
+    "postedAt": "2026-07-10T19:01:03.285Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-docker-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-8ce6619a27cc"
   },
   {
     "slug": "the-feynman-guide-to-the-cap-theorem",

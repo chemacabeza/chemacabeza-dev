@@ -52,8 +52,10 @@
       "Distributed Systems"
     ],
     "scheduledFor": "2026-07-06T18:00:00.000Z",
-    "posted": false,
-    "mediumDraftId": "b1a57aafc635"
+    "posted": true,
+    "postedAt": "2026-07-11T07:00:58.582Z",
+    "mediumStatus": "published",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-apache-kafka-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-b1a57aafc635"
   },
   {
     "slug": "the-feynman-guide-to-cdns",

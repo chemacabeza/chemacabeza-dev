@@ -382,9 +382,8 @@ try {
   // ["Add subscribe buttons", "Publish without buttons"]. We don't want to
   // inject subscribe buttons into the body, so click "Publish without buttons".
   // This is the click that ACTUALLY publishes.
-  await page.waitForTimeout(1800);
   const withoutButtons = page.locator('button:has-text("Publish without buttons")').first();
-  if (await withoutButtons.isVisible({ timeout: 4000 }).catch(() => false)) {
+  if (await withoutButtons.waitFor({ state: 'visible', timeout: 15000 }).then(() => true).catch(() => false)) {
     await withoutButtons.click();
     log('  clicked "Publish without buttons"');
   } else {

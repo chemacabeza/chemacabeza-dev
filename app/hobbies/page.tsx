@@ -17,6 +17,15 @@ export default function HobbiesPage() {
             </div>
 
             <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Back */}
+                <Link
+                    href="/"
+                    className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-300 mb-10 transition-colors group"
+                >
+                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+                    Back to Home
+                </Link>
+
                 {/* Header */}
                 <div className="mb-12">
                     <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20 mb-4">

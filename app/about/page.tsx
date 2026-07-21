@@ -1,11 +1,15 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
+import JsonLd from "@/components/JsonLd";
+import { personSchema, profilePageSchema } from "@/lib/jsonld";
 
 export const metadata: Metadata = createMetadata({
-    title: "About",
+    title: "About — Engineering Manager in Berlin",
     description:
-        "Engineering Manager with 15+ years building high-performance backend systems, distributed architectures, and the teams that ship them.",
+        "José María Cabeza Rodríguez is an Engineering Manager and System Architect in Berlin with 15+ years across backend platforms, distributed systems, and engineering leadership at Klarna, NCR, and Amadeus.",
     path: "/about",
+    type: "profile",
 });
 
 const experience = [
@@ -111,6 +115,7 @@ const principles = [
 export default function AboutPage() {
     return (
         <div className="pt-24 pb-32">
+            <JsonLd data={[profilePageSchema("/about"), personSchema()]} />
             {/* Background */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-20 right-0 w-[400px] h-[400px] rounded-full bg-indigo-600/5 blur-[100px]" />
@@ -305,6 +310,30 @@ export default function AboutPage() {
                             </div>
                         ))}
                     </div>
+                </section>
+
+                {/* Explore — contextual links to cornerstone content */}
+                <section className="mt-20 pt-10 border-t border-slate-800/40">
+                    <h2 className="text-2xl font-bold text-slate-100 mb-4">Explore my work</h2>
+                    <p className="text-slate-400 leading-relaxed max-w-2xl">
+                        See the{" "}
+                        <Link href="/projects" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 font-medium">
+                            engineering projects and case studies
+                        </Link>{" "}
+                        I&apos;ve built across AI, platform engineering, and backend systems, or read my{" "}
+                        <Link href="/writing" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 font-medium">
+                            technical writing on system design, distributed systems, and engineering leadership
+                        </Link>
+                        . You can also see what I&apos;m focused on{" "}
+                        <Link href="/now" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 font-medium">
+                            right now
+                        </Link>{" "}
+                        or{" "}
+                        <Link href="/contact" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 font-medium">
+                            get in touch
+                        </Link>
+                        .
+                    </p>
                 </section>
             </div>
         </div>

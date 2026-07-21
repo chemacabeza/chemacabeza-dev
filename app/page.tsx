@@ -7,9 +7,13 @@ import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
 import ArticleCard from "@/components/ArticleCard";
 import SectionHeader from "@/components/SectionHeader";
+import JsonLd from "@/components/JsonLd";
+import { personSchema, webSiteSchema } from "@/lib/jsonld";
 
+// No `title` → uses the name-first site title ("José María Cabeza Rodríguez —
+// Engineering Manager & System Architect"), the strongest brand signal for the
+// homepage. Berlin/backend positioning lives in the description and Person JSON-LD.
 export const metadata: Metadata = createMetadata({
-  title: "Engineering Manager & System Architect",
   description: siteConfig.description,
 });
 
@@ -42,6 +46,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <JsonLd data={[webSiteSchema(), personSchema()]} />
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
         {/* Background orbs */}

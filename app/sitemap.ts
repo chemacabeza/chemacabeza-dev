@@ -3,35 +3,49 @@ import { siteConfig } from "@/lib/metadata";
 import { getAllPosts } from "@/lib/mdx";
 import { projects } from "@/lib/projects";
 
+/**
+ * Canonical sitemap. Only indexable, self-canonical pages are listed — no API
+ * routes, the /export duplicate-content route, or the noindex 404 page.
+ *
+ * `lastModified` uses real content dates (frontmatter `updated`/`date`) rather
+ * than a per-request `new Date()`, so timestamps only change when content
+ * actually changes. `changeFrequency`/`priority` are intentionally omitted:
+ * Google ignores them and inventing values adds no signal.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
     const posts = getAllPosts();
 
+    const postDate = (iso: string | undefined) =>
+        iso ? new Date(iso) : undefined;
+
+    const postEntries = posts.map((post) => ({
+        url: `${siteConfig.url}/writing/${post.slug}`,
+        lastModified:
+            postDate(post.frontmatter.updated) ?? new Date(post.frontmatter.date),
+    }));
+
+    // The writing hub's freshness tracks the newest article.
+    const newestPost = posts[0]
+        ? postDate(posts[0].frontmatter.updated) ??
+          new Date(posts[0].frontmatter.date)
+        : undefined;
+
     const staticRoutes: MetadataRoute.Sitemap = [
-        { url: siteConfig.url, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-        { url: `${siteConfig.url}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-        { url: `${siteConfig.url}/projects`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-        { url: `${siteConfig.url}/writing`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
-        { url: `${siteConfig.url}/hobbies`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-        { url: `${siteConfig.url}/now`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-        { url: `${siteConfig.url}/contact`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.6 },
-        { url: `${siteConfig.url}/support`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.4 },
-        { url: `${siteConfig.url}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
-        { url: `${siteConfig.url}/terms-of-service`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
+        { url: siteConfig.url },
+        { url: `${siteConfig.url}/about` },
+        { url: `${siteConfig.url}/projects` },
+        { url: `${siteConfig.url}/writing`, lastModified: newestPost },
+        { url: `${siteConfig.url}/hobbies` },
+        { url: `${siteConfig.url}/now` },
+        { url: `${siteConfig.url}/contact` },
+        { url: `${siteConfig.url}/support` },
+        { url: `${siteConfig.url}/privacy-policy` },
+        { url: `${siteConfig.url}/terms-of-service` },
     ];
 
-    const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-        url: `${siteConfig.url}/writing/${post.slug}`,
-        lastModified: new Date(post.frontmatter.date),
-        changeFrequency: "monthly",
-        priority: 0.7,
-    }));
-
-    const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+    const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
         url: `${siteConfig.url}/projects/${project.slug}`,
-        lastModified: new Date(),
-        changeFrequency: "monthly",
-        priority: 0.6,
     }));
 
-    return [...staticRoutes, ...postRoutes, ...projectRoutes];
+    return [...staticRoutes, ...postEntries, ...projectEntries];
 }

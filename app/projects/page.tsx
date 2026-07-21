@@ -3,13 +3,15 @@ import { createMetadata } from "@/lib/metadata";
 import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
 import SectionHeader from "@/components/SectionHeader";
+import JsonLd from "@/components/JsonLd";
+import { collectionPageSchema, breadcrumbSchema } from "@/lib/jsonld";
 import { Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = createMetadata({
-    title: "Projects",
+    title: "Projects — Engineering Case Studies",
     description:
-        "Selected engineering projects: AI voice generation, microservices observability, and SaaS products.",
+        "Engineering case studies and open-source work across AI, platform engineering, observability, backend architecture, and scalable SaaS systems.",
     path: "/projects",
 });
 
@@ -208,6 +210,19 @@ const githubProjects = [
 export default function ProjectsPage() {
     return (
         <div className="pt-24 pb-32">
+            <JsonLd
+                data={[
+                    breadcrumbSchema([
+                        { name: "Home", path: "/" },
+                        { name: "Projects", path: "/projects" },
+                    ]),
+                    collectionPageSchema(
+                        "/projects",
+                        "Projects — Engineering Case Studies",
+                        "Engineering case studies and open-source work across AI, platform engineering, observability, backend architecture, and scalable SaaS systems."
+                    ),
+                ]}
+            />
             {/* Background */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-violet-600/5 blur-[100px]" />
@@ -215,9 +230,10 @@ export default function ProjectsPage() {
 
             <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <SectionHeader
+                    as="h1"
                     label="Projects"
                     title="Work I'm proud of"
-                    description="Systems and products built to solve real problems at scale. Each one taught me something new about the craft."
+                    description="Engineering case studies and systems built to solve real problems at scale — spanning AI, platform engineering, observability, and backend architecture. Each one taught me something new about the craft."
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

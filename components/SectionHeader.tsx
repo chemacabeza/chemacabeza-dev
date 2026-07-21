@@ -4,6 +4,12 @@ interface SectionHeaderProps {
     description?: string;
     align?: "left" | "center";
     className?: string;
+    /**
+     * Heading level for the title. Defaults to "h2" (section heading). Set to
+     * "h1" on index/landing pages that need a single top-level page heading.
+     * Visual styling is identical regardless of level.
+     */
+    as?: "h1" | "h2";
 }
 
 export default function SectionHeader({
@@ -12,6 +18,7 @@ export default function SectionHeader({
     description,
     align = "left",
     className = "",
+    as: Heading = "h2",
 }: SectionHeaderProps) {
     return (
         <div
@@ -22,9 +29,9 @@ export default function SectionHeader({
                     {label}
                 </span>
             )}
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 leading-tight mb-3">
+            <Heading className="text-3xl sm:text-4xl font-bold text-slate-100 leading-tight mb-3">
                 {title}
-            </h2>
+            </Heading>
             {description && (
                 <p className="text-slate-400 text-lg leading-relaxed max-w-2xl">
                     {description}

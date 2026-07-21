@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Code2 } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Rss } from "lucide-react";
 import { siteConfig } from "@/lib/metadata";
 
 export default function Footer() {
@@ -20,6 +20,11 @@ export default function Footer() {
             href: `mailto:${siteConfig.author.email}`,
             label: "Email",
             icon: Mail,
+        },
+        {
+            href: "/rss.xml",
+            label: "RSS feed",
+            icon: Rss,
         },
     ];
 

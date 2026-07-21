@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
+      // Stable, discoverable feed URLs — both map to the same handler.
+      {
+        source: "/rss.xml",
+        destination: "/api/rss",
+      },
       {
         source: "/feed.xml",
         destination: "/api/rss",

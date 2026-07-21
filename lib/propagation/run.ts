@@ -49,14 +49,16 @@ async function propagateOne(
     const artifactPaths = writeArtifacts(platform, post, rendered, generatedAt);
 
     const record = getRecord(state, post.slug, platform);
-    const unchanged = !!record && record.contentHash === post.contentHash;
-
-    // Map an already-published post (found via public feed) into state the first
-    // time we see it, so we never create a duplicate.
+    // If the record is missing or has status "error", we check the public feed.
     let existing: ExistingPublication | null = null;
-    if (!record) {
+    if (!record || record.status === "error") {
         existing = await adapter.findExisting(post);
     }
+
+    const unchanged =
+        !!record &&
+        record.contentHash === post.contentHash &&
+        record.status !== "error";
 
     let result: PublicationResult;
     if (unchanged && !options.updateExisting) {
@@ -99,9 +101,11 @@ async function propagateOne(
     result.artifactPaths = artifactPaths;
 
     // Persist. On an idempotent skip we preserve the prior meaningful status
-    // rather than overwriting it with "skipped".
+    // rather than overwriting it with "skipped", unless we matched an existing post.
     const persistedStatus =
-        result.status === "skipped" && record ? record.status : result.status;
+        result.status === "skipped" && record
+            ? (existing ? "created" : record.status)
+            : result.status;
     const next: SyncRecord = {
         slug: post.slug,
         canonicalUrl: post.canonicalUrl,
@@ -109,7 +113,7 @@ async function propagateOne(
         platform,
         platformPostId: result.platformPostId ?? record?.platformPostId,
         platformUrl: result.platformUrl ?? record?.platformUrl,
-        status: existing && !record ? "created" : persistedStatus,
+        status: (existing && !record) || (existing && record?.status === "error") ? "created" : persistedStatus,
         fullTextPropagated:
             result.fullTextPropagated ?? record?.fullTextPropagated ?? false,
         fullTextArtifact: result.fullTextArtifact ?? true,
@@ -127,12 +131,13 @@ export async function runPropagation(cfg: RunConfig): Promise<RunItemResult[]> {
 
     for (const post of cfg.posts) {
         for (const platform of cfg.platforms) {
+            console.log(`Processing: [${platform}] ${post.slug}...`);
             const result = await propagateOne(post, platform, cfg.options, state, generatedAt);
             results.push({ slug: post.slug, platform, result });
+            saveState(state); // Save progress incrementally
         }
     }
 
-    saveState(state);
     return results;
 }
 

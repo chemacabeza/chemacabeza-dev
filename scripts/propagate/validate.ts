@@ -41,7 +41,7 @@ function main() {
     const posts = discoverPosts();
     const state = loadState();
 
-    const missing: Record<Platform, string[]> = { substack: [], medium: [], linkedin: [] };
+    const missing: Record<Platform, string[]> = { substack: [], medium: [], linkedin: [], devto: [] };
     const changed: string[] = [];
     const manual: string[] = [];
     const missingFullText: string[] = [];
@@ -90,6 +90,7 @@ function main() {
     list("Missing on Substack", missing.substack);
     list("Missing on Medium", missing.medium);
     list("Missing on LinkedIn", missing.linkedin);
+    list("Missing on DEV.to", missing.devto);
     list("Changed locally since last propagation", changed);
     list("Requiring manual publishing action", manual);
     list("Missing FULL-TEXT propagation/artifact", missingFullText);

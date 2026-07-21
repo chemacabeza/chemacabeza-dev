@@ -7,7 +7,7 @@
 // and either publish it (where a compliant API exists) or emit a ready-to-paste
 // full-text artifact.
 
-export type Platform = "substack" | "medium" | "linkedin";
+export type Platform = "substack" | "medium" | "linkedin" | "devto";
 
 export interface Post {
     slug: string;

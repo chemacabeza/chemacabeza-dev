@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { getPost } from "../lib/propagation/posts";
-import { MediumAdapter, SubstackAdapter, LinkedInAdapter } from "../lib/propagation/adapters";
+import { MediumAdapter, SubstackAdapter, LinkedInAdapter, DevToAdapter } from "../lib/propagation/adapters";
 import type { Post, PublishOptions } from "../lib/propagation/types";
 
 const DRY: PublishOptions = { dryRun: true, publish: false, updateExisting: false };
@@ -12,9 +12,9 @@ function samplePost(): Post {
     return p!;
 }
 
-test("Medium/Substack render the COMPLETE body + attribution footer", async () => {
+test("Medium/Substack/DevTo render the COMPLETE body + attribution footer", async () => {
     const post = samplePost();
-    for (const adapter of [new MediumAdapter(), new SubstackAdapter()]) {
+    for (const adapter of [new MediumAdapter(), new SubstackAdapter(), new DevToAdapter()]) {
         const r = await adapter.render(post);
         assert.ok(r.fullTextIncluded);
         // body must contain (most of) the source body
@@ -35,7 +35,7 @@ test("LinkedIn render produces BOTH a full-text article and a feed teaser", asyn
 
 test("dry-run publish never performs real actions; reports manual_required + full-text artifact", async () => {
     const post = samplePost();
-    for (const adapter of [new MediumAdapter(), new SubstackAdapter(), new LinkedInAdapter()]) {
+    for (const adapter of [new MediumAdapter(), new SubstackAdapter(), new LinkedInAdapter(), new DevToAdapter()]) {
         const res = await adapter.publish(post, DRY);
         assert.equal(res.status, "manual_required");
         assert.equal(res.fullTextArtifact, true);

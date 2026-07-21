@@ -61,7 +61,7 @@ function parseArgs(argv: string[]): Args {
 function resolvePlatforms(p: string): Platform[] {
     if (p === "all") return PLATFORMS;
     if ((PLATFORMS as string[]).includes(p)) return [p as Platform];
-    console.error(`Invalid --platform "${p}". Use substack | medium | linkedin | all.`);
+    console.error(`Invalid --platform "${p}". Use substack | medium | linkedin | devto | all.`);
     process.exit(2);
 }
 

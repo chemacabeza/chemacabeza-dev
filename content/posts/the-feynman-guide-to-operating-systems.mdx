@@ -57,6 +57,13 @@ When you open your web browser and then open Spotify, the operating system creat
 
 ### Processes: The Isolated Factories
 
+<div align="center">
+
+![Processes as Isolated Factories](/images/writing/os-isolated-factories.png)
+*Each process is a completely isolated factory. If one catches fire (crashes), the other keeps running normally.*
+
+</div>
+
 Think of each process as a **factory with thick concrete walls**. Factory A (the browser) has its own walls, its own electrical wiring, its own loading dock, its own storage room. Factory B (Spotify) has all the same things, completely independently.
 
 This isolation is critical. If a factory catches fire (a process crashes), the other factories keep running normally. Your browser crashing doesn't kill Spotify. Each process has its own:
@@ -65,6 +72,13 @@ This isolation is critical. If a factory catches fire (a process crashes), the o
 *   **Open files and network connections** (its own shipping department)
 
 ### Threads: The Workers Inside a Factory
+
+<div align="center">
+
+![Threads as Workers on a Shared Assembly Line](/images/writing/os-threads-workers.png)
+*Threads are workers inside the same factory: they share the tools, the power supply, and the conveyor belt — but each handles a different task.*
+
+</div>
 
 Inside a single factory, however, you often have multiple **workers (threads)** operating on the same assembly line. They share the same tools, materials, and workspace — but each worker keeps track of where they are in their own task.
 

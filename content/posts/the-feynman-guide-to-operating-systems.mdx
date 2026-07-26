@@ -95,6 +95,13 @@ But the shared workspace is a double-edged sword: if two workers try to use the 
 
 ## 3. Context Switching: The Juggler's Act
 
+<div align="center">
+
+![Context Switching — The Juggler](/images/writing/os-juggler-switch.png)
+*Context switching is like a juggler swapping props mid-act: save one set, pick up another, keep the show going — but every swap costs time.*
+
+</div>
+
 If your computer has a single CPU core, how can it run 50 processes "at the same time"?
 
 It doesn't. It **fakes it**.
@@ -167,6 +174,13 @@ To enforce this, the OS provides synchronization primitives — different types 
 
 ### Mutex (Mutual Exclusion Lock): The Key to the Bridge
 
+<div align="center">
+
+![Mutex — The Key to the Bridge](/images/writing/os-mutex-key.png)
+*A mutex is a single key on a hook: take it to enter, return it when you leave. If the key is gone, you wait.*
+
+</div>
+
 A **mutex** is the simplest mechanism. Think of a single physical key hanging on a hook at the bridge entrance. Before crossing, you take the key. When you reach the other side, you hang the key back. If someone else arrives and the key is gone, they wait until it is returned.
 
 ```c
@@ -178,11 +192,25 @@ pthread_mutex_unlock(&bridge_lock);  // Return the key
 
 ### Semaphore: The Parking Garage Counter
 
+<div align="center">
+
+![Semaphore — The Parking Garage Counter](/images/writing/os-semaphore-garage.png)
+*A semaphore tracks available slots: the counter decrements on entry and increments on exit. When it hits zero, everyone waits.*
+
+</div>
+
 A **semaphore** generalizes the concept. Instead of a single key, imagine a parking garage counter displaying the number of available spots. Each car entering decrements the counter; each car leaving increments it. If the counter hits zero, incoming cars wait.
 
 A semaphore initialized to 1 behaves like a mutex. But a semaphore initialized to 5 allows up to five threads to enter the critical section simultaneously — perfect for a resource pool (e.g., a database connection pool with 5 connections).
 
 ### Monitor: The Automated Traffic Controller
+
+<div align="center">
+
+![Monitor — The Traffic Controller with a Radio](/images/writing/os-monitor-radio.png)
+*A monitor is a traffic controller who manages the key AND radios waiting cars when the bridge is clear — no need to keep checking.*
+
+</div>
 
 A **monitor** combines a mutex with **condition variables** — smart waiting signals. Think of a traffic controller at the bridge booth who not only manages the key but also has a radio. When a car arrives and the bridge is full, the controller says: *"Wait here, I will radio you when the bridge is clear."*
 
@@ -191,6 +219,13 @@ This avoids **busy waiting** (the car endlessly checking *"Is it clear yet? Is i
 ---
 
 ## 6. Deadlocks: The Four-Way Gridlock
+
+<div align="center">
+
+![Deadlock — The Four-Way Gridlock](/images/writing/os-deadlock-gridlock.png)
+*Four cars at a four-way intersection, each holding one lane and needing the next: a perfect circular dependency. Nobody can move.*
+
+</div>
 
 Sometimes, synchronization goes horribly wrong. Consider a four-way intersection with no traffic lights, where four cars arrive simultaneously from all four directions:
 
@@ -220,6 +255,13 @@ To prevent a deadlock, you need to eliminate **at least one** of these four cond
 *   **Eliminate Mutual Exclusion:** In some cases, you can redesign the intersection (the resource) to support multiple cars — like a roundabout.
 
 ### The Dining Philosophers Problem
+
+<div align="center">
+
+![The Dining Philosophers Problem](/images/writing/os-dining-philosophers.png)
+*Five philosophers, five forks, one between each pair. If all grab the left fork simultaneously, nobody can eat — deadlock.*
+
+</div>
 
 The classic illustration of deadlock is the **Dining Philosophers Problem**: five philosophers sit at a round table, each with a plate of spaghetti and a single fork between each pair. A philosopher needs *two* forks to eat. If all five simultaneously pick up the fork to their left, nobody can pick up the right fork — deadlock. The solution? Make one philosopher pick up the right fork first, or require philosophers to pick up both forks atomically.
 
@@ -252,6 +294,13 @@ Virtual memory divides both the virtual address space and physical RAM into fixe
 
 ### Page Replacement: Which Book to Send Back?
 
+<div align="center">
+
+![Page Replacement — Choosing Which Book to Return](/images/writing/os-page-replacement.png)
+*The librarian holds a new book but the desk is full. Which existing book gets returned? The dusty, untouched one (LRU) is the best candidate.*
+
+</div>
+
 When the reading room is full and a new book arrives, the librarian must decide which book to return to the warehouse. Common strategies include:
 
 *   **LRU (Least Recently Used):** Return the book nobody has touched in the longest time.
@@ -260,11 +309,25 @@ When the reading room is full and a new book arrives, the librarian must decide 
 
 ### Thrashing: Too Many Readers, Too Few Desks
 
+<div align="center">
+
+![Thrashing — The Overwhelmed Librarian](/images/writing/os-thrashing.png)
+*Too many readers, too few desks: the librarian spends all her time running between the reading room and the warehouse, with no time for actual reading.*
+
+</div>
+
 If too many readers are working simultaneously and the reading room is too small, the librarian spends all their time shuttling books back and forth between the reading room and the warehouse, with no time left for actual reading. This is called **thrashing** — the system grinds to a near-halt because it is spending more time swapping pages than executing programs.
 
 ---
 
 ## 8. File Systems: The Filing Cabinet
+
+<div align="center">
+
+![File Systems — The Filing Cabinet](/images/writing/os-filing-cabinet.png)
+*A file system is a filing cabinet: drawers (directories) contain folders (files), organized in a hierarchical tree structure.*
+
+</div>
 
 Programs and users need to store data permanently — surviving reboots, power outages, and software crashes. This is the job of the **file system**.
 
@@ -282,6 +345,13 @@ A **file** is a named collection of data — a single document in the cabinet. I
 A **directory** (or folder) is a container that holds files and other directories, forming a tree structure. The topmost directory is the **root** (`/` on Linux, `C:\` on Windows).
 
 ### Inodes: The Catalog Card
+
+<div align="center">
+
+![Inodes and Permissions — Catalog Cards and Access Badges](/images/writing/os-inodes-permissions.png)
+*Left: an inode is a catalog card recording size, owner, and disk block locations. Right: permissions are access badges — gold (owner), silver (group), bronze (others).*
+
+</div>
 
 On Unix/Linux systems, the file's metadata is stored in a data structure called an **inode** (index node). Think of it as the catalog card in a library — it records the file's size, owner, permissions, timestamps, and the list of disk blocks where the file's data is physically stored. The filename itself is stored separately in the directory, which maps names to inode numbers — like a phone book mapping names to phone numbers.
 
@@ -308,23 +378,58 @@ The OS solves this with three increasingly clever strategies:
 
 ### Polling: Checking the Mailbox Every Five Minutes
 
+<div align="center">
+
+![Polling — Checking the Mailbox](/images/writing/os-polling-mailbox.png)
+*Polling is walking to the empty mailbox every five minutes. It works, but wastes enormous amounts of your time.*
+
+</div>
+
 The simplest approach: the CPU repeatedly asks the device, *"Is my data ready? Is my data ready?"* This is like walking to the mailbox every five minutes to check for a delivery. It works but wastes enormous amounts of CPU time.
 
 ### Interrupts: The Doorbell
+
+<div align="center">
+
+![Interrupts — The Doorbell](/images/writing/os-interrupts-doorbell.png)
+*Interrupts are the doorbell: the delivery person rings when the package arrives. You don't have to keep checking.*
+
+</div>
 
 A much better approach: the device *rings a doorbell* (fires an interrupt signal) when it is ready. The CPU goes about its other business and is only interrupted when the data has actually arrived. This is how modern keyboards, mice, and network cards work.
 
 ### DMA (Direct Memory Access): The Delivery Service
 
+<div align="center">
+
+![DMA — The Autonomous Delivery Service](/images/writing/os-dma-delivery.png)
+*DMA is an autonomous delivery fleet: the trucks unload directly into the warehouse while the manager relaxes upstairs, only notified when the shipment is complete.*
+
+</div>
+
 For bulk data transfers (reading a large file from disk), even interrupts are too chatty — one interrupt per byte would drown the CPU. **DMA** solves this by letting the device write data directly into RAM without involving the CPU at all. It is like hiring a delivery service: you tell them *"deliver 1000 boxes to warehouse slot 42"*, and they do it autonomously, only calling you when the entire shipment is complete.
 
 ### Buffering: The Loading Dock
+
+<div align="center">
+
+![Buffering — The Loading Dock](/images/writing/os-buffering-dock.png)
+*A buffer is a loading dock: the fast conveyor belt piles packages on the platform, and the slow truck loads them at its own pace.*
+
+</div>
 
 The OS uses **buffers** (temporary storage areas) to absorb speed differences between the CPU and devices. Think of a loading dock between the fast assembly line inside the factory and the slow delivery truck outside. The dock accumulates packages from the assembly line at high speed and hands them to the truck at the truck's pace, decoupling the two speeds.
 
 ---
 
 ## Summary: The Operating Systems Cheat Sheet
+
+<div align="center">
+
+![The Operating System City — All Concepts United](/images/writing/os-summary-map.png)
+*An entire miniature city representing the OS: the kernel (government), factories (processes), hospital (scheduler), bridge (synchronization), intersection (deadlocks), library (memory), filing office (file system), and postal hub (I/O).*
+
+</div>
 
 To wrap it up, here is how the physical world maps to the OS world:
 

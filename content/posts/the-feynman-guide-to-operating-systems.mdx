@@ -118,12 +118,13 @@ This is the **scheduling problem**, and it is identical to the problem a hospita
 
 Here are the most important scheduling strategies, translated into hospital triage terms:
 
-| Algorithm | Hospital Analogy | How It Works |
-|---|---|---|
-| **First-Come, First-Served (FCFS)** | Patients are seen in the order they arrive. No exceptions. | Simple but unfair: a patient with a paper cut who arrived first blocks the heart attack patient behind them. |
-| **Shortest Job First (SJF)** | The nurse estimates each patient's treatment time and treats the fastest ones first. | Minimizes average wait time but risks **starvation**: the complex surgery patient may never be seen if minor injuries keep arriving. |
-| **Priority Scheduling** | Each patient gets a wristband: 🔴 critical, 🟡 medium, 🟢 minor. Red wristbands are always seen first. | Used by real ER departments. Risk: low-priority patients can starve. Solution: **aging** — gradually increasing a patient's priority the longer they wait. |
-| **Round Robin (RR)** | The doctor gives each patient exactly 5 minutes of attention, then moves to the next patient in line, cycling back around. | The workhorse of modern OSes. Fair and responsive but adds context-switch overhead. The 5 minutes is the **time quantum**. |
+*   **First-Come, First-Served (FCFS):** Patients are seen in the order they arrive, no exceptions. Simple but unfair — a patient with a paper cut who arrived first blocks the heart attack patient behind them.
+
+*   **Shortest Job First (SJF):** The nurse estimates each patient's treatment time and treats the fastest ones first. Minimizes average wait time but risks **starvation**: the complex surgery patient may never be seen if minor injuries keep arriving.
+
+*   **Priority Scheduling:** Each patient gets a wristband: 🔴 critical, 🟡 medium, 🟢 minor. Red wristbands are always seen first. Used by real ER departments. Risk: low-priority patients can starve. Solution: **aging** — gradually increasing a patient's priority the longer they wait.
+
+*   **Round Robin (RR):** The doctor gives each patient exactly 5 minutes of attention, then moves to the next patient in line, cycling back around. The workhorse of modern OSes. Fair and responsive but adds context-switch overhead. The 5 minutes is the **time quantum**.
 
 ### Preemptive vs. Non-Preemptive
 

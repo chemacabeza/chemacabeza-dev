@@ -137,6 +137,13 @@ This is the **scheduling problem**, and it is identical to the problem a hospita
 
 ### Common Scheduling Algorithms
 
+<div align="center">
+
+![Common Scheduling Algorithms — Triage Queue Strategies](/images/writing/os-scheduling-queues.png)
+*Different scheduling policies manage process queues differently: FCFS, Shortest Job First, Priority Scheduling, and Round Robin.*
+
+</div>
+
 Here are the most important scheduling strategies, translated into hospital triage terms:
 
 *   **First-Come, First-Served (FCFS):** Patients are seen in the order they arrive, no exceptions. Simple but unfair — a patient with a paper cut who arrived first blocks the heart attack patient behind them.
@@ -148,6 +155,13 @@ Here are the most important scheduling strategies, translated into hospital tria
 *   **Round Robin (RR):** The doctor gives each patient exactly 5 minutes of attention, then moves to the next patient in line, cycling back around. The workhorse of modern OSes. Fair and responsive but adds context-switch overhead. The 5 minutes is the **time quantum**.
 
 ### Preemptive vs. Non-Preemptive
+
+<div align="center">
+
+![Preemptive vs Non-Preemptive Scheduling](/images/writing/os-preemptive.png)
+*Non-Preemptive (left): once in treatment, a patient stays until done. Preemptive (right): high-priority emergency interrupts treatment mid-operation.*
+
+</div>
 
 In non-preemptive scheduling, once a patient enters the treatment room, they stay until they are finished (like FCFS). In **preemptive scheduling**, the triage nurse can *interrupt* a patient's treatment mid-operation if a higher-priority emergency arrives. Modern operating systems are almost always preemptive.
 
@@ -167,6 +181,13 @@ When multiple threads or processes need to access the **same shared resource** (
 Imagine a narrow, one-lane bridge over a river gorge. Cars come from both directions. If two cars try to cross at the same time, they collide. This is the **race condition** — the operating system's equivalent of a head-on crash.
 
 ### The Critical Section
+
+<div align="center">
+
+![The Critical Section — The Gated Narrow Bridge](/images/writing/os-critical-section.png)
+*The critical section is a gated single-lane bridge: only one process/thread may enter at a time while others wait at the gate.*
+
+</div>
 
 The bridge itself is the **critical section** — the stretch of code where a thread accesses shared data. The rule is simple: **only one thread may be on the bridge at a time**.
 
@@ -238,6 +259,13 @@ Nobody can move. This is a **deadlock** — every process is waiting for a resou
 
 ### Coffman's Four Conditions
 
+<div align="center">
+
+![Coffman's Four Conditions for Deadlock](/images/writing/os-coffman-conditions.png)
+*Coffman's four conditions for deadlock: Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait.*
+
+</div>
+
 A deadlock can only occur when **all four** of the following conditions hold simultaneously (known as Coffman's conditions):
 
 1.  **Mutual Exclusion** — Each lane can hold only one car.
@@ -246,6 +274,13 @@ A deadlock can only occur when **all four** of the following conditions hold sim
 4.  **Circular Wait** — A → B → C → D → A — a closed loop of dependencies.
 
 ### Breaking the Deadlock
+
+<div align="center">
+
+![Breaking the Deadlock](/images/writing/os-breaking-deadlock.png)
+*Breaking a deadlock: traffic cops forcing rollbacks, lane reordering, and intersection redesign to eliminate circular wait.*
+
+</div>
 
 To prevent a deadlock, you need to eliminate **at least one** of these four conditions:
 
@@ -280,6 +315,13 @@ Every process needs memory to hold its code, data, and stack. But physical RAM i
 
 ### The Library Analogy
 
+<div align="center">
+
+![The Library Analogy — Reading Room vs Warehouse](/images/writing/os-library-analogy.png)
+*Virtual memory is a library: a bright, fast Reading Room (RAM) backed by a vast multi-level Warehouse (Disk storage).*
+
+</div>
+
 Imagine a library with two areas:
 *   **The Reading Room** (RAM/Physical Memory): A small, fast-access room with a few desks. Readers can only work with books that are physically on their desk.
 *   **The Warehouse** (Disk/Secondary Storage): A massive basement holding millions of books, but it takes 5 minutes to walk there and retrieve one.
@@ -289,6 +331,13 @@ The **librarian** (the Memory Management Unit, or **MMU**) handles the logistics
 The **card catalog** is the **page table** — a lookup table that maps book titles (virtual addresses) to their physical locations (shelf positions in the reading room or warehouse aisle numbers).
 
 ### Paging: Fixed-Size Book Shipments
+
+<div align="center">
+
+![Paging — Fixed-Size Book Shipments](/images/writing/os-paging-shipments.png)
+*Paging delivers fixed-size 4KB boxes from warehouse shelves to designated reading room desk slots, indexed by the page table card catalog.*
+
+</div>
 
 Virtual memory divides both the virtual address space and physical RAM into fixed-size chunks called **pages** (typically 4KB). When a program accesses a page that isn't in RAM, a **page fault** occurs: the OS pauses the program, loads the missing page from disk into RAM, updates the page table, and resumes execution.
 
@@ -335,12 +384,26 @@ Think of a file system as an enormous **filing cabinet** in an office.
 
 ### Files: The Documents
 
+<div align="center">
+
+![Files — The Documents and Metadata](/images/writing/os-files-documents.png)
+*A file is a document folder containing data pages with a sticky note specifying metadata: owner, size, permissions, and block pointers.*
+
+</div>
+
 A **file** is a named collection of data — a single document in the cabinet. It can hold text, images, code, or raw binary data. Every file has:
 *   A **name** (the label on the folder tab).
 *   **Metadata** (the sticky note on the folder: creation date, size, permissions, owner).
 *   **Contents** (the actual pages inside the folder).
 
 ### Directories: The Cabinet Drawers
+
+<div align="center">
+
+![Directories — The Cabinet Drawers](/images/writing/os-directories-drawers.png)
+*A directory structure is an organized cabinet with drawers containing sub-folders, organized in a hierarchical tree.*
+
+</div>
 
 A **directory** (or folder) is a container that holds files and other directories, forming a tree structure. The topmost directory is the **root** (`/` on Linux, `C:\` on Windows).
 
@@ -357,6 +420,13 @@ On Unix/Linux systems, the file's metadata is stored in a data structure called 
 
 ### Permissions: The Office Access Badges
 
+<div align="center">
+
+![Permissions — Access Badges](/images/writing/os-permissions-badges.png)
+*Permissions act like access badges: Gold (Owner) gets Read/Write/Execute, Silver (Group) gets Read/Execute, Bronze (Others) gets Read only.*
+
+</div>
+
 File systems enforce access control through **permissions**. On Unix, every file has three sets of permissions — for the **owner**, the **group**, and **others** — each specifying whether they can **read** (`r`), **write** (`w`), or **execute** (`x`) the file.
 
 ```bash
@@ -369,6 +439,13 @@ File systems enforce access control through **permissions**. On Unix, every file
 ---
 
 ## 9. I/O and Device Management: The Personal Assistant
+
+<div align="center">
+
+![I/O Management — The Personal Assistant](/images/writing/os-io-assistant.png)
+*The I/O manager is a hyper-efficient personal assistant handling slow external requests, printer jobs, and deliveries so the CPU executive works uninterrupted.*
+
+</div>
 
 The final major subsystem of the OS handles **Input/Output (I/O)** — communication between the CPU and external devices like disks, keyboards, network cards, and displays.
 

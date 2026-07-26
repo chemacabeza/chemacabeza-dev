@@ -173,8 +173,9 @@
   },
   {
     "slug": "the-feynman-guide-to-operating-systems",
-    "posted": false,
-    "postedAt": null,
-    "body": "Demystifying processes, memory, scheduling, and concurrency using simple analogies and the Richard Feynman Technique.\n\nI just published \"The Feynman Guide to Operating Systems\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-operating-systems\n\n#OperatingSystems #SystemDesign #ComputerScience #Infrastructure"
+    "posted": true,
+    "postedAt": "2026-07-26T09:31:39.020Z",
+    "body": "Demystifying processes, memory, scheduling, and concurrency using simple analogies and the Richard Feynman Technique.\n\nI just published \"The Feynman Guide to Operating Systems\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-operating-systems\n\n#OperatingSystems #SystemDesign #ComputerScience #Infrastructure",
+    "linkedinPostId": "urn:li:share:7487077163054026752"
   }
 ]

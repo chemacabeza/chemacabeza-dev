@@ -1015,6 +1015,46 @@
       "fullTextPropagated": true,
       "fullTextArtifact": true,
       "lastSyncedAt": "2026-07-21T06:57:56.775Z"
+    },
+    "the-feynman-guide-to-operating-systems::substack": {
+      "slug": "the-feynman-guide-to-operating-systems",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-operating-systems",
+      "contentHash": "de2b378ed6514f13",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-26T09:30:02.598Z"
+    },
+    "the-feynman-guide-to-operating-systems::medium": {
+      "slug": "the-feynman-guide-to-operating-systems",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-operating-systems",
+      "contentHash": "de2b378ed6514f13",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-26T09:30:02.598Z"
+    },
+    "the-feynman-guide-to-operating-systems::linkedin": {
+      "slug": "the-feynman-guide-to-operating-systems",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-operating-systems",
+      "contentHash": "de2b378ed6514f13",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-26T09:30:02.598Z"
+    },
+    "the-feynman-guide-to-operating-systems::devto": {
+      "slug": "the-feynman-guide-to-operating-systems",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-operating-systems",
+      "contentHash": "de2b378ed6514f13",
+      "platform": "devto",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-07-26T09:30:02.598Z"
     }
   }
 }

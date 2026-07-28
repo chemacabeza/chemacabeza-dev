@@ -377,8 +377,9 @@
       "Infrastructure"
     ],
     "scheduledFor": "2026-07-26T21:31:19.874Z",
-    "posted": false,
-    "postedAt": null,
-    "mediumUrl": null
+    "posted": true,
+    "postedAt": "2026-07-28T19:01:21.007Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/every-time-you-open-a-browser-play-music-and-check-your-email-at-the-same-time-something-72dc970beeba",
+    "mediumStatus": "published"
   }
 ]

@@ -1,92 +1,307 @@
 ---
-title: "Large Language Models: The Feynman Guide"
-description: "How do computers learn to speak? Using the Feynman Technique to demystify the internal world of LLMs—from the Attention mechanism to the secrets of RAG."
-date: "2026-04-11"
-tags: ["AI", "LLMs", "Machine Learning", "NLP"]
+title: "The Feynman Guide to Large Language Models"
+description: "Demystifying Large Language Models (LLMs)—from tokenization and high-dimensional embeddings to transformers, self-attention, pre-training, fine-tuning, and RAG—using simple analogies and runnable Python code."
+date: "2026-08-09"
+tags: ["AI", "LLMs", "Machine Learning", "Transformers", "NLP", "Python"]
 featured: true
 ---
 
-Have you ever wondered how ChatGPT or Claude seems to "understand" you? To many, it feels like magic. To others, it's just "fancy autocomplete." 
+Have you ever wondered how ChatGPT, Claude, or Gemini seems to "understand" human language and write prose, code, or poetry? 
 
-But if we peel back the layers and look at the actual engineering—the same stuff I've been studying in books by pioneers like Sebastian Raschka and Jay Alammar—we find something far more fascinating than magic. 
+To some, it feels like magic. To others, it's dismissed as "just fancy autocomplete." But if we look under the hood—drawing from foundational lectures by Andrej Karpathy, 3Blue1Brown, Stanford CS229, and Google Cloud—we discover an incredible feat of modern engineering.
 
-Let's use the Richard Feynman technique—simplifying complex systems using everyday analogies—to understand how Large Language Models (LLMs) actually work.
+Let's use the **Richard Feynman Technique**—translating complex technical mechanics into simple, everyday analogies—to build a crystal-clear mental model of Large Language Models (LLMs), complete with runnable Python code.
 
 ---
 
 ## 1. Tokenization: The Lego Bricks of Language
 
-Computers don't actually read words like "Elephant" or "Hydrogen." They only understand numbers. So, how do we bridge the gap?
+Computers don't read English, Spanish, or Python code directly—they only understand numbers. Before an LLM can process a single word, language must be chopped into numerical chunks called **Tokens**.
 
-Imagine you have a massive box of **Legos**. Every word in the human language is built from smaller, reusable blocks. Instead of having a single block for "unhappy," we might have a block for "un" and a block for "happy."
+<div align="center">
 
 ![Tokenization: Building with Lego Bricks](/images/writing/llm-tokens.png)
-*Tokenization is the process of breaking language into subword units. It allows the model to understand words it has never seen before by looking at their pieces.*
+*Tokenization breaks words into subword Lego bricks. This allows LLMs to handle rare words and code efficiently.*
 
-This is **Tokenization**. Most modern LLMs use a technique called Byte Pair Encoding (BPE). It breaks words down into the most efficient "bricks" possible. This is why an LLM can understand "Antidisestablishmentarianism"—it doesn't need to know the whole word; it just snaps together the pieces it already knows.
+</div>
 
----
+Think of language like a box of **Lego bricks**. Instead of creating a custom molded piece for every complex object in the universe (like "unbelievable" or "antidisestablishmentarianism"), you break words down into reusable subword bricks like `un-`, `believ-`, and `-able`.
 
-## 2. Attention: The Spotlight in the Library
+Most modern LLMs use **Byte Pair Encoding (BPE)**. In Python, we can inspect tokenization directly using OpenAI's `tiktoken` library:
 
-Once the model has the Lego bricks, it needs to figure out what they mean in context. This is where the **Transformer** architecture comes in, and its secret weapon is called "Self-Attention."
+```python
+import tiktoken
 
-Imagine you are in a pitch-black library with a single **spotlight**. You are trying to figure out what the word "it" refers to in the sentence: *"The bank was closed because it was a holiday."*
+# Load tokenizer for modern LLMs
+encoder = tiktoken.encoding_for_model("gpt-4o")
 
-Does "it" refer to the bank? Or the holiday? 
+text = "Large Language Models are transforming engineering!"
+tokens = encoder.encode(text)
 
-![Attention: The Model's Spotlight](/images/writing/llm-attention.png)
-*The Attention mechanism acts like a spotlight, allowing the model to focus on the most relevant words in a sentence to determine context.*
+print(f"Original Text: '{text}'")
+print(f"Token IDs:     {tokens}")
+print(f"Token Count:   {len(tokens)}")
 
-The model uses its spotlight to scan the entire sentence at once (not left-to-right, like a human). It shines the light on "bank" and then on "holiday." It calculates which word has the strongest "relationship" to the word it's currently looking at. In this case, the spotlight lingers on "holiday" to explain the "why." This mathematical spotlight is what allows AI to "understand" nuance.
-
----
-
-## 3. Training: The Self-Reading Student & The Teacher
-
-How does the model learn where to shine the spotlight? It goes through two main phases of school.
-
-#### Phase 1: Pre-training (The Self-Reading Student)
-The model is given the entire internet. It plays a game of "Guess the Next Word" billions of times. It's like a student who reads 100,000 libraries but has no teacher. It learns the *patterns* of language, but it doesn't always learn how to be *helpful*. It might learn how to write a poem, but also how to argue or be rude.
-
-#### Phase 2: RLHF (The Teacher's Feedback)
-To turn that raw "pattern-matcher" into a helpful assistant, we use **Reinforcement Learning from Human Feedback (RLHF)**.
-
-![RLHF: Refined by Humans](/images/writing/llm-rlhf.png)
-*Human "teachers" review the model's outputs and give it a thumbs up or thumbs down. Over time, the model "grows" into a helpful and safe assistant.*
-
-Think of it like watering a plant. We "water" the responses that are helpful, honest, and harmless, and we "prune" the ones that are confusing or dangerous. This is how we get from a chaotic text-guesser to a tool like ChatGPT.
+# Decode each token back to text to see subwords
+decoded_tokens = [encoder.decode([t]) for t in tokens]
+print(f"Token Chunks:  {decoded_tokens}")
+```
 
 ---
 
-## 4. RAG: The Open-Book Exam
+## 2. Word Embeddings: The High-Dimensional GPS
 
-One big problem with LLMs is that they have a "knowledge cutoff." They only know what they read during their initial school years. If you ask them about news from yesterday, they might guess (or "hallucinate").
+Once text is converted into token IDs, how does a model know that "king" is related to "queen", or that "Paris" is to "France" what "Tokyo" is to "Japan"?
 
-To fix this, we use **Retrieval Augmented Generation (RAG)**. 
+It assigns each token a **Vector Embedding**—a list of hundreds or thousands of numbers representing coordinates in a high-dimensional space.
 
-Imagine you are taking a history exam. You are a smart student with a great memory, but your teacher lets you use a **library** during the test. When you get a question you aren't 100% sure about, you don't guess—you walk to the shelf, grab the right book, and read the answer.
+<div align="center">
 
-![RAG: The Open-Book Exam](/images/writing/llm-rag.png)
-*RAG allows the model to look up real-time, factual information from a secure "Vector Database" before answering, drastically reducing errors.*
+![Word Embeddings Map](/images/writing/llm-embeddings-map.png)
+*Embeddings place words in a high-dimensional concept map. Words with similar meanings cluster together in space.*
 
-This is why modern AI "Agents" are so powerful. They don't just "know" things; they know how to find things.
+</div>
+
+Think of embeddings as a **GPS system for concepts**. 
+* In a 2D map, you have latitude and longitude.
+* In an LLM's embedding space, you have 4,096+ dimensions: one axis for "royalty", another for "gender", another for "city vs country", and so on.
+
+Because related concepts live close together in coordinate space, we can do **vector arithmetic**: `Vector("King") - Vector("Man") + Vector("Woman") ≈ Vector("Queen")`.
+
+Here is how you compute vector similarities in Python using `sentence-transformers`:
+
+```python
+from sentence_transformers import SentenceTransformer
+import numpy as np
+
+# Load lightweight embedding model
+model = SentenceTransformer("all-MiniLM-L6-v2")
+
+words = ["king", "queen", "apple", "banana", "paris", "france"]
+embeddings = model.encode(words)
+
+def cosine_similarity(v1, v2):
+    return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+
+print(f"king ↔ queen similarity:  {cosine_similarity(embeddings[0], embeddings[1]):.4f}")
+print(f"apple ↔ banana similarity: {cosine_similarity(embeddings[2], embeddings[3]):.4f}")
+print(f"king ↔ apple similarity:  {cosine_similarity(embeddings[0], embeddings[2]):.4f}")
+```
 
 ---
 
-## References & Further Reading
+## 3. The Transformer: The Grand Symphony Orchestra
 
-This post was synthesized from the foundational concepts found in these exceptional engineering resources:
+The breakthrough architecture behind all modern LLMs is the **Transformer** (introduced in the seminal 2017 paper *Attention Is All You Need*).
 
-*   **Build a Large Language Model (From Scratch)** by Sebastian Raschka. (Essential for understanding the Transformer architecture and Attention).
-*   **LLM Engineer’s Handbook** by Paul Iusztin & Maxime Labonne. (Great for RAG and Production patterns).
-*   **Hands-On Large Language Models** by Jay Alammar & Maarten Grootendorst. (The gold standard for visual explanations of NLP).
-*   **Building LLMs for Production** by Louis-François Bouchard. (Deep dive into reliability and evaluation).
+<div align="center">
+
+![The Transformer Orchestra](/images/writing/llm-transformer-orchestra.png)
+*The Transformer acts like an orchestra where dozens of specialized attention heads process language in parallel.*
+
+</div>
+
+Before Transformers, older neural networks (RNNs) processed words one by one, like a person reading through a narrow straw. They were slow and forgot early context.
+
+A Transformer is like a **Symphony Orchestra**:
+* The **Conductor** is the overall network architecture coordinating signal flow.
+* The **Musicians** are parallel processing layers (Attention Heads & Feed-Forward Layers).
+* Instead of reading sequentially, the orchestra plays and evaluates every token in the entire context window **simultaneously**.
 
 ---
 
-## The Verdict
+## 4. Self-Attention: The Library Spotlight
 
-LLMs aren't thinking beings—they are massive, incredibly sophisticated pattern-matching engines. They break language into bricks, use spotlights to find context, learn from human teachers, and pass open-book exams using databases.
+How does an LLM resolve ambiguity? Consider the sentence:
+> *"The bank was closed because the river overflowed."* vs *"The bank was closed because it was a holiday."*
 
-By understanding these simple components, we can stop seeing AI as a "black box" and start seeing it for what it truly is: **The most powerful language tool humanity has ever built.**
+What does "bank" mean in each sentence?
+
+<div align="center">
+
+![Self-Attention Spotlight](/images/writing/llm-attention.png)
+*Self-Attention acts like a spotlight scanning context to update the meaning of each word based on surrounding words.*
+
+</div>
+
+The Transformer uses **Self-Attention** like a dynamic **spotlight in a library**. For every word in a sequence, it calculates:
+1. **Query (Q):** What am I looking for? (e.g., "bank" looking for contextual clues).
+2. **Key (K):** What information do other words hold? ("river" vs "holiday").
+3. **Value (V):** How much should I update my understanding based on that match?
+
+When "bank" sees "river", the spotlight shines brightly between them, updating the vector for "bank" to mean *financial institution* or *riverbank*.
+
+---
+
+## 5. Training Phase 1: Pre-Training (The Self-Reading Student)
+
+How does a model learn these embeddings and attention weights?
+
+<div align="center">
+
+![Raw Pre-trained vs Fine-tuned Model](/images/writing/llm-fine-tuning.png)
+*Pre-training carves out raw language capability from massive web data. Fine-tuning sculpts it into a safe, helpful assistant.*
+
+</div>
+
+### The Self-Reading Student
+During **Pre-training**, the model is fed hundreds of billions of words from books, code repositories, and web crawls. It plays a simple game billions of times: **"Predict the next word."**
+
+If given: *"The capital of France is ___"*, it calculates probability distributions across its vocabulary to select *"Paris"*.
+
+At this stage, the model is a **raw base model**. It is an incredible document completer, but it isn't an assistant yet. If you ask it *"How do I bake a cake?"*, it might respond with another question: *"How do I bake cookies?"* because it's completing a list!
+
+---
+
+## 6. Training Phase 2: Instruction Tuning & RLHF (The Teacher's Feedback)
+
+To convert a raw base model into a helpful chatbot, engineers apply two refinement stages:
+
+1. **Instruction Fine-Tuning (SFT):** Human annotators write thousands of high-quality `(Prompt, Answer)` pairs teaching the model how to follow instructions.
+2. **RLHF (Reinforcement Learning from Human Feedback):** Human reviewers rate multiple model outputs. A reward model is trained on these preferences to steer the LLM toward responses that are helpful, honest, and harmless.
+
+<div align="center">
+
+![RLHF Alignment](/images/writing/llm-rlhf.png)
+*RLHF acts like a dedicated mentor rewarding good answers and penalizing toxic or inaccurate ones.*
+
+</div>
+
+---
+
+## 7. Controlling Creativity: The Temperature Dial
+
+When an LLM generates text, it converts raw output scores (logits) into probabilities using the **Softmax** function. We can adjust a parameter called **Temperature** to control randomness.
+
+<div align="center">
+
+![Temperature Dial](/images/writing/llm-temperature-dial.png)
+*Low temperature (0.0) produces deterministic, factual output; high temperature (1.0+) increases creativity and unpredictability.*
+
+</div>
+
+* **Temperature = 0.0:** The model always picks the single most likely token (Greedy Decoding). Best for coding, math, and factual queries.
+* **Temperature = 0.7:** Balanced creativity and coherence. Best for blog posts and conversations.
+* **Temperature = 1.5+:** High randomness. The model samples lower probability words, leading to imaginative prose or unhinged gibberish.
+
+Here is Python code implementing custom Softmax sampling with temperature control:
+
+```python
+import numpy as np
+
+def sample_with_temperature(logits, temperature=1.0):
+    if temperature == 0:
+        return np.argmax(logits)
+    
+    # Scale logits by temperature
+    scaled_logits = np.array(logits) / temperature
+    
+    # Softmax function to turn scaled logits into probabilities
+    exp_logits = np.exp(scaled_logits - np.max(scaled_logits))
+    probs = exp_logits / np.sum(exp_logits)
+    
+    # Sample index based on probability distribution
+    return np.random.choice(len(logits), p=probs)
+
+# Simulated next-word logits for vocabulary: ["Paris", "France", "croissants", "unicorns"]
+vocab = ["Paris", "France", "croissants", "unicorns"]
+raw_logits = [5.0, 3.2, 1.5, -2.0]
+
+print("Low Temp (0.1): ", vocab[sample_with_temperature(raw_logits, temperature=0.1)])
+print("High Temp (1.5):", vocab[sample_with_temperature(raw_logits, temperature=1.5)])
+```
+
+---
+
+## 8. Hallucinations: The Confident Presenter
+
+Why do LLMs sometimes state false information with absolute confidence?
+
+<div align="center">
+
+![LLM Hallucination](/images/writing/llm-hallucination.png)
+*LLMs do not query a database of facts—they generate text word-by-word based on probability. This leads to confident hallucinations.*
+
+</div>
+
+Because LLMs are fundamentally **statistical text predictors**, not search engines. They do not look up database rows; they predict plausible word sequences. If a factual detail is rare in their training data, the model synthesizes a sentence that *sounds* structurally correct, even if the facts are completely fabricated.
+
+---
+
+## 9. RAG: The Open-Book Exam
+
+How do we eliminate hallucinations and give LLMs access to private, up-to-date knowledge? We use **Retrieval-Augmented Generation (RAG)**.
+
+<div align="center">
+
+![Retrieval-Augmented Generation](/images/writing/llm-rag.png)
+*RAG grounds the LLM by retrieving relevant documents from a vector database before generating the answer.*
+
+</div>
+
+Think of standard LLMs taking a **closed-book exam** from memory. **RAG** turns it into an **open-book exam**:
+1. **Retrieve:** The user's prompt searches a Vector Database for relevant factual documents.
+2. **Augment:** The retrieved facts are inserted directly into the context prompt.
+3. **Generate:** The LLM reads the provided documents and synthesizes an accurate answer with citations.
+
+Here is a minimal working RAG script in Python using `openai`:
+
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "your-api-key"))
+
+# 1. Private Knowledge Base (Retrieved Context)
+retrieved_docs = """
+Company Policy #402:
+- Employees are allowed up to $50/day for lunch expenses during travel.
+- Receipts must be submitted within 5 business days via the travel portal.
+"""
+
+user_query = "What is the daily lunch budget allowance for travel?"
+
+# 2. Augment Prompt with Context
+system_prompt = f"You are a helpful assistant. Answer questions ONLY using the provided context:\n\n{retrieved_docs}"
+
+# 3. Generate Answer
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_query}
+    ],
+    temperature=0.0
+)
+
+print("Response:\n", response.choices[0].message.content)
+```
+
+---
+
+## Summary & Key Takeaways
+
+| Concept | Feynman Analogy | Tech Core |
+|---|---|---|
+| **Tokenization** | Lego Bricks | Byte Pair Encoding (BPE) subwords |
+| **Embeddings** | High-Dimensional GPS | Multidimensional vector coordinates |
+| **Transformer** | Symphony Orchestra | Parallel processing architecture |
+| **Self-Attention** | Dynamic Spotlight | Query, Key, Value matrix math |
+| **Pre-Training** | Self-Reading Student | Unsupervised next-token prediction |
+| **RLHF** | Teacher's Feedback | Preference model reward tuning |
+| **Temperature** | Thermostat | Logit scaling before Softmax |
+| **RAG** | Open-Book Exam | Vector search + context injection |
+
+---
+
+## References & Masterclass Lectures
+
+This guide synthesizes key concepts from these outstanding open lectures:
+
+*   **[1hr Talk] Intro to Large Language Models** by Andrej Karpathy ([YouTube](https://youtu.be/zjkBMFhNj_g))
+*   **Transformers, the Tech Behind LLMs** by 3Blue1Brown ([YouTube](https://youtu.be/wjZofJX0v4M))
+*   **Stanford CS229: Building Large Language Models** by Stanford University ([YouTube](https://youtu.be/9vM4p9NN0Ts))
+*   **Everything You Need To Know About LLMs** ([YouTube](https://youtu.be/osKyvYJ3PRM))
+*   **Introduction to Large Language Models** by Google Cloud Tech ([YouTube](https://youtu.be/zizonToFXDs))
+*   **Large Language Models Explained Simply** by The Gradient Descent ([YouTube](https://youtu.be/UgvrrHc5BRY))
+*   **¿Qué es un LLM? Enormes Modelos del Lenguaje** by DotCSV ([YouTube](https://youtu.be/Sz4qacFBHLk))

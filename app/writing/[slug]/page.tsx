@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Calendar, Clock, RefreshCw } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import rehypeHighlight from "rehype-highlight";
 import {
     getAllPosts,
     getPostBySlug,
@@ -153,7 +154,15 @@ export default async function PostPage({ params }: Props) {
 
                     {/* MDX content */}
                     <article className="prose prose-invert sm:prose-lg max-w-none overflow-hidden">
-                        <MDXRemote source={content} components={mdxComponents} />
+                        <MDXRemote
+                            source={content}
+                            components={mdxComponents}
+                            options={{
+                                mdxOptions: {
+                                    rehypePlugins: [rehypeHighlight],
+                                },
+                            }}
+                        />
                     </article>
 
                     {/* Author bio + about link */}

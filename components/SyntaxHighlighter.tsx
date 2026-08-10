@@ -15,7 +15,8 @@ export default function SyntaxHighlighter() {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        if (loaded && typeof window !== "undefined" && window.hljs) {
+        const isReady = loaded || (typeof window !== "undefined" && Boolean(window.hljs));
+        if (isReady && window.hljs) {
             document.querySelectorAll("pre code").forEach((block) => {
                 block.removeAttribute("data-highlighted");
             });
@@ -26,15 +27,9 @@ export default function SyntaxHighlighter() {
     }, [pathname, loaded]);
 
     return (
-        <>
-            <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
-            />
-            <Script
-                src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
-                onLoad={() => setLoaded(true)}
-            />
-        </>
+        <Script
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+            onLoad={() => setLoaded(true)}
+        />
     );
 }

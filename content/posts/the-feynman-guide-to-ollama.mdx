@@ -99,6 +99,18 @@ ollama serve
 # View currently loaded models actively occupying GPU VRAM or CPU RAM
 ollama ps
 ```
+
+> [!WARNING]
+> **Troubleshooting `Error: listen tcp 127.0.0.1:11434: bind: address already in use`**
+>
+> If you run `ollama serve` and see this error:
+> 1. **`Couldn't find ~/.ollama/id_ed25519. Generating new private key`**: This is normal initial behavior. Ollama generates a local SSH Ed25519 keypair on first launch to securely identify your client with model registries.
+> 2. **`bind: address already in use`**: This means **Ollama is already running as a background service** on port `11434`! You do not need to run `ollama serve` again.
+>    - **Verify it's active:** Run `ollama list` or `curl http://localhost:11434`. If it returns `"Ollama is running"`, you're good to go—just run `ollama run llama3` directly.
+>    - **If you need to restart the server:** Kill the existing background process first:
+>      - **Linux / macOS:** `pkill ollama` or `sudo systemctl stop ollama`
+>      - **Windows:** Quit the Ollama icon from your system tray or end `ollama.exe` in Task Manager.
+
 > [!TIP]
 > `ollama ps` is extremely useful for checking memory consumption. It displays the model name, size, processor allocation (e.g., `100% GPU` vs `50%/50% CPU/GPU`), and when the model will automatically unload from VRAM due to inactivity.
 

@@ -381,5 +381,20 @@
     "postedAt": "2026-07-28T19:01:21.007Z",
     "mediumUrl": "https://medium.com/@chemacabeza/every-time-you-open-a-browser-play-music-and-check-your-email-at-the-same-time-something-72dc970beeba",
     "mediumStatus": "published"
+  },
+  {
+    "slug": "the-feynman-guide-to-ollama",
+    "title": "The Feynman Guide to Ollama",
+    "tags": [
+      "AI",
+      "Ollama",
+      "LLMs",
+      "Python",
+      "Privacy"
+    ],
+    "scheduledFor": "2026-08-11T23:32:09.055Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

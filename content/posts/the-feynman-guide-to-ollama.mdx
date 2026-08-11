@@ -71,33 +71,155 @@ Under the hood, Ollama acts as a streamlined wrapper around `llama.cpp`—a high
 
 ---
 
-## 4. Model Management: The Library Catalog
+## 4. Mastering Ollama Commands: CLI & Interactive REPL Masterclass
 
-Working with models in Ollama feels remarkably like working with Docker images. 
+Working with models in Ollama feels remarkably like working with Docker containers or database shells. There are two distinct layers of commands:
+
+1. **System CLI Commands:** Executed from your system terminal shell (`bash`, `zsh`, or PowerShell) to manage model weights, background daemons, and system resources.
+2. **Interactive REPL Slash-Commands:** Executed inside an active `ollama run` session (at the `>>>` prompt) to configure model parameters, inspect system prompts, save sessions, and manage conversation context on the fly.
 
 <div align="center">
 
 ![Ollama Model Library](/images/writing/ollama-model-library.png)
-*Ollama organizes models like a standardized library catalog, allowing you to pull, run, and swap model weights instantly.*
+*Ollama organizes models like a standardized library catalog, allowing you to pull, run, swap, and inspect model weights instantly.*
 
 </div>
 
-Just like `docker pull` fetches container blueprints, `ollama pull` fetches model weights from the [Ollama Library](https://ollama.com/library).
+---
 
-### Core Terminal Commands
+### Part A: Terminal CLI Command Reference
 
+Think of the terminal CLI as the **warehouse manager**. It controls what model weights exist on disk, what processes are active in VRAM, and how the background engine runs.
+
+#### 1. Background Engine & Process Management
 ```bash
-# 1. Download a model (e.g., Llama 3)
+# Start the background daemon server (runs on http://localhost:11434)
+ollama serve
+
+# View currently loaded models actively occupying GPU VRAM or CPU RAM
+ollama ps
+```
+> [!TIP]
+> `ollama ps` is extremely useful for checking memory consumption. It displays the model name, size, processor allocation (e.g., `100% GPU` vs `50%/50% CPU/GPU`), and when the model will automatically unload from VRAM due to inactivity.
+
+#### 2. Managing Model Weights on Disk
+```bash
+# Download a model from the registry without launching an interactive chat
 ollama pull llama3
 
-# 2. List all locally installed models
+# List all locally downloaded models on your machine
 ollama list
 
-# 3. Start an interactive terminal chat session
-ollama run llama3
+# Duplicate a model locally (great for creating a backup before editing system prompts)
+ollama cp llama3 my-llama3-backup
 
-# 4. Remove a model to free disk space
-ollama rm llama3
+# Remove model weights from disk to free up storage space
+ollama rm my-llama3-backup
+```
+
+#### 3. Model Inspection & Custom Modelfiles
+```bash
+# Inspect model metadata, parameter counts, system prompt, and license
+ollama show llama3
+
+# Display only the Modelfile underlying a model
+ollama show --modelfile llama3
+
+# Build a new custom model from a local Modelfile
+ollama create my-custom-assistant -f ./Modelfile
+```
+
+---
+
+### Part B: Interactive REPL Slash-Commands (`>>>`)
+
+When you run `ollama run llama3`, you enter Ollama's interactive Read-Eval-Print Loop (REPL). Think of this like entering an interactive `psql` or `python` shell.
+
+If you type `/?` or `/help` inside the interactive session, Ollama displays its built-in command menu:
+
+```text
+% ollama run llama3
+>>> /?
+Available Commands:
+  /set          Set session variables
+  /show         Show model information
+  /load <model> Load a session or model
+  /save <model> Save your current session
+  /clear        Clear session context
+  /bye          Exit
+  /?, /help     Help for a command
+  /? shortcuts  Help for keyboard shortcuts
+
+Use """ to begin a multi-line message.
+```
+
+Let's break down every slash-command in detail:
+
+#### 1. Session Tuning: `/set`
+The `/set` command allows you to tune hyperparameters and behavior on the fly without restarting the session.
+
+```text
+# Adjust creative randomness (0.0 = deterministic/coding, 1.0 = creative prose)
+>>> /set parameter temperature 0.2
+
+# Set top_p (nucleus sampling threshold)
+>>> /set parameter top_p 0.9
+
+# Fix random seed for 100% reproducible benchmark testing
+>>> /set parameter seed 42
+
+# Dynamically change or override the system prompt persona
+>>> /set system "You are a principal Rust kernel engineer. Answer with maximum technical precision."
+
+# Enable verbose mode (prints token generation speed, prompt eval time, and VRAM load time after each response)
+>>> /set verbose
+```
+
+> [!NOTE]
+> Enabling `/set verbose` displays key benchmarks after every answer, such as **eval rate (tokens per second)** and **prompt evaluation speed**, helping you optimize hardware performance.
+
+#### 2. Dynamic Model Inspection: `/show`
+Want to inspect the model's internal setup while chatting? Use `/show`:
+
+```text
+>>> /show info       # Displays quantization format, family, and architecture
+>>> /show system     # Displays current active system prompt
+>>> /show license    # Displays license terms (e.g., Llama 3 Community License)
+>>> /show template   # Displays raw prompt template wrapping user messages
+```
+
+#### 3. Model & State Persistence: `/load` & `/save`
+You can switch models or persist tuned sessions directly inside the REPL:
+
+```text
+# Switch to another installed model in the same session without exiting
+>>> /load mistral
+
+# Save current session (including system prompt and tuned parameters) as a new named model
+>>> /save my-tuned-rust-expert
+```
+
+#### 4. Context Management & Exit: `/clear` & `/bye`
+
+```text
+# Wipe conversation memory context while keeping the model warm in VRAM
+>>> /clear
+
+# Cleanly exit the interactive shell back to your terminal
+>>> /bye
+```
+
+#### 5. Multi-line Inputs (`"""`)
+By default, pressing `Enter` submits your message. To paste multi-line documents, code blocks, or structured prompts, enclose your text in **triple quotes** (`"""`):
+
+```text
+>>> """
+Here is a multi-line document I want you to review:
+1. Function A handles data parsing.
+2. Function B writes to disk.
+
+Please summarize potential race conditions.
+"""
 ```
 
 ### Hardware Rules of Thumb for Model Sizes

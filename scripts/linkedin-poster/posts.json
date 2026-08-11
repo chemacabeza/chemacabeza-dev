@@ -177,5 +177,11 @@
     "postedAt": "2026-07-26T09:31:39.020Z",
     "body": "Demystifying processes, memory, scheduling, and concurrency using simple analogies and the Richard Feynman Technique.\n\nI just published \"The Feynman Guide to Operating Systems\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-operating-systems\n\n#OperatingSystems #SystemDesign #ComputerScience #Infrastructure",
     "linkedinPostId": "urn:li:share:7487077163054026752"
+  },
+  {
+    "slug": "the-feynman-guide-to-ollama",
+    "posted": false,
+    "postedAt": null,
+    "body": "Demystifying local AI—from installation and model management to Python integration, multimodal vision, and building chatbots—using simple analogies and runnable code.\n\nI just published \"The Feynman Guide to Ollama\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-ollama\n\n#AI #Ollama #LLMs #Python #Privacy"
   }
 ]

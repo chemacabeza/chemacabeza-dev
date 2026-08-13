@@ -393,8 +393,9 @@
       "Privacy"
     ],
     "scheduledFor": "2026-08-11T23:32:09.055Z",
-    "posted": false,
-    "postedAt": null,
-    "mediumUrl": null
+    "posted": true,
+    "postedAt": "2026-08-13T19:00:56.517Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-ollama-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-ace2a111c51d",
+    "mediumStatus": "published"
   }
 ]

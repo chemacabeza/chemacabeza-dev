@@ -183,5 +183,11 @@
     "posted": false,
     "postedAt": null,
     "body": "Demystifying local AI—from installation and model management to Python integration, multimodal vision, and building chatbots—using simple analogies and runnable code.\n\nI just published \"The Feynman Guide to Ollama\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-ollama\n\n#AI #Ollama #LLMs #Python #Privacy"
+  },
+  {
+    "slug": "the-feynman-guide-to-decision-engines",
+    "posted": false,
+    "postedAt": null,
+    "body": "Demystifying how modern software makes decisions—from deterministic algorithms and statistical learning to genetic evolution, A/B testing, vector search, and autonomous AI agents.\n\nI just published \"Decision Engines: The Feynman Guide\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-decision-engines\n\n#AI #DecisionEngines #Algorithms #MachineLearning #SoftwareArchitecture"
   }
 ]

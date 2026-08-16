@@ -69,7 +69,19 @@ If an ingredient changes (e.g., humidity or flour type), a rigid recipe cannot a
 
 When problems are too subtle for manual recipes (like distinguishing spam from legitimate email), we flip the paradigm:
 
-$$\text{Data} + \text{Rules} \rightarrow \text{Answers} \quad \Rightarrow \quad \text{Data} + \text{Answers} \rightarrow \text{Rules}$$
+<div align="center" className="my-6">
+  <span className="inline-block px-5 py-2.5 bg-slate-800/50 text-indigo-300 font-mono rounded-lg border border-indigo-500/10 text-base sm:text-lg">
+    Data + Rules &rarr; Answers
+  </span>
+</div>
+
+Machine Learning flips this paradigm on its head:
+
+<div align="center" className="my-6">
+  <span className="inline-block px-5 py-2.5 bg-slate-800/50 text-indigo-300 font-mono rounded-lg border border-indigo-500/10 text-base sm:text-lg">
+    Data + Answers &rarr; Rules
+  </span>
+</div>
 
 As Paolo Perrotta (*Programming Machine Learning*) and Sean Moriarity (*Machine Learning in Elixir*) explain, Machine Learning is like training an **apprentice chef**.
 
@@ -117,7 +129,7 @@ As detailed in *Practical A/B Testing* and *Next-Level A/B Testing*, A/B testing
 
 * **The Defendants:** Variant A (Current Control) vs. Variant B (New Feature).
 * **The Jury:** Real users randomly assigned to each experience.
-* **The Evidence:** Conversion rates, latency, engagement metrics, and statistical significance ($p$-values and confidence intervals).
+* **The Evidence:** Conversion rates, latency, engagement metrics, and statistical significance (p-values and confidence intervals).
 
 A decision engine backed by experimentation ensures that product changes are driven by empirical evidence rather than opinions.
 

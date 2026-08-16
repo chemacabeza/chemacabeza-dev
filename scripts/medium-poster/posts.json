@@ -397,5 +397,20 @@
     "postedAt": "2026-08-13T19:00:56.517Z",
     "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-ollama-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-ace2a111c51d",
     "mediumStatus": "published"
+  },
+  {
+    "slug": "the-feynman-guide-to-decision-engines",
+    "title": "Decision Engines: The Feynman Guide",
+    "tags": [
+      "AI",
+      "Decision Engines",
+      "Algorithms",
+      "Machine Learning",
+      "Software Architecture"
+    ],
+    "scheduledFor": "2026-08-16T22:01:19.043Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

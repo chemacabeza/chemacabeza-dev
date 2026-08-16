@@ -1055,6 +1055,86 @@
       "fullTextPropagated": false,
       "fullTextArtifact": true,
       "lastSyncedAt": "2026-07-26T09:30:02.598Z"
+    },
+    "the-feynman-guide-to-ollama::substack": {
+      "slug": "the-feynman-guide-to-ollama",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-ollama",
+      "contentHash": "79046f2fe636428d",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-11T16:44:01.103Z"
+    },
+    "the-feynman-guide-to-ollama::medium": {
+      "slug": "the-feynman-guide-to-ollama",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-ollama",
+      "contentHash": "79046f2fe636428d",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-11T16:44:01.103Z"
+    },
+    "the-feynman-guide-to-ollama::linkedin": {
+      "slug": "the-feynman-guide-to-ollama",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-ollama",
+      "contentHash": "79046f2fe636428d",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-11T16:44:01.103Z"
+    },
+    "the-feynman-guide-to-ollama::devto": {
+      "slug": "the-feynman-guide-to-ollama",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-ollama",
+      "contentHash": "79046f2fe636428d",
+      "platform": "devto",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-11T16:44:01.103Z"
+    },
+    "the-feynman-guide-to-decision-engines::substack": {
+      "slug": "the-feynman-guide-to-decision-engines",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-decision-engines",
+      "contentHash": "a5683f5b78a850da",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-16T09:59:52.576Z"
+    },
+    "the-feynman-guide-to-decision-engines::medium": {
+      "slug": "the-feynman-guide-to-decision-engines",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-decision-engines",
+      "contentHash": "a5683f5b78a850da",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-16T09:59:52.576Z"
+    },
+    "the-feynman-guide-to-decision-engines::linkedin": {
+      "slug": "the-feynman-guide-to-decision-engines",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-decision-engines",
+      "contentHash": "a5683f5b78a850da",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-16T09:59:52.576Z"
+    },
+    "the-feynman-guide-to-decision-engines::devto": {
+      "slug": "the-feynman-guide-to-decision-engines",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-decision-engines",
+      "contentHash": "a5683f5b78a850da",
+      "platform": "devto",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-16T09:59:52.576Z"
     }
   }
 }

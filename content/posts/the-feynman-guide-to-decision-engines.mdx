@@ -1,0 +1,222 @@
+---
+title: "Decision Engines: The Feynman Guide"
+description: "Demystifying how modern software makes decisions—from deterministic algorithms and statistical learning to genetic evolution, A/B testing, vector search, and autonomous AI agents."
+date: "2026-08-16"
+tags: ["AI", "Decision Engines", "Algorithms", "Machine Learning", "Software Architecture"]
+featured: true
+---
+
+Every piece of software you have ever used is, at its core, a **Decision Engine**.
+
+Whether it is deciding which route a delivery driver should take, which movie to recommend next, whether a transaction is fraudulent, or how an AI agent should break down a multi-step coding task, software exists to transform raw information into choices.
+
+Over the decades, computer scientists and engineers have invented vastly different ways to build these engines. Yet when developers dive into the literature—spanning classical data structures, statistical machine learning, evolutionary computation, data governance, vector embeddings, and agentic LLM workflows—it easy to feel overwhelmed by the jargon.
+
+Let me use the **Richard Feynman Technique**: taking complex computational concepts and translating them into simple, intuitive analogies, backed by concrete principles.
+
+---
+
+## 1. What is a Decision Engine? The Traffic Intersection
+
+Imagine standing at the center of a bustling city during peak rush hour. Thousands of vehicles (data points) arrive at an intersection every minute. 
+
+<div align="center">
+
+![The Traffic Intersection Analogy](/images/writing/decision-engines-traffic-intersection.png)
+*A Decision Engine acts like an intelligent traffic intersection: taking streams of real-time data and deciding which paths vehicles take to keep traffic flowing safely.*
+
+</div>
+
+A **Decision Engine** is the traffic system that evaluates incoming vehicles, checks road conditions, applies rules or learned patterns, and decides which signal turns green.
+
+* **Inputs:** Signals, sensor readings, user actions, or historical logs.
+* **Evaluation:** Applying deterministic rules, statistical probabilities, optimization goals, or natural language reasoning.
+* **Outputs:** An action, a prediction, a recommendation, or a workflow trigger.
+
+Depending on the problem's complexity, we build very different kinds of traffic systems.
+
+---
+
+## 2. Classical Algorithms: The Rigid Recipe Book
+
+The earliest decision engines were **deterministic algorithms**—what Jay Wengrow highlights in *A Common-Sense Guide to Data Structures and Algorithms*.
+
+Think of a classical algorithm as a **strict recipe book**.
+
+<div align="center">
+
+![Recipe Book vs. Apprentice Chef](/images/writing/decision-engines-recipe-vs-apprentice.png)
+*Deterministic algorithms follow exact recipes line-by-line; machine learning acts like an apprentice chef learning rules by tasting thousands of example dishes.*
+
+</div>
+
+If you follow a recipe for baking bread:
+1. Measure exactly 500g of flour.
+2. Add 300ml of water and 7g of yeast.
+3. Knead for 10 minutes and bake at 200°C for 30 minutes.
+
+If you follow the instructions precisely, you get the exact same loaf of bread every single time. 
+
+* **Binary Search:** Like opening a 1,000-page dictionary right down the middle, seeing if your word is in the left or right half, and cutting the search area in half repeatedly.
+* **Graph Traversal (Dijkstra's / A*):** Like planning a subway route by evaluating every station connection step-by-step.
+
+### The Catch:
+If an ingredient changes (e.g., humidity or flour type), a rigid recipe cannot adapt on its own. When business rules grow into thousands of nested `if-else` statements, the recipe book collapses under its own weight.
+
+---
+
+## 3. Machine Learning: The Apprentice Chef
+
+When problems are too subtle for manual recipes (like distinguishing spam from legitimate email), we flip the paradigm:
+
+$$\text{Data} + \text{Rules} \rightarrow \text{Answers} \quad \Rightarrow \quad \text{Data} + \text{Answers} \rightarrow \text{Rules}$$
+
+As Paolo Perrotta (*Programming Machine Learning*) and Sean Moriarity (*Machine Learning in Elixir*) explain, Machine Learning is like training an **apprentice chef**.
+
+Instead of giving the apprentice a recipe, you hand them 10,000 completed dishes labeled "Delicious" or "Burnt". The apprentice tastes each dish, measures the difference between their output and the target standard (**Loss Function**), and tweaks their spice blend step-by-step (**Gradient Descent**).
+
+Over time, the apprentice discovers the hidden rules of cooking without anyone writing an explicit instruction manual.
+
+---
+
+## 4. Genetic Algorithms: Nature’s Survival of the Fittest
+
+What if you don't even know what a good dish looks like, but you can score how well a solution performs? Here we turn to **Genetic Algorithms** and swarm intelligence, explored by Frances Buontempo (*Genetic Algorithms and Machine Learning for Programmers*) and Sean Moriarity (*Genetic Algorithms in Elixir*).
+
+Imagine an **ant colony** searching for food or a **swarm of bees** seeking the richest flower fields.
+
+<div align="center">
+
+![Nature's Optimization Algorithms](/images/writing/decision-engines-evolution.png)
+*Genetic algorithms and nature-inspired swarms explore massive search spaces through trial, selection, mutation, and convergence.*
+
+</div>
+
+Instead of computing a direct path:
+1. **Population:** You create 100 random trial solutions (chromosomes).
+2. **Evaluation:** You test each solution against a **Fitness Function**.
+3. **Selection & Crossover:** The best-performing solutions "mate" to combine traits.
+4. **Mutation:** Random tweaks are introduced to prevent getting stuck in local traps.
+
+Over hundreds of generations, optimal routes, schedules, and structural designs emerge organically through natural selection.
+
+---
+
+## 5. A/B Testing: The Scientific Courtroom
+
+When building digital products, how do you decide whether a new checkout flow or recommendation engine is actually better? You don't guess—you hold a trial.
+
+As detailed in *Practical A/B Testing* and *Next-Level A/B Testing*, A/B testing is a **scientific courtroom**.
+
+<div align="center">
+
+![The Courtroom of A/B Testing](/images/writing/decision-engines-ab-testing.png)
+*A/B testing acts like a tech courtroom: Variant A and Variant B stand trial, and a jury of real user behavior provides statistical evidence.*
+
+</div>
+
+* **The Defendants:** Variant A (Current Control) vs. Variant B (New Feature).
+* **The Jury:** Real users randomly assigned to each experience.
+* **The Evidence:** Conversion rates, latency, engagement metrics, and statistical significance ($p$-values and confidence intervals).
+
+A decision engine backed by experimentation ensures that product changes are driven by empirical evidence rather than opinions.
+
+---
+
+## 6. Vector Search & AI Agents: The Modern Orchestrator
+
+In the era of Large Language Models, decision engines have evolved into **Agentic Systems**, as outlined in Jay Wengrow's *A Common-Sense Guide to AI Engineering*, Uberto Barbini's *Process Over Magic*, and *Vector Search with JavaScript*.
+
+<div align="center">
+
+![AI Control Center & Decision Orchestrator](/images/writing/decision-engines-orchestrator.png)
+*Modern AI architectures act like an airport control tower: orchestrating vector search, classical rules, ML models, tool execution, and guardrails.*
+
+</div>
+
+### Semantic Memory via Vector Search
+Traditional search looks for exact keyword matches. **Vector Search** converts text, code, or images into multi-dimensional coordinates (embeddings). Searching becomes as simple as finding the physical distance between two points in space—discovering meaning rather than matching letters.
+
+### The Agentic Control Tower
+Modern AI applications don't just generate text; they run **Agent Loops**:
+1. **Perceive:** Read user intent and context.
+2. **Plan:** Deconstruct complex goals into discrete steps.
+3. **Act:** Invoke tools (APIs, databases, web scrapers, code execution).
+4. **Evaluate & Guardrail:** Validate outputs against safety policies and domain rules.
+
+---
+
+## Summary & Key Takeaways
+
+<div className="overflow-x-auto my-6">
+<table>
+  <thead>
+    <tr>
+      <th align="left">Decision Engine</th>
+      <th align="left">Feynman Analogy</th>
+      <th align="left">Core Mechanism</th>
+      <th align="left">Best Used For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><strong>Classical Algorithm</strong></td>
+      <td align="left">Recipe Book</td>
+      <td align="left">Deterministic logic & data structures</td>
+      <td align="left">Sorting, exact lookups, defined workflows</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Machine Learning</strong></td>
+      <td align="left">Apprentice Chef</td>
+      <td align="left">Pattern recognition via Loss & Gradient Descent</td>
+      <td align="left">Classification, forecasting, perception</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Genetic Algorithm</strong></td>
+      <td align="left">Ant Colony / Bee Swarm</td>
+      <td align="left">Evolutionary selection, crossover & mutation</td>
+      <td align="left">Complex combinatorial optimization</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>A/B Testing</strong></td>
+      <td align="left">Scientific Courtroom</td>
+      <td align="left">Randomized control trials & hypothesis testing</td>
+      <td align="left">Validating product & feature decisions</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Vector Search</strong></td>
+      <td align="left">Compass of Meaning</td>
+      <td align="left">High-dimensional embedding distance</td>
+      <td align="left">Unstructured search & RAG retrieval</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Agentic AI System</strong></td>
+      <td align="left">Airport Control Tower</td>
+      <td align="left">LLM planning loop + Tool calling + Guardrails</td>
+      <td align="left">Autonomous workflow execution</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+---
+
+## Conclusion & References
+
+Building robust decision engines requires knowing which tool to pull from the engineering shed:
+* Use **classical algorithms** when logic is exact.
+* Use **machine learning** when patterns are hidden in data.
+* Use **evolutionary methods** when searching vast non-linear spaces.
+* Use **A/B testing** to measure real-world impact.
+* Use **AI agents and vector search** when dealing with unstructured human language and complex tool orchestration.
+
+### Literature References
+This guide synthesizes core principles from these cornerstone texts:
+* **A Common-Sense Guide to AI Engineering** & **Data Structures & Algorithms** by Jay Wengrow
+* **Programming Machine Learning** by Paolo Perrotta
+* **Machine Learning in Elixir** & **Genetic Algorithms in Elixir** by Sean Moriarity
+* **Genetic Algorithms and Machine Learning for Programmers** by Frances Buontempo
+* **Process Over Magic: Beyond Vibe Coding** by Uberto Barbini
+* **Practical A/B Testing** & **Next-Level A/B Testing**
+* **Designing Data Governance From the Ground Up** by Lauren Maffeo
+* **Vector Search with JavaScript**

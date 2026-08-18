@@ -1139,42 +1139,42 @@
     "the-feynman-guide-to-cpp::substack": {
       "slug": "the-feynman-guide-to-cpp",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-cpp",
-      "contentHash": "f306fe1ab9305322",
+      "contentHash": "5f1c3265ccceda2b",
       "platform": "substack",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-18T14:47:17.941Z"
+      "lastSyncedAt": "2026-08-18T14:59:57.821Z"
     },
     "the-feynman-guide-to-cpp::medium": {
       "slug": "the-feynman-guide-to-cpp",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-cpp",
-      "contentHash": "f306fe1ab9305322",
+      "contentHash": "5f1c3265ccceda2b",
       "platform": "medium",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-18T14:47:17.941Z"
+      "lastSyncedAt": "2026-08-18T14:59:57.821Z"
     },
     "the-feynman-guide-to-cpp::linkedin": {
       "slug": "the-feynman-guide-to-cpp",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-cpp",
-      "contentHash": "f306fe1ab9305322",
+      "contentHash": "5f1c3265ccceda2b",
       "platform": "linkedin",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-18T14:47:17.941Z"
+      "lastSyncedAt": "2026-08-18T14:59:57.821Z"
     },
     "the-feynman-guide-to-cpp::devto": {
       "slug": "the-feynman-guide-to-cpp",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-cpp",
-      "contentHash": "f306fe1ab9305322",
+      "contentHash": "5f1c3265ccceda2b",
       "platform": "devto",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-18T14:47:17.941Z"
+      "lastSyncedAt": "2026-08-18T14:59:57.821Z"
     }
   }
 }

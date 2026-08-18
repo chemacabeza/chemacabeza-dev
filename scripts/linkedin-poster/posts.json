@@ -189,5 +189,11 @@
     "posted": false,
     "postedAt": null,
     "body": "Demystifying how modern software makes decisions—from deterministic algorithms and statistical learning to genetic evolution, A/B testing, vector search, and autonomous AI agents.\n\nI just published \"Decision Engines: The Feynman Guide\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-decision-engines\n\n#AI #DecisionEngines #Algorithms #MachineLearning #SoftwareArchitecture"
+  },
+  {
+    "slug": "the-feynman-guide-to-cpp",
+    "posted": false,
+    "postedAt": null,
+    "body": "Demystifying raw memory, pointers, compilation, stack vs. heap, and object-oriented programming in C++ using the Feynman Technique and clean physical analogies.\n\nI just published \"C++: The Feynman Guide\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-cpp\n\n#C #Programming #ComputerScience #MemoryManagement #Algorithms"
   }
 ]

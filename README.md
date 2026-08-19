@@ -1,43 +1,137 @@
-# chemacabeza.dev
+# chemacabeza.dev 🚀
 
-Personal site and engineering blog built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**.
+Personal developer website, technical blog, and engineering monitoring hub built with **Next.js 16**, **React 19**, **Tailwind CSS v4**, and integrated with a **Vercel Read-Only MCP Server**.
 
 Live at [chemacabeza.dev](https://chemacabeza.dev).
 
-## What’s in this repo
+---
 
-- **Site** — App Router pages under `app/` (home, about, projects, writing, contact, etc.)
-- **Blog** — MDX posts in `content/posts/`; rendered via `lib/mdx.ts` and `next-mdx-remote`
-- **Cross-posting** — Scripts and GitHub Actions that mirror new posts to LinkedIn, Medium, and Substack
+## ⚡ Minimal Commands: Post Creation & Vercel Deployment
 
-For agent/AI context and pipeline details, see [`CLAUDE.md`](./CLAUDE.md).
-
-## Requirements
-
-- Node.js **≥ 20.9.0**
-
-## Commands
+### 1. Create a New Blog Post
+Create a new `.mdx` file in `content/posts/` with frontmatter:
 
 ```bash
-npm run dev      # http://localhost:3000
-npm run build    # production build (same as Vercel)
-npm run start    # serve the production build
-npm run lint     # ESLint (flat config)
-npm run test     # propagation layer tests (Node test runner + tsx)
+cat << 'EOF' > content/posts/my-new-post.mdx
+---
+title: "My New Guide Title"
+description: "A short, engaging summary of the post."
+date: "2026-08-19"
+tags: ["Engineering", "Guide"]
+---
+
+Write your post content using Markdown and HTML here...
+EOF
 ```
 
-## Content
+### 2. Deploy to vercel.com (https://chemacabeza.dev)
+Run a single command to trigger production deployment directly on Vercel:
 
-Blog posts live in `content/posts/*.mdx`. The **filename is the slug**.
+```bash
+# Option A: One-line direct Vercel API deployment
+make deploy-vercel
 
-Frontmatter fields: `title`, `description`, `date` (ISO), `tags[]`, optional `featured`.
+# Option B: Standard Git push (triggers Vercel GitHub CI/CD integration)
+git add . && git commit -m "feat: add new post" && git push origin master
+```
 
-## Cross-posting (short version)
+### 3. Propagate to LinkedIn, Medium, Substack & Dev.to
+```bash
+# Generate cross-posting artifacts & trigger multi-platform distribution
+make propagate-posts
+```
 
-New MDX posts trigger prep workflows that enqueue LinkedIn/Medium entries. LinkedIn publishes via API in CI; Medium is manual import; Substack uses local CDP automation or the `tools/chemacabeza-crosspost` package.
+---
 
-See [`CLAUDE.md`](./CLAUDE.md) and [`docs/content-propagation.md`](./docs/content-propagation.md) for the full picture.
+## 📂 What’s in this repo
 
-## Deploy
+- **Site & Portfolio**: Next.js App Router pages under `app/` (home, about, projects, writing, contact).
+- **Blog Engine**: MDX posts in `content/posts/`, styled with standard CSS/Tailwind, rendered via `next-mdx-remote`.
+- **Vercel MCP Monitor Integration**: Connected to `/home/chemacabeza/Repositories/vercel-mcp-server.git` via Streamable HTTP (SSE) and automated Git hooks (`post-commit`, `post-merge`) for real-time status and health audits.
+- **Cross-posting & Propagation**: Automated scripts mirroring published technical guides to LinkedIn, Medium, Substack, and Dev.to.
 
-Hosted on [Vercel](https://vercel.com). Pushes to `master` deploy automatically.
+For detailed architecture and AI pair programming instructions, see [`CLAUDE.md`](./CLAUDE.md).
+
+---
+
+## 🛠️ Makefile Commands
+
+Use `make` to execute all common development, testing, monitoring, and deployment tasks.
+
+```bash
+# View available Makefile target summary
+make help
+```
+
+### 1. Development & Building
+
+| Command | Description |
+|---------|-------------|
+| `make dev` | Run Next.js local development server (`http://localhost:3000`) |
+| `make build` | Compile production static bundle |
+| `make start` | Serve production build locally |
+| `make lint` | Run ESLint static code analysis |
+| `make test` | Run workspace unit tests |
+
+### 2. Vercel MCP Server & Health Monitoring
+
+| Command | Description |
+|---------|-------------|
+| `make mcp-start` | Start the Vercel MCP Monitor Server (`http://localhost:3001`) |
+| `make mcp-health` | Run live MCP health audit for `chemacabeza-dev` against Vercel REST API |
+| `make mcp-verify` | Verify MCP server tool listing and Streamable HTTP (SSE) transport |
+| `make mcp-test` | Run 14 Vitest unit tests inside `vercel-mcp-server` |
+
+### 3. Content Propagation & Publishing
+
+| Command | Description |
+|---------|-------------|
+| `make propagate-posts` | Run post propagation CLI to generate cross-posting artifacts |
+| `make validate-propagation` | Validate propagation status across platforms |
+| `make linkedin-publish` | Publish queued post blurbs to LinkedIn via API |
+| `make medium-publish` | Publish queued post artifacts to Medium |
+
+### 4. Deployment & Maintenance
+
+| Command | Description |
+|---------|-------------|
+| `make deploy-vercel` | Trigger production build & deployment directly via Vercel REST API |
+| `make clean` | Clean Next.js `.next`, `out`, and build caches |
+
+---
+
+## 🔗 Automatic Git Hooks Integration
+
+The workspace includes active Git hooks linked to the Vercel MCP Server:
+
+- **`.git/hooks/post-commit`**: Automatically triggers `make mcp-health` after every git commit.
+- **`.git/hooks/post-merge`**: Automatically triggers `make mcp-health` after pulling or merging code.
+
+If the MCP server is active on `http://localhost:3001`, your deployment status, build states, and error events are audited instantly.
+
+---
+
+## 📝 Content Authoring
+
+Blog posts live in `content/posts/*.mdx`. The **filename is the post slug**.
+
+Frontmatter format:
+```yaml
+---
+title: "The Feynman Guide to Good Math"
+description: "Building block analogies for numbers, infinity, logic, and Turing machines."
+date: "2026-08-19"
+tags: ["Math", "Computer Science", "Feynman"]
+---
+```
+
+---
+
+## 🚀 Deployment
+
+Hosted on **Vercel**. Pushes to `master` trigger automatic deployments.
+
+Minimal direct API deployment command:
+```bash
+make deploy-vercel
+```

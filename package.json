@@ -13,6 +13,8 @@
     "medium:publish": "node scripts/medium-poster/publish-via-import.mjs",
     "propagate:posts": "tsx scripts/propagate/cli.ts",
     "validate:post-propagation": "tsx scripts/propagate/validate.ts",
+    "mcp:health": "npx tsx /home/chemacabeza/Repositories/vercel-mcp-server.git/scripts/test-chemacabeza-dev.ts",
+    "mcp:verify": "npx tsx /home/chemacabeza/Repositories/vercel-mcp-server.git/scripts/verify-mcp.ts",
     "test": "node --import tsx --test tests/*.test.ts"
   },
   "dependencies": {

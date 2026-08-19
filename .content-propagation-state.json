@@ -1175,6 +1175,46 @@
       "fullTextPropagated": false,
       "fullTextArtifact": true,
       "lastSyncedAt": "2026-08-18T14:59:57.821Z"
+    },
+    "the-feynman-guide-to-good-math::substack": {
+      "slug": "the-feynman-guide-to-good-math",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-good-math",
+      "contentHash": "ed8767faf6f0896d",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-19T14:26:56.585Z"
+    },
+    "the-feynman-guide-to-good-math::medium": {
+      "slug": "the-feynman-guide-to-good-math",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-good-math",
+      "contentHash": "ed8767faf6f0896d",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-19T14:26:56.585Z"
+    },
+    "the-feynman-guide-to-good-math::linkedin": {
+      "slug": "the-feynman-guide-to-good-math",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-good-math",
+      "contentHash": "ed8767faf6f0896d",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-19T14:26:56.585Z"
+    },
+    "the-feynman-guide-to-good-math::devto": {
+      "slug": "the-feynman-guide-to-good-math",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-good-math",
+      "contentHash": "ed8767faf6f0896d",
+      "platform": "devto",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-19T14:26:56.585Z"
     }
   }
 }

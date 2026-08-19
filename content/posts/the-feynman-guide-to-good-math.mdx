@@ -1,0 +1,245 @@
+---
+title: "Good Math: The Feynman Guide"
+description: "Demystifying numbers, logic, set theory, infinity, and mechanical computation using the Richard Feynman Technique and clean physical analogies."
+date: "2026-08-19"
+tags: ["Mathematics", "Computer Science", "Logic", "Computation"]
+featured: true
+---
+
+Mathematics isn't just about crunching numbers or memorizing formulas—it is the language we use to build models of reality, reason about truth, and construct machines that compute.
+
+In his classic book *Good Math: A Geek's Guide to the Beauty of Numbers, Logic, and Computation*, Mark C. Chu-Carroll takes us on a journey from basic counting up through mechanical computation and undecidability.
+
+Let's use the **Richard Feynman Technique**: taking complex mathematical concepts and explaining them with simple, intuitive physical analogies.
+
+---
+
+## 1. Numbers: Stacking Building Blocks on a Playground
+
+How do we construct the number system from scratch? Think of numbers as **building blocks on a playground**.
+
+<div align="center">
+
+![Building Blocks of Number Systems](/images/writing/goodmath-number-blocks.png)
+*Number systems built layer by layer: Natural numbers at the base, Integers extending backward, Reals filling every gap, and Irrationals floating into infinity.*
+
+</div>
+
+### Natural Numbers (N): The Basic Wooden Blocks
+Natural numbers (0, 1, 2, 3...) are like physical wooden toy blocks. Giuseppe Peano defined them with just two simple concepts:
+1. **Zero** is a natural number (our starting block).
+2. Every number has a **successor** (stacking one more block on top).
+
+Using just these axioms and mathematical induction, you can build all of addition and multiplication!
+
+### Integers (Z): Stepping Backward
+What happens if you step backward past zero? You get negative numbers. Chu-Carroll shows how we can construct integers naturally as pairs of natural numbers `(a, b)`, representing `a - b`. For instance, `(3, 5)` represents `-2`.
+
+### Real & Irrational Numbers (R): Filling Every Infinite Gap
+Fractions (Rational numbers Q) let us cut blocks into halves and quarters. But even between fractions, there are "holes". **Irrational numbers** like &radic;2 and &pi; are points on the continuous number line that can never be expressed as a ratio of two integers. Dedekind cuts show us that a real number is simply a divider splitting all rational numbers into two sets: those smaller than the number and those larger.
+
+---
+
+## 2. Funny Numbers: The Oddball Guests at the Party
+
+Some numbers are so strange and fundamental that they feel like quirky, legendary guests at a party.
+
+<div align="center">
+
+![The Mathematical Soirée](/images/writing/goodmath-oddball-numbers.png)
+*Famous mathematical constants personified: Zero in the center, e appearing everywhere at once, Golden Ratio φ in golden symmetry, and imaginary i half-visible.*
+
+</div>
+
+* **Zero (0):** For centuries, ancient civilizations did math without zero! It serves two distinct roles: a **placeholder** in positional notation (105 vs 15) and a **number** representing absolute nothingness.
+* **Euler's Number (e &approx; 2.71828):** The base of natural logarithms. If you continuously compound interest at 100% per year over infinitely small time slices, your money grows by a factor of e. It pops up in population growth, radioactive decay, and probability.
+* **The Golden Ratio (&phi; &approx; 1.61803):** Found by solving `x² - x - 1 = 0`. While surrounded by modern myths, &phi; genuinely governs optimal packing algorithms, Fibonacci sequence ratios, and continued fractions.
+* **Imaginary Numbers (i = &radic;-1):** *i* isn't "fake"—it represents a **90-degree rotation** in a two-dimensional plane. Multiplying by *i* turns a 1D number line into a 2D complex plane, powering signal processing, quantum mechanics, and electrical engineering.
+
+---
+
+## 3. Writing Numbers: Different Alphabets for Math
+
+The way we write numbers radically shapes what math we can easily perform.
+
+<div align="center">
+
+![Three Writing Systems for Numbers](/images/writing/goodmath-writing-systems.png)
+*Roman numerals carved in stone, Egyptian unit fractions on papyrus, and continued fractions as infinitely nested glowing boxes.*
+
+</div>
+
+### Roman Numerals vs. Positional Systems
+Roman numerals (`XIV`, `MCMXCIX`) are an additive system. While great for stone carvings, doing long division in Roman numerals is a nightmare compared to positional Hindu-Arabic decimal notation.
+
+### Egyptian Fractions
+4,000 years ago, Egyptians wrote all fractions (except 2/3) as sums of distinct unit fractions (1/n). For example:
+
+<div align="center" className="my-6">
+  <span className="inline-block px-5 py-2.5 bg-slate-800/50 text-indigo-300 font-mono rounded-lg border border-indigo-500/10 text-base sm:text-lg">
+    4/5 = 1/2 + 1/4 + 1/20
+  </span>
+</div>
+
+While visually elegant, Fibonacci's greedy algorithm shows how Egyptian fractions can produce monstrously huge denominators for tiny values.
+
+### Continued Fractions
+Instead of decimals that repeat infinitely (1/3 = 0.333...), **continued fractions** express numbers as nested fractions:
+
+<div align="center" className="my-6">
+  <span className="inline-block px-5 py-2.5 bg-slate-800/50 text-indigo-300 font-mono rounded-lg border border-indigo-500/10 text-base sm:text-lg">
+    x = a₀ + 1 / (a₁ + 1 / (a₂ + 1 / a₃...))
+  </span>
+</div>
+
+Continued fractions yield the absolute best rational approximations for irrational numbers!
+
+---
+
+## 4. Logic: Thinking Like a Machine
+
+Logic isn't just about arguing—it is a formal mathematical system for computing truth.
+
+<div align="center">
+
+![The Courtroom of Formal Logic](/images/writing/goodmath-logic-debate.png)
+*First-Order Predicate Logic, proof trees, and Prolog rules evaluated in a formal academic setting.*
+
+</div>
+
+### First-Order Predicate Logic (FOPL)
+Statements are built using quantifiers (&forall; "for all", &exist; "there exists") and predicates (`isHuman(x)`):
+
+<div align="center" className="my-6">
+  <span className="inline-block px-5 py-2.5 bg-slate-800/50 text-indigo-300 font-mono rounded-lg border border-indigo-500/10 text-base sm:text-lg">
+    &forall;x (isHuman(x) &rarr; isMortal(x))
+  </span>
+</div>
+
+### Truth Trees & Proofs
+A **proof tree** systematically splits statements into branches. If every branch leads to a contradiction (`P ∧ ¬P`), the hypothesis is proven true by contradiction!
+
+### Logic Programming (Prolog)
+In Prolog, you don't write step-by-step code. You state facts and relationships, and the language uses logical inference (unification and backtracking) to compute answers:
+```prolog
+mortal(X) :- human(X).
+human(socrates).
+
+% Query: ?- mortal(socrates).
+% Result: true.
+```
+
+---
+
+## 5. Sets & Infinity: The Infinite Hotel
+
+Is one infinity bigger than another? Georg Cantor proved the astounding answer: **YES**.
+
+### Cantor's Diagonalization Proof
+The countable infinite set of natural numbers (1, 2, 3...) has the size Aleph-zero (&aleph;₀). Fractions (Q) can be mapped 1-to-1 with natural numbers!
+
+However, the real numbers (R) between 0 and 1 are **uncountably infinite**. If you list all real numbers as infinite decimals, you can construct a new number by changing the *i*-th digit of the *i*-th number along the diagonal. This new number is guaranteed to differ from every single number on your list!
+
+### ZFC Axioms
+Naive set theory allowed paradoxes like **Russell's Paradox**: *"Does the set of all sets that do not contain themselves contain itself?"* Zermelo-Fraenkel set theory (ZFC) resolved this by establishing strict rules for set creation.
+
+---
+
+## 6. Mechanical Math: Machines That Compute
+
+What does it actually mean for a machine to "compute"?
+
+<div align="center">
+
+![The Turing Machine & Undecidability](/images/writing/goodmath-turing-machine.png)
+*A futuristic robot scanning an infinite tape (Turing Machine), surrounded by FSM state diagrams, lambda calculus terms, and the Halting Problem.*
+
+</div>
+
+### 1. Finite State Machines (FSMs)
+The simplest computer: a machine with a fixed set of states and transitions (like a turnstile or vending machine). FSMs match Regular Expressions.
+
+### 2. The Turing Machine
+Alan Turing defined the ultimate model of computation: a machine with a head, a state table, and an **unbounded tape**. Any computation performable by any modern supercomputer can be simulated on a simple Turing machine!
+
+### 3. Lambda Calculus (&lambda;-Calculus)
+Alonzo Church created an equivalent model based purely on anonymous functions and variable substitution:
+
+<div align="center" className="my-6">
+  <span className="inline-block px-5 py-2.5 bg-slate-800/50 text-indigo-300 font-mono rounded-lg border border-indigo-500/10 text-base sm:text-lg">
+    &lambda;x. x + 1
+  </span>
+</div>
+
+&lambda;-calculus is the foundation of functional programming languages like Haskell, Lisp, and Clojure.
+
+### 4. The Halting Problem: The Limit of Math
+Can we write a program `halts(program, input)` that determines whether *any* program will eventually finish running or loop forever?
+
+Turing proved this is **IMPOSSIBLE**. If such a program existed, you could construct a mischievous program `paradox()`:
+```python
+def paradox():
+    if halts(paradox):
+        while True: pass # loop forever
+    else:
+        return # halt immediately
+```
+If `paradox()` halts, `halts()` says it loops. If it loops, `halts()` says it halts. Contradiction! There are fundamental limits to what math and computers can ever know.
+
+---
+
+## Summary & Key Takeaways
+
+<div className="overflow-x-auto my-6">
+<table>
+  <thead>
+    <tr>
+      <th align="left">Topic</th>
+      <th align="left">Feynman Analogy</th>
+      <th align="left">Core Breakthrough</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left"><strong>Natural Numbers</strong></td>
+      <td align="left">Playground Toy Blocks</td>
+      <td align="left">Peano Axioms: Start at 0, iterate with successors</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Complex Numbers (i)</strong></td>
+      <td align="left">90° Spatial Rotation</td>
+      <td align="left">Extends 1D number lines to 2D complex planes</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Continued Fractions</strong></td>
+      <td align="left">Infinitely Nested Boxes</td>
+      <td align="left">Provides optimal rational approximations for irrationals</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Logic Programming</strong></td>
+      <td align="left">Debate Club Resolution</td>
+      <td align="left">Computation via automatic unification &amp; proof search</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Cantor's Infinity</strong></td>
+      <td align="left">Infinite Hotel Rooms</td>
+      <td align="left">Real numbers are uncountably larger than integers (&aleph;₁ &gt; &aleph;₀)</td>
+    </tr>
+    <tr>
+      <td align="left"><strong>Turing Machine &amp; Halting</strong></td>
+      <td align="left">Infinite Tape Robot</td>
+      <td align="left">Defines general computability &amp; proves undecidability limits</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+---
+
+## Conclusion & Literature Reference
+
+Mathematics is not a static list of arithmetic rules—it is an ever-expanding, beautifully structured tree of ideas. From building numbers with Peano axioms to exploring undecidability with Turing machines, understanding "Good Math" gives us deep insight into the structure of code, logic, and computation.
+
+### Literature Reference
+This post synthesizes concepts from:
+* **Good Math: A Geek's Guide to the Beauty of Numbers, Logic, and Computation** by Mark C. Chu-Carroll (Pragmatic Bookshelf).

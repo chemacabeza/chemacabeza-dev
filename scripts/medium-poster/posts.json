@@ -429,5 +429,19 @@
     "postedAt": "2026-08-19T07:01:05.740Z",
     "mediumUrl": "https://medium.com/@chemacabeza/c-the-feynman-guide-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-d8c7fbc645d2",
     "mediumStatus": "published"
+  },
+  {
+    "slug": "the-feynman-guide-to-good-math",
+    "title": "Good Math: The Feynman Guide",
+    "tags": [
+      "Mathematics",
+      "Computer Science",
+      "Logic",
+      "Computation"
+    ],
+    "scheduledFor": "2026-08-20T02:29:08.010Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

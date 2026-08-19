@@ -195,5 +195,11 @@
     "posted": false,
     "postedAt": null,
     "body": "Demystifying raw memory, pointers, compilation, stack vs. heap, and object-oriented programming in C++ using the Feynman Technique and clean physical analogies.\n\nI just published \"C++: The Feynman Guide\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-cpp\n\n#C #Programming #ComputerScience #MemoryManagement #Algorithms"
+  },
+  {
+    "slug": "the-feynman-guide-to-good-math",
+    "posted": false,
+    "postedAt": null,
+    "body": "Demystifying numbers, logic, set theory, infinity, and mechanical computation using the Richard Feynman Technique and clean physical analogies.\n\nI just published \"Good Math: The Feynman Guide\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-good-math\n\n#Mathematics #ComputerScience #Logic #Computation"
   }
 ]

@@ -443,5 +443,19 @@
     "posted": false,
     "postedAt": null,
     "mediumUrl": null
+  },
+  {
+    "slug": "the-feynman-guide-to-vercel-cli",
+    "title": "The Feynman Guide to Vercel CLI: Command-Line Superpowers for the Modern Web",
+    "tags": [
+      "Vercel",
+      "CLI",
+      "DevOps",
+      "Feynman"
+    ],
+    "scheduledFor": "2026-08-21T03:13:05.681Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

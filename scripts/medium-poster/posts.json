@@ -440,9 +440,10 @@
       "Computation"
     ],
     "scheduledFor": "2026-08-20T02:29:08.010Z",
-    "posted": false,
-    "postedAt": null,
-    "mediumUrl": null
+    "posted": true,
+    "postedAt": "2026-08-20T19:01:12.285Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/good-math-the-feynman-guide-jos%C3%A9-mar%C3%ADa-cabeza-rodr%C3%ADguez-7476d6c62e03",
+    "mediumStatus": "published"
   },
   {
     "slug": "the-feynman-guide-to-vercel-cli",

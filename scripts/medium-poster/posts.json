@@ -455,8 +455,9 @@
       "Feynman"
     ],
     "scheduledFor": "2026-08-21T03:13:05.681Z",
-    "posted": false,
-    "postedAt": null,
-    "mediumUrl": null
+    "posted": true,
+    "postedAt": "2026-08-21T19:01:01.665Z",
+    "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-vercel-cli-command-line-superpowers-for-the-modern-web-jos%C3%A9-mar%C3%ADa-cabeza-aa085e6a1c34",
+    "mediumStatus": "published"
   }
 ]

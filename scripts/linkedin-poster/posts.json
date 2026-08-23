@@ -207,5 +207,11 @@
     "posted": false,
     "postedAt": null,
     "body": "Master Vercel CLI using intuitive physical analogies: digital teleporters, local rehearsal labs, cloud tethers, and telemetry radars.\n\nI just published \"The Feynman Guide to Vercel CLI: Command-Line Superpowers for the Modern Web\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-vercel-cli\n\n#Vercel #CLI #DevOps #Feynman"
+  },
+  {
+    "slug": "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+    "posted": false,
+    "postedAt": null,
+    "body": "Understand how multi-agent coordination works using Richard Feynman analogies, and follow a step-by-step visual guide to connecting a ChatGPT Agent directly to your email inbox.\n\nI just published \"The Feynman Guide to Connecting ChatGPT Agents to Your Email\".\n\nRead it → https://chemacabeza.dev/writing/the-feynman-guide-to-connecting-chatgpt-agents-to-your-email\n\n#ChatGPT #AIAgents #Automation #EmailIntegration #OpenAPI"
   }
 ]

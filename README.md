@@ -111,6 +111,30 @@ If the MCP server is active on `http://localhost:3001`, your deployment status, 
 
 ---
 
+## 🔒 AgentVercel Reporter Status Integration
+
+The site includes a restrained, server-side status indicator in the footer that fetches telemetry from the protected `GET /api/status` endpoint of the `agentvercel-daily-reporter`.
+
+### Configuration (Server-Only Environment Variables)
+
+- `AGENTVERCEL_REPORTER_URL`: Base URL of the deployed daily reporter service (e.g. `https://reporter.example.com`).
+- `AGENTVERCEL_STATUS_SECRET`: Shared Bearer authorization secret.
+
+```bash
+# Add to .env.local for local testing
+AGENTVERCEL_REPORTER_URL=https://agentvercel-daily-reporter.example.com
+AGENTVERCEL_STATUS_SECRET=your-secure-status-secret
+```
+
+### Security & Privacy Guarantees
+
+1. **Server-Side Execution**: Requests run entirely on the server inside Next.js Server Components. Secrets are never sent to the browser or included in client JavaScript bundles.
+2. **Minimal Telemetry**: Renders only availability, last report timestamp, change count, and warning count (if non-zero). No Vercel project names, deployments, domains, email addresses, or internal URLs are exposed.
+3. **Fail-Closed Behavior**: Network failures, timeouts (3s limit), 40x/50x HTTP status codes, or malformed schemas return a neutral "Status temporarily unavailable" state without leaking raw error traces.
+
+
+---
+
 ## 📝 Content Authoring
 
 Blog posts live in `content/posts/*.mdx`. The **filename is the post slug**.

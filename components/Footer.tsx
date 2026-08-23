@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, Code2, Rss } from "lucide-react";
 import { siteConfig } from "@/lib/metadata";
+import AgentVercelStatus from "@/components/AgentVercelStatus";
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -88,7 +89,11 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-slate-800/40 flex flex-col items-center gap-4 text-center text-xs text-slate-600">
+                <div className="mt-8">
+                    <AgentVercelStatus />
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-slate-800/40 flex flex-col items-center gap-4 text-center text-xs text-slate-600">
                     <p>
                         © {year} {siteConfig.name}. Built with Next.js & Tailwind CSS.
                         Deployed on Vercel.

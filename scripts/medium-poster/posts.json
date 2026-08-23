@@ -459,5 +459,20 @@
     "postedAt": "2026-08-21T19:01:01.665Z",
     "mediumUrl": "https://medium.com/@chemacabeza/the-feynman-guide-to-vercel-cli-command-line-superpowers-for-the-modern-web-jos%C3%A9-mar%C3%ADa-cabeza-aa085e6a1c34",
     "mediumStatus": "published"
+  },
+  {
+    "slug": "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+    "title": "The Feynman Guide to Connecting ChatGPT Agents to Your Email",
+    "tags": [
+      "ChatGPT",
+      "AI Agents",
+      "Automation",
+      "Email Integration",
+      "OpenAPI"
+    ],
+    "scheduledFor": "2026-08-23T19:48:49.972Z",
+    "posted": false,
+    "postedAt": null,
+    "mediumUrl": null
   }
 ]

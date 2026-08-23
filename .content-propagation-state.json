@@ -9,7 +9,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-system-design-interviews::medium": {
       "slug": "the-feynman-guide-to-system-design-interviews",
@@ -19,7 +19,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-system-design-interviews::linkedin": {
       "slug": "the-feynman-guide-to-system-design-interviews",
@@ -29,7 +29,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-n8n::substack": {
       "slug": "the-feynman-guide-to-n8n",
@@ -39,7 +39,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-n8n::medium": {
       "slug": "the-feynman-guide-to-n8n",
@@ -49,7 +49,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-n8n::linkedin": {
       "slug": "the-feynman-guide-to-n8n",
@@ -59,7 +59,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-java-modules::substack": {
       "slug": "the-feynman-guide-to-java-modules",
@@ -69,7 +69,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-java-modules::medium": {
       "slug": "the-feynman-guide-to-java-modules",
@@ -79,7 +79,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-java-modules::linkedin": {
       "slug": "the-feynman-guide-to-java-modules",
@@ -89,7 +89,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cdns::substack": {
       "slug": "the-feynman-guide-to-cdns",
@@ -99,7 +99,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cdns::medium": {
       "slug": "the-feynman-guide-to-cdns",
@@ -109,7 +109,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cdns::linkedin": {
       "slug": "the-feynman-guide-to-cdns",
@@ -119,7 +119,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-apache-kafka::substack": {
       "slug": "the-feynman-guide-to-apache-kafka",
@@ -129,7 +129,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-apache-kafka::medium": {
       "slug": "the-feynman-guide-to-apache-kafka",
@@ -139,7 +139,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-apache-kafka::linkedin": {
       "slug": "the-feynman-guide-to-apache-kafka",
@@ -149,7 +149,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-mcp::substack": {
       "slug": "the-feynman-guide-to-mcp",
@@ -159,7 +159,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-mcp::medium": {
       "slug": "the-feynman-guide-to-mcp",
@@ -169,7 +169,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-mcp::linkedin": {
       "slug": "the-feynman-guide-to-mcp",
@@ -179,7 +179,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-system-design-fails::substack": {
       "slug": "how-system-design-fails",
@@ -189,7 +189,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-system-design-fails::medium": {
       "slug": "how-system-design-fails",
@@ -199,7 +199,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-system-design-fails::linkedin": {
       "slug": "how-system-design-fails",
@@ -209,7 +209,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-software-architecture::substack": {
       "slug": "the-feynman-guide-to-software-architecture",
@@ -219,7 +219,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-software-architecture::medium": {
       "slug": "the-feynman-guide-to-software-architecture",
@@ -229,7 +229,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-software-architecture::linkedin": {
       "slug": "the-feynman-guide-to-software-architecture",
@@ -239,7 +239,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "why-microservices-fail::substack": {
       "slug": "why-microservices-fail",
@@ -249,7 +249,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "why-microservices-fail::medium": {
       "slug": "why-microservices-fail",
@@ -259,7 +259,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "why-microservices-fail::linkedin": {
       "slug": "why-microservices-fail",
@@ -269,7 +269,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-co-intelligence::substack": {
       "slug": "the-feynman-guide-to-co-intelligence",
@@ -279,7 +279,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-co-intelligence::medium": {
       "slug": "the-feynman-guide-to-co-intelligence",
@@ -289,7 +289,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-co-intelligence::linkedin": {
       "slug": "the-feynman-guide-to-co-intelligence",
@@ -299,7 +299,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vim::substack": {
       "slug": "the-feynman-guide-to-vim",
@@ -309,7 +309,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vim::medium": {
       "slug": "the-feynman-guide-to-vim",
@@ -319,7 +319,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vim::linkedin": {
       "slug": "the-feynman-guide-to-vim",
@@ -329,7 +329,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-llms::substack": {
       "slug": "the-feynman-guide-to-llms",
@@ -339,7 +339,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-llms::medium": {
       "slug": "the-feynman-guide-to-llms",
@@ -349,7 +349,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-llms::linkedin": {
       "slug": "the-feynman-guide-to-llms",
@@ -359,7 +359,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ddd::substack": {
       "slug": "the-feynman-guide-to-ddd",
@@ -369,7 +369,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ddd::medium": {
       "slug": "the-feynman-guide-to-ddd",
@@ -379,7 +379,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ddd::linkedin": {
       "slug": "the-feynman-guide-to-ddd",
@@ -389,7 +389,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-serverless::substack": {
       "slug": "the-feynman-guide-to-serverless",
@@ -399,7 +399,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-serverless::medium": {
       "slug": "the-feynman-guide-to-serverless",
@@ -409,7 +409,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-serverless::linkedin": {
       "slug": "the-feynman-guide-to-serverless",
@@ -419,7 +419,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-microservices::substack": {
       "slug": "the-feynman-guide-to-microservices",
@@ -429,7 +429,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-microservices::medium": {
       "slug": "the-feynman-guide-to-microservices",
@@ -439,7 +439,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-microservices::linkedin": {
       "slug": "the-feynman-guide-to-microservices",
@@ -449,7 +449,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "performance-is-a-product-feature::substack": {
       "slug": "performance-is-a-product-feature",
@@ -459,7 +459,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "performance-is-a-product-feature::medium": {
       "slug": "performance-is-a-product-feature",
@@ -469,7 +469,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "performance-is-a-product-feature::linkedin": {
       "slug": "performance-is-a-product-feature",
@@ -479,7 +479,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "monolith-vs-microservices::substack": {
       "slug": "monolith-vs-microservices",
@@ -489,7 +489,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "monolith-vs-microservices::medium": {
       "slug": "monolith-vs-microservices",
@@ -499,7 +499,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "monolith-vs-microservices::linkedin": {
       "slug": "monolith-vs-microservices",
@@ -509,7 +509,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-machine-learning::substack": {
       "slug": "the-feynman-guide-to-machine-learning",
@@ -519,7 +519,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-machine-learning::medium": {
       "slug": "the-feynman-guide-to-machine-learning",
@@ -530,7 +530,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-machine-learning::linkedin": {
       "slug": "the-feynman-guide-to-machine-learning",
@@ -540,7 +540,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-okrs::substack": {
       "slug": "the-feynman-guide-to-okrs",
@@ -550,7 +550,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-okrs::medium": {
       "slug": "the-feynman-guide-to-okrs",
@@ -560,7 +560,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-okrs::linkedin": {
       "slug": "the-feynman-guide-to-okrs",
@@ -570,7 +570,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-effective-ai::substack": {
       "slug": "the-feynman-guide-to-effective-ai",
@@ -580,7 +580,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-effective-ai::medium": {
       "slug": "the-feynman-guide-to-effective-ai",
@@ -590,7 +590,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-effective-ai::linkedin": {
       "slug": "the-feynman-guide-to-effective-ai",
@@ -600,7 +600,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-not-to-tackle-a-system-design-interview::substack": {
       "slug": "how-not-to-tackle-a-system-design-interview",
@@ -611,7 +611,7 @@
       "status": "published",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-not-to-tackle-a-system-design-interview::medium": {
       "slug": "how-not-to-tackle-a-system-design-interview",
@@ -622,7 +622,7 @@
       "status": "published",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-not-to-tackle-a-system-design-interview::linkedin": {
       "slug": "how-not-to-tackle-a-system-design-interview",
@@ -634,7 +634,7 @@
       "status": "published",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::substack": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
@@ -644,7 +644,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::medium": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
@@ -654,7 +654,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::linkedin": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
@@ -664,7 +664,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-docker::substack": {
       "slug": "the-feynman-guide-to-docker",
@@ -674,7 +674,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-docker::medium": {
       "slug": "the-feynman-guide-to-docker",
@@ -684,7 +684,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-docker::linkedin": {
       "slug": "the-feynman-guide-to-docker",
@@ -694,7 +694,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-the-cap-theorem::substack": {
       "slug": "the-feynman-guide-to-the-cap-theorem",
@@ -705,7 +705,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-the-cap-theorem::medium": {
       "slug": "the-feynman-guide-to-the-cap-theorem",
@@ -716,7 +716,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-the-cap-theorem::linkedin": {
       "slug": "the-feynman-guide-to-the-cap-theorem",
@@ -726,7 +726,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-the-cap-theorem::devto": {
       "slug": "the-feynman-guide-to-the-cap-theorem",
@@ -738,7 +738,7 @@
       "status": "updated",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-apache-kafka::devto": {
       "slug": "the-feynman-guide-to-apache-kafka",
@@ -750,7 +750,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-not-to-tackle-a-system-design-interview::devto": {
       "slug": "how-not-to-tackle-a-system-design-interview",
@@ -762,7 +762,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-docker::devto": {
       "slug": "the-feynman-guide-to-docker",
@@ -774,7 +774,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-system-design-fundamentals::devto": {
       "slug": "the-feynman-guide-to-system-design-fundamentals",
@@ -786,7 +786,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-effective-ai::devto": {
       "slug": "the-feynman-guide-to-effective-ai",
@@ -798,7 +798,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-okrs::devto": {
       "slug": "the-feynman-guide-to-okrs",
@@ -810,7 +810,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-machine-learning::devto": {
       "slug": "the-feynman-guide-to-machine-learning",
@@ -822,7 +822,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-system-design-interviews::devto": {
       "slug": "the-feynman-guide-to-system-design-interviews",
@@ -834,7 +834,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-n8n::devto": {
       "slug": "the-feynman-guide-to-n8n",
@@ -846,7 +846,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-java-modules::devto": {
       "slug": "the-feynman-guide-to-java-modules",
@@ -858,7 +858,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cdns::devto": {
       "slug": "the-feynman-guide-to-cdns",
@@ -870,7 +870,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-mcp::devto": {
       "slug": "the-feynman-guide-to-mcp",
@@ -882,7 +882,7 @@
       "status": "updated",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "how-system-design-fails::devto": {
       "slug": "how-system-design-fails",
@@ -894,7 +894,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-software-architecture::devto": {
       "slug": "the-feynman-guide-to-software-architecture",
@@ -906,7 +906,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "why-microservices-fail::devto": {
       "slug": "why-microservices-fail",
@@ -918,7 +918,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-co-intelligence::devto": {
       "slug": "the-feynman-guide-to-co-intelligence",
@@ -930,7 +930,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vim::devto": {
       "slug": "the-feynman-guide-to-vim",
@@ -942,7 +942,7 @@
       "status": "updated",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-llms::devto": {
       "slug": "the-feynman-guide-to-llms",
@@ -954,7 +954,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ddd::devto": {
       "slug": "the-feynman-guide-to-ddd",
@@ -966,7 +966,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-serverless::devto": {
       "slug": "the-feynman-guide-to-serverless",
@@ -978,7 +978,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-microservices::devto": {
       "slug": "the-feynman-guide-to-microservices",
@@ -990,7 +990,7 @@
       "status": "created",
       "fullTextPropagated": true,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "performance-is-a-product-feature::devto": {
       "slug": "performance-is-a-product-feature",
@@ -1002,7 +1002,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "monolith-vs-microservices::devto": {
       "slug": "monolith-vs-microservices",
@@ -1014,7 +1014,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-operating-systems::substack": {
       "slug": "the-feynman-guide-to-operating-systems",
@@ -1024,7 +1024,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-operating-systems::medium": {
       "slug": "the-feynman-guide-to-operating-systems",
@@ -1034,7 +1034,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-operating-systems::linkedin": {
       "slug": "the-feynman-guide-to-operating-systems",
@@ -1044,7 +1044,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-operating-systems::devto": {
       "slug": "the-feynman-guide-to-operating-systems",
@@ -1054,7 +1054,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ollama::substack": {
       "slug": "the-feynman-guide-to-ollama",
@@ -1064,7 +1064,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ollama::medium": {
       "slug": "the-feynman-guide-to-ollama",
@@ -1074,7 +1074,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ollama::linkedin": {
       "slug": "the-feynman-guide-to-ollama",
@@ -1084,7 +1084,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-ollama::devto": {
       "slug": "the-feynman-guide-to-ollama",
@@ -1094,7 +1094,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-decision-engines::substack": {
       "slug": "the-feynman-guide-to-decision-engines",
@@ -1104,7 +1104,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-decision-engines::medium": {
       "slug": "the-feynman-guide-to-decision-engines",
@@ -1114,7 +1114,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-decision-engines::linkedin": {
       "slug": "the-feynman-guide-to-decision-engines",
@@ -1124,7 +1124,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-decision-engines::devto": {
       "slug": "the-feynman-guide-to-decision-engines",
@@ -1134,7 +1134,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cpp::substack": {
       "slug": "the-feynman-guide-to-cpp",
@@ -1144,7 +1144,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cpp::medium": {
       "slug": "the-feynman-guide-to-cpp",
@@ -1154,7 +1154,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cpp::linkedin": {
       "slug": "the-feynman-guide-to-cpp",
@@ -1164,7 +1164,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-cpp::devto": {
       "slug": "the-feynman-guide-to-cpp",
@@ -1174,7 +1174,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-good-math::substack": {
       "slug": "the-feynman-guide-to-good-math",
@@ -1184,7 +1184,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-good-math::medium": {
       "slug": "the-feynman-guide-to-good-math",
@@ -1194,7 +1194,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-good-math::linkedin": {
       "slug": "the-feynman-guide-to-good-math",
@@ -1204,7 +1204,7 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-good-math::devto": {
       "slug": "the-feynman-guide-to-good-math",
@@ -1214,47 +1214,87 @@
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vercel-cli::substack": {
       "slug": "the-feynman-guide-to-vercel-cli",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-vercel-cli",
-      "contentHash": "d844e5f17343fe78",
+      "contentHash": "3903463e1e3fdee7",
       "platform": "substack",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vercel-cli::medium": {
       "slug": "the-feynman-guide-to-vercel-cli",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-vercel-cli",
-      "contentHash": "d844e5f17343fe78",
+      "contentHash": "3903463e1e3fdee7",
       "platform": "medium",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vercel-cli::linkedin": {
       "slug": "the-feynman-guide-to-vercel-cli",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-vercel-cli",
-      "contentHash": "d844e5f17343fe78",
+      "contentHash": "3903463e1e3fdee7",
       "platform": "linkedin",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     },
     "the-feynman-guide-to-vercel-cli::devto": {
       "slug": "the-feynman-guide-to-vercel-cli",
       "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-vercel-cli",
-      "contentHash": "d844e5f17343fe78",
+      "contentHash": "3903463e1e3fdee7",
       "platform": "devto",
       "status": "manual_required",
       "fullTextPropagated": false,
       "fullTextArtifact": true,
-      "lastSyncedAt": "2026-08-20T15:15:10.651Z"
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
+    },
+    "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email::substack": {
+      "slug": "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "contentHash": "9f5e9379d631371b",
+      "platform": "substack",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
+    },
+    "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email::medium": {
+      "slug": "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "contentHash": "9f5e9379d631371b",
+      "platform": "medium",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
+    },
+    "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email::linkedin": {
+      "slug": "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "contentHash": "9f5e9379d631371b",
+      "platform": "linkedin",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
+    },
+    "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email::devto": {
+      "slug": "the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "canonicalUrl": "https://chemacabeza.dev/writing/the-feynman-guide-to-connecting-chatgpt-agents-to-your-email",
+      "contentHash": "9f5e9379d631371b",
+      "platform": "devto",
+      "status": "manual_required",
+      "fullTextPropagated": false,
+      "fullTextArtifact": true,
+      "lastSyncedAt": "2026-08-23T07:48:48.385Z"
     }
   }
 }

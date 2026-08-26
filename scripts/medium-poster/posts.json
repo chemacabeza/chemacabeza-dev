@@ -473,6 +473,22 @@
     "scheduledFor": "2026-08-23T19:48:49.972Z",
     "posted": false,
     "postedAt": null,
+    "mediumUrl": null,
+    "mediumDraftId": "575a1862b6f4"
+  },
+  {
+    "slug": "the-feynman-guide-to-greek-myths",
+    "title": "The Feynman Guide to Greek Myths: Stephen Fry's Mythos & Heroes",
+    "tags": [
+      "Books",
+      "Greek Mythology",
+      "Stephen Fry",
+      "Storytelling",
+      "Writing"
+    ],
+    "scheduledFor": "2026-08-26T09:00:00.000Z",
+    "posted": false,
+    "postedAt": null,
     "mediumUrl": null
   }
 ]

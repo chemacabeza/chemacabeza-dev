@@ -24,7 +24,7 @@ To solve this, smart executives employ two specialized assistants:
 
 When you build **ChatGPT Agents** connected to your email, you are recreating this exact executive office in software. 
 
-In this guide, we will break down how email agents operate using the **Richard Feynman Technique**—explaining complex AI protocols with intuitive physical analogies—and provide a **complete master system prompt** and **OpenAPI schema** to build an **Hourly Change Report Agent** that audits your digital activity and emails the report directly to your personal address (`chemacabeza@gmail.com`).
+In this guide, we will break down how email agents operate using the **Richard Feynman Technique**—explaining complex AI protocols with intuitive physical analogies—and provide a **complete master system prompt** and **OpenAPI schema** to build an **Hourly Change Report Agent** that audits your digital activity and emails the report directly to your personal address (`sometest@gmail.com`).
 
 ---
 
@@ -37,7 +37,7 @@ If you force a single conversational LLM to perform raw HTML parsing, calculate 
 Instead, we use **multi-agent delegation**:
 
 *   **Agent 1 (The Reasoning Executive):** Focuses purely on high-level impact analysis, change categorization, error reporting, and table formatting.
-*   **Agent 2 (The Email Postmaster):** Focuses strictly on executing external REST API calls—fetching message history, inspecting draft lists, and dispatching formatted HTML reports to `chemacabeza@gmail.com`.
+*   **Agent 2 (The Email Postmaster):** Focuses strictly on executing external REST API calls—fetching message history, inspecting draft lists, and dispatching formatted HTML reports to `sometest@gmail.com`.
 
 ### How do the two agents talk to each other?
 
@@ -47,7 +47,7 @@ When the Executive Agent needs to audit recent activity, it presses the intercom
 ```json
 {
   "action": "list_message_activity",
-  "inbox": "chemacabeza@gmail.com",
+  "inbox": "sometest@gmail.com",
   "window_start": "2026-08-27T14:40:14Z",
   "window_end": "2026-08-27T17:40:14Z"
 }
@@ -84,7 +84,7 @@ When you run an hourly audit prompt, here is the underlying loop:
 1.  **Intent Recognition:** ChatGPT recognizes that it needs real-world mailbox data.
 2.  **Packet Formatting:** It formats the request into a JSON payload adhering to your **OpenAPI specification**.
 3.  **Switchboard Routing:** ChatGPT dispatches the request to the Google Gmail REST API gateway via OAuth 2.0 authentication.
-4.  **Report Dispatch:** Once the report text and HTML table are generated, ChatGPT routes a final POST request to `sendEmail` or `createDraft` targeting `chemacabeza@gmail.com`.
+4.  **Report Dispatch:** Once the report text and HTML table are generated, ChatGPT routes a final POST request to `sendEmail` or `createDraft` targeting `sometest@gmail.com`.
 
 ---
 
@@ -93,7 +93,7 @@ When you run an hourly audit prompt, here is the underlying loop:
 To build an agent that generates structured shift reports like the one below, copy and paste the following **Master System Prompt** into the **Instructions** tab when creating your Custom GPT or Agent workflow in ChatGPT:
 
 ```text
-You are "Hourly Change Reporter Agent", an autonomous executive audit assistant. Your core responsibility is to inspect digital mailbox and workspace activity, detect state changes over a specified time window, synthesize an executive summary, construct a detailed change log table, flag connector errors or data gaps, and dispatch the formatted report to the owner's personal email (chemacabeza@gmail.com).
+You are "Hourly Change Reporter Agent", an autonomous executive audit assistant. Your core responsibility is to inspect digital mailbox and workspace activity, detect state changes over a specified time window, synthesize an executive summary, construct a detailed change log table, flag connector errors or data gaps, and dispatch the formatted report to the owner's personal email (sometest@gmail.com).
 
 OPERATING INSTRUCTIONS & RULES:
 
@@ -102,7 +102,7 @@ OPERATING INSTRUCTIONS & RULES:
    - Display timezone explicitly (e.g. Timezone: Europe/Madrid).
 
 2. DATA AUDIT & RETRIEVAL:
-   - Call `listEmails` and `getDrafts` actions for the specified time window targeting chemacabeza@gmail.com.
+   - Call `listEmails` and `getDrafts` actions for the specified time window targeting sometest@gmail.com.
    - Attempt to verify activity across connected sources: Gmail message activity, draft list, Google Drive changes, and Google Calendar events.
    - If a source (e.g. Google Drive, Google Calendar, historical audit data) cannot be queried due to connector unavailability or scope constraints, record it under "Failed or incomplete sources" and document the error in the Data Gaps section.
 
@@ -143,7 +143,7 @@ OPERATING INSTRUCTIONS & RULES:
 
 4. EMAIL DISPATCH EXECUTION:
    - Automatically compile the final report into clean HTML/Markdown.
-   - Call the `sendEmail` or `createDraft` action targeting recipient: chemacabeza@gmail.com.
+   - Call the `sendEmail` or `createDraft` action targeting recipient: sometest@gmail.com.
    - Set Subject: "Hourly Change Report — [START_TIMESTAMP] to [END_TIMESTAMP]".
    - Confirm successful dispatch to the user.
 ```
@@ -170,7 +170,7 @@ Navigate to the **Agents** tab in ChatGPT and click the white **Create ∨** but
 ### Step 2: Define Your Agent's Goal
 
 When asked *"What should your agent do?"*, paste your initialization prompt:
-`"Create an Hourly Change Reporter agent that audits my Gmail activity for chemacabeza@gmail.com, creates a structured change table with impact analysis, and emails the report to chemacabeza@gmail.com."`
+`"Create an Hourly Change Reporter agent that audits my Gmail activity for sometest@gmail.com, creates a structured change table with impact analysis, and emails the report to sometest@gmail.com."`
 
 <div align="center">
 
@@ -185,7 +185,7 @@ When asked *"What should your agent do?"*, paste your initialization prompt:
 
 Under the **Configure** tab:
 1. **Name:** `Hourly Change Reporter`
-2. **Description:** `Audits Gmail inbox activity, generates structured shift change reports with state transition tables, and sends reports to chemacabeza@gmail.com.`
+2. **Description:** `Audits Gmail inbox activity, generates structured shift change reports with state transition tables, and sends reports to sometest@gmail.com.`
 3. **Instructions:** Paste the **Master System Prompt** provided in Section 3.
 4. Scroll down to **Actions** and click **+ Create new action**.
 
@@ -200,19 +200,19 @@ Under the **Configure** tab:
 
 ### Step 4: Paste OpenAPI Schema & OAuth 2.0 Credentials
 
-In the Action configuration window, paste the OpenAPI specification allowing the agent to list messages and send emails to `chemacabeza@gmail.com`:
+In the Action configuration window, paste the OpenAPI specification allowing the agent to list messages and send emails to `sometest@gmail.com`:
 
 ```json
 {
   "openapi": "3.0.0",
   "info": {
     "title": "Gmail Change Reporter Gateway",
-    "description": "API endpoints for auditing inbox activity and dispatching reports for chemacabeza@gmail.com",
+    "description": "API endpoints for auditing inbox activity and dispatching reports for sometest@gmail.com",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://gmail.googleapis.com/gmail/v1/users/chemacabeza%40gmail.com",
+      "url": "https://gmail.googleapis.com/gmail/v1/users/sometest%40gmail.com",
       "description": "Google Gmail REST API Endpoint"
     }
   ],
@@ -244,7 +244,7 @@ In the Action configuration window, paste the OpenAPI specification allowing the
     "/messages/send": {
       "post": {
         "operationId": "sendEmail",
-        "summary": "Dispatch formatted Hourly Change Report email to chemacabeza@gmail.com",
+        "summary": "Dispatch formatted Hourly Change Report email to sometest@gmail.com",
         "requestBody": {
           "required": true,
           "content": {
@@ -253,7 +253,7 @@ In the Action configuration window, paste the OpenAPI specification allowing the
                 "type": "object",
                 "required": ["recipient", "subject", "bodyHtml"],
                 "properties": {
-                  "recipient": { "type": "string", "example": "chemacabeza@gmail.com" },
+                  "recipient": { "type": "string", "example": "sometest@gmail.com" },
                   "subject": { "type": "string" },
                   "bodyHtml": { "type": "string" }
                 }
@@ -283,7 +283,7 @@ Configure **OAuth 2.0** settings with your Google Cloud OAuth Client ID, Secret,
 
 ## 5. Sample Output: The Generated Hourly Change Report Email
 
-When your agent executes an audit cycle, it produces a clean, structured HTML/Markdown report delivered directly to `chemacabeza@gmail.com`:
+When your agent executes an audit cycle, it produces a clean, structured HTML/Markdown report delivered directly to `sometest@gmail.com`:
 
 <div align="center">
 
@@ -352,25 +352,25 @@ Here is how the end-to-end audit and report pipeline works under the hood:
 <div align="center">
 
 ![Automated AI Email Processing Pipeline](/images/writing/chatgpt-agent-email-workflow.png)
-*The complete email agent loop: Activity query -> Data Triage & State Comparison -> Change Log Formatting -> Report Generation -> Automated Dispatch to chemacabeza@gmail.com.*
+*The complete email agent loop: Activity query -> Data Triage & State Comparison -> Change Log Formatting -> Report Generation -> Automated Dispatch to sometest@gmail.com.*
 
 </div>
 
 1. **Trigger / Scheduled Audit:** The agent is invoked periodically (or via a CRON automation webhook) for the audit window.
-2. **Activity Retrieval:** The Postmaster agent queries `listEmails` for `chemacabeza@gmail.com` matching the timestamp range.
+2. **Activity Retrieval:** The Postmaster agent queries `listEmails` for `sometest@gmail.com` matching the timestamp range.
 3. **State Transition & Impact Triage:** The Reasoning agent compares previous state vs. new state, categorizes items (informational, invitations, purchases, urgent), and flags unverified sources.
 4. **HTML/Markdown Formatting:** The agent constructs the structured shift report complete with summary metrics, change table, and error logs.
-5. **Direct Email Dispatch:** The agent executes `sendEmail` to send the report directly to `chemacabeza@gmail.com`.
+5. **Direct Email Dispatch:** The agent executes `sendEmail` to send the report directly to `sometest@gmail.com`.
 
 ---
 
 ## 7. Security Guardrails & Best Practices
 
-When deploying an AI agent with access to `chemacabeza@gmail.com`, observe these critical guardrails:
+When deploying an AI agent with access to `sometest@gmail.com`, observe these critical guardrails:
 
 > [!IMPORTANT]
 > **1. Human-in-the-Loop Option for Outbound Replies**
-> While automated shift reports can be sent directly to your own personal address (`chemacabeza@gmail.com`), any outbound email sent to *third parties* should always be written to `/drafts` for manual human review.
+> While automated shift reports can be sent directly to your own personal address (`sometest@gmail.com`), any outbound email sent to *third parties* should always be written to `/drafts` for manual human review.
 
 > [!TIP]
 > **2. Minimal Scope Principle**
@@ -384,7 +384,7 @@ When deploying an AI agent with access to `chemacabeza@gmail.com`, observe these
 
 ## Conclusion
 
-Building an **Hourly Change Reporter Agent** turns your AI assistant into an automated shift watchman. By combining Richard Feynman's principle of modular isolation (Reasoning vs. Execution) with a robust System Prompt and OpenAPI actions, you eliminate manual inbox searching and receive structured, high-value activity digests directly at `chemacabeza@gmail.com`.
+Building an **Hourly Change Reporter Agent** turns your AI assistant into an automated shift watchman. By combining Richard Feynman's principle of modular isolation (Reasoning vs. Execution) with a robust System Prompt and OpenAPI actions, you eliminate manual inbox searching and receive structured, high-value activity digests directly at `sometest@gmail.com`.
 
 Copy the master prompt, configure your OpenAPI schema, and let your agents handle the shift logging while you focus on high-impact work.
 

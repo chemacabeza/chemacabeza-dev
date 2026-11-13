@@ -86,9 +86,9 @@ jobs:
             const count = process.env.COUNT;
             const added = process.env.ADDED.split(',').filter(Boolean);
             const body = process.env.BODY || '';
-            const title = `📝 ${count} new post${count === '1' ? '' : 's'} auto-published to LinkedIn`;
+            const title = `📝 ${count} new post${count === '1' ? '' : 's'} queued for LinkedIn`;
             const intro = [
-              `Blurbs were added to \`scripts/linkedin-poster/posts.json\` and **the publish workflow was dispatched automatically** — these post to LinkedIn without any manual step.`,
+              `Blurbs were added to \`scripts/linkedin-poster/posts.json\` and the publish workflow was dispatched automatically. This confirms queueing only; verify the workflow run and the post's \`posted\` status and \`linkedinPostId\` before treating it as published.`,
               ``,
               `Check the run: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/workflows/linkedin-publish.yml`,
               ``,

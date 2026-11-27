@@ -4,6 +4,22 @@ Personal developer website, technical blog, and private deployment monitoring hu
 
 Live at [chemacabeza.dev](https://chemacabeza.dev).
 
+## Install on Android
+
+Open [chemacabeza.dev/install](https://chemacabeza.dev/install) in Chrome on the
+phone. Tap **Install app** when Chrome offers it, or open Chrome's three-dot menu
+and choose **Install and create shortcut → Install**. Some Chrome versions show
+**Add to Home screen** first. Confirm on the phone, then open the purple gear icon
+from the home screen or app drawer.
+
+If the existing icon already opens a standalone app window, keep using it. The
+website requires an internet connection; this installation does not add offline
+caching or a Google Play listing.
+
+The manifest keeps the existing `/` launch URL and app identity. Android icons
+are generated from `app/icon.svg`; regenerate them with
+`node scripts/generate-android-icons.mjs` after installing the project dependencies.
+
 ---
 
 ## ⚡ Minimal Commands: Post Creation & Deployment

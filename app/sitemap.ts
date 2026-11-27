@@ -39,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${siteConfig.url}/now` },
         { url: `${siteConfig.url}/contact` },
         { url: `${siteConfig.url}/support` },
+        { url: `${siteConfig.url}/install` },
         { url: `${siteConfig.url}/privacy-policy` },
         { url: `${siteConfig.url}/terms-of-service` },
     ];

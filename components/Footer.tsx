@@ -59,6 +59,7 @@ export default function Footer() {
                             ["Now", "/now"],
                             ["Contact", "/contact"],
                             ["Support", "/support"],
+                            ["Install app", "/install"],
                             ["Privacy", "/privacy-policy"],
                             ["Terms", "/terms-of-service"],
                         ].map(([label, href]) => (

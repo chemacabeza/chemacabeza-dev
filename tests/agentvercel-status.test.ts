@@ -206,13 +206,19 @@ test("fetchAgentVercelStatus fails closed on malformed JSON / invalid response s
   }
 });
 
-test("fetchAgentVercelStatus never exposes secrets in output", async () => {
+test("fetchAgentVercelStatus never exposes secrets in output", async (t) => {
   const secret = "SUPER-CONFIDENTIAL-BEARER-SECRET-999";
   process.env.AGENTVERCEL_REPORTER_URL = "https://reporter.test.example";
   process.env.AGENTVERCEL_STATUS_SECRET = secret;
 
+  // Exercise sanitization without sending test credentials over the network.
+  t.mock.method(globalThis, "fetch", async () =>
+    Response.json({ available: true, secret })
+  );
+
   const result = await fetchAgentVercelStatus();
   const serialized = JSON.stringify(result);
 
+  assert.equal(result.available, true);
   assert.ok(!serialized.includes(secret), "Secret should never appear in returned status object");
 });

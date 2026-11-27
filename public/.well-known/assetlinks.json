@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.chemacabeza.app",
+      "sha256_cert_fingerprints": [
+        "EB:87:1D:1A:81:6A:BD:1C:3E:8C:83:C7:17:FB:AA:07:55:A5:75:A7:F5:25:D6:CD:73:C8:87:CE:89:37:AF:24"
+      ]
+    }
+  }
+]

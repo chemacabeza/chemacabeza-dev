@@ -1,0 +1,26 @@
+Status: Draft listing text. Review against the final Android build before submission.
+
+App name
+chemacabeza.dev
+
+Short description
+Engineering articles, projects and ideas from José María Cabeza Rodríguez.
+
+Full description
+Explore the articles and projects of José María Cabeza Rodríguez, an engineering manager and software engineer.
+
+Read about software engineering and system design, browse selected projects, and learn about his professional background and interests. Find links to his open-source work, newsletter, and contact options.
+
+The app opens the current chemacabeza.dev website in an Android app window. An internet connection is required to load the website. Some links open external services, including meeting booking and a separate digital-model marketplace. Certain services and products available through those links require payment.
+
+Support email
+chema@chemacabeza.dev
+
+Website
+https://chemacabeza.dev/
+
+Privacy policy
+https://chemacabeza.dev/privacy-policy
+
+Initial release notes (draft)
+Open chemacabeza.dev from an Android app with its purple gear icon. Browse the current articles and projects, and access contact links. A connection message helps you retry if you go offline after the first online launch.

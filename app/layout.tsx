@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AppInstallProvider from "@/components/AppInstallProvider";
+import OfflineSupport from "@/components/OfflineSupport";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig } from "@/lib/metadata";
@@ -113,6 +114,7 @@ export default function RootLayout({
           <AppInstallProvider>{children}</AppInstallProvider>
         </main>
         <Footer />
+        <OfflineSupport />
         <Analytics />
         <SpeedInsights />
       </body>

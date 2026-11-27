@@ -1,0 +1,15 @@
+# Local Android toolchains, build outputs, and signing material.
+.gradle/
+build/
+app/build/
+local.properties
+/signing
+*.jks
+*.keystore
+*.p12
+*.apk
+*.aab
+*.idsig
+service-account*.json
+node_modules/
+*.log
